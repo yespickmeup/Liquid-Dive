@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3bc4695-7072-48e7-9139-f693862bab69">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="60"/>
+	<property name="ireport.y" value="0"/>
+	<field name="cash_float_date" class="java.lang.String"/>
+	<field name="my_date" class="java.lang.String"/>
+	<field name="cashier_name" class="java.lang.String"/>
+	<field name="cashin_time" class="java.lang.String"/>
+	<field name="cashin_peso" class="java.lang.Double"/>
+	<field name="cashin_dollar" class="java.lang.Double"/>
+	<field name="cashin_cc" class="java.lang.Double"/>
+	<field name="cashout_time" class="java.lang.String"/>
+	<field name="cashout_peso" class="java.lang.Double"/>
+	<field name="cashout_dollar" class="java.lang.Double"/>
+	<field name="cashout_credit" class="java.lang.Double"/>
+	<field name="acc_peso" class="java.lang.Double"/>
+	<field name="acc_dollar" class="java.lang.Double"/>
+	<field name="acc_credit" class="java.lang.Double"/>
+	<field name="signature" class="java.lang.String"/>
+	<field name="addtl_cashin" class="java.lang.Double"/>
+	<field name="cashout" class="java.lang.Double"/>
+	<field name="expenses" class="java.lang.Double"/>
+	<field name="sales_peso" class="java.lang.Double"/>
+	<field name="gross_sales" class="java.lang.Double"/>
+	<field name="peso_remarks" class="java.lang.String"/>
+	<field name="dollar_remarks" class="java.lang.String"/>
+	<field name="credit_remarks" class="java.lang.String"/>
+	<field name="advance_payment" class="java.lang.Double"/>
+	<group name="cash_date">
+		<groupExpression><![CDATA[$F{my_date}]]></groupExpression>
+		<groupHeader>
+			<band height="34">
+				<textField>
+					<reportElement uuid="a628fa88-35c8-4c83-ac9e-15efcdea584d" x="0" y="14" width="802" height="20"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{my_date}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement uuid="3b53fc87-0124-4912-a486-a6221ed03c02" x="0" y="0" width="802" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cash_float_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="93" splitType="Stretch">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="1da44779-6805-4dd4-83ac-e6186e194d2e" mode="Transparent" x="125" y="5" width="39" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashin_time}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="7149fc72-f8b6-457d-9888-bc36ec04340a" mode="Transparent" x="207" y="5" width="65" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashin_peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cc14daab-f9be-4b21-9dc6-954c4ef596d3" x="20" y="16" width="54" height="35"/>
+				<box>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashier_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="ac543b58-a4fc-4ae0-b28e-afbf7c26f25c" mode="Transparent" x="207" y="25" width="65" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{addtl_cashin}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="1695e423-8d9c-409b-9afd-314506992a92" mode="Transparent" x="336" y="5" width="65" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{expenses}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="efd87858-716b-42d0-a412-16d27b7111d3" mode="Transparent" x="186" y="51" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashout_peso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="0fad3bdc-82f6-4c0e-8956-4c75cf7ab069" mode="Transparent" x="406" y="51" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashout_dollar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="983bf231-6c53-4953-8ffd-6be5faa8cb90" mode="Transparent" x="625" y="51" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashout_credit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="e2bb97db-0676-4070-8702-30625f73f929" mode="Transparent" x="246" y="51" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acc_peso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="91c9cf35-84dc-43c6-816c-a6a827d46986" mode="Transparent" x="467" y="51" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acc_dollar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="a7e19b03-c5ef-4942-ac03-339ba09b9d18" x="685" y="51" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{acc_credit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7b155590-504b-4418-bdc2-f25723949c5a" x="465" y="51" width="2" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="355944b8-293f-43aa-8f2c-45f4c8736a54" x="682" y="51" width="2" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e01dbd85-1341-4904-ab66-eb0e05e3d1ab" x="246" y="51" width="2" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3a503950-fe68-44b6-998a-048fecb5ff62" x="75" y="5" width="47" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[START:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6b3ac746-cc21-4412-bf61-e4b587384fe2" x="164" y="5" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CASHIN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61c59214-5a08-47d0-bd22-27625b81298f" x="169" y="25" width="38" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADDTL: CASHIN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="75" y="51" width="47" height="30"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bc43f80f-69cb-496f-bfac-73be8693e3cd" x="353" y="51" width="52" height="30"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOLLAR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d52ed9df-e794-4b4e-bccc-6a8f37c9bf29" x="575" y="51" width="49" height="30"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDIT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5d5c72ec-62ff-4a0e-970e-1104edad8951" x="276" y="5" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXPENSES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="186" y="71" width="60" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[CASH COUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="246" y="71" width="60" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ACTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="467" y="71" width="60" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ACTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="406" y="71" width="60" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[CASH COUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="685" y="71" width="60" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ACTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="625" y="71" width="60" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[CASH COUNT]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="f7c1d603-fccc-4bac-929c-e8cb62cefb47" x="125" y="51" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sales_peso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="125" y="71" width="60" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[SALES]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3546e96f-6b79-403b-b38c-3af8eb30a270" x="746" y="51" width="35" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credit_remarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="746" y="71" width="35" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[REMARK]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="fa0101e7-86aa-4b1b-a271-1a499727445c" x="528" y="51" width="35" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dollar_remarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="528" y="71" width="35" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[REMARK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="74" y="83" width="728" height="5"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="fa0101e7-86aa-4b1b-a271-1a499727445c" x="307" y="51" width="35" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{peso_remarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="307" y="71" width="35" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[REMARK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5d5c72ec-62ff-4a0e-970e-1104edad8951" x="670" y="5" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREPAID:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="1695e423-8d9c-409b-9afd-314506992a92" mode="Transparent" x="729" y="5" width="73" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{advance_payment}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="03e35e88-6980-44b0-9c26-b45e3ffbc360" mode="Transparent" x="459" y="5" width="64" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashout_peso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3d4ec358-5434-4808-a7c4-1d6c7f828b5b" x="406" y="5" width="55" height="38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CASHOUT:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="03e35e88-6980-44b0-9c26-b45e3ffbc360" mode="Transparent" x="523" y="5" width="64" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashout_dollar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="459" y="24" width="64" height="19"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Php]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="523" y="24" width="64" height="19"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[USD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5c2d8e8-802b-4961-8705-ec8d548de486" x="587" y="24" width="64" height="19"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[CREDIT CARD]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="03e35e88-6980-44b0-9c26-b45e3ffbc360" mode="Transparent" x="587" y="5" width="64" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cashout_credit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
