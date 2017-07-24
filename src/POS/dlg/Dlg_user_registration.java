@@ -10,7 +10,6 @@
  */
 package POS.dlg;
 
-import POS.Main;
 import POS.svc.S2_ret_user_details;
 import POS.svc.S3_insert_new_user;
 import POS.svc.S4_delete_user;
@@ -26,7 +25,6 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -603,7 +601,7 @@ private void pm_tbl_users_deleteActionPerformed(java.awt.event.ActionEvent evt) 
     //<editor-fold defaultstate="collapsed" desc=" myInit ">
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         set_account_names();
         initActionKey();
         check_pass();

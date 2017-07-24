@@ -4,7 +4,6 @@
  */
 package POS.guests;
 
-import POS.Main;
 import POS.utl.Prompt;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -12,7 +11,6 @@ import com.lowagie.text.Font;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.ListModel;
@@ -430,7 +428,7 @@ public class Dlg_split_orders extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         init_tbl_room_guests();
         init_tbl_tables();

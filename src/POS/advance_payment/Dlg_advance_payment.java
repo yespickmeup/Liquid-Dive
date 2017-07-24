@@ -4,7 +4,6 @@
  */
 package POS.advance_payment;
 
-import POS.Main;
 import POS.advance_payment.S1_guest_advance_payment.to_guest_advance_payment;
 import POS.bank.Dlg_bank;
 import POS.card_types.Dlg_card_types;
@@ -945,7 +944,7 @@ public class Dlg_advance_payment extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_tbl_guest_advance_payment();
         jLabel8.setVisible(false);
         lbl_change.setVisible(false);

@@ -138,7 +138,7 @@ public class Main {
             System.setProperty("instanceSocket", prop.getProperty("instanceSocket", "800"));
             System.setProperty("HOST_CONN_PYOP_SEND", prop.getProperty("server_conn", "localhost"));
             System.setProperty("HOST_PARAM_PYOP_SEND", prop.getProperty("server_param", "?user=root&password=password"));
-             System.setProperty("pool_host", prop.getProperty("pool_host", "localhost:3306"));
+            System.setProperty("pool_host", prop.getProperty("pool_host", "localhost:3306"));
             System.setProperty("pool_user", prop.getProperty("pool_user", "root"));
             System.setProperty("pool_password", prop.getProperty("pool_password", "password"));
             System.out.println(prop.getProperty("pool_host", "localhost"));
@@ -168,6 +168,7 @@ public class Main {
             System.setProperty("ui_items", prop.getProperty("ui_items", "list"));
             System.setProperty("strict_cashout", prop.getProperty("strict_cashout", "false"));
             System.setProperty("recipientEmail", prop.getProperty("recipientEmail", "maytopacka@gmail.com"));
+            System.setProperty("mydb", prop.getProperty("mydb", "db_pos_restaurant"));
             String mydb = System.getProperty("mydb", "db_pos_restaurant");
             System.out.println(mydb);
             MyDB.setNames(mydb);
@@ -186,15 +187,18 @@ public class Main {
             System.setProperty("print_to_receipts", prop.getProperty("print_to_receipts", "false"));
             System.setProperty("slogan", prop.getProperty("slogan", ""));
 
+            System.setProperty("auto_print_billing_statement", prop.getProperty("auto_print_billing_statement", "false"));
+            System.setProperty("auto_print_stab_bar_and_resto", prop.getProperty("auto_print_stab_bar_and_resto", "false"));
+            System.setProperty("auto_print_stab_kitchen", prop.getProperty("auto_print_stab_kitchen", "false"));
+            System.setProperty("print_billing_statement_size", prop.getProperty("print_billing_statement_size", "default"));
             System.out.println(MyDB.getNames() + " ------");
             Lg.$.severe(System.getProperty("receipt_printer"));
-            System.setProperty("mydb", prop.getProperty("mydb", "db_pos_restaurant"));
+
             new Main().start();
         } catch (Exception ex) {
 //                    Lg.$.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
-
 
     }
 
@@ -219,11 +223,13 @@ public class Main {
     }
 
     public static class CountOrders {
+
         public static int counts;
 
         public CountOrders(int counts1) {
             counts = counts1;
         }
+
         public static int getCounts() {
             return counts;
         }

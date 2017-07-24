@@ -4,7 +4,6 @@
  */
 package POS.billing_history;
 
-import POS.Main;
 import POS.billing_history.S1_billing_guest.to_billing_guest;
 import POS.billing_history.S1_billing_history.to_billing_histories;
 import POS.category_discounts.S1_category_discounts;
@@ -29,7 +28,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -446,7 +444,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());

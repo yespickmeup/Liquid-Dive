@@ -33,6 +33,7 @@ public class S9_add_product {
                     + ",cat_id,cost,printing_assembly,is_active,types_num,types,item_package_id,happy_hour  from " + MyDB.
                     getNames() + ".inventory2_stocks_left"
                     + " where types='" + type + "' and  product_name like '" + names + "%' or types='" + type + "' and  description like '" + names + "%' order by description asc";
+//            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {

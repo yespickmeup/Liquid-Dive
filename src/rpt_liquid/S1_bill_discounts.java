@@ -4,7 +4,6 @@
  */
 package rpt_liquid;
 
-import POS.Main;
 import POS.Main.MyDB;
 import POS.utl.MyConnection1;
 import java.sql.Connection;
@@ -132,7 +131,7 @@ public class S1_bill_discounts {
     
     
     public static void main(String[] args) {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         to_bill_discounts to = ret_data("13", "00000025");
         System.out.println(to.discount);
 

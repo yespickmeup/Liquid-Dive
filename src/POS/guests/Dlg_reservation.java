@@ -4,7 +4,6 @@
  */
 package POS.guests;
 
-import POS.Main;
 import POS.dlg.country.S1_countries;
 import POS.guests.S1_guest.to_guests;
 import POS.staff_discount.S1_staff_discount;
@@ -21,7 +20,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -755,7 +753,7 @@ public class Dlg_reservation extends javax.swing.JDialog {
 
     private void myInit() {
 
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
 
 //        btn_ok.setVisible(false);
 

@@ -4,7 +4,6 @@
  */
 package rpt_liquid;
 
-import POS.Main;
 import POS.category_discounts.Dlg_category_discount;
 import POS.category_discounts.S1_category_discounts;
 import POS.category_discounts.S1_category_discounts.to_category_discounts;
@@ -580,7 +579,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         init_cb();
         init_tbl_category_discounts();

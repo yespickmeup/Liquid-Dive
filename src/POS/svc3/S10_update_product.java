@@ -378,6 +378,7 @@ public class S10_update_product {
             int printing_assembly = S5_printing_assemlby.get_category_assembly_id(cat_id);
             String s0 = "update " + MyDB.getNames() + ".inventory2_stocks_left set types='" + types + "', types_num='" + types_num + "'"
                     + ",cat_id='" + cat_id + "',prod_assembly='" + assembly + "',group_id='" + group_id + "',printing_assembly='" + printing_assembly + "' where product_name='" + id + "'";
+//            System.out.println(s0);
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
 //            Prompt.call("Successfully Updated");

@@ -5,7 +5,6 @@
 package POS.inventory;
 
 import POS.Main.MyDB;
-import POS.inventory.S2_assembly.to_inventory2_stocks_left;
 import POS.to2.to_add_product;
 import POS.utl.MyConnection1;
 import java.sql.Connection;
@@ -121,7 +120,7 @@ public class S6_items {
                     + ",types_num= '" + type_id + "' "
                     + ",cat_id= '" + cat_id + "' "
                     + "where "
-                    + " product_name ='" + num + "' "
+                    + " prod_num ='" + num + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);

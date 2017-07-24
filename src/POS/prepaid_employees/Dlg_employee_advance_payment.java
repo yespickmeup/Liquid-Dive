@@ -4,9 +4,7 @@
  */
 package POS.prepaid_employees;
 
-import POS.Main;
 import POS.guests.S1_guest;
-import POS.prepaid_employees.S1_payment_history.to_payment_history;
 import POS.to.to_users;
 import POS.utl.DateType;
 import POS.utl.Prompt;
@@ -433,7 +431,7 @@ public class Dlg_employee_advance_payment extends javax.swing.JDialog {
         tf_search.grabFocus();
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         init_tbl_guests();
         ret_data();

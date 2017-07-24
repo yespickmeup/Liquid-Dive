@@ -4,7 +4,6 @@
  */
 package POS.bank;
 
-import POS.Main;
 import POS.bank.S1_bank.to_bank;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -380,7 +379,7 @@ public class Dlg_bank extends javax.swing.JDialog {
     private void myInit() {
         init_key();
 
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_tbl_bank();
         data_cols();
     }

@@ -4,7 +4,6 @@
  */
 package rpt_liquid;
 
-import POS.Main;
 import POS.Main.MyDB;
 import POS.sales.S1_my_sales;
 import POS.to.to_users;
@@ -288,7 +287,7 @@ public class Srpt_cash_float {
 
     public static void main(String[] args) {
 
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         List<Srpt_cash_float.field> fields = ret_data("", new ArrayList(), "");
 
         Srpt_cash_float rpt = new Srpt_cash_float();

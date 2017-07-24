@@ -30,6 +30,7 @@ public class rpt_orders {
         this.cashier = cashier;
         this.fields = new ArrayList();
     }
+
     public static class field implements Serializable {
 
         private String desc;

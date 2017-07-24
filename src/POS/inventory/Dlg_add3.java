@@ -4,7 +4,6 @@
  */
 package POS.inventory;
 
-import POS.Main;
 import POS.dlg2.Dlg_category;
 import POS.dlg2.Dlg_confirm;
 import POS.dlg2.Dlg_search_product;
@@ -54,9 +53,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
     public void setCallback(Callback callback) {
         this.callback = callback;
-
-
-
 
     }
 
@@ -168,7 +164,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-
         Dlg_add3 dialog = Dlg_add3.create(new javax.swing.JFrame(), true);
 //        dialog.setVisible(true);
 //        FullScreen.do_max_normal(dialog);
@@ -195,7 +190,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
 
     }
 
@@ -310,13 +304,13 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
         tbl_prod.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "PRODUCT NAME", "DESCRIPTION", "Unit Price", "QTY"
+
             }
         ));
         tbl_prod.setFocusable(false);
@@ -726,7 +720,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1186, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jScrollPane1)))
@@ -762,7 +756,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         cb_type();
-
 
 //        set_category();
     }//GEN-LAST:event_cb_categoryActionPerformed
@@ -965,7 +958,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
     private void myInit() {
 //      
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         tf_search.grabFocus();
         tf_barcode.setText("" + S7_uom.get_barcode());
         cb_model();
@@ -975,7 +968,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
         jButton8.setVisible(false);
         jButton10.setVisible(false);
 //        jButton9.setVisible(false);
-        
+
     }
 
     private boolean check_code() {
@@ -1092,7 +1085,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
         final String cat_id = S10_update_product.get_classid(category_name);
 
 //        System.setProperty("cashiering_for", "restaurant_w_order_no");
-
 //        Window p = (Window) this;
 //        Dlg_add_product2 nd = Dlg_add_product2.create(p, true);
 //        nd.setTitle("");
@@ -1107,7 +1099,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
 //        Center.setCenter(nd);
 //        
 //        nd.setVisible(true);
-
         Window p = (Window) this;
         Dlg_add_product2 nd = Dlg_add_product2.create(p, true);
         nd.setTitle("Add Product");
@@ -1137,7 +1128,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
 //            cat = cb_type.getSelectedItem().toString();
 //        }
 
-
     }
 
     private void add_item() {
@@ -1159,7 +1149,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
         if (cb_is_lenient.isSelected()) {
             is_linient = "1";
         }
-
 
         int is_active = 0;
         if (cb_is_lenient.isSelected()) {
@@ -1259,7 +1248,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
 //        cb_category.setSelectedItem(to.category_name);
 //        cb_type.setSelectedItem(to.category_name);
 
-
     }
 
     private void ok1() {
@@ -1324,7 +1312,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
         tbl_prod.getTableHeader().
                 setPreferredSize(new Dimension(100, 30));
 //        tbl_prod.setAutoResizeMode(0);
-        int[] tbl_widths_accounts = {0, 300, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 200, 0, 100, 100};
+        int[] tbl_widths_accounts = {0, 300, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 200, 0, 140, 90, 100};
         for (int i = 0, n = tbl_widths_accounts.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -1342,9 +1330,10 @@ public class Dlg_add3 extends javax.swing.JDialog {
 //        TableUtility.align_column_to_Center(tbl_prod, 3);
 
         tbl_prod.getTableHeader().
-                setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-        tbl_prod.setRowHeight(35);
+                setFont(new java.awt.Font("Arial", Font.BOLD, 12));
+        tbl_prod.setRowHeight(30);
         tbl_prod.setFont(new java.awt.Font("Arial", 1, 12));
+        TableWidthUtilities.setColumnRightRenderer(tbl_prod, 2);
     }
 
     private void loadData_baptism(List<to_add_product> acc) {
@@ -1355,7 +1344,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
     public static class TblInvoicesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "PRODUCT CODE", "DESCRIPTION", "PRICE", "QUANTITY", "num", "VAT", "category_id", "is_linient", "w_comm", "amount", "cat_id", "cost", "printing Assembly", "IS ACTIVE", "CATEGORY", "type id", "SUB", "HAPPy HOUR"
+            "PRODUCT CODE", "DESCRIPTION", "PRICE", "QUANTITY", "num", "VAT", "category_id", "is_linient", "w_comm", "amount", "cat_id", "cost", "printing Assembly", "IS ACTIVE", "CATEGORY", "type id", "SUB", "HAPPy HOUR", "Printing"
         };
 
         public TblInvoicesModel(ListModel listmodel) {
@@ -1384,52 +1373,60 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
             switch (col) {
                 case 0:
-                    return tt.name;
+                    return " " + tt.name;
                 case 1:
-                    return tt.desc;
+                    return " " + tt.desc;
 
                 case 2:
-                    return FitIn.fmt_wc_0(tt.price);
+                    return FitIn.fmt_wc_0(tt.price) + " ";
 
                 case 3:
-                    return tt.qty;
+                    return " " + tt.qty;
                 case 4:
-                    return tt.num;
+                    return " " + tt.num;
                 case 5:
-                    return tt.vat;
+                    return " " + tt.vat;
                 case 6:
-                    return tt.category_id;
+                    return " " + tt.category_id;
                 case 7:
-                    return tt.is_linient;
+                    return " " + tt.is_linient;
                 case 8:
-                    return tt.w_commission;
+                    return " " + tt.w_commission;
                 case 9:
-                    return tt.comm_amount;
+                    return " " + tt.comm_amount;
                 case 10:
-                    return tt.cat_id;
+                    return " " + tt.cat_id;
                 case 11:
-                    return tt.cost;
+                    return " " + tt.cost;
                 case 12:
-                    return tt.printing_assembly;
+                    return " " + tt.printing_assembly;
 
                 case 13:
                     if (tt.is_active == 1) {
-                        return "YES";
+                        return " YES";
                     } else {
-                        return "NO";
+                        return " NO";
                     }
 
                 case 14:
-                    return tt.category_name.toUpperCase();
+                    return " " + tt.category_name.toUpperCase();
                 case 15:
                     return tt.type_id;
                 case 16:
-                    return tt.type_name.toUpperCase();
-                default:
+                    return " " + tt.type_name.toUpperCase();
+                case 17:
                     if (tt.happy_hour == 1) {
-                        return "YES";
+                        return " YES";
                     } else {
-                        return "NO";
+                        return " NO";
+                    }
+                default:
+                    if (tt.printing_assembly == 3) {
+                        return " Bar and Resto";
+                    } else if (tt.printing_assembly == 4) {
+                        return " Kitchen";
+                    } else {
+                        return " ";
                     }
 
             }
@@ -1487,7 +1484,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
 //            return;
 //        }
 
-
         String name = tf_search.getText();
         String type_name = cb_type.getSelectedItem().
                 toString();
@@ -1516,10 +1512,8 @@ public class Dlg_add3 extends javax.swing.JDialog {
 //        JOptionPane.showMessageDialog(null, type_id);
         type_id = S10_update_product.get_category_name(type_id);
 
-
         String cat_name = S10_update_product.get_category_id(id);
 //       
-
 
         cat_name = S10_update_product.get_class_name(cat_name);
 
@@ -1585,7 +1579,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
                 getValueAt(row, 11).
                 toString());
 
-
         String cat_id = tbl_prod.getModel().
                 getValueAt(row, 10).
                 toString();
@@ -1624,7 +1617,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-
 
         final String num = tbl_prod.getModel().
                 getValueAt(row, 0).
@@ -1793,7 +1785,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
             if (row < 0) {
                 return;
             }
-
+            to_add_product to2 = (to_add_product) tbl_employee_payroll_ALM.get(row);
             String is_active = (tbl_prod.getModel().
                     getValueAt(row, 13).
                     toString());
@@ -1802,9 +1794,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
             } else {
                 pm_is_active.setSelected(false);
             }
-            final String num = tbl_prod.getModel().
-                    getValueAt(row, 0).
-                    toString();
+            final String num = to2.num;
             final int print_assembly = FitIn.toInt(tbl_prod.getModel().
                     getValueAt(row, 12).
                     toString());
@@ -1844,6 +1834,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
                     @Override
                     public void actionPerformed(ActionEvent ae) {
+
                         S5_printing_assemlby.update_printing_assembly_item(num, to.id);
 //                        System.out.println(to.id + " = " + print_assembly + " = " + to.place + " ," + num);
                         data_employee_category();

@@ -4,8 +4,6 @@
  */
 package POS.outside_cash;
 
-import POS.Main;
-import POS.dlg.Dlg_authenticate;
 import POS.svc2.S12_cashier_sessions;
 import POS.to.to_users;
 import POS.utl.DateType;
@@ -13,7 +11,6 @@ import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.lowagie.text.Font;
 import java.awt.Dimension;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
@@ -382,7 +379,7 @@ public class Dlg_outside_cash extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         dp_date.setDate(new Date());
         dp_date.addPropertyChangeListener(new PropertyChangeListener() {
 

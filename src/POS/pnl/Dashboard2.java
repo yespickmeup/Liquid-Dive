@@ -56,6 +56,8 @@ import POS.credit_card.Dlg_credit_card_ins;
 import POS.dlg.Dlg_pay.to_print_save;
 import POS.guests.*;
 import POS.prepaid_employees.Dlg_employee_advance_payment;
+import POS.printing2.Dlg_print_orders;
+import POS.printing2.Srpt_billing_statement;
 import POS.redo_receipts.Dlg_receipts;
 import POS.sales.Dlg_cashier_sales_all;
 import POS_svc4.S2_search;
@@ -89,7 +91,6 @@ import org.jdesktop.swingx.combobox.ListComboBoxModel;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 import mijzcx.synapse.desk.utils.*;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.swing.JRViewer;
 import rpt_liquid.*;
 
 import test.*;
@@ -1717,7 +1718,7 @@ public class Dashboard2 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         set_or();
         invisible();
         init_tbl_category();
@@ -2945,7 +2946,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         lbl_oders_payment.setText(FitIn.fmt_wc_0(payment));
         lbl_guest_total.setText("" + ((FitIn.toDouble(lbl_oders_payment.getText()) + FitIn.
                 toDouble(lbl_rate.getText())) - FitIn.toDouble(lbl_advance_payment.
-                        getText())));
+                getText())));
         lbl_amount.setText(lbl_guest_total.getText());
 
     }
@@ -3836,7 +3837,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         sp_cat.getVerticalScrollBar().
                 setValue(sp_cat.getVerticalScrollBar().
                         getValue() + sp_cat.getVerticalScrollBar().
-                        getBlockIncrement() + 500);
+                                getBlockIncrement() + 500);
 //      
     }
 
@@ -3845,7 +3846,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         sp_cat.getVerticalScrollBar().
                 setValue(sp_cat.getVerticalScrollBar().
                         getValue() - sp_cat.getVerticalScrollBar().
-                        getBlockIncrement() - 500);
+                                getBlockIncrement() - 500);
     }
 
     private void do_down_orders() {
@@ -3854,7 +3855,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         sp_orders.getVerticalScrollBar().
                 setValue(sp_orders.getVerticalScrollBar().
                         getValue() + sp_orders.getVerticalScrollBar().
-                        getBlockIncrement() + 500);
+                                getBlockIncrement() + 500);
 //      
     }
 
@@ -3863,7 +3864,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         sp_orders.getVerticalScrollBar().
                 setValue(sp_orders.getVerticalScrollBar().
                         getValue() - sp_orders.getVerticalScrollBar().
-                        getBlockIncrement() - 500);
+                                getBlockIncrement() - 500);
     }
 
     private void do_down_items() {
@@ -3872,7 +3873,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         sp_items.getVerticalScrollBar().
                 setValue(sp_items.getVerticalScrollBar().
                         getValue() + sp_items.getVerticalScrollBar().
-                        getBlockIncrement() + 500);
+                                getBlockIncrement() + 500);
 //      
     }
 
@@ -3881,7 +3882,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         sp_items.getVerticalScrollBar().
                 setValue(sp_items.getVerticalScrollBar().
                         getValue() - sp_items.getVerticalScrollBar().
-                        getBlockIncrement() - 500);
+                                getBlockIncrement() - 500);
     }
     // </editor-fold>
 
@@ -4066,7 +4067,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.OPAQUE);
                 Graphics2D graphics2D = scaledImage.createGraphics();
                 graphics2D.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
-                                            RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+                        RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
                 graphics2D.drawImage(img, 0, 0, width, height, null);
                 graphics2D.dispose();
                 ImageIcon myIcon = new ImageIcon(scaledImage);
@@ -4311,7 +4312,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.OPAQUE);
                 Graphics2D graphics2D = scaledImage.createGraphics();
                 graphics2D.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
-                                            RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+                        RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
                 graphics2D.drawImage(img, 0, 0, width, height, null);
                 graphics2D.dispose();
                 ImageIcon myIcon = new ImageIcon(scaledImage);
@@ -4411,7 +4412,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.OPAQUE);
                 Graphics2D graphics2D = scaledImage.createGraphics();
                 graphics2D.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
-                                            RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+                        RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
                 graphics2D.drawImage(img, 0, 0, width, height, null);
                 graphics2D.dispose();
                 ImageIcon myIcon = new ImageIcon(scaledImage);
@@ -6142,8 +6143,8 @@ public class Dashboard2 extends javax.swing.JFrame {
         Window w = (Window) this;
         Dlg_pay d = Dlg_pay.create(w, true);
         d.setTitle("Pay");
-        d.load(new Dlg_pay.InputData((List) data_orders), payment, "" + table_ids, advance_payment, advance_usd, bank_php, bank_usd
-                , staff, advance_credit_card, guest_ids, my_guest_room_ids);
+        d.load(new Dlg_pay.InputData((List) data_orders), payment, "" + table_ids, advance_payment, advance_usd, bank_php, bank_usd,
+                staff, advance_credit_card, guest_ids, my_guest_room_ids);
         d.do_pass(user_id, "" + table_ids);
         d.setCallback(new Dlg_pay.Callback() {
 
@@ -6456,10 +6457,10 @@ public class Dashboard2 extends javax.swing.JFrame {
                     rpt_summary.add(f);
                 }
 
-                Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2
-                        , accom3, new ArrayList(), new ArrayList(), my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path
-                        , to_pay1, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar
-                        , print.paid_credit, bank_php, bank_usd, advance_credit_card, dollar_to_pay, rpt_summary);
+                Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
+                        accom3, new ArrayList(), new ArrayList(), my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
+                        to_pay1, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
+                        print.paid_credit, bank_php, bank_usd, advance_credit_card, dollar_to_pay, rpt_summary);
 
                 try {
                     JasperReport jasperReport;
@@ -6708,14 +6709,12 @@ public class Dashboard2 extends javax.swing.JFrame {
         }
         boolean check = false;
         check = S2_guest_charges.select_guests(lbl_table_no.getText());
-        if (System.getProperty("version", "ordering").
-                equals("ordering")) {
-            String print = System.getProperty("print_to_receipts", "false");
-            if (print.equals("true")) {
-                prepare_order2();
-            }
-        } else {
+
+        String print = System.getProperty("print_to_receipts", "false");
+        if (print.equals("true")) {
+            prepare_order2();
         }
+
         if ((my_guest.size() == 1 && check == false && !datas.isEmpty())) {
             check_ins_ordering();
         }
@@ -7270,8 +7269,8 @@ public class Dashboard2 extends javax.swing.JFrame {
                     usd_bank += ad.getUsd_bank();
 
                     double credit_rate = ad.getCredit_card_rate();
-                    credit_rate = (credit_rate / 100) * ad.getCredit_card();                 
-                    double credit_total = ad.getCredit_card() ;//+ credit_rate;
+                    credit_rate = (credit_rate / 100) * ad.getCredit_card();
+                    double credit_total = ad.getCredit_card();//+ credit_rate;
                     credit1 += credit_total;
                 }
 
@@ -7552,7 +7551,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     S1_prepare_order1.to_prepare_receipt to1 = new S1_prepare_order1.to_prepare_receipt(table_name, "" + assembly[j], t.place, lbl_table_no.
                             getText(), cb_guest.getSelectedItem().
-                            toString());
+                                    toString());
                     S1_prepare_order1.prepare_food(to1);
                     S5_printing_assemlby.update_order_status(table_name, "" + assembly[j]);
                     setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -7569,36 +7568,46 @@ public class Dashboard2 extends javax.swing.JFrame {
         final String ui_items = System.getProperty("ui_items", "list");
         String table_name = S1_prepare_order1.get_table_name(lbl_table_no.
                 getText());
-        List<S5_printing_assemlby.to_printing_assembly> datas = S5_printing_assemlby.
-                ret_data("");
+        List<S5_printing_assemlby.to_printing_assembly> datas = S5_printing_assemlby.ret_data("");
         String table_id = lbl_table_no.getText();
         int[] assembly = new int[datas.size()];
         int j = 0;
+
+        String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
+        String address = System.getProperty("address", "Dauin, Negros Oriental");
+        String contact_no = System.getProperty("contact_no", "1235566");
+        String date = DateType.datetime2.format(new Date());
+        String room_no = table_name;
+        String guess_names = "";
+        List<Dlg_check_liquid.to_guests> guest = my_guest;
+        int u = 0;
+        for (Dlg_check_liquid.to_guests t : guest) {
+            if (u == 0) {
+                guess_names = guess_names + t.name + "";
+
+            } else {
+                guess_names = guess_names + ", " + t.name + "";
+            }
+
+            u++;
+        }
+
+        String print_to = "";
+        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to);
+        Srpt_billing_statement rpt_billing_stab_bar_and_resto = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Bar and Resto");
+        Srpt_billing_statement rpt_billing_stab_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Kitchen");
+
         for (S5_printing_assemlby.to_printing_assembly t : datas) {
             assembly[j] = t.id;
             if (t.place.equalsIgnoreCase("NORMAL")) {
             } else {
-
                 rpt_orders rpt = new rpt_orders(table_name + " (" + cb_table_location.
                         getSelectedItem().
                         toString() + ")", t.place,
-                                                to_users.username1);
+                        to_users.username1);
                 int state = 0;
                 if (ui_items.equals("list")) {
-                    for (int i = 0; i < tbl_table_orders_ALM.size(); i++) {
-                        Object value = tbl_table_orders_ALM.getElementAt(i);
-                        S2_search.to_orders tt = (S2_search.to_orders) value;
-                        if (tt.printing_assembly == assembly[j]) {
-                            rpt_orders.field f = new rpt_orders.field(
-                                    tt.desc.toUpperCase(),
-                                    tt.qty,
-                                    tt.price);
-//                             if (tt.qty * tt.price != 0) {
-                            rpt.fields.add(f);
-                            state++;
-//                            }
-                        }
-                    }
+
                 } else {
                     for (int i = 0; i < orders_model.size(); i++) {
                         Object value = orders_model.getElementAt(i);
@@ -7608,23 +7617,61 @@ public class Dashboard2 extends javax.swing.JFrame {
                                     tt.desc,
                                     tt.qty,
                                     tt.price);
-//                            if (tt.qty * tt.price != 0) {
                             rpt.fields.add(f);
                             state++;
-//                            }
 
                         }
                     }
                 }
 
-                if (state > 0) {
-                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    rpt_orders.print_to_place(rpt);
-                    setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                }
+//                if (state > 0) {
+//                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//                    rpt_orders.print_to_place(rpt);
+//                    setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+//                }
             }
             j++;
         }
+        
+        for (int i = 0; i < tbl_table_orders_ALM.size(); i++) {
+            Object value = tbl_table_orders_ALM.getElementAt(i);
+            S2_search.to_orders tt = (S2_search.to_orders) value;
+
+            String item_code = tt.name;
+            String description = tt.desc;
+            String assembly1 = "" + tt.printing_assembly;
+            double qty = tt.qty;
+            double selling_price = tt.price;
+            double discount = (tt.disc_rate / 100) * (qty * selling_price);
+
+            double amount = (qty * selling_price) - discount;
+            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount);
+            rpt_billing_statement.fields.add(field_billing_statement);
+
+            if (tt.printing_assembly == 3) {
+                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount);
+                rpt_billing_stab_bar_and_resto.fields.add(field_stab_bar_and_resto);
+            }
+            if (tt.printing_assembly == 4) {
+                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount);
+                rpt_billing_stab_kitchen.fields.add(field_stab_kitchen);
+            }
+
+        }
+        Window p = (Window) this;
+        Dlg_print_orders nd = Dlg_print_orders.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(rpt_billing_statement, rpt_billing_stab_bar_and_resto, rpt_billing_stab_kitchen);
+        nd.setCallback(new Dlg_print_orders.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_print_orders.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
         lbl_prepare.setText("PREPARE ( 0 )");
     }
 

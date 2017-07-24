@@ -143,9 +143,10 @@ public class S5_printing_assemlby {
 
         try {
             Connection conn = MyConnection1.connect();
-            String s0 = "update " + MyDB.getNames() + ".inventory2_stocks_left set printing_assembly='" + assembly_id + "' where product_name='" + prod_num + "' ";
+            String s0 = "update " + MyDB.getNames() + ".inventory2_stocks_left set printing_assembly='" + assembly_id + "' where prod_num='" + prod_num + "' ";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
+//            System.out.println(s0);
             Lg.s(S5_printing_assemlby.class, "Successfully Updated");
         } catch (Exception e) {
             throw new RuntimeException(e);

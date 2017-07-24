@@ -4,7 +4,6 @@
  */
 package test;
 
-import POS.Main;
 import POS.utl.Wrapper;
 import POS_svc4.S2_search;
 import de.jgrid.JGrid;
@@ -225,7 +224,7 @@ public class Dlg_scroll extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         init_items();
         scrolling();

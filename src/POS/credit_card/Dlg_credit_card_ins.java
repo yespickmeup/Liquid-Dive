@@ -4,7 +4,6 @@
  */
 package POS.credit_card;
 
-import POS.Main;
 import POS.bank.Dlg_bank;
 import POS.bank.S1_bank;
 import POS.credit_card.S1_credit_card_ins.to_credit_card_ins;
@@ -681,7 +680,7 @@ public class Dlg_credit_card_ins extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         get_balance();
         dp_pay_from.setDate(new Date());

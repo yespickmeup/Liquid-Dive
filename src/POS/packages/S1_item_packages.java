@@ -4,7 +4,6 @@
  */
 package POS.packages;
 
-import POS.Main;
 import POS.Main.MyDB;
 import POS.utl.MyConnection1;
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.Lg;
@@ -172,7 +170,7 @@ public class S1_item_packages {
     }
 
     public static void main(String[] args) {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         List<to_item_packages> packages = ret_data("35");
         int qty = 15;
 //        System.out.println(

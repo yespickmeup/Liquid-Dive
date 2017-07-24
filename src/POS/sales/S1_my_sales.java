@@ -4,7 +4,6 @@
  */
 package POS.sales;
 
-import POS.Main;
 import POS.Main.MyDB;
 import POS.to.to_users;
 import POS.utl.DateType;
@@ -16,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 import POS.utl.MyConnection1;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -639,7 +637,7 @@ public class S1_my_sales {
     }
 
     public static void main(String[] args) {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         System.out.println(ret_cb_data());
     }
 

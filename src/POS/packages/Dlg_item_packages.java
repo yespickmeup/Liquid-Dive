@@ -4,7 +4,6 @@
  */
 package POS.packages;
 
-import POS.Main;
 import POS.packages.S1_item_packages.to_item_packages;
 import POS.utl.Prompt;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -458,7 +457,7 @@ public class Dlg_item_packages extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         init_tbl_item_packages();
 

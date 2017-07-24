@@ -4,7 +4,6 @@
  */
 package POS.transfer_table;
 
-import POS.Main;
 import POS.table_location.S1_table_location;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -406,7 +405,7 @@ public class Dlg_transfer_table extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         set_location();
         init_tbl_tables();

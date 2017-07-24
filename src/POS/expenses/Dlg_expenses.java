@@ -4,7 +4,6 @@
  */
 package POS.expenses;
 
-import POS.Main;
 import POS.dlg.Dlg_authenticate;
 import POS.expenses.S1_expenses.to_expenses;
 import POS.svc2.S12_cashier_sessions;
@@ -26,7 +25,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -507,7 +505,7 @@ public class Dlg_expenses extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         dp_date.setDate(new Date());
         dp_date.addPropertyChangeListener(new PropertyChangeListener() {
 

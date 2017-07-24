@@ -4,7 +4,6 @@
  */
 package POS.currency;
 
-import POS.Main;
 import POS.Main.MyDB;
 import POS.utl.DateType;
 import POS.utl.DateUtils;
@@ -208,7 +207,7 @@ public class S1_currency {
     }
 
     public static void main(String[] args) {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         update_currency();
     }
 

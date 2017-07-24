@@ -4,7 +4,6 @@
  */
 package POS.expenses;
 
-import POS.Main;
 import POS.expenses.S1_expenses_categories.to_expenses_categories;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -359,7 +358,7 @@ public class Dlg_expenses_categories extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         init_tbl_expenses_categories();
         data_cols();

@@ -4,7 +4,6 @@
  */
 package POS.guests;
 
-import POS.Main;
 import POS.dlg.country.S1_countries;
 import POS.guests.S1_guest.to_guests;
 import POS.staff_discount.S1_staff_discount;
@@ -14,7 +13,6 @@ import POS.utl.TableUtility;
 import POS_svc4.S2_search;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
-import com.lowagie.text.Font;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -961,7 +959,7 @@ public class Dlg_guest extends javax.swing.JDialog {
 
     private void myInit() {
 
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
 
 //        btn_ok.setVisible(false);
         jLabel8.setVisible(false);
