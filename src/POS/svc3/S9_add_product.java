@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import POS.utl.MyConnection1;
+import java.sql.SQLException;
 
 /**
  *
@@ -31,7 +32,7 @@ public class S9_add_product {
             Connection conn = MyConnection1.connect();
             String s0 = "select product_name,description,price,product_qty,prod_num,is_vat,types_num,is_linient,w_commission,comm_amount"
                     + ",cat_id,cost,printing_assembly,is_active,types_num,types,item_package_id,happy_hour  from " + MyDB.
-                    getNames() + ".inventory2_stocks_left"
+                            getNames() + ".inventory2_stocks_left"
                     + " where types='" + type + "' and  product_name like '" + names + "%' or types='" + type + "' and  description like '" + names + "%' order by description asc";
 //            System.out.println(s0);
             Statement stmt = conn.createStatement();
@@ -78,14 +79,13 @@ public class S9_add_product {
 
         List<to_add_product> datas = new ArrayList();
 
-
         try {
             Connection conn = MyConnection1.connect();
 
             String s0 = "select product_name,description,price,product_qty,prod_num,is_vat,types_num"
                     + ",is_linient,w_commission,comm_amount,cat_id"
                     + ",cost,printing_assembly,is_active,types_num,types,item_package_id,happy_hour  from " + MyDB.
-                    getNames() + ".inventory2_stocks_left"
+                            getNames() + ".inventory2_stocks_left"
                     + " where cat_id='" + cat_id + "' and  product_name like '" + names + "%' or cat_id='" + type + "' and  description like '" + names + "%' order by description asc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -135,7 +135,7 @@ public class S9_add_product {
             String s0 = "select product_name,description,price,product_qty,prod_num,is_vat,types_num,is_linient"
                     + ",w_commission,comm_amount,cat_id,cost,printing_assembly"
                     + ",is_active,types_num,types,item_package_id,happy_hour  from " + MyDB.
-                    getNames() + ".inventory2_stocks_left"
+                            getNames() + ".inventory2_stocks_left"
                     + " where description like '%" + names + "%'  order by description asc ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -149,7 +149,6 @@ public class S9_add_product {
                 String types_num = rs.getString(7);
                 String is_linient = rs.getString(8);
                 String w_commission = rs.getString(9);
-
 
                 double comm_amount = rs.getDouble(10);
                 String cat_id = rs.getString(11);
@@ -189,7 +188,7 @@ public class S9_add_product {
             String s0 = "select product_name,description,price,product_qty,prod_num,is_vat,types_num"
                     + ",is_linient,w_commission,comm_amount,cat_id,cost,printing_assembly"
                     + ",is_active, types_num,types,item_package_id,happy_hour from " + MyDB.
-                    getNames() + ".inventory2_stocks_left"
+                            getNames() + ".inventory2_stocks_left"
                     + " where description like '%" + names + "%' and cat_id = '" + type + "' and types_num='" + type_id + "' order by description asc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -203,7 +202,6 @@ public class S9_add_product {
                 String types_num = rs.getString(7);
                 String is_linient = rs.getString(8);
                 String w_commission = rs.getString(9);
-
 
                 double comm_amount = rs.getDouble(10);
                 String cat_id = rs.getString(11);
@@ -233,15 +231,17 @@ public class S9_add_product {
             MyConnection1.close();
         }
     }
-    public static List<to_add_product> ret_products_search_category2(String category_id, String names, String type_names) {
+
+    public static List<to_add_product> ret_products_search_category2(String where) {
         List<to_add_product> datas = new ArrayList();
         try {
             Connection conn = MyConnection1.connect();
             String s0 = "select product_name,description,price,product_qty,prod_num,is_vat,types_num"
                     + ",is_linient,w_commission,comm_amount,cat_id,cost,printing_assembly"
                     + ",is_active, types_num,types,item_package_id,happy_hour from " + MyDB.
-                    getNames() + ".inventory2_stocks_left"
-                    + " where description like '%" + names + "%' and cat_id = '" + category_id + "' and types like '%" + type_names + "%' order by description asc";
+                            getNames() + ".inventory2_stocks_left"
+                    + " " + where
+                    + " order by description asc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -254,7 +254,6 @@ public class S9_add_product {
                 String types_num = rs.getString(7);
                 String is_linient = rs.getString(8);
                 String w_commission = rs.getString(9);
-
 
                 double comm_amount = rs.getDouble(10);
                 String cat_id = rs.getString(11);
@@ -286,7 +285,6 @@ public class S9_add_product {
     }
 
     public static void add(String name, String description, String price, String qty, String remarks, String types, String supp_id, String vat, String assembly, List<S7_uom.to_product_uom> tt, String is_linient, String w_com, double com_amount, String cat_id, double cost, String img_path, int is_active, int printing_assembly, int group_id, String type_name, String type_id, int happy_hour) {
-
 
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date d = new Date();
@@ -343,7 +341,6 @@ public class S9_add_product {
             stmt2.setInt(19, happy_hour);
             stmt2.execute();
 
-
             if (tt.isEmpty()) {
             } else {
                 for (S7_uom.to_product_uom t : tt) {
@@ -358,7 +355,6 @@ public class S9_add_product {
             }
             Prompt.call("Successfully Added");
 //            JOptionPane.showMessageDialog(null, "Successfully Added");
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -420,6 +416,61 @@ public class S9_add_product {
             }
             return qty;
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection1.close();
+        }
+    }
+
+    public static List<to_add_product> ret_products_where(String where) {
+
+        List<to_add_product> datas = new ArrayList();
+        try {
+            Connection conn = MyConnection1.connect();
+            String s0 = "select product_name,description,price,product_qty,prod_num,is_vat,types_num,is_linient"
+                    + ",w_commission,comm_amount,cat_id,cost,printing_assembly"
+                    + ",is_active,types_num,types,item_package_id,happy_hour  from " + MyDB.
+                            getNames() + ".inventory2_stocks_left"
+                    + "   " + where
+                    + " order by description asc ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                String name = rs.getString(1);
+                String desc = rs.getString(2);
+                String price = rs.getString(3);
+                String qty = rs.getString(4);
+                String num = rs.getString(5);
+                String vat = rs.getString(6);
+                String types_num = rs.getString(7);
+                String is_linient = rs.getString(8);
+                String w_commission = rs.getString(9);
+
+                double comm_amount = rs.getDouble(10);
+                String cat_id = rs.getString(11);
+                double cost = rs.getDouble(12);
+                int printing_assembly = rs.getInt(13);
+                int is_active = rs.getInt(14);
+
+                String type_id = rs.getString(15);
+                String type_name = rs.getString(16);
+                String item_package_id = rs.getString(17);
+
+                int happy_hour = rs.getInt(18);
+                String category_name = "";
+                String s3 = "select cat_name from " + MyDB.getNames() + ".category where cat_num='" + cat_id + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s3);
+                if (rs2.next()) {
+                    category_name = rs2.getString(1);
+                }
+
+                to_add_product to = new to_add_product(name, desc, price, qty, num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package_id, happy_hour);
+                datas.add(to);
+            }
+
+            return datas;
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

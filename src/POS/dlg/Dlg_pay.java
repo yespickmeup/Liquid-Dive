@@ -10,7 +10,6 @@
  */
 package POS.dlg;
 
-import POS.Main.MyDB;
 import POS.card_types.Dlg_card_types;
 import POS.card_types.S1_card_types;
 import POS.category_discounts.S1_category_discounts;
@@ -34,7 +33,6 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +44,6 @@ import org.jdesktop.swingx.combobox.ListComboBoxModel;
 import mijzcx.synapse.desk.utils.*;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-import rpt_liquid.S1_bill_discounts;
 
 /**
  *
@@ -1677,7 +1674,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     //<editor-fold defaultstate="collapsed" desc=" myInit ">
 
     private void myInit() {
-        MyDB.setNames("db_pos_restaurant");
+//        MyDB.setNames("db_pos_restaurant");
 
         get_currency();
         set_dollar_cur();
@@ -2505,7 +2502,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
 
         S1_add_customer_discount.to_customer_discounts to_credit = new S1_add_customer_discount.to_customer_discounts(id, customer_name, card_no, address);
-        S1_add_customer_discount.add_data(to_credit);
+        S1_add_customer_discount.add_data(to_credit); 
         double credit_peso = FitIn.toDouble(lbl_credit.getText());
         double credit_dollar = FitIn.toDouble(lbl_net_credit.getText());
         double dollar_tendered = FitIn.toDouble(lbl_tendered_dollar.getText());

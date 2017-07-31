@@ -90,7 +90,12 @@ import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.combobox.ListComboBoxModel;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 import mijzcx.synapse.desk.utils.*;
-import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
 import rpt_liquid.*;
 
 import test.*;
@@ -2455,6 +2460,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                         } else {
                             int i = 0;
                             my_guest_room_ids = "";
+
                             my_guest_ids = "";
                             my_guest_names = "";
                             for (Dlg_check_liquid.to_guests g : my_guest) {
@@ -2506,7 +2512,6 @@ public class Dashboard2 extends javax.swing.JFrame {
                     if (ui_items.equals("list")) {
                         js_items.setVisible(true);
                         js_orders.setVisible(true);
-
                         sp_orders.setVisible(false);
                         sp_items.setVisible(false);
 
@@ -2563,9 +2568,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 public void set_order(CloseDialog closeDialog, Dlg_check_liquid.OutputData data) {
                     selected_guest = data.to1;
                     my_guest = data.to1;
-
                     my_guest_size = data.guest_size;
-
                     set_multiple_guest_orders();
                     sp_orders.updateUI();
                     tbl_customer_tables_details_M.fireTableDataChanged();
@@ -2577,14 +2580,12 @@ public class Dashboard2 extends javax.swing.JFrame {
                     my_guest.clear();
                     my_guest = data.to1;
                     my_guest_size = data.guest_size;
-
                     billing();
                 }
 
                 @Override
                 public void set_prepaid(CloseDialog closeDialog, Dlg_check_liquid.OutputData data) {
                     closeDialog.ok();
-
                     my_guest_size = data.guest_size;
                     String guest_id = "";
                     String guest = "";
@@ -2593,7 +2594,6 @@ public class Dashboard2 extends javax.swing.JFrame {
                         guest = t.name;
                         room_guest_id = t.room_guest_id;
                     }
-
                     advance_payment(guest_id, guest, t.id);
                 }
 
@@ -2611,7 +2611,6 @@ public class Dashboard2 extends javax.swing.JFrame {
                     closeDialog.ok();
                     my_guest_size = data.guest_size;
                     init_rooms();
-
                 }
             });
             nd.setLocationRelativeTo(sp_orders);
@@ -2944,9 +2943,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         lbl_advance_payment.setText("" + advance);
 
         lbl_oders_payment.setText(FitIn.fmt_wc_0(payment));
-        lbl_guest_total.setText("" + ((FitIn.toDouble(lbl_oders_payment.getText()) + FitIn.
-                toDouble(lbl_rate.getText())) - FitIn.toDouble(lbl_advance_payment.
-                getText())));
+        lbl_guest_total.setText("" + ((FitIn.toDouble(lbl_oders_payment.getText()) + FitIn.toDouble(lbl_rate.getText())) - FitIn.toDouble(lbl_advance_payment.getText())));
         lbl_amount.setText(lbl_guest_total.getText());
 
     }
@@ -6227,7 +6224,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 S1_billing_history.to_billing_histories bh = new S1_billing_history.to_billing_histories(
                         id, room_id, room_name, guest_ids, guest_names, checkin_date, checkout_date, status, gross_sales1, to_pay, adv_peso, adv_usd, paid_peso, paid_dollar, paid_credit, dollar_rate, discount, discount_rate, discount_name, room_guest_ids, user_name, bank_php, bank_usd, advance_credit_card);
                 if (print.prints == 2) {
-                    S1_billing_history.add_billing_histories(bh, print.payable, print.due, advance_credit_card);
+                    S1_billing_history.add_billing_histories(bh, print.payable, print.due, advance_credit_card); //uncomment this
                 }
 
                 List<S1_billing_history_items.to_billing_history_items> items = new ArrayList();
@@ -6435,7 +6432,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 if (print.prints == 2) {
                     to_pay = bar_resto;
                 }
-                double dollar_to_pay = to_pay1 / dollar_rate1;
+                double dollar_to_pay = (to_pay1-discount) / dollar_rate1;
                 String s = df.format(dollar_to_pay);
                 dollar_to_pay = FitIn.toDouble(s);
 
@@ -6457,11 +6454,36 @@ public class Dashboard2 extends javax.swing.JFrame {
                     rpt_summary.add(f);
                 }
 
+                 List<Srpt_history_advance_payments.field> advances = new ArrayList();
+                List<Dlg_check_liquid.to_guests> guest_selected = my_guest;
+
+                int sel = 0;
+                for (Dlg_check_liquid.to_guests g : guest_selected) {
+                    if (g.status == true) {
+                        sel++;
+                    }
+                }
+                if (sel == 0) {
+                    for (Dlg_check_liquid.to_guests g : guest_selected) {
+                        advances.addAll(Srpt_history_advance_payments.ret_data("" + g.room_guest_id));
+                    }
+                } else {
+                    for (Dlg_check_liquid.to_guests g : guest_selected) {
+                        if (g.status == true) {
+                            advances.addAll(Srpt_history_advance_payments.
+                                    ret_data("" + g.room_guest_id));
+                        }
+                    }
+                }
+                String ss=df.format((to_pay1-discount));
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
-                        accom3, new ArrayList(), new ArrayList(), my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
-                        to_pay1, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
+                        accom3, advances, new ArrayList(), my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
+                        FitIn.toDouble(ss), guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
                         print.paid_credit, bank_php, bank_usd, advance_credit_card, dollar_to_pay, rpt_summary);
 
+               
+             
+//                test_print(rpt,table_id, resto_items, bar_items, guest_names, guest_ids, advances, accom, rpt_others); 
                 try {
                     JasperReport jasperReport;
                     JasperPrint jasperPrint;
@@ -6502,7 +6524,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     throw new RuntimeException(e);
                 }
                 if (print.prints == 2) {
-                    S1_billing_history_items.add_billing_history_items(items);
+                    S1_billing_history_items.add_billing_history_items(items); //uncomment this
                 }
 
             }
@@ -6512,6 +6534,31 @@ public class Dashboard2 extends javax.swing.JFrame {
         d.setVisible(true);
     }
     int payments = 1;
+
+    private void test_print(Srpt_liquid_billing rpt,String table_id, List<Srpt_bar_and_resto.field> resto_items, List<Srpt_bar_and_resto.field> bar_items,String guest_name, String guest_id, List<Srpt_history_advance_payments.field> advances, List<Srpt_accomodation.field> accom, List<Srpt_others.field> rpt_others) {
+        
+        Window p = (Window) this;
+        Dlg_billing_report nd = Dlg_billing_report.create(p, true);
+        nd.setTitle("");
+
+        nd.do_pass(rpt, "rpt_billing_liquid.jrxml", table_id, resto_items, bar_items, guest_name, guest_id, advances, accom, rpt_others, tbl_category_ALM, my_guest);
+        nd.setCallback(new Dlg_billing_report.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_billing_report.OutputData data) {
+                closeDialog.ok();
+                set_bill_discount(data.discount, data.rate, data.guest_id, data.guest_name);
+            }
+        });
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().
+                getWidth());
+        int ySize = ((int) tk.getScreenSize().
+                getHeight());
+        nd.setSize(xSize, ySize);
+        nd.setVisible(true);
+
+    }
 
     private void save_and_print(Dlg_pay.to_print_save prints) {
         //        
@@ -6534,6 +6581,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     getText(), tbl_location_id, peso, my_guest_size, table_id, table_name, gross_sales, bank_php, bank_usd, advance_credit_card, guest_ids);
         }
         String do_print = System.getProperty("do_print", "false");
+//        System.out.println("do_print: " + do_print);
         if (do_print.equals("true")) {
             printing();
         }
@@ -6710,7 +6758,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         boolean check = false;
         check = S2_guest_charges.select_guests(lbl_table_no.getText());
 
-        String print = System.getProperty("print_to_receipts", "false");
+        String print = System.getProperty("print_orders", "false");
         if (print.equals("true")) {
             prepare_order2();
         }
@@ -6894,7 +6942,7 @@ public class Dashboard2 extends javax.swing.JFrame {
 
         S1_bill_discounts.to_bill_discounts to1 = new S1_bill_discounts.to_bill_discounts(-1, discount, rate, FitIn.
                 toInt(table.id), guest_id, 0, guest_name);
-        S1_bill_discounts.add_data(to1);
+        S1_bill_discounts.add_data(to1); //
     }
 
     private void billing() {
@@ -7208,7 +7256,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                             getDesc().
                             toUpperCase(), ss2.getDate_added(), am, ss2.getQty());
-                    System.out.println(am + " 33");
+//                    System.out.println(am + " 33");
                     rpt_bar.add(tbar);
                 }
                 List<Srpt_others.field> accom2 = new ArrayList();
@@ -7282,7 +7330,9 @@ public class Dashboard2 extends javax.swing.JFrame {
                 Window p = (Window) this;
                 Dlg_billing_report nd = Dlg_billing_report.create(p, true);
                 nd.setTitle("");
-
+                
+               
+                
                 nd.do_pass(rpt, "rpt_billing_liquid.jrxml", table.id, resto_items, bar_items, guest_name, guest_id, advances, accom, rpt_others, tbl_category_ALM, my_guest);
                 nd.setCallback(new Dlg_billing_report.Callback() {
 
@@ -7593,9 +7643,10 @@ public class Dashboard2 extends javax.swing.JFrame {
         }
 
         String print_to = "";
-        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to);
-        Srpt_billing_statement rpt_billing_stab_bar_and_resto = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Bar and Resto");
-        Srpt_billing_statement rpt_billing_stab_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Kitchen");
+        String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
+        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        Srpt_billing_statement rpt_billing_stab_bar_and_resto = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Bar and Resto", receipt_footer);
+        Srpt_billing_statement rpt_billing_stab_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Kitchen", receipt_footer);
 
         for (S5_printing_assemlby.to_printing_assembly t : datas) {
             assembly[j] = t.id;
@@ -7632,7 +7683,7 @@ public class Dashboard2 extends javax.swing.JFrame {
             }
             j++;
         }
-        
+
         for (int i = 0; i < tbl_table_orders_ALM.size(); i++) {
             Object value = tbl_table_orders_ALM.getElementAt(i);
             S2_search.to_orders tt = (S2_search.to_orders) value;

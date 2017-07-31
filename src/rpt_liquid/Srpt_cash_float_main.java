@@ -4,10 +4,8 @@
  */
 package rpt_liquid;
 
-import POS.Main;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
@@ -40,7 +38,7 @@ public class Srpt_cash_float_main {
     }
 
     public static void main(String[] args) {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Maytopacka\\") + "img_templates\\rpt\\";
         List<Srpt_cash_float.field> datas = Srpt_cash_float.ret_data("",new ArrayList(),"");
         Srpt_cash_float_main rpt = new Srpt_cash_float_main(datas, SUBREPORT_DIR);
