@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4a85a82f-a92c-4bb2-a00e-e7cb88673dfb">
+    <property name="ireport.zoom" value="1.5"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <field name="category" class="java.lang.String"/>
+    <field name="due" class="java.lang.Double"/>
+    <field name="disc_percent" class="java.lang.Double"/>
+    <field name="disc_amount" class="java.lang.Double"/>
+    <field name="sub_total" class="java.lang.Double"/>
+    <variable name="due_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{due}]]></variableExpression>
+    </variable>
+    <variable name="disc_percent_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{disc_percent}]]></variableExpression>
+    </variable>
+    <variable name="disc_amount_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{disc_amount}]]></variableExpression>
+    </variable>
+    <variable name="sub_total_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{sub_total}]]></variableExpression>
+    </variable>
+    <group name="cat">
+        <groupExpression><![CDATA[$F{category}]]></groupExpression>
+        <groupHeader>
+            <band/>
+        </groupHeader>
+        <groupFooter>
+            <band/>
+        </groupFooter>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="13" splitType="Stretch">
+            <staticText>
+                <reportElement uuid="d2ef70fe-7e25-4e9b-9737-966885fcf18b" mode="Transparent" x="0" y="0" width="159" height="13" backcolor="#E2DDDD"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <text><![CDATA[CATEGORY]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="41fde95e-81a2-4136-88a6-28a40d49dae2" mode="Transparent" x="159" y="0" width="67" height="13" backcolor="#E2DDDD"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                    <paragraph rightIndent="5"/>
+                </textElement>
+                <text><![CDATA[Amount Due]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="3e872855-e314-4389-b0b7-492ac6745dcd" mode="Transparent" x="226" y="0" width="55" height="13" backcolor="#E2DDDD"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                    <paragraph rightIndent="5"/>
+                </textElement>
+                <text><![CDATA[Disc %]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="7ae3b80a-2e3c-4dc6-85b6-b4eb225539ac" mode="Transparent" x="281" y="0" width="75" height="13" backcolor="#E2DDDD"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                    <paragraph rightIndent="5"/>
+                </textElement>
+                <text><![CDATA[Disc Amount]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="7f1e0bf3-1077-4a02-b172-a6ab125128ef" mode="Transparent" x="356" y="0" width="76" height="13" backcolor="#E2DDDD"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                    <paragraph rightIndent="5"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="13" splitType="Stretch">
+            <textField>
+                <reportElement uuid="df9d1949-5ce0-46d1-b70f-7d459e529513" x="0" y="0" width="159" height="13"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="10" isBold="true"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="f7833135-c560-47a3-a143-49941a9563c0" mode="Transparent" x="159" y="0" width="67" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single" rightIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{due}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="4e708629-6e43-473a-8f7d-f1764b69604a" mode="Transparent" x="226" y="0" width="55" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single" rightIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{disc_percent}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="656d5977-00cf-4e55-a181-a964c13dfd70" mode="Transparent" x="281" y="0" width="75" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single" rightIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{disc_amount}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement uuid="2df7e9c1-9822-488a-9505-fd3d85b0b1b1" x="356" y="0" width="76" height="13"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10"/>
+                    <paragraph rightIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{sub_total}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="13" splitType="Stretch">
+            <textField pattern="#,###.00" isBlankWhenNull="false">
+                <reportElement uuid="c5c23c72-cebc-4536-9002-1f02db9e8a38" mode="Opaque" x="159" y="0" width="67" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single" rightIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{due_1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="db9366dc-1026-4c27-aa93-6bf9c3581c0e" mode="Opaque" x="226" y="0" width="55" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{disc_percent_1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="827db056-2bda-4ceb-9919-f0ac71576547" mode="Opaque" x="281" y="0" width="75" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{disc_amount_1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,###.00" isBlankWhenNull="false">
+                <reportElement uuid="c541430b-b3aa-4808-9d17-fb65e1b21c40" mode="Opaque" x="356" y="0" width="76" height="13" forecolor="#000000" backcolor="#CCCCCC"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single" rightIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{sub_total_1}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="c9061263-e1be-4e11-a803-6e04551488f6" x="0" y="0" width="159" height="13"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement/>
+                <text><![CDATA[]]></text>
+            </staticText>
+        </band>
+    </summary>
+</jasperReport>

@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
 import POS.utl.MyConnection1;
+import java.sql.SQLException;
 
 /**
  *
@@ -382,7 +383,7 @@ public class S10_update_product {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
 //            Prompt.call("Successfully Updated");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

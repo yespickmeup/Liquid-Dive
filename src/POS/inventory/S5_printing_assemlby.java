@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import POS.utl.MyConnection1;
+import java.sql.SQLException;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
@@ -148,7 +149,7 @@ public class S5_printing_assemlby {
             stmt.execute();
 //            System.out.println(s0);
             Lg.s(S5_printing_assemlby.class, "Successfully Updated");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

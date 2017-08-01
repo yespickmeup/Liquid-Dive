@@ -13,6 +13,7 @@ import POS.billing_history.Dlg_billing_history;
 import POS.billing_history.S1_billing_history;
 import POS.billing_history.S1_billing_history_items;
 import POS.cashout.Dlg_cashout;
+import POS.category_discounts.S1_category_discounts;
 import POS.category_type.S1_category_type;
 import POS.category_type.S1_category_type.to_category_type;
 import POS.currency.S1_currency;
@@ -1116,6 +1117,11 @@ public class Dashboard2 extends javax.swing.JFrame {
         jg_orders.setFocusable(false);
         jg_orders.setMaximumSize(new java.awt.Dimension(180, 0));
         jg_orders.setMinimumSize(new java.awt.Dimension(180, 0));
+        jg_orders.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jg_ordersFocusLost(evt);
+            }
+        });
         jg_orders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jg_ordersMouseClicked(evt);
@@ -1128,11 +1134,6 @@ public class Dashboard2 extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jg_ordersMouseReleased(evt);
-            }
-        });
-        jg_orders.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jg_ordersFocusLost(evt);
             }
         });
         sp_orders.setViewportView(jg_orders);
@@ -6432,7 +6433,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 if (print.prints == 2) {
                     to_pay = bar_resto;
                 }
-                double dollar_to_pay = (to_pay1-discount) / dollar_rate1;
+                double dollar_to_pay = (to_pay1 - discount) / dollar_rate1;
                 String s = df.format(dollar_to_pay);
                 dollar_to_pay = FitIn.toDouble(s);
 
@@ -6454,7 +6455,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     rpt_summary.add(f);
                 }
 
-                 List<Srpt_history_advance_payments.field> advances = new ArrayList();
+                List<Srpt_history_advance_payments.field> advances = new ArrayList();
                 List<Dlg_check_liquid.to_guests> guest_selected = my_guest;
 
                 int sel = 0;
@@ -6475,14 +6476,27 @@ public class Dashboard2 extends javax.swing.JFrame {
                         }
                     }
                 }
-                String ss=df.format((to_pay1-discount));
+                String ss = df.format((to_pay1 - discount));
+                List<S1_category_discounts.to_category_discounts> category_discounts = S1_category_discounts.
+                        ret_data(room_guest_ids);
+//                System.out.println("category_discounts: "+category_discounts+ " ,room_guest_ids: "+room_guest_ids);
+                List<Srpt_category_discounts.field> cdd = new ArrayList();
+                for (S1_category_discounts.to_category_discounts cd : category_discounts) {
+                  
+                        String category = cd.category_name;
+                        double due = cd.due;
+                        double disc_percent = cd.discount_percent;
+                        double disc_amount = cd.discount_amount;
+                        double sub_total = cd.due - cd.discount_amount;
+                        Srpt_category_discounts.field tbar = new Srpt_category_discounts.field(category, due, disc_percent, disc_amount, sub_total);
+                        cdd.add(tbar);
+                   
+                }
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
-                        accom3, advances, new ArrayList(), my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
+                        accom3, advances, cdd, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
                         FitIn.toDouble(ss), guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
                         print.paid_credit, bank_php, bank_usd, advance_credit_card, dollar_to_pay, rpt_summary);
 
-               
-             
 //                test_print(rpt,table_id, resto_items, bar_items, guest_names, guest_ids, advances, accom, rpt_others); 
                 try {
                     JasperReport jasperReport;
@@ -6535,8 +6549,8 @@ public class Dashboard2 extends javax.swing.JFrame {
     }
     int payments = 1;
 
-    private void test_print(Srpt_liquid_billing rpt,String table_id, List<Srpt_bar_and_resto.field> resto_items, List<Srpt_bar_and_resto.field> bar_items,String guest_name, String guest_id, List<Srpt_history_advance_payments.field> advances, List<Srpt_accomodation.field> accom, List<Srpt_others.field> rpt_others) {
-        
+    private void test_print(Srpt_liquid_billing rpt, String table_id, List<Srpt_bar_and_resto.field> resto_items, List<Srpt_bar_and_resto.field> bar_items, String guest_name, String guest_id, List<Srpt_history_advance_payments.field> advances, List<Srpt_accomodation.field> accom, List<Srpt_others.field> rpt_others) {
+
         Window p = (Window) this;
         Dlg_billing_report nd = Dlg_billing_report.create(p, true);
         nd.setTitle("");
@@ -7330,9 +7344,6 @@ public class Dashboard2 extends javax.swing.JFrame {
                 Window p = (Window) this;
                 Dlg_billing_report nd = Dlg_billing_report.create(p, true);
                 nd.setTitle("");
-                
-               
-                
                 nd.do_pass(rpt, "rpt_billing_liquid.jrxml", table.id, resto_items, bar_items, guest_name, guest_id, advances, accom, rpt_others, tbl_category_ALM, my_guest);
                 nd.setCallback(new Dlg_billing_report.Callback() {
 
@@ -7712,7 +7723,8 @@ public class Dashboard2 extends javax.swing.JFrame {
         Window p = (Window) this;
         Dlg_print_orders nd = Dlg_print_orders.create(p, true);
         nd.setTitle("");
-        nd.do_pass(rpt_billing_statement, rpt_billing_stab_bar_and_resto, rpt_billing_stab_kitchen);
+        List<S2_search.to_items> orders=tbl_customer_tables_details_ALM;
+        nd.do_pass(rpt_billing_statement, rpt_billing_stab_bar_and_resto, rpt_billing_stab_kitchen,orders);
         nd.setCallback(new Dlg_print_orders.Callback() {
 
             @Override

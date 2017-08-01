@@ -1846,7 +1846,8 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
                         S5_printing_assemlby.update_printing_assembly_item(num, to.id);
 //                        System.out.println(to.id + " = " + print_assembly + " = " + to.place + " ," + num);
-                        data_employee_category();
+//                        data_employee_category();
+                        data_employee();
                     }
                 });
                 jm.add(p);
