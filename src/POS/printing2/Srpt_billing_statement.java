@@ -53,11 +53,11 @@ public class Srpt_billing_statement {
         double selling_price;
         double discount;
         double amount;
-
+        String datetime;
         public field() {
         }
 
-        public field(String item_code, String description, String assembly, double qty, double selling_price, double discount, double amount) {
+        public field(String item_code, String description, String assembly, double qty, double selling_price, double discount, double amount,String datetime) {
             this.item_code = item_code;
             this.description = description;
             this.assembly = assembly;
@@ -65,8 +65,17 @@ public class Srpt_billing_statement {
             this.selling_price = selling_price;
             this.discount = discount;
             this.amount = amount;
+            this.datetime=datetime;
         }
 
+        public String getDatetime() {
+            return datetime;
+        }
+
+        public void setDatetime(String datetime) {
+            this.datetime = datetime;
+        }
+        
         public String getItem_code() {
             return item_code;
         }
@@ -144,7 +153,7 @@ public class Srpt_billing_statement {
             double selling_price = 100 + i;
             double discount = 0;
             double amount = qty * selling_price;
-            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount);
+            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount,"");
             rpt.fields.add(field);
         }
 

@@ -265,8 +265,8 @@ public class Dlg_scroll extends javax.swing.JDialog {
         jg_orders.setCellBackground(Color.white);
         jg_orders.setSelectionBackground(Color.lightGray);
 
-        jg_orders.getCellRendererManager().
-                setDefaultRenderer(new POS.pnl.Dashboard2.Items());
+//        jg_orders.getCellRendererManager().
+//                setDefaultRenderer(new POS.pnl.Dashboard.Items());
     }
 
     public void do_pass() {

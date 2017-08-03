@@ -419,7 +419,7 @@ public class Dlg_login1 extends javax.swing.JDialog {
         );
 
         pnl_log.add(jPanel2);
-        jPanel2.setBounds(50, 30, 730, 57);
+        jPanel2.setBounds(50, 30, 0, 0);
 
         btn_clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img2/clear-fields1.png"))); // NOI18N
         btn_clear.setBorderPainted(false);

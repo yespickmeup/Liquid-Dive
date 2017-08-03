@@ -36,6 +36,7 @@ import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import synsoftech.fields.Button;
 
 /**
  *
@@ -75,6 +76,8 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
         void transfer(CloseDialog closeDialog, OutputData data);
 
         void accomodation(CloseDialog closeDialog, OutputData data);
+
+        void print_order(CloseDialog closeDialog);
     }
 
     public static class InputData {
@@ -101,18 +104,21 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
     private Dlg_check_liquid(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         myInit();
     }
 
     private Dlg_check_liquid(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         myInit();
     }
 
     public Dlg_check_liquid() {
         super();
+        setUndecorated(true);
         initComponents();
         myInit();
 
@@ -136,7 +142,7 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
             return create(parent, ModalityType.APPLICATION_MODAL);
         }
 
-        return create(parent, ModalityType.APPLICATION_MODAL);
+        return create(parent, ModalityType.MODELESS);
 
     }
 
@@ -234,15 +240,16 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lbl_plus = new javax.swing.JLabel();
-        btn_p_check = new javax.swing.JButton();
+        btn_p_check = new Button.Default();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_guest = new javax.swing.JTable();
-        btn_p_cancel = new javax.swing.JButton();
-        btn_p_close2 = new javax.swing.JButton();
-        btn_p_order = new javax.swing.JButton();
-        btn_bill = new javax.swing.JButton();
-        btn_prepaid = new javax.swing.JButton();
-        btn_transfer = new javax.swing.JButton();
+        btn_p_cancel = new Button.Default();
+        btn_p_close2 = new Button.Default();
+        btn_p_order = new Button.Default();
+        btn_bill = new Button.Default();
+        btn_prepaid = new Button.Default();
+        btn_transfer = new Button.Default();
+        btn_bill1 = new Button.Default();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -264,13 +271,14 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_plus.setBackground(new java.awt.Color(255, 204, 204));
+        lbl_plus.setBackground(new java.awt.Color(255, 255, 255));
         lbl_plus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_plus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_plus.setText("+");
+        lbl_plus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/user.png"))); // NOI18N
         lbl_plus.setToolTipText("");
         lbl_plus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lbl_plus.setOpaque(true);
@@ -282,6 +290,7 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
         jPanel1.add(lbl_plus, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 40, 40));
 
         btn_p_check.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_p_check.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/login.png"))); // NOI18N
         btn_p_check.setText("CHECK IN");
         btn_p_check.setFocusable(false);
         btn_p_check.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +298,7 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
                 btn_p_checkActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_p_check, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 120, 40));
+        jPanel1.add(btn_p_check, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 160, 40));
 
         tbl_guest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -309,9 +318,10 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbl_guest);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 280));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 320));
 
         btn_p_cancel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_p_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/reload.png"))); // NOI18N
         btn_p_cancel.setText("CLEAR");
         btn_p_cancel.setFocusable(false);
         btn_p_cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -319,9 +329,10 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
                 btn_p_cancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_p_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 160, 40));
+        jPanel1.add(btn_p_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 200, 40));
 
         btn_p_close2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_p_close2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/letter-x.png"))); // NOI18N
         btn_p_close2.setText("CLOSE");
         btn_p_close2.setFocusable(false);
         btn_p_close2.addActionListener(new java.awt.event.ActionListener() {
@@ -329,9 +340,10 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
                 btn_p_close2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_p_close2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 160, 40));
+        jPanel1.add(btn_p_close2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 200, 40));
 
         btn_p_order.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_p_order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/shopping-basket.png"))); // NOI18N
         btn_p_order.setText("ORDER");
         btn_p_order.setFocusable(false);
         btn_p_order.addActionListener(new java.awt.event.ActionListener() {
@@ -339,27 +351,30 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
                 btn_p_orderActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_p_order, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 160, 40));
+        jPanel1.add(btn_p_order, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 200, 40));
 
         btn_bill.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_bill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/invoice.png"))); // NOI18N
         btn_bill.setText("BILL");
         btn_bill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_billActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 160, 40));
+        jPanel1.add(btn_bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 200, 40));
 
         btn_prepaid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_prepaid.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/prepaid-card-in-a-hand.png"))); // NOI18N
         btn_prepaid.setText("PREPAID");
         btn_prepaid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_prepaidActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_prepaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 160, 40));
+        jPanel1.add(btn_prepaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 200, 40));
 
         btn_transfer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_transfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/transfer.png"))); // NOI18N
         btn_transfer.setText("TRANSFER");
         btn_transfer.setFocusable(false);
         btn_transfer.addActionListener(new java.awt.event.ActionListener() {
@@ -367,9 +382,19 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
                 btn_transferActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_transfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 160, 40));
+        jPanel1.add(btn_transfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 200, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 300));
+        btn_bill1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_bill1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_default/printer (1).png"))); // NOI18N
+        btn_bill1.setText("Print Orders");
+        btn_bill1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bill1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_bill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 200, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -419,11 +444,16 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
     private void btn_p_close2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p_close2ActionPerformed
         disposed();
     }//GEN-LAST:event_btn_p_close2ActionPerformed
+
+    private void btn_bill1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bill1ActionPerformed
+        print_order();
+    }//GEN-LAST:event_btn_bill1ActionPerformed
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_bill;
+    private javax.swing.JButton btn_bill1;
     private javax.swing.JButton btn_p_cancel;
     private javax.swing.JButton btn_p_check;
     private javax.swing.JButton btn_p_close2;
@@ -773,7 +803,7 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1221,6 +1251,12 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
 //            this.dispose();
             callback.accomodation(new CloseDialog(this), new OutputData(ok, percentag, tbl_tables_ALM.
                     size(), guest_ids, tbl_tables_ALM));
+        }
+    }
+    
+    private void print_order() {
+        if (callback != null) {
+            callback.print_order(new CloseDialog(this));
         }
     }
 }

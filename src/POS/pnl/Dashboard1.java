@@ -105,12 +105,12 @@ import test.*;
  *
  * @author i1
  */
-public class Dashboard2 extends javax.swing.JFrame {
+public class Dashboard1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Dashboard
      */
-    public Dashboard2() {
+    public Dashboard1() {
         initComponents();
         myInit();
     }
@@ -1612,7 +1612,7 @@ public class Dashboard2 extends javax.swing.JFrame {
 
                 String img_path = System.getProperty("img_path", "C:\\Users\\i1\\");
                 ImgPath.setPath(img_path);
-                Dashboard2 aw = new Dashboard2();
+                Dashboard1 aw = new Dashboard1();
                 System.setProperty("sun.java2d.opengl", "True");
                 Application.setSystemLookAndFeel();
                 Screen.set_normal(aw);
@@ -2397,6 +2397,11 @@ public class Dashboard2 extends javax.swing.JFrame {
             nd.do_pass(datas2, t, user_id, count_other_orders);
 
             nd.setCallback(new Dlg_check_liquid.Callback() {
+                @Override
+                public void print_order(CloseDialog closeDialog) {
+                    lbl_table_no.setText(t.id);
+                    print_orders();
+                }
 
                 @Override
                 public void cancel(CloseDialog closeDialog, Dlg_check_liquid.OutputData data) {
@@ -2619,6 +2624,39 @@ public class Dashboard2 extends javax.swing.JFrame {
 
         }
     }
+
+    private void print_orders() {
+        String table_name = S1_prepare_order1.get_table_name(lbl_table_no.
+                getText());
+        String room_no = table_name;
+        String guess_names = "";
+        List<Dlg_check_liquid.to_guests> guest = my_guest;
+        int u = 0;
+        for (Dlg_check_liquid.to_guests t : guest) {
+            if (u == 0) {
+                guess_names = guess_names + t.name + "";
+            } else {
+                guess_names = guess_names + ", " + t.name + "";
+            }
+            u++;
+        }
+        
+        Window p = (Window) this;
+        Dlg_print_orders_by_date nd = Dlg_print_orders_by_date.create(p, true);
+        nd.setTitle("");
+        List<S2_search.to_items> orders = tbl_customer_tables_details_ALM;
+        nd.do_pass(orders,room_no,guess_names);
+        nd.setCallback(new Dlg_print_orders_by_date.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_print_orders_by_date.OutputData data) {
+                closeDialog.ok();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
     int my_guest_size = 0;
     String my_guest_room_ids = "";
     String my_guest_ids = "";
@@ -5289,9 +5327,9 @@ public class Dashboard2 extends javax.swing.JFrame {
         my_order = 0;
         final String names = System.getProperty("entityName", "Synapse Software Tech");
         Window w = (Window) this;
-        Dlg_login1 d = Dlg_login1.create(w, true);
-        d.setTitle("Login");
-        d.setCallback(new Dlg_login1.Callback() {
+        Dlg_login1 d1 = Dlg_login1.create(w, true);
+        d1.setTitle("Login");
+        d1.setCallback(new Dlg_login1.Callback() {
 
             @Override
             public void ok(CloseDialog cd, Dlg_login1.OutputData data) {
@@ -5321,8 +5359,8 @@ public class Dashboard2 extends javax.swing.JFrame {
                 }
             }
         });
-        Center.setCenter(d);
-        d.setVisible(true);
+        Center.setCenter(d1);
+        d1.setVisible(true);
 
     }
 
@@ -6309,7 +6347,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                         try {
                             date_added = DateType.datetime.parse(t1.date_added);
                         } catch (ParseException ex) {
-                            Logger.getLogger(Dashboard2.class.getName()).
+                            Logger.getLogger(Dashboard1.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
 
@@ -6482,15 +6520,15 @@ public class Dashboard2 extends javax.swing.JFrame {
 //                System.out.println("category_discounts: "+category_discounts+ " ,room_guest_ids: "+room_guest_ids);
                 List<Srpt_category_discounts.field> cdd = new ArrayList();
                 for (S1_category_discounts.to_category_discounts cd : category_discounts) {
-                  
-                        String category = cd.category_name;
-                        double due = cd.due;
-                        double disc_percent = cd.discount_percent;
-                        double disc_amount = cd.discount_amount;
-                        double sub_total = cd.due - cd.discount_amount;
-                        Srpt_category_discounts.field tbar = new Srpt_category_discounts.field(category, due, disc_percent, disc_amount, sub_total);
-                        cdd.add(tbar);
-                   
+
+                    String category = cd.category_name;
+                    double due = cd.due;
+                    double disc_percent = cd.discount_percent;
+                    double disc_amount = cd.discount_amount;
+                    double sub_total = cd.due - cd.discount_amount;
+                    Srpt_category_discounts.field tbar = new Srpt_category_discounts.field(category, due, disc_percent, disc_amount, sub_total);
+                    cdd.add(tbar);
+
                 }
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
                         accom3, advances, cdd, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
@@ -7017,7 +7055,7 @@ public class Dashboard2 extends javax.swing.JFrame {
             try {
                 d = DateType.datetime.parse(lbl_check_date.getText());
             } catch (ParseException ex) {
-                Logger.getLogger(Dashboard2.class.getName()).
+                Logger.getLogger(Dashboard1.class.getName()).
                         log(Level.SEVERE, null, ex);
             }
 
@@ -7069,7 +7107,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     }
 
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard2.class.getName()).
+                    Logger.getLogger(Dashboard1.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 i_date++;
@@ -7078,7 +7116,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 try {
                     nd = DateType.datetime.parse(cd.check_in);
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard2.class.getName()).
+                    Logger.getLogger(Dashboard1.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 int nights = DateUtils.count_days(nd, md) + 1;
@@ -7104,7 +7142,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     }
                     start = DateType.datetime.parse(cd.check_in);
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard2.class.getName()).
+                    Logger.getLogger(Dashboard1.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 String date_stayed = "( " + DateType.month_date.format(start) + " - " + DateType.month_date.
@@ -7135,7 +7173,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                     try {
                         date = DateType.datetime.parse(t1.date_added);
                     } catch (ParseException ex) {
-                        Logger.getLogger(Dashboard2.class.getName()).
+                        Logger.getLogger(Dashboard1.class.getName()).
                                 log(Level.SEVERE, null, ex);
                     }
 
@@ -7179,7 +7217,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                         try {
                             date_added = DateType.datetime.parse(t1.date_added);
                         } catch (ParseException ex) {
-                            Logger.getLogger(Dashboard2.class.getName()).
+                            Logger.getLogger(Dashboard1.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
 //                        z
@@ -7399,7 +7437,7 @@ public class Dashboard2 extends javax.swing.JFrame {
                 try {
                     d = DateType.datetime.parse(lbl_check_date.getText());
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard2.class.getName()).
+                    Logger.getLogger(Dashboard1.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 int count = S2_search.ret_guest_charge_count(lbl_table_no.
@@ -7464,7 +7502,7 @@ public class Dashboard2 extends javax.swing.JFrame {
         try {
             d = DateType.datetime.parse(lbl_check_date.getText());
         } catch (ParseException ex) {
-            Logger.getLogger(Dashboard2.class.getName()).
+            Logger.getLogger(Dashboard1.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
         int count = S2_search.ret_guest_charge_count(lbl_table_no.getText(), where_charge);
@@ -7707,15 +7745,15 @@ public class Dashboard2 extends javax.swing.JFrame {
             double discount = (tt.disc_rate / 100) * (qty * selling_price);
 
             double amount = (qty * selling_price) - discount;
-            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount);
+            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount,"");
             rpt_billing_statement.fields.add(field_billing_statement);
 
             if (tt.printing_assembly == 3) {
-                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount);
+                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount,"");
                 rpt_billing_stab_bar_and_resto.fields.add(field_stab_bar_and_resto);
             }
             if (tt.printing_assembly == 4) {
-                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount);
+                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount,"");
                 rpt_billing_stab_kitchen.fields.add(field_stab_kitchen);
             }
 
@@ -7723,8 +7761,8 @@ public class Dashboard2 extends javax.swing.JFrame {
         Window p = (Window) this;
         Dlg_print_orders nd = Dlg_print_orders.create(p, true);
         nd.setTitle("");
-        List<S2_search.to_items> orders=tbl_customer_tables_details_ALM;
-        nd.do_pass(rpt_billing_statement, rpt_billing_stab_bar_and_resto, rpt_billing_stab_kitchen,orders);
+        List<S2_search.to_items> orders = tbl_customer_tables_details_ALM;
+        nd.do_pass(rpt_billing_statement, rpt_billing_stab_bar_and_resto, rpt_billing_stab_kitchen, orders);
         nd.setCallback(new Dlg_print_orders.Callback() {
 
             @Override

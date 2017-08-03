@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.printing2;
+package POS.pnl;
 
+import POS.printing2.Dlg_print_orders;
+import POS.printing2.Srpt_billing_statement;
+import POS.utl.DateType;
 import POS_svc4.S2_search;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -13,6 +16,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +46,7 @@ import synsoftech.fields.Button;
  *
  * @author Guinness
  */
-public class Dlg_print_orders extends javax.swing.JDialog {
+public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_print_orders
@@ -66,33 +72,33 @@ public class Dlg_print_orders extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_print_orders(java.awt.Frame parent, boolean modal) {
+    private Dlg_print_orders_by_date(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_print_orders(java.awt.Dialog parent, boolean modal) {
+    private Dlg_print_orders_by_date(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_print_orders() {
+    public Dlg_print_orders_by_date() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_print_orders myRef;
+    private Dlg_print_orders_by_date myRef;
 
-    private void setThisRef(Dlg_print_orders myRef) {
+    private void setThisRef(Dlg_print_orders_by_date myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_print_orders> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_print_orders_by_date> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -100,7 +106,7 @@ public class Dlg_print_orders extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_print_orders create(java.awt.Window parent, boolean modal) {
+    public static Dlg_print_orders_by_date create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -110,14 +116,14 @@ public class Dlg_print_orders extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_print_orders create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_print_orders_by_date create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_print_orders dialog = dialogContainer.get(parent);
+            Dlg_print_orders_by_date dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_print_orders((java.awt.Frame) parent, false);
+                dialog = new Dlg_print_orders_by_date((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -131,10 +137,10 @@ public class Dlg_print_orders extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_print_orders dialog = dialogContainer.get(parent);
+            Dlg_print_orders_by_date dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_print_orders((java.awt.Dialog) parent, false);
+                dialog = new Dlg_print_orders_by_date((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -161,7 +167,7 @@ public class Dlg_print_orders extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_print_orders dialog = Dlg_print_orders.create(new javax.swing.JFrame(), true);
+        Dlg_print_orders_by_date dialog = Dlg_print_orders_by_date.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -200,6 +206,17 @@ public class Dlg_print_orders extends javax.swing.JDialog {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_bank = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new Button.Success();
@@ -210,21 +227,102 @@ public class Dlg_print_orders extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jButton3 = new Button.Success();
         jPanel7 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_uom = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Date from:");
+
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setText("All");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Date to:");
+
+        jDateChooser1.setDate(new Date());
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jDateChooser2.setDate(new Date());
+        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        tbl_bank.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_bank);
+
+        jLabel3.setText("Total no. of rows:");
+
+        jLabel4.setText("0");
+
+        jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Report", jPanel5);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -371,95 +469,7 @@ public class Dlg_print_orders extends javax.swing.JDialog {
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Print", jPanel1);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Date from:");
-
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setText("All");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Date to:");
-
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        tbl_uom.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tbl_uom);
-
-        jLabel3.setText("Total no. of rows:");
-
-        jLabel4.setText("0");
-
-        jButton4.setText("Search");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Report", jPanel5);
+        jTabbedPane1.addTab("Preview", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -467,31 +477,35 @@ public class Dlg_print_orders extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        print();
+//        print();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        print2();
+//        print2();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        print3();
+//        print3();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        set_order();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -519,19 +533,103 @@ public class Dlg_print_orders extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pnl_report;
-    private javax.swing.JTable tbl_uom;
+    private javax.swing.JTable tbl_bank;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-//        init_tbl_uom(tbl_uom);
-        jTabbedPane1.remove(1);
+        init_tbl_bank(tbl_bank);
     }
+    List<S2_search.to_items> my_orders = new ArrayList();
 
-    public void do_pass(Srpt_billing_statement rpt_billing_statement, Srpt_billing_statement rpt_billing_stab_bar_and_resto, Srpt_billing_statement rpt_billing_stab_kitchen, List<S2_search.to_items> orders) {
+    private void set_order() {
+        String min1 = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:00";
+        String max1 = DateType.sf.format(jDateChooser2.getDate()) + " 00:00:00";
+        Date min = new Date();
+        Date max = new Date();
+        try {
+            min = DateType.datetime.parse(min1);
+            max = DateType.datetime.parse(max1);
+        } catch (ParseException ex) {
+            Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        System.out.println("min: " + min);
+//        System.out.println("max: " + max);
+        List<Srpt_billing_statement.field> datas = new ArrayList();
+        List<Srpt_billing_statement.field> datas_bar = new ArrayList();
+        List<Srpt_billing_statement.field> datas_kitchen = new ArrayList();
+        for (S2_search.to_items order : my_orders) {
+            if (order.cat_id.equals("10") || order.cat_id.equals("12")) {
+                Date d = new Date();
+                Date d2 = new Date();
+                try {
+                    d = DateType.datetime.parse(order.date_added);
+                    String sf = DateType.sf.format(d) + " 00:00:00";
+                    d2 = DateType.datetime.parse(sf);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//                System.out.println("date: " + d2 + " | " + (min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())   );
+
+                boolean m1 = d.compareTo(min) >= 0;
+                boolean m2 = d.compareTo(max) <= 0;
+
+                String item_code = order.name;
+                String description = order.desc;
+                String assembly = "" + order.printing_assembly;
+                double qty = order.qty;
+                double selling_price = order.price;
+                double discount = order.discount;
+                double amount = (qty * selling_price) - discount;
+                boolean status = (min.getTime() >= d.getTime() && d.getTime() <= max.getTime());
+//                System.out.println("Date: " + d + " = " + status);
+
+                if ((min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())) {
+
+                    Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty, selling_price, discount, amount, order.date_added);
+                    datas.add(field);
+
+                    if (order.cat_id.equals("12")) {
+                        datas_bar.add(field);
+                    }
+                    if (order.cat_id.equals("10")) {
+                        datas_kitchen.add(field);
+                    }
+                }
+
+            }
+        }
+       
+        loadData_bank(datas);
+
+        String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
+        String address = System.getProperty("address", "Dauin, Negros Oriental");
+        String contact_no = System.getProperty("contact_no", "1235566");
+        String date = DateType.datetime2.format(new Date());
+        String room_no = table_names;
+        String print_to = "";
+        String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
+        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        rpt_billing_statement.fields.addAll(datas);
+        Srpt_billing_statement rpt_billing_statement_bar = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        rpt_billing_statement_bar.fields.addAll(datas_bar);
+        Srpt_billing_statement rpt_billing_statement_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        rpt_billing_statement_kitchen.fields.addAll(datas_kitchen);
+
+        jLabel4.setText("" + datas.size());
+
         init_report_billing_statement(rpt_billing_statement);
-        init_report_billing_stab_bar_and_resto(rpt_billing_stab_bar_and_resto);
-        init_report_billing_stab_kitchen(rpt_billing_stab_kitchen);
-//        loadData_uom(orders);
+        init_report_billing_stab_bar_and_resto(rpt_billing_statement_bar);
+        init_report_billing_stab_kitchen(rpt_billing_statement_kitchen);
+    }
+    String guess_names = "";
+    String table_names = "";
+
+    public void do_pass(List<S2_search.to_items> orders, String table_name, String guess_name) {
+        my_orders = orders;
+        guess_names = guess_name;
+        table_names = table_name;
+        set_order();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -551,6 +649,88 @@ public class Dlg_print_orders extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" bank "> 
+    public static ArrayListModel tbl_bank_ALM;
+    public static TblbankModel tbl_bank_M;
+
+    public static void init_tbl_bank(JTable tbl_bank) {
+        tbl_bank_ALM = new ArrayListModel();
+        tbl_bank_M = new TblbankModel(tbl_bank_ALM);
+        tbl_bank.setModel(tbl_bank_M);
+        tbl_bank.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_bank.setRowHeight(25);
+        int[] tbl_widths_bank = {60, 80, 100, 80, 80, 100, 80};
+        for (int i = 0, n = tbl_widths_bank.length; i < n; i++) {
+            if (i == 2) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_bank, i, tbl_widths_bank[i]);
+        }
+        Dimension d = tbl_bank.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_bank.getTableHeader().setPreferredSize(d);
+        tbl_bank.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_bank.setRowHeight(25);
+        tbl_bank.setFont(new java.awt.Font("Arial", 0, 12));
+        TableWidthUtilities.setColumnRightRenderer(tbl_bank, 4);
+        TableWidthUtilities.setColumnRightRenderer(tbl_bank, 5);
+        TableWidthUtilities.setColumnRightRenderer(tbl_bank, 3);
+    }
+
+    public static void loadData_bank(List<Srpt_billing_statement.field> acc) {
+        tbl_bank_ALM.clear();
+        tbl_bank_ALM.addAll(acc);
+    }
+
+    public static class TblbankModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Qty", "Code", "Description", "Price", "Discount", "Amount", "Date"
+        };
+
+        public TblbankModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            Srpt_billing_statement.field tt = (Srpt_billing_statement.field) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + FitIn.fmt_woc(tt.getQty());
+                case 1:
+                    return " " + tt.getItem_code();
+                case 2:
+                    return " " + tt.getDescription();
+                case 3:
+                    return FitIn.fmt_wc_0(tt.getSelling_price()) + " ";
+                case 4:
+                    return FitIn.fmt_wc_0(tt.getDiscount()) + " ";
+                case 5:
+                    return FitIn.fmt_wc_0(tt.getAmount()) + " ";
+                default:
+                    return " " + DateType.convert_slash(tt.getDatetime());
+            }
+        }
+    }
+//</editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc=" billing statement ">
     private void init_report_billing_statement(final Srpt_billing_statement rpt) {
@@ -640,6 +820,7 @@ public class Dlg_print_orders extends javax.swing.JDialog {
     }
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" Bar and Resto ">
+
     private void init_report_billing_stab_bar_and_resto(final Srpt_billing_statement rpt) {
 
         Thread t = new Thread(new Runnable() {
@@ -722,6 +903,7 @@ public class Dlg_print_orders extends javax.swing.JDialog {
     }
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" kitchen ">
+
     private void init_report_billing_stab_kitchen(final Srpt_billing_statement rpt) {
 
         Thread t = new Thread(new Runnable() {
@@ -805,83 +987,5 @@ public class Dlg_print_orders extends javax.swing.JDialog {
         }
     }
 //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc=" uom "> 
-    public static ArrayListModel tbl_uom_ALM;
-    public static TbluomModel tbl_uom_M;
-
-    public static void init_tbl_uom(JTable tbl_uom) {
-        tbl_uom_ALM = new ArrayListModel();
-        tbl_uom_M = new TbluomModel(tbl_uom_ALM);
-        tbl_uom.setModel(tbl_uom_M);
-        tbl_uom.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        tbl_uom.setRowHeight(25);
-        int[] tbl_widths_uom = {50, 80, 100, 80, 80, 100};
-        for (int i = 0, n = tbl_widths_uom.length; i < n; i++) {
-            if (i == 2) {
-                continue;
-            }
-            TableWidthUtilities.setColumnWidth(tbl_uom, i, tbl_widths_uom[i]);
-        }
-        Dimension d = tbl_uom.getTableHeader().getPreferredSize();
-        d.height = 25;
-        tbl_uom.getTableHeader().setPreferredSize(d);
-        tbl_uom.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
-        tbl_uom.setRowHeight(25);
-        tbl_uom.setFont(new java.awt.Font("Arial", 0, 12));
-    }
-
-    public static void loadData_uom(List<S2_search.to_items> orders) {
-        tbl_uom_ALM.clear();
-        tbl_uom_ALM.addAll(orders);
-
-    }
-
-    public static class TbluomModel extends AbstractTableAdapter {
-
-        public static String[] COLUMNS = {
-            "Qty", "Code", "Description", "Date", "Disc", "Amoung"
-        };
-
-        public TbluomModel(ListModel listmodel) {
-            super(listmodel, COLUMNS);
-        }
-
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            if (column == 100) {
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public Class getColumnClass(int col) {
-            if (col == 1000) {
-                return Boolean.class;
-            }
-            return Object.class;
-        }
-
-        @Override
-        public Object getValueAt(int row, int col) {
-            S2_search.to_items tt = (S2_search.to_items) getRow(row);
-            switch (col) {
-                case 0:
-                    return " " + tt.qty;
-                case 1:
-                    return " " + tt.name;
-                case 2:
-                    return " " + tt.desc;
-                case 3:
-                    return " " + tt.date_added;
-                case 4:
-                    return FitIn.fmt_wc_0(tt.discount) + " ";
-                default:
-                    return FitIn.fmt_wc_0((tt.qty * tt.price) - tt.discount) + " ";
-            }
-        }
-    }
-//</editor-fold> 
 
 }

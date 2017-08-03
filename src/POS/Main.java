@@ -5,7 +5,7 @@
 package POS;
 
 import POS.currency.S1_currency;
-import POS.pnl.Dashboard2;
+import POS.pnl.Dashboard1;
 import POS.utl.Center;
 import POS.utl.DateType;
 import POS.utl.DateUtils;
@@ -51,7 +51,7 @@ public class Main {
                 System.exit(1);
             }
         }
-        Dashboard2 pnl = new Dashboard2();
+        Dashboard1 pnl = new Dashboard1();
         Application.setSystemLookAndFeel();
         Screen.set_normal(pnl);
 //        S2_guest_charges.ret_data("");
