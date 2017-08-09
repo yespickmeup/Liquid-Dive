@@ -13,6 +13,7 @@ import POS.utl.Screen;
 import java.awt.Window;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.Date;
@@ -192,11 +193,12 @@ public class Main {
             System.setProperty("auto_print_stab_kitchen", prop.getProperty("auto_print_stab_kitchen", "false"));
             System.setProperty("print_billing_statement_size", prop.getProperty("print_billing_statement_size", "default"));
             System.setProperty("print_orders", prop.getProperty("print_orders", "false"));
+            System.setProperty("catid_orders_wo_qty", prop.getProperty("catid_orders_wo_qty", "false"));
             System.out.println(MyDB.getNames() + " ------");
             Lg.$.severe(System.getProperty("receipt_printer"));
-
+            
             new Main().start();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
 //                    Lg.$.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }

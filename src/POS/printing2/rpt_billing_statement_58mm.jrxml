@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="164" pageHeight="841" columnWidth="164" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="e7cb27ba-ff27-4de5-912c-ed49536dbd9a">
     <property name="ireport.zoom" value="3.0"/>
     <property name="ireport.x" value="0"/>
-    <property name="ireport.y" value="192"/>
+    <property name="ireport.y" value="56"/>
     <parameter name="business_name" class="java.lang.String"/>
     <parameter name="address" class="java.lang.String"/>
     <parameter name="contact_no" class="java.lang.String"/>
@@ -13,7 +13,7 @@
     <field name="item_code" class="java.lang.String"/>
     <field name="description" class="java.lang.String"/>
     <field name="assembly" class="java.lang.String"/>
-    <field name="qty" class="java.lang.Double"/>
+    <field name="qty" class="java.lang.String"/>
     <field name="selling_price" class="java.lang.Double"/>
     <field name="discount" class="java.lang.Double"/>
     <field name="amount" class="java.lang.Double"/>

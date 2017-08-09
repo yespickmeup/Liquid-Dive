@@ -5,11 +5,18 @@
  */
 package POS.printing2;
 
+import POS.Main.MyDB;
+import POS.utl.MyConnection1;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -49,15 +56,18 @@ public class Srpt_billing_statement {
         String item_code;
         String description;
         String assembly;
-        double qty;
+        String qty;
         double selling_price;
         double discount;
         double amount;
         String datetime;
+        String cat_id;
+        String sub_cat_id;
+
         public field() {
         }
 
-        public field(String item_code, String description, String assembly, double qty, double selling_price, double discount, double amount,String datetime) {
+        public field(String item_code, String description, String assembly, String qty, double selling_price, double discount, double amount, String datetime, String cat_id, String sub_cat_id) {
             this.item_code = item_code;
             this.description = description;
             this.assembly = assembly;
@@ -65,7 +75,25 @@ public class Srpt_billing_statement {
             this.selling_price = selling_price;
             this.discount = discount;
             this.amount = amount;
-            this.datetime=datetime;
+            this.datetime = datetime;
+            this.cat_id = cat_id;
+            this.sub_cat_id = sub_cat_id;
+        }
+
+        public String getCat_id() {
+            return cat_id;
+        }
+
+        public void setCat_id(String cat_id) {
+            this.cat_id = cat_id;
+        }
+
+        public String getSub_cat_id() {
+            return sub_cat_id;
+        }
+
+        public void setSub_cat_id(String sub_cat_id) {
+            this.sub_cat_id = sub_cat_id;
         }
 
         public String getDatetime() {
@@ -75,7 +103,7 @@ public class Srpt_billing_statement {
         public void setDatetime(String datetime) {
             this.datetime = datetime;
         }
-        
+
         public String getItem_code() {
             return item_code;
         }
@@ -100,11 +128,11 @@ public class Srpt_billing_statement {
             this.assembly = assembly;
         }
 
-        public double getQty() {
+        public String getQty() {
             return qty;
         }
 
-        public void setQty(double qty) {
+        public void setQty(String qty) {
             this.qty = qty;
         }
 
@@ -143,17 +171,19 @@ public class Srpt_billing_statement {
         String guess_names = "Ronald Pascua, Ronald Pascua";
         String print_to = "";
         String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
-        Srpt_billing_statement rpt = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to,receipt_footer);
+        Srpt_billing_statement rpt = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
 
         for (int i = 0; i < 10; i++) {
             String item_code = "100" + i;
             String description = "Description " + i;
             String assembly = "";
-            double qty = i;
+            String qty = "" + i;
             double selling_price = 100 + i;
             double discount = 0;
-            double amount = qty * selling_price;
-            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount,"");
+            double amount = FitIn.toDouble(qty) * selling_price;
+            String cat_id = "";
+            String sub_cat_id = "";
+            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount, "", cat_id, sub_cat_id);
             rpt.fields.add(field);
         }
 
@@ -181,5 +211,30 @@ public class Srpt_billing_statement {
                 compileJasper(jrxml),
                 JasperUtil.setParameter(to),
                 JasperUtil.makeDatasource(to.fields));
+    }
+
+    public static String ret_types_num(String prod_num) {
+        String types_num = "";
+
+        try {
+            Connection conn = MyConnection1.connect();
+            String s0 = "select "
+                    + " cat_id"
+                    + ",types_num"
+                    + " from " + MyDB.getNames() + ".inventory2_stocks_left"
+                    + " where product_name='" + prod_num + "'";
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+
+                types_num = rs.getString(2);
+            }
+            return types_num;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection1.close();
+        }
     }
 }

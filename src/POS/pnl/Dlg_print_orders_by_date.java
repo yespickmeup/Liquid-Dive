@@ -355,7 +355,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnl_report, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -396,7 +396,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -436,7 +436,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -477,8 +477,8 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,6 +542,8 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     List<S2_search.to_items> my_orders = new ArrayList();
 
     private void set_order() {
+        String types_no_wo_qty = System.getProperty("catid_orders_wo_qty", "");
+        String[] l_types_no_wo_qty = types_no_wo_qty.split(",");
         String min1 = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:00";
         String max1 = DateType.sf.format(jDateChooser2.getDate()) + " 00:00:00";
         Date min = new Date();
@@ -582,11 +584,42 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 double discount = order.discount;
                 double amount = (qty * selling_price) - discount;
                 boolean status = (min.getTime() >= d.getTime() && d.getTime() <= max.getTime());
-//                System.out.println("Date: " + d + " = " + status);
+//                System.out.println("item_code: " + item_code);
+                if (!jCheckBox1.isSelected()) {
+                    if ((min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())) {
 
-                if ((min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())) {
+                        String qty1 = "" + qty;
 
-                    Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty, selling_price, discount, amount, order.date_added);
+                        String cat_id = order.cat_id;
+                        String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
+                        for (String s : l_types_no_wo_qty) {
+                            if (sub_cat_id.equalsIgnoreCase(s)) {
+                                qty1 = "";
+                            }
+                        }
+//                    System.out.println("sub_cat_id: "+sub_cat_id);
+                        Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id);
+                        datas.add(field);
+
+                        if (order.cat_id.equals("12")) {
+                            datas_bar.add(field);
+                        }
+                        if (order.cat_id.equals("10")) {
+                            datas_kitchen.add(field);
+                        }
+                    }
+                } else {
+                    String qty1 = "" + qty;
+
+                    String cat_id = order.cat_id;
+                    String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
+                    for (String s : l_types_no_wo_qty) {
+                        if (sub_cat_id.equalsIgnoreCase(s)) {
+                            qty1 = "";
+                        }
+                    }
+//                    System.out.println("sub_cat_id: "+sub_cat_id);
+                    Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id);
                     datas.add(field);
 
                     if (order.cat_id.equals("12")) {
@@ -599,7 +632,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
             }
         }
-       
+
         loadData_bank(datas);
 
         String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");

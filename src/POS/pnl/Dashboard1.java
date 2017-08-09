@@ -2640,12 +2640,12 @@ public class Dashboard1 extends javax.swing.JFrame {
             }
             u++;
         }
-        
+
         Window p = (Window) this;
         Dlg_print_orders_by_date nd = Dlg_print_orders_by_date.create(p, true);
         nd.setTitle("");
         List<S2_search.to_items> orders = tbl_customer_tables_details_ALM;
-        nd.do_pass(orders,room_no,guess_names);
+        nd.do_pass(orders, room_no, guess_names);
         nd.setCallback(new Dlg_print_orders_by_date.Callback() {
 
             @Override
@@ -7745,15 +7745,25 @@ public class Dashboard1 extends javax.swing.JFrame {
             double discount = (tt.disc_rate / 100) * (qty * selling_price);
 
             double amount = (qty * selling_price) - discount;
-            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount,"");
+            String qty1 = "" + qty;
+            String types_no_wo_qty = System.getProperty("catid_orders_wo_qty", "");
+            String[] l_types_no_wo_qty = types_no_wo_qty.split(",");
+            String cat_id = tt.cat_id;
+            String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
+            for (String s : l_types_no_wo_qty) {
+                if (sub_cat_id.equalsIgnoreCase(s)) {
+                    qty1 = "";
+                }
+            }
+            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "",cat_id,sub_cat_id);
             rpt_billing_statement.fields.add(field_billing_statement);
 
             if (tt.printing_assembly == 3) {
-                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount,"");
+                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "",cat_id,sub_cat_id);
                 rpt_billing_stab_bar_and_resto.fields.add(field_stab_bar_and_resto);
             }
             if (tt.printing_assembly == 4) {
-                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount, amount,"");
+                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "",cat_id,sub_cat_id);
                 rpt_billing_stab_kitchen.fields.add(field_stab_kitchen);
             }
 
@@ -7811,6 +7821,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 //        nd.setLocationRelativeTo(this);
 //
 //        nd.setVisible(true);
+
 
         Window p = (Window) this;
         Dlg_addtl_cashins nd = Dlg_addtl_cashins.create(p, true);

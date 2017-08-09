@@ -12,7 +12,7 @@
     <field name="item_code" class="java.lang.String"/>
     <field name="description" class="java.lang.String"/>
     <field name="assembly" class="java.lang.String"/>
-    <field name="qty" class="java.lang.Double"/>
+    <field name="qty" class="java.lang.String"/>
     <field name="selling_price" class="java.lang.Double"/>
     <field name="discount" class="java.lang.Double"/>
     <field name="amount" class="java.lang.Double"/>

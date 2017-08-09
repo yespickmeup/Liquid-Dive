@@ -5,7 +5,6 @@
 package POS_svc4;
 
 import POS.Main.MyDB;
-import POS.pnl.Dashboard;
 import POS.to.to_users;
 import POS.utl.DateType;
 import POS.utl.DateUtils;
@@ -16,14 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import POS.utl.MyConnection1;
-import POS.utl.NumType;
-import POS.utl.NumberFormat;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import mijzcx.synapse.desk.utils.FitIn;
 import test.Dlg_check_liquid;
 
