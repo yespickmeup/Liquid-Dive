@@ -580,7 +580,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 String description = order.desc;
                 String assembly = "" + order.printing_assembly;
                 double qty = order.qty;
-                double selling_price = order.price;
+                double selling_price = order.price / order.qty;
                 double discount = order.discount;
                 double amount = (qty * selling_price) - discount;
                 boolean status = (min.getTime() >= d.getTime() && d.getTime() <= max.getTime());
