@@ -536,7 +536,7 @@ public class Dlg_print_orders extends javax.swing.JDialog {
         jTabbedPane1.remove(1);
     }
 
-    public void do_pass(Srpt_billing_statement rpt_billing_statement, Srpt_billing_statement rpt_billing_stab_bar_and_resto, Srpt_billing_statement rpt_billing_stab_kitchen, List<S2_search.to_items> orders) {
+    public void do_pass(String order_no,Srpt_billing_statement rpt_billing_statement, Srpt_billing_statement rpt_billing_stab_bar_and_resto, Srpt_billing_statement rpt_billing_stab_kitchen, List<S2_search.to_items> orders) {
         init_report_billing_statement(rpt_billing_statement);
         init_report_billing_stab_bar_and_resto(rpt_billing_stab_bar_and_resto);
         init_report_billing_stab_kitchen(rpt_billing_stab_kitchen);

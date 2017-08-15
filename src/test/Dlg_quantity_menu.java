@@ -4,9 +4,7 @@
  */
 package test;
 
-import POS.Main;
 import POS.discount.S1_add_customer_discount;
-import POS.discount.S1_add_customer_discount.to_customer_discounts;
 import POS.inventory.S2_assembly;
 import POS.packages.S1_item_packages;
 import POS.svc.S9_confirm_user;
@@ -1266,7 +1264,7 @@ public class Dlg_quantity_menu extends javax.swing.JDialog {
                     getText(), FitIn.toDouble(lbl_price.getText()), FitIn.
                     toDouble(tf_qty.getText()), my_img_path, FitIn.toDouble(tf_qty.
                     getText()), guest_id, cat_id, category_name, print_assme, status, disc_name1
-                    , disc_rate, discount, customer_name1, customer_id, customer_address, "", group_id, 0, 0, "", "", "", 0,"","");
+                    , disc_rate, discount, customer_name1, customer_id, customer_address, "", group_id, 0, 0, "", "", "", 0,"","","");
             List<S2_search.to_items_status> to_sub = tbl_employee_payroll_ALM;
             double to_pay = FitIn.toDouble(lbl_price.getText());
             double qty = FitIn.toDouble(tf_qty.getText());

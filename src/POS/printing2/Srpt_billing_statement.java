@@ -38,8 +38,10 @@ public class Srpt_billing_statement {
     public final String print_to;
     public final List<field> fields;
     public final String receipt_footer;
+    public final String cashier_name;
+    public final String order_no;
 
-    public Srpt_billing_statement(String business_name, String address, String contact_no, String date, String room_no, String guess_names, String print_to, String receipt_footer) {
+    public Srpt_billing_statement(String business_name, String address, String contact_no, String date, String room_no, String guess_names, String print_to, String receipt_footer, String cashier_name, String order_no) {
         this.business_name = business_name;
         this.address = address;
         this.contact_no = contact_no;
@@ -49,6 +51,8 @@ public class Srpt_billing_statement {
         this.fields = new ArrayList();
         this.print_to = print_to;
         this.receipt_footer = receipt_footer;
+        this.cashier_name = cashier_name;
+        this.order_no = order_no;
     }
 
     public static class field {
@@ -63,11 +67,12 @@ public class Srpt_billing_statement {
         String datetime;
         String cat_id;
         String sub_cat_id;
-
+        boolean is_selected;
+        String order_no;
         public field() {
         }
 
-        public field(String item_code, String description, String assembly, String qty, double selling_price, double discount, double amount, String datetime, String cat_id, String sub_cat_id) {
+        public field(String item_code, String description, String assembly, String qty, double selling_price, double discount, double amount, String datetime, String cat_id, String sub_cat_id, boolean is_selected,String order_no) {
             this.item_code = item_code;
             this.description = description;
             this.assembly = assembly;
@@ -78,6 +83,24 @@ public class Srpt_billing_statement {
             this.datetime = datetime;
             this.cat_id = cat_id;
             this.sub_cat_id = sub_cat_id;
+            this.is_selected = is_selected;
+            this.order_no=order_no;
+        }
+
+        public String getOrder_no() {
+            return order_no;
+        }
+
+        public void setOrder_no(String order_no) {
+            this.order_no = order_no;
+        }
+        
+        public boolean isIs_selected() {
+            return is_selected;
+        }
+
+        public void setIs_selected(boolean is_selected) {
+            this.is_selected = is_selected;
         }
 
         public String getCat_id() {
@@ -171,7 +194,9 @@ public class Srpt_billing_statement {
         String guess_names = "Ronald Pascua, Ronald Pascua";
         String print_to = "";
         String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
-        Srpt_billing_statement rpt = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        String cashier_name = "";
+        String order_no = "";
+        Srpt_billing_statement rpt = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
 
         for (int i = 0; i < 10; i++) {
             String item_code = "100" + i;
@@ -183,7 +208,8 @@ public class Srpt_billing_statement {
             double amount = FitIn.toDouble(qty) * selling_price;
             String cat_id = "";
             String sub_cat_id = "";
-            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount, "", cat_id, sub_cat_id);
+            String order_nos="";
+            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount, "", cat_id, sub_cat_id, true,order_nos);
             rpt.fields.add(field);
         }
 

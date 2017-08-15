@@ -2953,7 +2953,7 @@ public class Dashboard1 extends javax.swing.JFrame {
             List<S2_search.to_items> datas = new ArrayList();
 
             for (S2_search.to_items s : results) {
-                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
                 datas.add(to);
                 payment += s.qty * s.price;
                 i++;
@@ -2962,7 +2962,7 @@ public class Dashboard1 extends javax.swing.JFrame {
             tbl_customer_tables_details_M.fireTableDataChanged();
         } else {
             for (S2_search.to_items s : results) {
-                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
                 item_model.add(i, to);
                 payment += s.qty * s.price;
                 i++;
@@ -3105,7 +3105,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         List< S2_search.to_items> datas = new ArrayList();
         if (ui_items.equals("list")) {
             for (S2_search.to_items s : results) {
-                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
                 datas.add(to);
                 payment += s.price;
                 i++;
@@ -3114,7 +3114,7 @@ public class Dashboard1 extends javax.swing.JFrame {
             tbl_customer_tables_details_M.fireTableDataChanged();
         } else {
             for (S2_search.to_items s : results) {
-                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
 
                 item_model.add(i, to);
                 payment += s.price * s.qty;
@@ -3212,7 +3212,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         List< S2_search.to_items> datas = new ArrayList();
         if (ui_items.equals("list")) {
             for (S2_search.to_items s : results) {
-                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
                 datas.add(to);
                 payment += s.qty * s.price;
                 i++;
@@ -3291,7 +3291,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 }
                 final S2_search.to_items to = (S2_search.to_items) j;
 
-                final S2_search.to_items to_items = new S2_search.to_items(to.name, to.uom, to.desc, to.price, to.qty, to.img_path, to.qty, to.guest_id, to.cat_id, to.category_name, to.printing_assembly, to.status, to.disc_name, to.disc_rate, to.discount, to.customer_name, to.customer_address, to.customer_address, to.date_added, to.group_id, to.nights, to.guest_no, to.check_out, to.room_guest_id, to.user_name, to.item_package_id, to.sub_category_name, to.sub_category_id);
+                final S2_search.to_items to_items = new S2_search.to_items(to.name, to.uom, to.desc, to.price, to.qty, to.img_path, to.qty, to.guest_id, to.cat_id, to.category_name, to.printing_assembly, to.status, to.disc_name, to.disc_rate, to.discount, to.customer_name, to.customer_address, to.customer_address, to.date_added, to.group_id, to.nights, to.guest_no, to.check_out, to.room_guest_id, to.user_name, to.item_package_id, to.sub_category_name, to.sub_category_id,to.order_no);
 
                 List<S2_search.to_items_status> to_sub = new ArrayList();
                 Window p = (Window) this;
@@ -3729,7 +3729,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 loadData_customer_tables_details(results);
             } else {
                 for (S2_search.to_items s : results) {
-                    S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                    S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
                     item_model.add(i, to);
                     i++;
                 }
@@ -3796,7 +3796,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 }
             } else {
                 for (S2_search.to_items s : results) {
-                    S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                    S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
                     item_model.add(i, to);
                     payment += s.price * s.qty;
                     if (s.status == 0 && s.printing_assembly != 0) {
@@ -5349,6 +5349,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 int user_level = S12_retval_user_level.get_user_level(data.un);
                 to_users.setUser_level1("" + user_level);
                 to_users.setUsername1(name);
+                to_users.setUser_screen_name(name);
                 myInit();
                 set_or();
                 if (to_users.get_inventory() == 1) {
@@ -6810,11 +6811,6 @@ public class Dashboard1 extends javax.swing.JFrame {
         boolean check = false;
         check = S2_guest_charges.select_guests(lbl_table_no.getText());
 
-        String print = System.getProperty("print_orders", "false");
-        if (print.equals("true")) {
-            prepare_order2();
-        }
-
         if ((my_guest.size() == 1 && check == false && !datas.isEmpty())) {
             check_ins_ordering();
         }
@@ -6822,7 +6818,12 @@ public class Dashboard1 extends javax.swing.JFrame {
 //            S1_check_in.add_order_rooms3(datas, lbl_table_no.getText(), my_guest, to_sub);
 //        } else {
 //            JOptionPane.showMessageDialog(null, my_guest.size());
-        S1_check_in.add_order_rooms(datas, lbl_table_no.getText(), split_guest, to_sub, user_id);
+        String order_no = S1_check_in.add_order_rooms(datas, lbl_table_no.getText(), split_guest, to_sub, user_id);
+       
+        String print = System.getProperty("print_orders", "false");
+        if (print.equals("true")) {
+            prepare_order2(order_no);
+        }
 //        }
 
 //        user_id = "5";
@@ -7639,7 +7640,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 for (int r = 0; r < row; r++) {
                     Object value = item_model.getElementAt(r);
                     S2_search.to_items s = (S2_search.to_items) value;
-                    S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id);
+                    S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id,s.order_no);
                     if (s.status == 0 && s.printing_assembly == assembly[j]) {
                         start++;
                         break;
@@ -7663,7 +7664,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         int i = 0;
     }
 
-    private void prepare_order2() {
+    private void prepare_order2(String order_no) {
         final String ui_items = System.getProperty("ui_items", "list");
         String table_name = S1_prepare_order1.get_table_name(lbl_table_no.
                 getText());
@@ -7693,9 +7694,11 @@ public class Dashboard1 extends javax.swing.JFrame {
 
         String print_to = "";
         String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
-        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
-        Srpt_billing_statement rpt_billing_stab_bar_and_resto = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Bar and Resto", receipt_footer);
-        Srpt_billing_statement rpt_billing_stab_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Kitchen", receipt_footer);
+        String cashier_name = to_users.getUser_screen_name();
+        
+        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name,order_no);
+        Srpt_billing_statement rpt_billing_stab_bar_and_resto = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Bar and Resto", receipt_footer, cashier_name,order_no);
+        Srpt_billing_statement rpt_billing_stab_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, "Kitchen", receipt_footer, cashier_name,order_no);
 
         for (S5_printing_assemlby.to_printing_assembly t : datas) {
             assembly[j] = t.id;
@@ -7755,15 +7758,15 @@ public class Dashboard1 extends javax.swing.JFrame {
                     qty1 = "";
                 }
             }
-            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "",cat_id,sub_cat_id);
+            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "", cat_id, sub_cat_id, true,order_no);
             rpt_billing_statement.fields.add(field_billing_statement);
 
             if (tt.printing_assembly == 3) {
-                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "",cat_id,sub_cat_id);
+                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "", cat_id, sub_cat_id, true,order_no);
                 rpt_billing_stab_bar_and_resto.fields.add(field_stab_bar_and_resto);
             }
             if (tt.printing_assembly == 4) {
-                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "",cat_id,sub_cat_id);
+                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "", cat_id, sub_cat_id, true,order_no);
                 rpt_billing_stab_kitchen.fields.add(field_stab_kitchen);
             }
 
@@ -7772,7 +7775,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         Dlg_print_orders nd = Dlg_print_orders.create(p, true);
         nd.setTitle("");
         List<S2_search.to_items> orders = tbl_customer_tables_details_ALM;
-        nd.do_pass(rpt_billing_statement, rpt_billing_stab_bar_and_resto, rpt_billing_stab_kitchen, orders);
+        nd.do_pass(order_no,rpt_billing_statement, rpt_billing_stab_bar_and_resto, rpt_billing_stab_kitchen, orders);
         nd.setCallback(new Dlg_print_orders.Callback() {
 
             @Override
@@ -7821,7 +7824,6 @@ public class Dashboard1 extends javax.swing.JFrame {
 //        nd.setLocationRelativeTo(this);
 //
 //        nd.setVisible(true);
-
 
         Window p = (Window) this;
         Dlg_addtl_cashins nd = Dlg_addtl_cashins.create(p, true);

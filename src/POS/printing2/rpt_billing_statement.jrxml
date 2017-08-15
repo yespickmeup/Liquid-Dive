@@ -9,6 +9,8 @@
     <parameter name="date" class="java.lang.String"/>
     <parameter name="room_no" class="java.lang.String"/>
     <parameter name="guess_names" class="java.lang.String"/>
+    <parameter name="cashier_name" class="java.lang.String"/>
+    <parameter name="order_no" class="java.lang.String"/>
     <field name="item_code" class="java.lang.String"/>
     <field name="description" class="java.lang.String"/>
     <field name="assembly" class="java.lang.String"/>
@@ -23,7 +25,7 @@
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="109" splitType="Stretch">
+        <band height="131" splitType="Stretch">
             <textField>
                 <reportElement uuid="98cc34d6-0b47-43ab-84bf-c82ffef142d4" x="9" y="0" width="190" height="12"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
@@ -53,35 +55,35 @@
                 <textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="51aefb1d-ba17-495a-9916-e7211013e832" x="9" y="55" width="33" height="12"/>
+                <reportElement uuid="51aefb1d-ba17-495a-9916-e7211013e832" x="9" y="74" width="33" height="12"/>
                 <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="8"/>
+                    <font fontName="Tahoma7" size="8"/>
                 </textElement>
                 <text><![CDATA[Room:]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="d6003f2b-85a8-4858-9536-47daa9552c9c" x="9" y="66" width="33" height="12"/>
+                <reportElement uuid="d6003f2b-85a8-4858-9536-47daa9552c9c" x="9" y="85" width="33" height="12"/>
                 <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="8"/>
+                    <font fontName="Tahoma7" size="8"/>
                 </textElement>
                 <text><![CDATA[Guest/s:]]></text>
             </staticText>
             <textField>
-                <reportElement uuid="98cc34d6-0b47-43ab-84bf-c82ffef142d4" x="42" y="55" width="157" height="12"/>
+                <reportElement uuid="98cc34d6-0b47-43ab-84bf-c82ffef142d4" x="42" y="74" width="157" height="12"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="8"/>
+                    <font fontName="Tahoma" size="8" isBold="false"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{room_no}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="98cc34d6-0b47-43ab-84bf-c82ffef142d4" x="42" y="66" width="157" height="12"/>
+                <reportElement uuid="98cc34d6-0b47-43ab-84bf-c82ffef142d4" x="42" y="85" width="157" height="12"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="8"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{guess_names}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="d6003f2b-85a8-4858-9536-47daa9552c9c" x="9" y="87" width="190" height="15"/>
+                <reportElement uuid="d6003f2b-85a8-4858-9536-47daa9552c9c" x="9" y="106" width="190" height="15"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
@@ -91,6 +93,20 @@
                 </textElement>
                 <text><![CDATA[Orders]]></text>
             </staticText>
+            <staticText>
+                <reportElement uuid="51aefb1d-ba17-495a-9916-e7211013e832" x="9" y="55" width="33" height="12"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="7"/>
+                </textElement>
+                <text><![CDATA[Cashier:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="98cc34d6-0b47-43ab-84bf-c82ffef142d4" x="42" y="55" width="157" height="12"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cashier_name}]]></textFieldExpression>
+            </textField>
         </band>
     </title>
     <pageHeader>
@@ -161,7 +177,7 @@
         <band splitType="Stretch"/>
     </pageFooter>
     <summary>
-        <band height="72" splitType="Stretch">
+        <band height="92" splitType="Stretch">
             <staticText>
                 <reportElement uuid="d6003f2b-85a8-4858-9536-47daa9552c9c" x="42" y="38" width="122" height="12"/>
                 <box>
@@ -193,6 +209,20 @@
                 </textElement>
                 <text><![CDATA[Total:]]></text>
             </staticText>
+            <staticText>
+                <reportElement uuid="51aefb1d-ba17-495a-9916-e7211013e832" x="9" y="61" width="33" height="12"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="7"/>
+                </textElement>
+                <text><![CDATA[Trans. #:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement uuid="98cc34d6-0b47-43ab-84bf-c82ffef142d4" x="42" y="61" width="157" height="12"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{order_no}]]></textFieldExpression>
+            </textField>
         </band>
     </summary>
 </jasperReport>

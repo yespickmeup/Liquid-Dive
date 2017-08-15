@@ -23,6 +23,7 @@ public class DateType {
     public static SimpleDateFormat time2 = new SimpleDateFormat("hh:mm aa");
     public static SimpleDateFormat sf1 = new SimpleDateFormat("EEE, MMM dd,yyyy");
     public static SimpleDateFormat dash = new SimpleDateFormat("MM/dd/yyyy");
+    public static SimpleDateFormat dash2 = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
     public static SimpleDateFormat d = new SimpleDateFormat("dd");
     public static SimpleDateFormat m = new SimpleDateFormat("MMMMMMMMMMM");
     public static SimpleDateFormat m1 = new SimpleDateFormat("MM");
@@ -33,10 +34,12 @@ public class DateType {
     public static SimpleDateFormat month_year = new SimpleDateFormat("MMMMMMMMMMM yyyy");
     public static SimpleDateFormat month_date = new SimpleDateFormat("MMMMMMMMMM dd, yyyy");
     public static SimpleDateFormat day_and_time = new SimpleDateFormat("MMMMMMMMMM dd, yyyy hh:mm aa");
-    public static SimpleDateFormat day_and_time2= new SimpleDateFormat("MMMMMMMMMM dd, yyyy hh:mm a");
+    public static SimpleDateFormat day_and_time2 = new SimpleDateFormat("MMMMMMMMMM dd, yyyy hh:mm a");
+
     public static void main(String[] args) {
         System.out.println(sf1.format(new Date()));
     }
+
     public static String convert_jan_1_2013_datetime(String datetime) {
         String date = "";
         Date d = new Date();
@@ -52,7 +55,8 @@ public class DateType {
         date = DateType.day_and_time.format(d);
         return date;
     }
-     public static String convert_slash(String datetime) {
+
+    public static String convert_slash(String datetime) {
         String date = "";
         Date d = new Date();
         if (datetime.isEmpty()) {
@@ -67,7 +71,22 @@ public class DateType {
         date = DateType.dash.format(d);
         return date;
     }
-     public static String convert_slash2(String datetime) {
+    public static String convert_slash3(String datetime) {
+        String date = "";
+        Date d = new Date();
+        if (datetime.isEmpty()) {
+            datetime = DateType.datetime.format(new Date());
+        }
+        try {
+            d = DateType.datetime.parse(datetime);
+        } catch (ParseException ex) {
+            Logger.getLogger(DateType.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        date = DateType.dash2.format(d);
+        return date;
+    }
+    public static String convert_slash2(String datetime) {
         String date = "";
         Date d = new Date();
         if (datetime.isEmpty()) {

@@ -7,26 +7,41 @@ package POS.pnl;
 
 import POS.printing2.Dlg_print_orders;
 import POS.printing2.Srpt_billing_statement;
+import POS.to.to_users;
 import POS.utl.DateType;
 import POS_svc4.S2_search;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractButton;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
@@ -40,6 +55,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+import org.jfree.ui.Align;
 import synsoftech.fields.Button;
 
 /**
@@ -217,6 +233,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new Button.Success();
@@ -258,6 +275,11 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
             }
         ));
+        tbl_bank.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_bankMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_bank);
 
         jLabel3.setText("Total no. of rows:");
@@ -271,6 +293,13 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
             }
         });
 
+        jButton5.setText("Preview");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -278,24 +307,27 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jCheckBox1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,14 +344,15 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                             .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Report", jPanel5);
@@ -477,7 +510,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -507,6 +540,14 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         set_order();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void tbl_bankMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bankMouseClicked
+        select_order();
+    }//GEN-LAST:event_tbl_bankMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        preview_order();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -516,6 +557,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -542,6 +584,8 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     List<S2_search.to_items> my_orders = new ArrayList();
 
     private void set_order() {
+        String order_no = "";
+        List<String> order_nos = new ArrayList();
         String types_no_wo_qty = System.getProperty("catid_orders_wo_qty", "");
         String[] l_types_no_wo_qty = types_no_wo_qty.split(",");
         String min1 = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:00";
@@ -598,9 +642,9 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                             }
                         }
 //                    System.out.println("sub_cat_id: "+sub_cat_id);
-                        Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id);
+                        Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id, true, order.order_no);
                         datas.add(field);
-
+                        order_nos.add(field.getOrder_no());
                         if (order.cat_id.equals("12")) {
                             datas_bar.add(field);
                         }
@@ -619,9 +663,9 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                         }
                     }
 //                    System.out.println("sub_cat_id: "+sub_cat_id);
-                    Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id);
+                    Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id, true, order.order_no);
                     datas.add(field);
-
+                    order_nos.add(field.getOrder_no());
                     if (order.cat_id.equals("12")) {
                         datas_bar.add(field);
                     }
@@ -635,6 +679,28 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
         loadData_bank(datas);
 
+        Map<String, Integer> myMap = new HashMap<String, Integer>();
+
+        for (int i = 0; i < order_nos.size(); i++) {
+            String product = order_nos.get(i);
+
+            if (myMap.containsKey(product)) {
+                myMap.put(product, 0);
+            } else {
+                myMap.put(product, 0);
+            }
+        }
+        int i = 0;
+        for (String product : myMap.keySet()) {
+            System.out.println(product + ": " + myMap.get(product));
+            if (i == 0) {
+                order_no = product;
+            } else {
+                order_no = order_no + ", " + product;
+            }
+            i++;
+        }
+
         String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
         String address = System.getProperty("address", "Dauin, Negros Oriental");
         String contact_no = System.getProperty("contact_no", "1235566");
@@ -642,11 +708,12 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         String room_no = table_names;
         String print_to = "";
         String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
-        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        String cashier_name = to_users.getUser_screen_name();
+        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
         rpt_billing_statement.fields.addAll(datas);
-        Srpt_billing_statement rpt_billing_statement_bar = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        Srpt_billing_statement rpt_billing_statement_bar = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
         rpt_billing_statement_bar.fields.addAll(datas_bar);
-        Srpt_billing_statement rpt_billing_statement_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer);
+        Srpt_billing_statement rpt_billing_statement_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
         rpt_billing_statement_kitchen.fields.addAll(datas_kitchen);
 
         jLabel4.setText("" + datas.size());
@@ -654,6 +721,148 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         init_report_billing_statement(rpt_billing_statement);
         init_report_billing_stab_bar_and_resto(rpt_billing_statement_bar);
         init_report_billing_stab_kitchen(rpt_billing_statement_kitchen);
+    }
+
+    private void preview_order() {
+        String order_no = "";
+        List<String> order_nos = new ArrayList();
+        String types_no_wo_qty = System.getProperty("catid_orders_wo_qty", "");
+        String[] l_types_no_wo_qty = types_no_wo_qty.split(",");
+        String min1 = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:00";
+        String max1 = DateType.sf.format(jDateChooser2.getDate()) + " 00:00:00";
+        Date min = new Date();
+        Date max = new Date();
+        try {
+            min = DateType.datetime.parse(min1);
+            max = DateType.datetime.parse(max1);
+        } catch (ParseException ex) {
+            Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        System.out.println("min: " + min);
+//        System.out.println("max: " + max);
+        List<Srpt_billing_statement.field> datas = tbl_bank_ALM;
+        List<Srpt_billing_statement.field> datas2 = new ArrayList();
+        List<Srpt_billing_statement.field> datas_bar = new ArrayList();
+        List<Srpt_billing_statement.field> datas_kitchen = new ArrayList();
+        for (Srpt_billing_statement.field order : datas) {
+            if (order.isIs_selected()) {
+                if (order.getCat_id().equals("10") || order.getCat_id().equals("12")) {
+                    Date d = new Date();
+                    Date d2 = new Date();
+                    try {
+                        d = DateType.datetime.parse(order.getDatetime());
+                        String sf = DateType.sf.format(d) + " 00:00:00";
+                        d2 = DateType.datetime.parse(sf);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+//                System.out.println("date: " + d2 + " | " + (min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())   );
+
+                    boolean m1 = d.compareTo(min) >= 0;
+                    boolean m2 = d.compareTo(max) <= 0;
+
+                    String item_code = order.getItem_code();
+                    String description = order.getDescription();
+                    String assembly = "" + order.getAssembly();
+                    double qty = FitIn.toDouble(order.getQty());
+                    double selling_price = order.getSelling_price() / qty;
+                    double discount = order.getDiscount();
+                    double amount = (qty * selling_price) - discount;
+                    boolean status = (min.getTime() >= d.getTime() && d.getTime() <= max.getTime());
+//                System.out.println("item_code: " + item_code);
+                    if (!jCheckBox1.isSelected()) {
+                        if ((min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())) {
+
+                            String qty1 = "" + qty;
+
+                            String cat_id = order.getCat_id();
+                            String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
+                            for (String s : l_types_no_wo_qty) {
+                                if (sub_cat_id.equalsIgnoreCase(s)) {
+                                    qty1 = "";
+                                }
+                            }
+//                    System.out.println("sub_cat_id: "+sub_cat_id);
+                            Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.getDatetime(), cat_id, sub_cat_id, true, order.getOrder_no());
+                            datas2.add(field);
+                            order_nos.add(field.getOrder_no());
+                            if (order.getCat_id().equals("12")) {
+                                datas_bar.add(field);
+                            }
+                            if (order.getCat_id().equals("10")) {
+                                datas_kitchen.add(field);
+                            }
+                        }
+                    } else {
+                        String qty1 = "" + qty;
+
+                        String cat_id = order.getCat_id();
+                        String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
+                        for (String s : l_types_no_wo_qty) {
+                            if (sub_cat_id.equalsIgnoreCase(s)) {
+                                qty1 = "";
+                            }
+                        }
+//                    System.out.println("sub_cat_id: "+sub_cat_id);
+                        Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.getDatetime(), cat_id, sub_cat_id, true, order.getOrder_no());
+                        datas2.add(field);
+                        order_nos.add(field.getOrder_no());
+                        if (order.getCat_id().equals("12")) {
+                            datas_bar.add(field);
+                        }
+                        if (order.getCat_id().equals("10")) {
+                            datas_kitchen.add(field);
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        Map<String, Integer> myMap = new HashMap<String, Integer>();
+
+        for (int i = 0; i < order_nos.size(); i++) {
+            String product = order_nos.get(i);
+
+            if (myMap.containsKey(product)) {
+                myMap.put(product, 0);
+            } else {
+                myMap.put(product, 0);
+            }
+        }
+        int i = 0;
+        for (String product : myMap.keySet()) {
+            System.out.println(product + ": " + myMap.get(product));
+            if (i == 0) {
+                order_no = product;
+            } else {
+                order_no = order_no + ", " + product;
+            }
+            i++;
+        }
+
+        String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
+        String address = System.getProperty("address", "Dauin, Negros Oriental");
+        String contact_no = System.getProperty("contact_no", "1235566");
+        String date = DateType.datetime2.format(new Date());
+        String room_no = table_names;
+        String print_to = "";
+        String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
+        String cashier_name = to_users.getUser_screen_name();
+
+        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
+        rpt_billing_statement.fields.addAll(datas2);
+        Srpt_billing_statement rpt_billing_statement_bar = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
+        rpt_billing_statement_bar.fields.addAll(datas_bar);
+        Srpt_billing_statement rpt_billing_statement_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
+        rpt_billing_statement_kitchen.fields.addAll(datas_kitchen);
+
+        init_report_billing_statement(rpt_billing_statement);
+        init_report_billing_stab_bar_and_resto(rpt_billing_statement_bar);
+        init_report_billing_stab_kitchen(rpt_billing_statement_kitchen);
+        jTabbedPane1.setSelectedIndex(1);
     }
     String guess_names = "";
     String table_names = "";
@@ -687,13 +896,13 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     public static ArrayListModel tbl_bank_ALM;
     public static TblbankModel tbl_bank_M;
 
-    public static void init_tbl_bank(JTable tbl_bank) {
+    public void init_tbl_bank(JTable tbl_bank) {
         tbl_bank_ALM = new ArrayListModel();
         tbl_bank_M = new TblbankModel(tbl_bank_ALM);
         tbl_bank.setModel(tbl_bank_M);
         tbl_bank.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_bank.setRowHeight(25);
-        int[] tbl_widths_bank = {60, 80, 100, 80, 80, 100, 80};
+        int[] tbl_widths_bank = {60, 80, 100, 80, 80, 100, 180, 30};
         for (int i = 0, n = tbl_widths_bank.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -709,6 +918,112 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_bank, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_bank, 5);
         TableWidthUtilities.setColumnRightRenderer(tbl_bank, 3);
+        TableColumn tc = tbl_bank.getColumnModel().getColumn(7);
+        tc.setCellEditor(tbl_bank.getDefaultEditor(Boolean.class));
+        tc.setCellRenderer(tbl_bank.getDefaultRenderer(Boolean.class));
+        tc.setHeaderRenderer(new CheckBoxHeader(new MyItemListener()));
+    }
+
+    class MyItemListener implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            Object source = e.getSource();
+            if (source instanceof AbstractButton == false) {
+                return;
+            }
+            boolean checked = e.getStateChange() == ItemEvent.SELECTED;
+            for (int x = 0, y = tbl_bank.getRowCount(); x < y; x++) {
+                tbl_bank.setValueAt(checked, x, 0);
+            }
+        }
+    }
+
+    class CheckBoxHeader extends JCheckBox
+            implements TableCellRenderer, MouseListener {
+
+        protected CheckBoxHeader rendererComponent;
+        protected int column;
+        protected boolean mousePressed = false;
+
+        public CheckBoxHeader(ItemListener itemListener) {
+            rendererComponent = this;
+            rendererComponent.addItemListener(itemListener);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            if (table != null) {
+                JTableHeader header = table.getTableHeader();
+                if (header != null) {
+                    rendererComponent.setForeground(header.getForeground());
+                    rendererComponent.setBackground(new java.awt.Color(204, 204, 204));
+                    rendererComponent.setHorizontalAlignment(Align.CENTER);
+                    rendererComponent.setOpaque(true);
+                    header.addMouseListener(rendererComponent);
+                }
+            }
+            setColumn(column);
+            rendererComponent.setText("");
+            setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+            return rendererComponent;
+        }
+
+        protected void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        protected void handleClickEvent(MouseEvent e) {
+            if (mousePressed) {
+                mousePressed = false;
+                JTableHeader header = (JTableHeader) (e.getSource());
+                JTable tableView = header.getTable();
+                TableColumnModel columnModel = tableView.getColumnModel();
+                int viewColumn = columnModel.getColumnIndexAtX(e.getX());
+                int column1 = tableView.convertColumnIndexToModel(viewColumn);
+                if (viewColumn == this.column && e.getClickCount() == 1 && column1 != -1) {
+                    doClick();
+                }
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            handleClickEvent(e);
+            ((JTableHeader) e.getSource()).repaint();
+            List<Srpt_billing_statement.field> datas = tbl_bank_ALM;
+            boolean selected = false;
+            if (this.isSelected()) {
+                selected = true;
+            }
+            for (Srpt_billing_statement.field to : datas) {
+                to.setIs_selected(selected);
+            }
+            e.consume();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            mousePressed = true;
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
     }
 
     public static void loadData_bank(List<Srpt_billing_statement.field> acc) {
@@ -719,7 +1034,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     public static class TblbankModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Qty", "Code", "Description", "Price", "Discount", "Amount", "Date"
+            "Qty", "Code", "Description", "Price", "Discount", "Amount", "Date", ""
         };
 
         public TblbankModel(ListModel listmodel) {
@@ -736,7 +1051,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 1000) {
+            if (col == 7) {
                 return Boolean.class;
             }
             return Object.class;
@@ -758,9 +1073,29 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                     return FitIn.fmt_wc_0(tt.getDiscount()) + " ";
                 case 5:
                     return FitIn.fmt_wc_0(tt.getAmount()) + " ";
+                case 6:
+                    return " " + DateType.convert_slash3(tt.getDatetime());
+
                 default:
-                    return " " + DateType.convert_slash(tt.getDatetime());
+                    return tt.isIs_selected();
             }
+        }
+    }
+
+    private void select_order() {
+        int row = tbl_bank.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        int col = tbl_bank.getSelectedColumn();
+        if (col == 7) {
+            Srpt_billing_statement.field to = (Srpt_billing_statement.field) tbl_bank_ALM.get(row);
+            if (to.isIs_selected()) {
+                to.setIs_selected(false);
+            } else {
+                to.setIs_selected(true);
+            }
+            tbl_bank_M.fireTableDataChanged();
         }
     }
 //</editor-fold> 
@@ -772,7 +1107,6 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
             @Override
             public void run() {
-
                 String jrxml = "rpt_billing_statement.jrxml";
                 String print_billing_statement_size = System.getProperty("print_billing_statement_size", "default");
                 if (print_billing_statement_size.equalsIgnoreCase("58mm")) {

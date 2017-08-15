@@ -25,6 +25,7 @@ import POS.utl.MyConnection1;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 import test.Dlg_check.to_guests;
@@ -98,7 +99,6 @@ public class S1_check_in {
             } else {
                 my_rate = guest.size();
             }
-
 
             double price = 0;
             double price1 = 0;
@@ -202,7 +202,6 @@ public class S1_check_in {
                 double amount = my_rate;
                 int status = 0;
 
-
                 S2_guest_charges.to_guest_charges to_guest_charges = new S2_guest_charges.to_guest_charges(id, guest_id, guest_name, date_added, amount, status);
                 String s3 = "update " + MyDB.getNames() + ".guest_charges set "
                         + "amount= '" + NumberFormat.df.format(my_rate) + "'"
@@ -245,7 +244,6 @@ public class S1_check_in {
                 Lg.s(S1_check_in.class, "Successfully Added");
 
             }
-
 
             Lg.s(S1_check_in.class, "Successfully Added check in");
         } catch (SQLException e) {
@@ -322,7 +320,6 @@ public class S1_check_in {
                 double amount = my_rate;
                 int status = 0;
 
-
                 S2_guest_charges.to_guest_charges to_guest_charges = new S2_guest_charges.to_guest_charges(id, guest_id, guest_name, date_added, amount, status);
                 String s3 = "update " + MyDB.getNames() + ".guest_charges2 set "
                         + "amount= '" + NumberFormat.df.format(to_guest_charges.amount) + "'"
@@ -395,8 +392,9 @@ public class S1_check_in {
         }
     }
 
-    public static void add_order_rooms(List<S2_search.to_orders> to, String table_no, List<Dlg_check_liquid.to_guests> my_guest, List<S2_search.to_items_status> to_sub, String user_lvl) {
+    public static String add_order_rooms(List<S2_search.to_orders> to, String table_no, List<Dlg_check_liquid.to_guests> my_guest, List<S2_search.to_items_status> to_sub, String user_lvl) {
         try {
+            String order_no = increment_id();
             double my_amount = 0;
             Connection conn = MyConnection1.connect();
             String room_id = table_no;
@@ -406,7 +404,7 @@ public class S1_check_in {
             double _disc_rate = S1_staff_discount.ret_data();
             String user_name = "";
             user_name = to_users.ret_user(to_users.username1);
- 
+
             int guest_no = my_guest.size();
             for (Dlg_check_liquid.to_guests guest : my_guest) {
                 System.out.println(guest.id + " : " + guest.name + " guessssstt");
@@ -416,7 +414,7 @@ public class S1_check_in {
                     double discounts = 0;
                     String s2 = "";
                     if (t.cat_id.equals("11")) {
-                        s2 = "select qty,id,discount from " + MyDB.getNames() + ".customer_tables_details where product_name='" + t.name + "' and table_no_id='" + guest.table_id+ "' "
+                        s2 = "select qty,id,discount from " + MyDB.getNames() + ".customer_tables_details where product_name='" + t.name + "' and table_no_id='" + guest.table_id + "' "
                                 + "and guest_id='" + guest.id + "' and status<>'" + "1" + "' and guest_no ='" + guest_no + "' and Date(date_added)='" + now2 + "'";
                     } else if (t.cat_id.equals("10") || t.cat_id.equals("12")) {
                         s2 = "select qty,id,discount from " + MyDB.getNames() + ".customer_tables_details where product_name='" + t.name + "' and table_no_id='" + guest.table_id + "' "
@@ -434,7 +432,7 @@ public class S1_check_in {
                     }
 //                    JOptionPane.showMessageDialog(null, guest.id  + " :guest id "+t.name + " :barcode "+guest.table_id + " table no id " + qty + " :id");
                     if (qty == 0) {
-                        
+
                         double disc_rate = 0;
                         double discount = t.discount;
                         int count = 0;
@@ -459,19 +457,20 @@ public class S1_check_in {
                                 desc = aw[1];
 //                                JOptionPane.showMessageDialog(null, t.name + " "+price+ " "+t.qty);
                             }
-                            price = price/ guest_no;
+                            price = price / guest_no;
                         } else {
                             guest_no = my_guest.size();
 
                             price = t.price / guest_no;
                         }
+
                         String s0 = "insert into " + MyDB.getNames() + ".customer_tables_details(table_no_id,qty,product_name,description,price"
                                 + ",img_path,status"
                                 + ",guest_id,guest_name,cat_id,date_added,printing_assembly"
                                 + ",disc_name,disc_rate,discount,customer_name,customer_id"
                                 + ",customer_address,user_lvl,group_id,nights,guest_no,room_guest_id"
-                                + ",user_name,sub_category_name,sub_category_id,category_name"
-                                + ")values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                                + ",user_name,sub_category_name,sub_category_id,category_name,order_no"
+                                + ")values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         PreparedStatement stmt = conn.prepareStatement(s0);
                         stmt.setString(1, guest.table_guest_ids);
                         stmt.setDouble(2, t.qty);
@@ -500,6 +499,7 @@ public class S1_check_in {
                         stmt.setString(25, t.sub_category_name);
                         stmt.setString(26, t.sub_category_name);
                         stmt.setString(27, t.category_name);
+                        stmt.setString(28, order_no);
                         stmt.execute();
                         my_amount += t.qty * t.price;
                         Lg.s(S1_check_in.class, "Successfully Added");
@@ -581,7 +581,7 @@ public class S1_check_in {
                             s0 = "update " + MyDB.getNames() + ".customer_tables_details set qty='" + qty + "'"
                                     + ",discount='" + discount + "',price='" + price + "',description='" + desc + "' "
                                     + "where id='" + id + "'";
-                           
+
                         }
 //                        JOptionPane.showMessageDialog(null, "adadad");
                         PreparedStatement stmt = conn.prepareStatement(s0);
@@ -590,6 +590,7 @@ public class S1_check_in {
                     }
                 }
             }
+            return order_no;
         } catch (Exception e) {
             MyConnection1.close();
             throw new RuntimeException(e);
@@ -603,7 +604,6 @@ public class S1_check_in {
             Connection conn = MyConnection1.connect();
             String now = DateType.datetime.format(new Date());
             for (S2_search.to_orders to : to1) {
-
 
                 String s0 = "insert into " + MyDB.getNames() + ".customer_tables_details("
                         + "table_no_id"
@@ -862,11 +862,8 @@ public class S1_check_in {
             String room_id = table_no;
             String now = DateType.datetime.format(new Date());
 
-
 //                JOptionPane.showMessageDialog(null, guest.name);
             for (S2_search.to_orders t : to) {
-
-
 
                 String s0 = "insert into " + MyDB.getNames() + ".customer_tables_details(table_no_id,qty,product_name,description,price,img_path,status"
                         + ",guest_id,guest_name,cat_id,date_added,printing_assembly)values(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -940,11 +937,7 @@ public class S1_check_in {
                     stmt7.execute();
                 }
 
-
-
-
             }
-
 
         } catch (Exception e) {
             MyConnection1.close();
@@ -976,6 +969,39 @@ public class S1_check_in {
 
         } catch (Exception e) {
             MyConnection1.close();
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection1.close();
+        }
+    }
+
+    public static void main(String[] args) {
+        MyDB.setNames("db_pos_restaurant_liquid");
+        System.out.println(increment_id());
+    }
+
+    public static String increment_id() {
+        String id = "000000";
+        try {
+            Connection conn = MyConnection1.connect();
+            String s0 = "select max(id) from " + MyDB.getNames() + ".customer_tables_details";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select order_no from " + MyDB.getNames() + ".customer_tables_details where id='" + id + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null || id.isEmpty()) {
+                id = "000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+            return id;
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

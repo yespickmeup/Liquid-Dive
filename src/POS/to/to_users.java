@@ -8,8 +8,6 @@ import POS.Main;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import POS.utl.MyConnection1;
 
 /**
@@ -20,12 +18,20 @@ public class to_users {
 
     public static String username1;
     public static String user_level1;
-
+    public static String user_screen_name;
     public to_users(String username, String user_level) {
         username1 = username;
         user_level1 = user_level;
     }
 
+    public static String getUser_screen_name() {
+        return user_screen_name;
+    }
+
+    public static void setUser_screen_name(String user_screen_name) {
+        to_users.user_screen_name = user_screen_name;
+    }
+    
     public String getUser_level() {
         return user_level1;
     }

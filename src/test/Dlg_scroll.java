@@ -253,7 +253,7 @@ public class Dlg_scroll extends javax.swing.JDialog {
             S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path
                     , s.qty2, "-1", s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name
                     , s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address
-                    ,"",s.group_id,0,0,"","","",0,"","");
+                    ,"",s.group_id,0,0,"","","",0,"","","");
             item_model.add(i, to);
             i++;
         }
