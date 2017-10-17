@@ -692,7 +692,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         }
         int i = 0;
         for (String product : myMap.keySet()) {
-            System.out.println(product + ": " + myMap.get(product));
+//            System.out.println(product + ": " + myMap.get(product));
             if (i == 0) {
                 order_no = product;
             } else {
@@ -834,7 +834,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         }
         int i = 0;
         for (String product : myMap.keySet()) {
-            System.out.println(product + ": " + myMap.get(product));
+//            System.out.println(product + ": " + myMap.get(product));
             if (i == 0) {
                 order_no = product;
             } else {

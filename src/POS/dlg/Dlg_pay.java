@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-/*
+ /*
  * Dlg_001.java
  *
  * Created on Sep 27, 2011, 4:42:16 PM
@@ -62,7 +62,7 @@ public class Dlg_pay extends javax.swing.JDialog {
 
         void ok(CloseDialog closeDialog, OutputData data);
 
-        void ok2(CloseDialog closeDialog, OutputData data);
+        void ok2(CloseDialog closeDialog, OutputData data, to_print_save print);
 
         void close(CloseDialog closeDialog);
 
@@ -1725,7 +1725,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         double d = (discount / 100) * Double.parseDouble(NumType.no_comma(ds_amountdue.
                 getText()));
         lbl_disc_amount.setText("" + FitIn.fmt_wc_0(d));
-        lbl_net.setText("" + df2.format(FitIn.toDouble(ds_amountdue.getText()) - d)+".00");
+        lbl_net.setText("" + df2.format(FitIn.toDouble(ds_amountdue.getText()) - d) + ".00");
         to_disc to = new to_disc(cb_discount.getSelectedItem().
                 toString(), "" + discount, "", "", "", "" + d);
         too = to;
@@ -2029,7 +2029,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private void initActionKey() {
 
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -2344,7 +2344,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
         ds_amountdue.setText(amount);
         amount_due = FitIn.toDouble(amount);
-        lbl_net.setText(df2.format(FitIn.toDouble(amount))+".00");
+        lbl_net.setText(df2.format(FitIn.toDouble(amount)) + ".00");
         double total_dollar = (FitIn.toDouble(lbl_net.getText()) / FitIn.toDouble(tf_dollar.getText()));
 
         lbl_total_dollar.setText(df2.format(total_dollar) + ".00");
@@ -2365,7 +2365,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             double d = disc2.discount_amount;
             lbl_disc_amount.setText("" + FitIn.fmt_wc_0(d));
             lbl_net.setText("" + df2.format(FitIn.toDouble(ds_amountdue.
-                    getText()) - d)+".00");
+                    getText()) - d) + ".00");
             to_disc to = new to_disc(disc2.discount, "" + disc2.discount_percent, "", "", "", "" + d);
             too = to;
         }
@@ -2483,8 +2483,8 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             if (jTabbedPane1.getSelectedIndex() == 1) {
                 if (tf_card_holder.getText().
                         isEmpty() || tf_credit_card_no.getText().
-                        isEmpty() || tf_app_code.getText().
-                        isEmpty()) {
+                                isEmpty() || tf_app_code.getText().
+                                isEmpty()) {
 
                     Prompt.call("Please Complete Fields");
                     return;
@@ -2502,7 +2502,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
 
         S1_add_customer_discount.to_customer_discounts to_credit = new S1_add_customer_discount.to_customer_discounts(id, customer_name, card_no, address);
-        S1_add_customer_discount.add_data(to_credit); 
+        S1_add_customer_discount.add_data(to_credit);
         double credit_peso = FitIn.toDouble(lbl_credit.getText());
         double credit_dollar = FitIn.toDouble(lbl_net_credit.getText());
         double dollar_tendered = FitIn.toDouble(lbl_tendered_dollar.getText());
@@ -2533,7 +2533,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                         getText(), tf_app_code.getText(), cb_bank.
                         getSelectedItem().
                         toString(), cb_card_type.getSelectedItem().
-                        toString(), credit_peso, credit_dollar);
+                                toString(), credit_peso, credit_dollar);
                 bb = 2;
                 to_c = to2;
             }
@@ -2555,7 +2555,38 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             if (print == 0) {
                 int payable = 0;
                 double due = 0;
-                callback.ok2(new CloseDialog(this), new OutputData(tendered, orders, to, ii, to_c, bb, member_id, dollar_rate, dollar_tendered, peso, payable, due));
+
+                double to_pay = FitIn.toDouble(lbl_net.getText());
+                double adv_peso = FitIn.toDouble(lbl_advance_payment.getText());
+                double adv_usd = FitIn.toDouble(lbl_advance_payment_usd.getText());
+                double paid_peso = peso;
+                double paid_dollar = dollar_tendered;
+                double paid_credit = FitIn.toDouble(lbl_credit.getText());
+                double dollar_rates = FitIn.toDouble(tf_dollar.getText());
+                double discount1 = FitIn.toDouble(lbl_disc_amount.getText());
+                double discount_rate = discount;
+                String discount_name = cb_discount.getSelectedItem().
+                        toString();
+
+                if (cb_payable.isSelected()) {
+                    adv_peso = 0;
+                    adv_usd = 0;
+                    paid_peso = 0;
+                    paid_dollar = 0;
+                    paid_credit = 0;
+                    dollar_rates = 0;
+                    discount1 = 0;
+                    discount_rate = 0;
+                    discount_name = "";
+                    payable = 1;
+                    due = FitIn.toDouble(lbl_net.getText());
+
+                    peso = 0;
+                }
+
+                to_print_save print1 = new to_print_save(to_pay, adv_peso, adv_usd, paid_peso, paid_dollar, paid_credit, dollar_rates, discount1, discount_rate, discount_name, print, payable, due);
+
+                callback.ok2(new CloseDialog(this), new OutputData(tendered, orders, to, ii, to_c, bb, member_id, dollar_rate, dollar_tendered, peso, payable, due), print1);
             } else {
 
                 double to_pay = FitIn.toDouble(lbl_net.getText());
@@ -2588,6 +2619,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 }
 
                 to_print_save print1 = new to_print_save(to_pay, adv_peso, adv_usd, paid_peso, paid_dollar, paid_credit, dollar_rates, discount1, discount_rate, discount_name, print, payable, due);
+
                 callback.save_and_print(new CloseDialog(this), new OutputData(tendered, orders, to, ii, to_c, bb, member_id, dollar_rate, dollar_tendered, peso, payable, due), print1);
 
             }
@@ -2648,7 +2680,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
                 lbl_disc_amount.setText("" + FitIn.fmt_wc_0(d));
                 lbl_net.setText("" + df2.format(FitIn.toDouble(ds_amountdue.
-                        getText()) - d)+".00");
+                        getText()) - d) + ".00");
                 set_discount();
 //                ds_amountdue
                 to_disc to = new to_disc(data.disc_name, data.disc_percent, data.cust_name, data.cust_num, data.cust_address, counted_disc);
@@ -2942,7 +2974,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             }
 
             ds_amountdue.setText(FitIn.fmt_wc_0(aw * -1 + amount_due));
-            lbl_net.setText(df2.format((aw * -1 + amount_due) - discount)+".00");
+            lbl_net.setText(df2.format((aw * -1 + amount_due) - discount) + ".00");
             late_due = FitIn.toDouble(ds_amountdue.getText());
             late_net_due = FitIn.toDouble(lbl_net.getText());
 
@@ -2969,7 +3001,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             late_credit_rate = 0;
 
             ds_amountdue.setText(FitIn.fmt_wc_0(amount_due));
-            lbl_net.setText(df2.format(amount_due - discount)+".00");
+            lbl_net.setText(df2.format(amount_due - discount) + ".00");
             late_due = FitIn.toDouble(ds_amountdue.getText());
             late_net_due = FitIn.toDouble(lbl_net.getText());
 
@@ -3130,7 +3162,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
         ds_amountdue.setText(FitIn.fmt_wc_0(amount_due + net_rate));
         lbl_net.setText(df2.format((amount_due + net_rate) - FitIn.toDouble(lbl_disc_amount.
-                getText()))+".00");
+                getText())) + ".00");
         double total_dollar = (FitIn.toDouble(lbl_net.getText()) / FitIn.toDouble(tf_dollar.getText()));
 
         lbl_total_dollar.setText(df2.format(total_dollar) + ".00");

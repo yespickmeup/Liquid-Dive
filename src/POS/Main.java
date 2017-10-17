@@ -194,9 +194,12 @@ public class Main {
             System.setProperty("print_billing_statement_size", prop.getProperty("print_billing_statement_size", "default"));
             System.setProperty("print_orders", prop.getProperty("print_orders", "false"));
             System.setProperty("catid_orders_wo_qty", prop.getProperty("catid_orders_wo_qty", "false"));
-            System.out.println(MyDB.getNames() + " ------");
+            System.setProperty("order_no", prop.getProperty("order_no", "false"));
+            System.setProperty("save_billing_history_bar", prop.getProperty("save_billing_history_bar", "false"));
+
+//            System.out.println(MyDB.getNames() + " ------");
             Lg.$.severe(System.getProperty("receipt_printer"));
-            
+
             new Main().start();
         } catch (IOException ex) {
 //                    Lg.$.severe(ex.getMessage());

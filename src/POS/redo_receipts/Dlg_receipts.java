@@ -4,7 +4,6 @@
  */
 package POS.redo_receipts;
 
-import POS.Main;
 import POS.expenses.S1_expenses_categories;
 import POS.redo_receipts.S1_cash_drawer.to_cash_drawer;
 import POS.redo_receipts.S2_guest_advance_payments.to_guest_advance_payment;
@@ -1405,7 +1404,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());

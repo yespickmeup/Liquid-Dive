@@ -4,7 +4,6 @@
  */
 package POS.sales;
 
-import POS.Main;
 import POS.expenses.S1_expenses_categories;
 import POS.rpt2.rpt_report;
 import POS.rpt2.to_date_to;
@@ -1065,7 +1064,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         List<String> cashier = new ArrayList();
         set_category();

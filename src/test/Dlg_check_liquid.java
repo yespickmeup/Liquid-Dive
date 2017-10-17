@@ -689,7 +689,7 @@ public class Dlg_check_liquid extends javax.swing.JDialog {
         has_other_orders = has_other_orders1;
 
         for (Dlg_check_liquid.to_guests j : tt) {
-            System.out.println(j.status + " --------------");
+//            System.out.println(j.status + " --------------");
         }
 
         tbl_tables_ALM.clear();

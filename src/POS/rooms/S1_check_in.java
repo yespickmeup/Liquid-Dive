@@ -394,7 +394,11 @@ public class S1_check_in {
 
     public static String add_order_rooms(List<S2_search.to_orders> to, String table_no, List<Dlg_check_liquid.to_guests> my_guest, List<S2_search.to_items_status> to_sub, String user_lvl) {
         try {
-            String order_no = increment_id();
+            String order_no = "";
+            String is_order_no = System.getProperty("order_no", "false");
+            if (is_order_no.equals("true")) {
+                order_no = increment_id();
+            }
             double my_amount = 0;
             Connection conn = MyConnection1.connect();
             String room_id = table_no;
@@ -984,7 +988,7 @@ public class S1_check_in {
         String id = "000000";
         try {
             Connection conn = MyConnection1.connect();
-            String s0 = "select max(id) from " + MyDB.getNames() + ".customer_tables_details";
+            String s0 = "select max(id) from " + MyDB.getNames() + ".customer_tables_details where order_no <>'" + "" + "' ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {

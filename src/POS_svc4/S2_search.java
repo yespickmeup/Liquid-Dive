@@ -83,7 +83,8 @@ public class S2_search {
         public final String sub_category_name;
         public final String sub_category_id;
         public final String order_no;
-        public to_items(String name, String uom, String desc, double price, double qty, String img_path, double qty2, String guest_id, String cat_id, String category_name, int printing_assembly, int status, String disc_name, double disc_rate, double discount, String customer_name, String customer_id, String customer_address, String date_added, int group_id, int nights, int guest_no, String check_out, String room_guest_id, String user_name, int item_package_id, String sub_category_name, String sub_category_id,String order_no) {
+
+        public to_items(String name, String uom, String desc, double price, double qty, String img_path, double qty2, String guest_id, String cat_id, String category_name, int printing_assembly, int status, String disc_name, double disc_rate, double discount, String customer_name, String customer_id, String customer_address, String date_added, int group_id, int nights, int guest_no, String check_out, String room_guest_id, String user_name, int item_package_id, String sub_category_name, String sub_category_id, String order_no) {
             this.name = name;
             this.uom = uom;
             this.desc = desc;
@@ -112,9 +113,9 @@ public class S2_search {
             this.item_package_id = item_package_id;
             this.sub_category_name = sub_category_name;
             this.sub_category_id = sub_category_name;
-            this.order_no=order_no;
+            this.order_no = order_no;
         }
-        
+
         public int getItem_package_id() {
             return item_package_id;
         }
@@ -631,8 +632,8 @@ public class S2_search {
                 if (rs2.next()) {
                     cat_name = rs2.getString(1);
                 }
-                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status
-                        , "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, types, types_num,"");
+                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status,
+                        "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, types, types_num, "");
                 datas.add(to);
             }
             return datas;
@@ -696,7 +697,7 @@ public class S2_search {
                 }
                 String typess = rs.getString(10);
                 String types_num = rs.getString(11);
-                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status, "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, typess, types_num,"");
+                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status, "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, typess, types_num, "");
                 datas.add(to);
             }
             return datas;
@@ -760,7 +761,7 @@ public class S2_search {
                 }
                 String typess = rs.getString(10);
                 String types_num = rs.getString(11);
-                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status, "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, typess, types_num,"");
+                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status, "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, typess, types_num, "");
                 datas.add(to);
             }
             return datas;
@@ -776,6 +777,15 @@ public class S2_search {
         List<to_items> datas = new ArrayList();
         try {
             Connection conn = MyConnection1.connect();
+            String where2 = " description like '%" + name + "%' and cat_id = '" + "10" + "' and types like '%" + types + "%' and is_active like '" + is_active + "'  or ";
+//            where2 = where2 + " lookup_code like '%" + name + "%' and cat_id = '" + "10" + "'  and types like '%" + types + "%' or ";
+            where2 = where2 + " description like '%" + name + "%' and cat_id = '" + "12" + "' and types like '%" + types + "%' and is_active like '" + is_active + "'   ";
+//where2 = where2 + " and happy_hour <> '" + happy_hour + "' or ";
+//            where2 = where2 + " lookup_code like '%" + name + "%' and cat_id = '" + "12" + "'  and is_active like '" + is_active + "' or ";
+//            where2 = where2 + " product_name like '" + name + "%' and cat_id = '" + "10" + "'  and is_active like '" + is_active + "' or ";
+//            where2 = where2 + " product_name like '" + name + "%' and cat_id = '" + "12" + "'  and is_active like '" + is_active + "' ";
+            where2 = where2 + "  order by description asc";
+
             String s0 = "select "
                     + "product_name"
                     + ",description"
@@ -789,16 +799,9 @@ public class S2_search {
                     + ",types "
                     + ",types_num "
                     + "from " + MyDB.getNames() + ".inventory2_stocks_left "
-                    + "where "
-                    + "description like '%" + name + "%' and cat_id = '" + "10" + "' and types like '%" + types + "%' or "
-                    + "description like '%" + name + "%' and cat_id = '" + "12" + "' and types like '%" + types + "%' or "
-                    + "lookup_code like '%" + name + "%' and cat_id = '" + "10" + "'  and types like '%" + types + "%' or "
-                    + "and happy_hour <> '" + happy_hour + "' or "
-                    + "lookup_code like '%" + name + "%' and cat_id = '" + "12" + "'  and is_active like '%" + is_active + "%' or "
-                    + "product_name like '" + name + "%' and cat_id = '" + "10" + "'  and is_active like '%" + is_active + "%' or "
-                    + "product_name like '" + name + "%' and cat_id = '" + "12" + "'  and is_active like '%" + is_active + "%' "
-                    + "order by description asc";
+                    + "where " + where2;
 
+//            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -828,11 +831,11 @@ public class S2_search {
                 if (rs2.next()) {
                     cat_name = rs2.getString(1);
                 }
-                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status, "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, typess, types_num,"");
+                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, "-1", cat_ids, cat_name, printing_assembly, status, "", 0, 0, "", "", "", "", group_id, 0, 0, "", "", "", item_package_id, typess, types_num, "");
                 datas.add(to);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();
@@ -864,7 +867,6 @@ public class S2_search {
             MyConnection1.close();
         }
 
-
     }
 
     public static List<to_items> ret_items_room(String room_no, int selected_guests, int all_guests) {
@@ -881,7 +883,6 @@ public class S2_search {
         int check_outs = to_users.get_check_outs();
         try {
             Connection conn = MyConnection1.connect();
-
 
             String s0 = "";
 
@@ -950,7 +951,6 @@ public class S2_search {
                         + " ";
             }
 
-
             String saved_name = "";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -1005,13 +1005,13 @@ public class S2_search {
                 if (price != 0) {
                     if (check_outs == 0 && cat_id.equals("11")) {
                     } else {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                         datas.add(to);
                         saved_name = names;
                     }
                 } else {
                     if (!cat_id.equals("11") && price == 0) {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                         datas.add(to);
                         saved_name = names;
                     }
@@ -1127,13 +1127,13 @@ public class S2_search {
                 if (price != 0) {
                     if (check_outs == 0 && cat_id.equals("11")) {
                     } else {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                         datas.add(to);
                         saved_name = names;
                     }
                 } else {
                     if (!cat_id.equals("11") && price == 0) {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                         datas.add(to);
                         saved_name = names;
                     }
@@ -1253,13 +1253,13 @@ public class S2_search {
                 if (price != 0) {
                     if (check_outs == 0 && cat_id.equals("11")) {
                     } else {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                         datas.add(to);
                         saved_name = names;
                     }
                 } else {
                     if (!cat_id.equals("11") && price == 0) {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                         datas.add(to);
                         saved_name = names;
                     }
@@ -1350,7 +1350,7 @@ public class S2_search {
                 if (rs2.next()) {
                     cat_name = rs2.getString(1);
                 }
-                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                 datas.add(to);
             }
             return datas;
@@ -1409,7 +1409,6 @@ public class S2_search {
                 int printing_assembly = rs.getInt(8);
                 int status = rs.getInt(9);
 
-
                 String disc_name = rs.getString(10);
                 double disc_rate = rs.getDouble(11);
                 double discount = rs.getDouble(12);
@@ -1426,7 +1425,7 @@ public class S2_search {
                 String user_name = rs.getString(22);
                 String sub_category_name = rs.getString(24);
                 String sub_category_id = rs.getString(25);
-                String order_no=rs.getString(26);
+                String order_no = rs.getString(26);
 //                System.out.println(desc + " 0asdasd");
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
@@ -1442,7 +1441,7 @@ public class S2_search {
                 if (rs2.next()) {
                     cat_name = rs2.getString(1);
                 }
-                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,order_no);
+                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, order_no);
                 datas.add(to);
             }
             return datas;
@@ -1483,7 +1482,6 @@ public class S2_search {
 
         List<to_items> holder = new ArrayList();
         List<to_items> others = new ArrayList();
-
 
         int check_outs = to_users.get_check_outs();
 //        JOptionPane.showMessageDialog(null, check_outs);
@@ -1542,7 +1540,6 @@ public class S2_search {
                 int printing_assembly = rs.getInt(8);
                 int status = rs.getInt(9);
 
-
                 String disc_name = rs.getString(10);
                 double disc_rate = rs.getDouble(11);
                 double discount = rs.getDouble(12);
@@ -1560,7 +1557,7 @@ public class S2_search {
                 String user_name = rs.getString(22);
                 String sub_category_name = rs.getString(24);
                 String sub_category_id = rs.getString(25);
-                String order_no=rs.getString(26);
+                String order_no = rs.getString(26);
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
                 }
@@ -1588,20 +1585,18 @@ public class S2_search {
                 if (price != 0) {
                     if (check_outs == 0 && cat_id.equals("11")) {
                     } else {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,order_no);
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, order_no);
                         holder.add(to);
                     }
 
                 } else {
                     if (!cat_id.equals("11") && price == 0) {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,order_no);
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, order_no);
                         holder.add(to);
                     }
                 }
 
             }
-
-
 
             return holder;
         } catch (Exception e) {
@@ -1669,7 +1664,6 @@ public class S2_search {
                 int printing_assembly = rs.getInt(8);
                 int status = rs.getInt(9);
 
-
                 String disc_name = rs.getString(10);
                 double disc_rate = rs.getDouble(11);
                 double discount = rs.getDouble(12);
@@ -1688,7 +1682,7 @@ public class S2_search {
                 String user_name = rs.getString(22);
                 String sub_category_name = rs.getString(24);
                 String sub_category_id = rs.getString(25);
-                String order_no=rs.getString(26);
+                String order_no = rs.getString(26);
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
                 }
@@ -1717,20 +1711,18 @@ public class S2_search {
                 if (price != 0) {
                     if (check_outs == 0 && cat_id.equals("11")) {
                     } else {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,order_no);
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, order_no);
                         holder.add(to);
                     }
 
                 } else {
                     if (!cat_id.equals("11") && price == 0) {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,order_no);
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, order_no);
                         holder.add(to);
                     }
                 }
 
             }
-
-
 
             return holder;
         } catch (Exception e) {
@@ -1802,7 +1794,6 @@ public class S2_search {
                 int printing_assembly = rs.getInt(8);
                 int status = rs.getInt(9);
 
-
                 String disc_name = rs.getString(10);
                 double disc_rate = rs.getDouble(11);
                 double discount = rs.getDouble(12);
@@ -1821,7 +1812,7 @@ public class S2_search {
                 String user_name = rs.getString(22);
                 String sub_category_name = rs.getString(25);
                 String sub_category_id = rs.getString(26);
-                String order_no=rs.getString(27);
+                String order_no = rs.getString(27);
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
                 }
@@ -1850,20 +1841,18 @@ public class S2_search {
                 if (price != 0) {
                     if (check_outs == 0 && cat_id.equals("11")) {
                     } else {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,order_no);
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, order_no);
                         holder.add(to);
                     }
 
                 } else {
                     if (!cat_id.equals("11") && price == 0) {
-                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,order_no);
+                        to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, order_no);
                         holder.add(to);
                     }
                 }
 
             }
-
-
 
             return holder;
         } catch (Exception e) {
@@ -1935,7 +1924,7 @@ public class S2_search {
                 String user_name = rs.getString(22);
                 String sub_category_name = rs.getString(24);
                 String sub_category_id = rs.getString(25);
-               
+
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
                 }
@@ -1953,7 +1942,7 @@ public class S2_search {
                 if (rs2.next()) {
                     cat_name = rs2.getString(1);
                 }
-                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id,"");
+                to_items to = new to_items(names, "pcs", desc, price, qty, img_path, qty, guest_id, cat_id, cat_name, printing_assembly, status, disc_name, disc_rate, discount, customer_name, customer_id, customer_address, date_added, group_id, nights, guest_no, check_out, room_guest_id, user_name, 0, sub_category_name, sub_category_id, "");
                 datas.add(to);
             }
             return datas;
