@@ -57,22 +57,31 @@ public class Srpt_billing_statement {
 
     public static class field {
 
-        String item_code;
-        String description;
-        String assembly;
-        String qty;
-        double selling_price;
-        double discount;
-        double amount;
-        String datetime;
-        String cat_id;
-        String sub_cat_id;
-        boolean is_selected;
-        String order_no;
+        public String item_code;
+        public String description;
+        public String assembly;
+        public double qty;
+        public double selling_price;
+        public double discount;
+        public double amount;
+        public String datetime;
+        public String cat_id;
+        public String sub_cat_id;
+        public boolean is_selected;
+        public String order_no;
+        public String table_no_id;
+        public String date_added;
+        public String guest_id;
+        public String guest_name;
+        public String user_name;
+        public double net_due;
+        public int is_add_ons;
         public field() {
         }
 
-        public field(String item_code, String description, String assembly, String qty, double selling_price, double discount, double amount, String datetime, String cat_id, String sub_cat_id, boolean is_selected,String order_no) {
+        public field(String item_code, String description, String assembly, double qty, double selling_price, double discount, double amount, String datetime,
+                String cat_id, String sub_cat_id, boolean is_selected,
+                String order_no, String table_no_id, String date_added, String guest_id, String guest_name, String user_name,double net_due,int is_add_ons) {
             this.item_code = item_code;
             this.description = description;
             this.assembly = assembly;
@@ -84,9 +93,72 @@ public class Srpt_billing_statement {
             this.cat_id = cat_id;
             this.sub_cat_id = sub_cat_id;
             this.is_selected = is_selected;
-            this.order_no=order_no;
+            this.order_no = order_no;
+            this.table_no_id = table_no_id;
+            this.date_added = date_added;
+            this.guest_id = guest_id;
+            this.guest_name = guest_name;
+            this.user_name = user_name;
+            this.net_due=net_due;
+            this.is_add_ons=is_add_ons;
         }
 
+        public int getIs_add_ons() {
+            return is_add_ons;
+        }
+
+        public void setIs_add_ons(int is_add_ons) {
+            this.is_add_ons = is_add_ons;
+        }
+        
+        public String getTable_no_id() {
+            return table_no_id;
+        }
+
+        public void setTable_no_id(String table_no_id) {
+            this.table_no_id = table_no_id;
+        }
+
+        public String getDate_added() {
+            return date_added;
+        }
+
+        public void setDate_added(String date_added) {
+            this.date_added = date_added;
+        }
+
+        public String getGuest_id() {
+            return guest_id;
+        }
+
+        public void setGuest_id(String guest_id) {
+            this.guest_id = guest_id;
+        }
+
+        public String getGuest_name() {
+            return guest_name;
+        }
+
+        public void setGuest_name(String guest_name) {
+            this.guest_name = guest_name;
+        }
+
+        public String getUser_name() {
+            return user_name;
+        }
+
+        public void setUser_name(String user_name) {
+            this.user_name = user_name;
+        }
+
+        public double getNet_due() {
+            return net_due;
+        }
+
+        public void setNet_due(double net_due) {
+            this.net_due = net_due;
+        }
+        
         public String getOrder_no() {
             return order_no;
         }
@@ -94,7 +166,7 @@ public class Srpt_billing_statement {
         public void setOrder_no(String order_no) {
             this.order_no = order_no;
         }
-        
+
         public boolean isIs_selected() {
             return is_selected;
         }
@@ -151,11 +223,11 @@ public class Srpt_billing_statement {
             this.assembly = assembly;
         }
 
-        public String getQty() {
+        public Double getQty() {
             return qty;
         }
 
-        public void setQty(String qty) {
+        public void setQty(double qty) {
             this.qty = qty;
         }
 
@@ -202,14 +274,21 @@ public class Srpt_billing_statement {
             String item_code = "100" + i;
             String description = "Description " + i;
             String assembly = "";
-            String qty = "" + i;
+            double qty = i;
             double selling_price = 100 + i;
             double discount = 0;
-            double amount = FitIn.toDouble(qty) * selling_price;
+            double amount = FitIn.toDouble("" + qty) * selling_price;
             String cat_id = "";
             String sub_cat_id = "";
-            String order_nos="";
-            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount, "", cat_id, sub_cat_id, true,order_nos);
+            String order_nos = "";
+            String table_no_id = "";
+            String date_added = "";
+            String guest_id = "";
+            String guest_name = "";
+            String user_name = "";
+            double net_due=0;
+            Srpt_billing_statement.field field = new field(item_code, description, assembly, qty, selling_price, discount, amount, "", cat_id, sub_cat_id, true,
+                     order_nos, table_no_id, date_added, guest_id, guest_name, user_name,net_due,0);
             rpt.fields.add(field);
         }
 
@@ -263,4 +342,5 @@ public class Srpt_billing_statement {
             MyConnection1.close();
         }
     }
+
 }

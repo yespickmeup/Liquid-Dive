@@ -411,9 +411,10 @@ public class S1_check_in {
 
             int guest_no = my_guest.size();
             for (Dlg_check_liquid.to_guests guest : my_guest) {
-                System.out.println(guest.id + " : " + guest.name + " guessssstt");
+//                System.out.println(guest.id + " : " + guest.name + " guessssstt");
                 String id = "";
                 for (S2_search.to_orders t : to) {
+                    
                     double qty = 0;
                     double discounts = 0;
                     String s2 = "";
@@ -434,163 +435,167 @@ public class S1_check_in {
                         id = rs.getString(2);
                         discounts = rs.getDouble(3);
                     }
+
+                    //<editor-fold defaultstate="collapsed" desc=" Insert Goes here ">
+                    double disc_rate = t.disc_rate/100;
+                    double  discount = t.discount;
+                    int count = 0;
+
+//                    if (guest.staff == 1 && t.cat_id.equals("10") || guest.staff == 1 && t.cat_id.
+//                            equals("12")) {
+//                        disc_rate = t.disc_rate;
+//                        discount = t.discount;
+//                    }
+                    double price = 0;
+                    String desc = t.desc;
+                    if (!t.cat_id.equals("11")) {
+//                            guest_no = 1;
+                        price = t.price;
+                        if (t.item_package_id == 1) {
+                            List<S1_item_packages.to_item_packages> packages = new ArrayList();
+                            packages = S1_item_packages.ret_data(t.name);
+
+                            String[] aw = S1_item_packages.get_rate(t.price, packages, FitIn.
+                                    toInt("" + t.qty), t.desc);
+                            price = FitIn.toDouble(aw[0]);
+                            desc = aw[1];
+//                                JOptionPane.showMessageDialog(null, t.name + " "+price+ " "+t.qty);
+                        }
+                        price = price / guest_no;
+                    } else {
+                        guest_no = my_guest.size();
+
+                        price = t.price / guest_no;
+                    }
+
+                    String s0 = "insert into " + MyDB.getNames() + ".customer_tables_details(table_no_id,qty,product_name,description,price"
+                            + ",img_path,status"
+                            + ",guest_id,guest_name,cat_id,date_added,printing_assembly"
+                            + ",disc_name,disc_rate,discount,customer_name,customer_id"
+                            + ",customer_address,user_lvl,group_id,nights,guest_no,room_guest_id"
+                            + ",user_name,sub_category_name,sub_category_id,category_name,order_no"
+                            + ")values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    PreparedStatement stmt = conn.prepareStatement(s0);
+                    stmt.setString(1, guest.table_guest_ids);
+                    stmt.setDouble(2, t.qty);
+                    stmt.setString(3, t.name);
+                    stmt.setString(4, desc);
+                    stmt.setDouble(5, price);
+                    stmt.setString(6, t.img_path);
+                    stmt.setString(7, "0");
+                    stmt.setString(8, guest.id);
+                    stmt.setString(9, guest.name);
+                    stmt.setString(10, t.cat_id);
+                    stmt.setString(11, now);
+                    stmt.setInt(12, t.printing_assembly);
+                    stmt.setString(13, t.disc_name);
+                    stmt.setDouble(14, disc_rate);
+                    stmt.setDouble(15, discount);
+                    stmt.setString(16, t.customer_name);
+                    stmt.setString(17, t.customer_id);
+                    stmt.setString(18, t.customer_address);
+                    stmt.setString(19, user_lvl);
+                    stmt.setInt(20, t.group_id);
+                    stmt.setInt(21, 1);
+                    stmt.setInt(22, guest_no);
+                    stmt.setInt(23, FitIn.toInt(guest.room_guest_ids));
+                    stmt.setString(24, user_name);
+                    stmt.setString(25, t.sub_category_name);
+                    stmt.setString(26, t.sub_category_name);
+                    stmt.setString(27, t.category_name);
+                    stmt.setString(28, order_no);
+                    stmt.execute();
+                    my_amount += t.qty * t.price;
+                    Lg.s(S1_check_in.class, "Successfully Added");
+                    String ctd_id = "-1";
+                    String s4 = "select max(id) from " + MyDB.getNames() + ".customer_tables_details";
+                    Statement stmt4 = conn.createStatement();
+                    ResultSet rs4 = stmt.executeQuery(s4);
+                    while (rs4.next()) {
+                        ctd_id = rs4.getString(1);
+                    }
+                    List<S2_search.to_items_status> subs = t.to_sub;
+                    for (S2_search.to_items_status to_customer_table_details_assembly : subs) {
+                        String s5 = "insert into " + MyDB.getNames() + ".customer_table_details_assembly("
+                                + "ctd_id"
+                                + ",prod_num"
+                                + ",description"
+                                + ",price"
+                                + ",product_qty"
+                                + ",ref_num"
+                                + ",status"
+                                + ",table_no"
+                                + ",is_selected"
+                                + ")values("
+                                + ":ctd_id"
+                                + ",:prod_num"
+                                + ",:description"
+                                + ",:price"
+                                + ",:product_qty"
+                                + ",:ref_num"
+                                + ",:status"
+                                + ",:table_no"
+                                + ",:is_selected"
+                                + ")";
+
+                        s5 = SqlStringUtil.parse(s5).
+                                setString("ctd_id", ctd_id).
+                                setString("prod_num", to_customer_table_details_assembly.name).
+                                setString("description", to_customer_table_details_assembly.desc).
+                                setNumber("price", to_customer_table_details_assembly.price).
+                                setNumber("product_qty", to_customer_table_details_assembly.qty).
+                                setString("ref_num", t.name).
+                                setNumber("status", 0).
+                                setString("table_no", table_no).
+                                setBoolean("is_selected", to_customer_table_details_assembly.status).
+                                ok();
+                        PreparedStatement stmt5 = conn.prepareStatement(s5);
+                        stmt5.execute();
+                        Lg.s(S1_check_in.class, "Successfully Added");
+                    }
+                    //</editor-fold>
 //                    JOptionPane.showMessageDialog(null, guest.id  + " :guest id "+t.name + " :barcode "+guest.table_id + " table no id " + qty + " :id");
                     if (qty == 0) {
 
-                        double disc_rate = 0;
-                        double discount = t.discount;
-                        int count = 0;
-
-                        if (guest.staff == 1 && t.cat_id.equals("10") || guest.staff == 1 && t.cat_id.
-                                equals("12")) {
-                            disc_rate = _disc_rate / 100;
-                            discount = (t.price * t.qty) * disc_rate;
-                        }
-                        double price = 0;
-                        String desc = t.desc;
-                        if (!t.cat_id.equals("11")) {
-//                            guest_no = 1;
-                            price = t.price;
-                            if (t.item_package_id == 1) {
-                                List<S1_item_packages.to_item_packages> packages = new ArrayList();
-                                packages = S1_item_packages.ret_data(t.name);
-
-                                String[] aw = S1_item_packages.get_rate(t.price, packages, FitIn.
-                                        toInt("" + t.qty), t.desc);
-                                price = FitIn.toDouble(aw[0]);
-                                desc = aw[1];
-//                                JOptionPane.showMessageDialog(null, t.name + " "+price+ " "+t.qty);
-                            }
-                            price = price / guest_no;
-                        } else {
-                            guest_no = my_guest.size();
-
-                            price = t.price / guest_no;
-                        }
-
-                        String s0 = "insert into " + MyDB.getNames() + ".customer_tables_details(table_no_id,qty,product_name,description,price"
-                                + ",img_path,status"
-                                + ",guest_id,guest_name,cat_id,date_added,printing_assembly"
-                                + ",disc_name,disc_rate,discount,customer_name,customer_id"
-                                + ",customer_address,user_lvl,group_id,nights,guest_no,room_guest_id"
-                                + ",user_name,sub_category_name,sub_category_id,category_name,order_no"
-                                + ")values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                        PreparedStatement stmt = conn.prepareStatement(s0);
-                        stmt.setString(1, guest.table_guest_ids);
-                        stmt.setDouble(2, t.qty);
-                        stmt.setString(3, t.name);
-                        stmt.setString(4, desc);
-                        stmt.setDouble(5, price);
-                        stmt.setString(6, t.img_path);
-                        stmt.setString(7, "0");
-                        stmt.setString(8, guest.id);
-                        stmt.setString(9, guest.name);
-                        stmt.setString(10, t.cat_id);
-                        stmt.setString(11, now);
-                        stmt.setInt(12, t.printing_assembly);
-                        stmt.setString(13, t.disc_name);
-                        stmt.setDouble(14, disc_rate);
-                        stmt.setDouble(15, discount);
-                        stmt.setString(16, t.customer_name);
-                        stmt.setString(17, t.customer_id);
-                        stmt.setString(18, t.customer_address);
-                        stmt.setString(19, user_lvl);
-                        stmt.setInt(20, t.group_id);
-                        stmt.setInt(21, 1);
-                        stmt.setInt(22, guest_no);
-                        stmt.setInt(23, FitIn.toInt(guest.room_guest_ids));
-                        stmt.setString(24, user_name);
-                        stmt.setString(25, t.sub_category_name);
-                        stmt.setString(26, t.sub_category_name);
-                        stmt.setString(27, t.category_name);
-                        stmt.setString(28, order_no);
-                        stmt.execute();
-                        my_amount += t.qty * t.price;
-                        Lg.s(S1_check_in.class, "Successfully Added");
-                        String ctd_id = "-1";
-                        String s4 = "select max(id) from " + MyDB.getNames() + ".customer_tables_details";
-                        Statement stmt4 = conn.createStatement();
-                        ResultSet rs4 = stmt.executeQuery(s4);
-                        while (rs4.next()) {
-                            ctd_id = rs4.getString(1);
-                        }
-                        List<S2_search.to_items_status> subs = t.to_sub;
-                        for (S2_search.to_items_status to_customer_table_details_assembly : subs) {
-                            String s5 = "insert into " + MyDB.getNames() + ".customer_table_details_assembly("
-                                    + "ctd_id"
-                                    + ",prod_num"
-                                    + ",description"
-                                    + ",price"
-                                    + ",product_qty"
-                                    + ",ref_num"
-                                    + ",status"
-                                    + ",table_no"
-                                    + ",is_selected"
-                                    + ")values("
-                                    + ":ctd_id"
-                                    + ",:prod_num"
-                                    + ",:description"
-                                    + ",:price"
-                                    + ",:product_qty"
-                                    + ",:ref_num"
-                                    + ",:status"
-                                    + ",:table_no"
-                                    + ",:is_selected"
-                                    + ")";
-
-                            s5 = SqlStringUtil.parse(s5).
-                                    setString("ctd_id", ctd_id).
-                                    setString("prod_num", to_customer_table_details_assembly.name).
-                                    setString("description", to_customer_table_details_assembly.desc).
-                                    setNumber("price", to_customer_table_details_assembly.price).
-                                    setNumber("product_qty", to_customer_table_details_assembly.qty).
-                                    setString("ref_num", t.name).
-                                    setNumber("status", 0).
-                                    setString("table_no", table_no).
-                                    setBoolean("is_selected", to_customer_table_details_assembly.status).
-                                    ok();
-                            PreparedStatement stmt5 = conn.prepareStatement(s5);
-                            stmt5.execute();
-                            Lg.s(S1_check_in.class, "Successfully Added");
-                        }
                     } else {
-                        qty += t.qty;
-                        double new_qty = qty - t.qty;
-                        my_amount += new_qty * t.price;
-
-                        double disc_rate = 0;
-                        disc_rate = _disc_rate / 100;
-                        double discount = 0;
-                        if (guest.staff == 1 && t.cat_id.equals("10") || guest.staff == 1 && t.cat_id.
-                                equals("12")) {
-                            discount = (t.price * t.qty) * disc_rate;
-                            discount += discounts;
-                        }
-                        String s0 = "";
-                        String desc = t.desc;
-                        if (t.item_package_id == 0) {
-//                             JOptionPane.showMessageDialog(null, "asd");
-                            s0 = "update " + MyDB.getNames() + ".customer_tables_details set "
-                                    + "qty='" + qty + "',discount='" + discount + "' "
-                                    + "where id='" + id + "'  ";
-                        } else {
-                            List<S1_item_packages.to_item_packages> packages = new ArrayList();
-                            packages = S1_item_packages.ret_data(t.name);
-                            double price = 0;
-                            String[] aw = S1_item_packages.get_rate(t.price, packages, FitIn.
-                                    toInt("" + qty), t.desc);
-                            desc = aw[1];
-                            price = FitIn.toDouble(aw[0]);
-
-                            s0 = "update " + MyDB.getNames() + ".customer_tables_details set qty='" + qty + "'"
-                                    + ",discount='" + discount + "',price='" + price + "',description='" + desc + "' "
-                                    + "where id='" + id + "'";
-
-                        }
-//                        JOptionPane.showMessageDialog(null, "adadad");
-                        PreparedStatement stmt = conn.prepareStatement(s0);
-                        stmt.execute();
-                        Lg.s(S1_check_in.class, "Successfully Updated");
+//                        qty += t.qty;
+//                        double new_qty = qty - t.qty;
+//                        my_amount += new_qty * t.price;
+//
+//                        double disc_rate = 0;
+//                        disc_rate = _disc_rate / 100;
+//                        double discount = 0;
+//                        if (guest.staff == 1 && t.cat_id.equals("10") || guest.staff == 1 && t.cat_id.
+//                                equals("12")) {
+//                            discount = (t.price * t.qty) * disc_rate;
+//                            discount += discounts;
+//                        }
+//                        String s0 = "";
+//                        String desc = t.desc;
+//                        if (t.item_package_id == 0) {
+////                             JOptionPane.showMessageDialog(null, "asd");
+//                            s0 = "update " + MyDB.getNames() + ".customer_tables_details set "
+//                                    + "qty='" + qty + "',discount='" + discount + "' "
+//                                    + "where id='" + id + "'  ";
+//                            System.out.println("Goes here");
+//                        } else {
+//                            List<S1_item_packages.to_item_packages> packages = new ArrayList();
+//                            packages = S1_item_packages.ret_data(t.name);
+//                            double price = 0;
+//                            String[] aw = S1_item_packages.get_rate(t.price, packages, FitIn.
+//                                    toInt("" + qty), t.desc);
+//                            desc = aw[1];
+//                            price = FitIn.toDouble(aw[0]);
+//                            
+//                            s0 = " update " + MyDB.getNames() + ".customer_tables_details set qty='" + qty + "'"
+//                                    + ",discount='" + discount + "',price='" + price + "',description='" + desc + "' "
+//                                    + "where id='" + id + "' and price='" + price + "' and discount='" + discount + "' ";
+//
+//                        }
+////                        JOptionPane.showMessageDialog(null, "adadad");
+//                        PreparedStatement stmt = conn.prepareStatement(s0);
+//                        stmt.execute();
+//                        Lg.s(S1_check_in.class, "Successfully Updated");
                     }
                 }
             }

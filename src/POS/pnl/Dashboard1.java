@@ -2630,9 +2630,10 @@ public class Dashboard1 extends javax.swing.JFrame {
                 getText());
         String room_no = table_name;
         String guess_names = "";
-        List<Dlg_check_liquid.to_guests> guest = my_guest;
+        List<Dlg_check_liquid.to_guests> guest1 = my_guest;
         int u = 0;
-        for (Dlg_check_liquid.to_guests t : guest) {
+
+        for (Dlg_check_liquid.to_guests t : guest1) {
             if (u == 0) {
                 guess_names = guess_names + t.name + "";
             } else {
@@ -2645,7 +2646,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         Dlg_print_orders_by_date nd = Dlg_print_orders_by_date.create(p, true);
         nd.setTitle("");
         List<S2_search.to_items> orders = tbl_customer_tables_details_ALM;
-        nd.do_pass(orders, room_no, guess_names);
+        nd.do_pass(orders, room_no, guess_names, guest1);
         nd.setCallback(new Dlg_print_orders_by_date.Callback() {
 
             @Override
@@ -3019,13 +3020,13 @@ public class Dashboard1 extends javax.swing.JFrame {
         if (selected_guest.isEmpty()) {
 
             if (to_users.user_level1.equals("6")) {
-                where_guest = where_guest + "where status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id<>'" + "11" + "' and cat_id='" + "10" + "' or "
-                        + "status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id<>'" + "11" + "' and cat_id='" + "12" + "'";
+                where_guest = where_guest + "where status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id<>'" + "11" + "' and cat_id in (10,12) ";
+
                 where_others = where_others + "where status = '" + "1100" + "' and table_no_id = '" + t.id + "' and cat_id<>'" + "10" + "'  and cat_id<>'" + "12" + "' ";
 
             } else {
-                where_guest = where_guest + "where status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id='" + "10" + "' or "
-                        + "status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id='" + "12" + "'";
+                where_guest = where_guest + "where status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id in (10,12) ";
+
             }
             where_guest_11 = where_guest_11 + "where status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id<>'" + "10" + "' and cat_id<>'" + "12" + "' and cat_id='" + "11" + "'";
             where_guest_11_dive = where_guest_11_dive + "where status = '" + "100" + "' and table_no_id = '" + t.id + "' and cat_id<>'" + "10" + "' and cat_id<>'" + "12" + "' and cat_id<>'" + "11" + "'";
@@ -3039,8 +3040,8 @@ public class Dashboard1 extends javax.swing.JFrame {
 
             if (ii == 0) {
                 if (to_users.user_level1.equals("6")) {
-                    where_guest = where_guest + " where table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "'  and cat_id ='" + "10" + "' or "
-                            + " table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "'  and cat_id ='" + "12" + "'";
+                    where_guest = where_guest + " where table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "'  and cat_id in (10,12)   ";
+
                     where_others = where_others + " where table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "'  and cat_id <>'" + "10" + "' and cat_id<>'" + "12" + "' ";
 
                     guest_ids = guest1.id;
@@ -3057,13 +3058,12 @@ public class Dashboard1 extends javax.swing.JFrame {
             } else {
 
                 if (to_users.user_level1.equals("6")) {
-                    where_guest = where_guest + " or table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id<>'" + "11" + "' and cat_id ='" + "10" + "' or "
-                            + " table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id<>'" + "11" + "' and cat_id ='" + "12" + "'";
+                    where_guest = where_guest + " or table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id<>'" + "11" + "' and cat_id in (10,12) ";
+
                     where_others = where_others + "  or table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id<>'" + "10" + "' and cat_id<>'" + "12" + "' ";
 
                 } else {
-                    where_guest = where_guest + " or table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id='" + "10" + "' or "
-                            + "table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id='" + "12" + "'";
+                    where_guest = where_guest + " or table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id in (10,12) ";
 
                 }
                 where_guest_11 = where_guest_11 + " or table_no_id = '" + t.id + "' and status <>'" + "1" + "' and guest_id = '" + guest1.id + "' and cat_id<>'" + "10" + "' and cat_id<>'" + "12" + "' and cat_id='" + "11" + "' ";
@@ -3402,6 +3402,7 @@ public class Dashboard1 extends javax.swing.JFrame {
     }
 
     private void order_item(to_items to_items1, List<to_items_status> to_sub, double to_pay) {
+//        System.out.println("rate: "+to_items1.disc_rate);
         final String ui_items = System.getProperty("ui_items", "list");
         Object j = new Object();
         if (ui_items.equals("list")) {
@@ -3441,39 +3442,26 @@ public class Dashboard1 extends javax.swing.JFrame {
             }
 
             S2_search.to_orders t_orders = (S2_search.to_orders) j_orders;
-//            JOptionPane.showMessageDialog(null, to_items.name + " = " + t_orders.name);
-            if (to_items.name.equals(t_orders.name)) {
-//                if (to_items.qty > 0) {
-//                    JOptionPane.showMessageDialog(null, t_orders.qty + to_items1.qty);
+
+            if (to_items1.name.equals(t_orders.name) && to_items1.price == t_orders.price && to_items1.discount == t_orders.discount) {
                 t_orders.setQty(t_orders.qty + to_items1.qty);
                 to_items.setQty(to_items.qty - to_items1.qty);
+                tbl_orders_M.fireTableDataChanged();
                 trap = 1;
-                if (ui_items.equals("list")) {
-                    tbl_orders_M.fireTableDataChanged();
-                    js_orders.updateUI();
-                } else {
-                    init_orders_ref();
-                }
-
                 break;
-//                } else {
-//                    trap = 1;
-//                    break;
-//                }
             } else {
                 trap = 0;
             }
         }
-
+        System.out.println("Trap : " + trap);
         if (trap == 0) {
-//            JOptionPane.showMessageDialog(null, to_items1.price);
-            S2_search.to_orders t1 = new S2_search.to_orders(to_items.name, to_items.uom, to_items.desc, to_items.price, to_items1.qty, to_items.img_path, to_items.qty2, to_sub, to_pay, to_items.cat_id, to_items.category_name, to_items.printing_assembly, to_items.disc_name, to_items.disc_rate, to_items.discount, to_items.customer_name, to_items.customer_address, to_items.customer_address, to_items.group_id, to_items.nights, to_items.item_package_id, to_items1.sub_category_name, to_items1.sub_category_id);
+            S2_search.to_orders t1 = new S2_search.to_orders(to_items.name, to_items.uom, to_items.desc,
+                    to_items.price, to_items1.qty, to_items.img_path, to_items.qty2, to_sub, to_pay, to_items.cat_id,
+                    to_items.category_name, to_items.printing_assembly, to_items1.disc_name, to_items1.disc_rate,
+                    to_items1.discount, to_items.customer_name, to_items.customer_address, to_items.customer_address, to_items.group_id, to_items.nights, to_items.item_package_id, to_items1.sub_category_name, to_items1.sub_category_id);
             to_items.setQty(to_items.qty - to_items1.qty);
+
             init_orders(t1);
-        } else {
-//            to.setQty(to.qty + to_items1.qty);
-            tbl_orders_M.fireTableDataChanged();
-            js_orders.updateUI();
         }
         sp_items.updateUI();
         js_orders.updateUI();
@@ -6331,7 +6319,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                     if (t1.cat_id.equals("10")) {
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(t1.cat_name.
-                                toUpperCase(), date, t1.price, t1.qty);
+                                toUpperCase(), date, t1.price, t1.qty,0);
                         regroup.add(tbar);
 
                         resto_items.add(tbar);
@@ -6339,7 +6327,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         ch += t1.price;
                         bar_resto += t1.price;
                     } else if (t1.cat_id.equals("12")) {
-                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty);
+                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty,0);
                         regroup3.add(tbar);
 
                         bar_items.add(tbar);
@@ -6385,7 +6373,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                             equals(my_data)) {
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                                 getDesc(), ss.getDate_added(), ss.getTotal(), ss.
-                                getQty());
+                                getQty(),0);
                         regroup2.add(tbar);
                     }
                     my_data = DateType.sf.format(ss.getDate_added());
@@ -6409,7 +6397,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                                 log(Level.SEVERE, null, ex);
                     }
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
-                            getDesc(), d1, am, ss2.getQty());
+                            getDesc(), d1, am, ss2.getQty(),0);
                     rpt_bar_and_resto.add(tbar);
                 }
 
@@ -6421,7 +6409,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                                 getDesc().
                                 toUpperCase(), ss.getDate_added(), ss.getTotal(), ss.
-                                getQty());
+                                getQty(),0);
                         regroup33.add(tbar);
 
                     }
@@ -6441,7 +6429,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                             getDesc().
-                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty());
+                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty(),0);
 
                     rpt_bar.add(tbar);
                 }
@@ -6482,19 +6470,19 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                 List<Srpt_bar_and_resto.field> rpt_summary = new ArrayList();
                 for (Srpt_accomodation.field r : accom3) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getAccomodation(), new Date(), r.getAmount(), r.getQty());
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getAccomodation(), new Date(), r.getAmount(), r.getQty(),0);
                     rpt_summary.add(f);
                 }
                 for (Srpt_bar_and_resto.field r : rpt_bar_and_resto) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty());
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty(),0);
                     rpt_summary.add(f);
                 }
                 for (Srpt_bar_and_resto.field r : rpt_bar) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty());
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty(),0);
                     rpt_summary.add(f);
                 }
                 for (Srpt_others.field r : accom2) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getCategory(), new Date(), r.getPrice(), r.getQty());
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getCategory(), new Date(), r.getPrice(), r.getQty(),0);
                     rpt_summary.add(f);
                 }
 
@@ -7183,7 +7171,9 @@ public class Dashboard1 extends javax.swing.JFrame {
                     }
 
                     if (t1.cat_id.equals("10")) {
-                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTAURANT", date, t1.price, t1.qty);
+                        System.out.println("RESTAURANT: "+t1.desc+ " qty: "+t1.qty+ " price: "+t1.price+ " date: "+t1.date_added);
+                         double amount = t1.price-t1.discount;
+                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTAURANT", date, amount, t1.qty,t1.discount);
                         regroup.add(tbar);
 
                         String s = DateType.sf.format(date) + " 00:00:00";
@@ -7194,12 +7184,13 @@ public class Dashboard1 extends javax.swing.JFrame {
                             Logger.getLogger(Dlg_billing_history.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
-                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, t1.price, t1.qty);
+                      
+                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, amount, t1.qty,t1.discount);
 
                         resto_items.add(tbar2);
                         ch += t1.price;
                     } else if (t1.cat_id.equals("12")) {
-                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty);
+                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty,t1.discount);
                         regroup3.add(tbar);
 
                         String s = DateType.sf.format(date) + " 00:00:00";
@@ -7210,7 +7201,8 @@ public class Dashboard1 extends javax.swing.JFrame {
                             Logger.getLogger(Dlg_billing_history.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
-                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, t1.price, t1.qty);
+                        double amount = t1.price-t1.discount;
+                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, amount, t1.qty,t1.discount);
                         bar_items.add(tbar2);
 
                         ch += t1.price;
@@ -7262,9 +7254,10 @@ public class Dashboard1 extends javax.swing.JFrame {
                 for (Srpt_bar_and_resto.field ss : regroup) {
                     if (!DateType.sf.format(ss.getDate_added()).
                             equals(my_data)) {
+                        double amount=ss.getTotal()-ss.getDiscount_amount();
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
-                                getDesc(), ss.getDate_added(), ss.getTotal(), ss.
-                                getQty());
+                                getDesc(), ss.getDate_added(), amount, ss.
+                                getQty(),ss.getDiscount_amount());
                         regroup2.add(tbar);
                     }
                     my_data = DateType.sf.format(ss.getDate_added());
@@ -7276,12 +7269,12 @@ public class Dashboard1 extends javax.swing.JFrame {
                     for (Srpt_bar_and_resto.field ss : regroup) {
                         if (DateType.sf.format(ss2.getDate_added()).
                                 equals(DateType.sf.format(ss.getDate_added()))) {
-                            am += ss.getTotal();
+                            am += ss.getTotal()-ss.getDiscount_amount();
                         }
                     }
 
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
-                            getDesc(), ss2.getDate_added(), am, ss2.getQty());
+                            getDesc(), ss2.getDate_added(), am, ss2.getQty(),ss2.getDiscount_amount());
                     rpt_bar_and_resto.add(tbar);
                 }
 
@@ -7290,10 +7283,11 @@ public class Dashboard1 extends javax.swing.JFrame {
                 for (Srpt_bar_and_resto.field ss : regroup3) {
                     if (!DateType.sf.format(ss.getDate_added()).
                             equals(my_data3)) {
+                        double amount=ss.getTotal()-ss.getDiscount_amount();
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                                 getDesc().
                                 toUpperCase(), ss.getDate_added(), ss.getTotal(), ss.
-                                getQty());
+                                getQty(),ss.getDiscount_amount());
                         regroup33.add(tbar);
 
                     }
@@ -7307,12 +7301,12 @@ public class Dashboard1 extends javax.swing.JFrame {
                     for (Srpt_bar_and_resto.field ss : regroup3) {
                         if (DateType.sf.format(ss2.getDate_added()).
                                 equals(DateType.sf.format(ss.getDate_added()))) {
-                            am += ss.getTotal();
+                            am += ss.getTotal() - ss.getDiscount_amount();
                         }
                     }
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                             getDesc().
-                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty());
+                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty(),ss2.getDiscount_amount());
 //                    System.out.println(am + " 33");
                     rpt_bar.add(tbar);
                 }
@@ -7762,15 +7756,24 @@ public class Dashboard1 extends javax.swing.JFrame {
                     qty1 = "";
                 }
             }
-            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "", cat_id, sub_cat_id, true, order_no);
+            String table_no_id = table_name;
+            String date_added = DateType.dash2.format(new Date());
+            String guest_id = "";
+            String guest_name = guess_names;
+            String user_name = to_users.getUser_screen_name();
+            double net_due = 0;
+            Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount,
+                    amount, "", cat_id, sub_cat_id, true, order_no, table_no_id, date_added, guest_id, guest_name, user_name, net_due, 0);
             rpt_billing_statement.fields.add(field_billing_statement);
 
             if (tt.printing_assembly == 3) {
-                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "", cat_id, sub_cat_id, true, order_no);
+                Srpt_billing_statement.field field_stab_bar_and_resto = new Srpt_billing_statement.field(item_code, description, assembly1, qty,
+                        selling_price, discount, amount, "", cat_id, sub_cat_id, true, order_no, table_no_id, date_added, guest_id, guest_name, user_name, net_due, 0);
                 rpt_billing_stab_bar_and_resto.fields.add(field_stab_bar_and_resto);
             }
             if (tt.printing_assembly == 4) {
-                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty1, selling_price, discount, amount, "", cat_id, sub_cat_id, true, order_no);
+                Srpt_billing_statement.field field_stab_kitchen = new Srpt_billing_statement.field(item_code, description, assembly1, qty,
+                        selling_price, discount, amount, "", cat_id, sub_cat_id, true, order_no, table_no_id, date_added, guest_id, guest_name, user_name, net_due, 0);
                 rpt_billing_stab_kitchen.fields.add(field_stab_kitchen);
             }
 
@@ -8077,9 +8080,9 @@ public class Dashboard1 extends javax.swing.JFrame {
 //        if(my_order = =0){
 //            size
 //        }
-        int[] tbl_widths_customer_tables_details = {0, 0, 100, 100, 100, 0, amount, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, size, 0};
+        int[] tbl_widths_customer_tables_details = {40, 100, 80, 60, 80, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_customer_tables_details.length; i < n; i++) {
-            if (i == 3) {
+            if (i == 1) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_items, i, tbl_widths_customer_tables_details[i]);
@@ -8095,8 +8098,11 @@ public class Dashboard1 extends javax.swing.JFrame {
                 setPreferredSize(d);
         tbl_items.getTableHeader().
                 setFont(new java.awt.Font("Arial", Font.BOLD, 12));
-        tbl_items.setRowHeight(35);
+        tbl_items.setRowHeight(30);
         tbl_items.setFont(new java.awt.Font("Arial", 1, 12));
+        TableWidthUtilities.setColumnRightRenderer(tbl_items, 2);
+        TableWidthUtilities.setColumnRightRenderer(tbl_items, 3);
+        TableWidthUtilities.setColumnRightRenderer(tbl_items, 4);
 
     }
 
@@ -8108,7 +8114,7 @@ public class Dashboard1 extends javax.swing.JFrame {
     public static class Tblcustomer_tables_detailsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "name", "uom", "QTY", "DESCRIPTION", "PRICE", "img_path", "AMOUNT", "guest_id", "cat_id", "category_name", "printing_assembly", "status", "disc_name", "disc_rate", "discount", "customer_name", "customer_id", "customer_address", "DATE ADDED", "ADDED BY"
+            "Qty", "Description", "Price", "Discount", "Amount", "Date", "AMOUNT", "guest_id", "cat_id", "category_name", "printing_assembly", "status", "disc_name", "disc_rate", "discount", "customer_name", "customer_id", "customer_address", "DATE ADDED", "ADDED BY"
         };
 
         public Tblcustomer_tables_detailsModel(ListModel listmodel) {
@@ -8136,19 +8142,19 @@ public class Dashboard1 extends javax.swing.JFrame {
             S2_search.to_items tt = (S2_search.to_items) getRow(row);
             switch (col) {
                 case 0:
-                    return tt.name;
+                    return " " + ("" + tt.qty);
                 case 1:
-                    return tt.uom;
+                    return " " + tt.desc;
                 case 2:
-                    return FitIn.toInt("" + tt.qty);
+                    return FitIn.fmt_wc_0(tt.price) + " ";
                 case 3:
-                    return tt.desc;
+                    return FitIn.fmt_wc_0(tt.discount) + " ";
                 case 4:
-                    return FitIn.fmt_wc_0(tt.price);
+                    return FitIn.fmt_wc_0((tt.qty * tt.price) - tt.discount) + " ";
                 case 5:
-                    return tt.img_path;
+                    return " " + DateType.convert_slash3(tt.date_added);
                 case 6:
-                    return FitIn.fmt_wc_0(tt.qty * tt.price);
+                    return FitIn.fmt_wc_0((tt.qty * tt.price) - tt.discount);
                 case 7:
                     return tt.guest_id;
                 case 8:
@@ -8261,7 +8267,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 case 5:
                     return tt.img_path;
                 case 6:
-                    return FitIn.fmt_wc_0(tt.price * tt.qty);
+                    return FitIn.fmt_wc_0((tt.price * tt.qty) - tt.discount);
                 case 7:
                     return tt.to_sub;
                 case 8:

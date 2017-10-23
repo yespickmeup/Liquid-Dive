@@ -33,17 +33,29 @@ public class Srpt_bar_and_resto {
         Date date_added;
         double total;
         double qty;
-
+        double discount_amount;
+        
         public field() {
+
         }
 
-        public field(String desc, Date date_added, double total, double qty) {
+        public field(String desc, Date date_added, double total, double qty,double discount_amount) {
             this.desc = desc;
             this.date_added = date_added;
             this.total = total;
             this.qty = qty;
+            this.discount_amount=discount_amount;
         }
 
+        public double getDiscount_amount() {
+            return discount_amount;
+        }
+
+        public void setDiscount_amount(double discount_amount) {
+            this.discount_amount = discount_amount;
+        }
+
+        
         public double getQty() {
             return qty;
         }
@@ -93,7 +105,7 @@ public class Srpt_bar_and_resto {
 
         List<Srpt_bar_and_resto.field> fields = new ArrayList();
         for (int i = 0; i < 20; i++) {
-            Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("desc" + i, new Date(), i + 100, 0);
+            Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("desc" + i, new Date(), i + 100, 0,0);
             fields.add(tbar);
         }
 

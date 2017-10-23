@@ -5,11 +5,15 @@
  */
 package POS.pnl;
 
+import POS.inventory2_stocks_left.Inventory2_stocks_left;
+import POS.users.Users;
+import POS.pnl_ordering.Ordering;
 import POS.printing2.Dlg_print_orders;
 import POS.printing2.Srpt_billing_statement;
 import POS.to.to_users;
 import POS.utl.DateType;
 import POS_svc4.S2_search;
+
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
@@ -25,9 +29,8 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractButton;
@@ -57,6 +60,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import org.jfree.ui.Align;
 import synsoftech.fields.Button;
+import test.Dlg_check_liquid;
 
 /**
  *
@@ -90,21 +94,21 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
     private Dlg_print_orders_by_date(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setUndecorated(true);
+        setUndecorated(false);
         initComponents();
         myInit();
     }
 
     private Dlg_print_orders_by_date(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        setUndecorated(true);
+        setUndecorated(false);
         initComponents();
         myInit();
     }
 
     public Dlg_print_orders_by_date() {
         super();
-        setUndecorated(true);
+        setUndecorated(false);
         initComponents();
         myInit();
 
@@ -228,12 +232,24 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_tables2 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_bank = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new Button.Success();
@@ -253,6 +269,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         jLabel1.setText("Date from:");
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -263,6 +280,118 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
         jDateChooser2.setDate(new Date());
         jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Preview");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbl_tables2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tbl_tables2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_tables2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbl_tables2);
+
+        jLabel5.setText("Total no. of rows:");
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("0");
+        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Net Due:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("0.00");
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Amount Due:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("0.00");
+        jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("0.00");
+        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setText("Discount:");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)))
+                .addContainerGap())
+        );
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
         tbl_bank.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -284,50 +413,64 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
         jLabel3.setText("Total no. of rows:");
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("0");
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jButton4.setText("Search");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Preview");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jCheckBox1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,24 +478,22 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Report", jPanel5);
@@ -388,7 +529,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnl_report, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -411,7 +552,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
+            .addGap(0, 255, Short.MAX_VALUE)
         );
 
         jButton2.setText("Print Bar and Resto Order/s");
@@ -458,7 +599,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 195, Short.MAX_VALUE)
+            .addGap(0, 251, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -517,8 +658,8 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -537,7 +678,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        set_order();
+        ret_order_nos();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void tbl_bankMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bankMouseClicked
@@ -545,8 +686,13 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_bankMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        preview_order();
+        set_order();
+
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tbl_tables2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tables2MouseClicked
+        select_list_order();
+    }//GEN-LAST:event_tbl_tables2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -562,9 +708,17 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -572,18 +726,30 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pnl_report;
     private javax.swing.JTable tbl_bank;
+    private javax.swing.JTable tbl_tables2;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
         init_tbl_bank(tbl_bank);
+        init_tbl_tables2(tbl_tables2);
+        ret_users();
+    }
+    static List<Users.to_users> users = new ArrayList();
+
+    private void ret_users() {
+        users = Users.ret_data("");
     }
     List<S2_search.to_items> my_orders = new ArrayList();
 
     private void set_order() {
+        List<Srpt_billing_statement.field> list_orders = tbl_bank_ALM;
         String order_no = "";
         List<String> order_nos = new ArrayList();
         String types_no_wo_qty = System.getProperty("catid_orders_wo_qty", "");
@@ -598,107 +764,78 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         } catch (ParseException ex) {
             Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-//        System.out.println("min: " + min);
-//        System.out.println("max: " + max);
-        List<Srpt_billing_statement.field> datas = new ArrayList();
         List<Srpt_billing_statement.field> datas_bar = new ArrayList();
         List<Srpt_billing_statement.field> datas_kitchen = new ArrayList();
-        for (S2_search.to_items order : my_orders) {
-            if (order.cat_id.equals("10") || order.cat_id.equals("12")) {
-                Date d = new Date();
-                Date d2 = new Date();
-                try {
-                    d = DateType.datetime.parse(order.date_added);
-                    String sf = DateType.sf.format(d) + " 00:00:00";
-                    d2 = DateType.datetime.parse(sf);
-                } catch (ParseException ex) {
-                    Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
-                }
-//                System.out.println("date: " + d2 + " | " + (min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())   );
 
-                boolean m1 = d.compareTo(min) >= 0;
-                boolean m2 = d.compareTo(max) <= 0;
-
-                String item_code = order.name;
-                String description = order.desc;
-                String assembly = "" + order.printing_assembly;
-                double qty = order.qty;
-                double selling_price = order.price / order.qty;
-                double discount = order.discount;
-                double amount = (qty * selling_price) - discount;
-                boolean status = (min.getTime() >= d.getTime() && d.getTime() <= max.getTime());
-//                System.out.println("item_code: " + item_code);
-                if (!jCheckBox1.isSelected()) {
-                    if ((min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())) {
-
-                        String qty1 = "" + qty;
-
-                        String cat_id = order.cat_id;
-                        String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
-                        for (String s : l_types_no_wo_qty) {
-                            if (sub_cat_id.equalsIgnoreCase(s)) {
-                                qty1 = "";
-                            }
-                        }
-//                    System.out.println("sub_cat_id: "+sub_cat_id);
-                        Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id, true, order.order_no);
-                        datas.add(field);
-                        order_nos.add(field.getOrder_no());
-                        if (order.cat_id.equals("12")) {
-                            datas_bar.add(field);
-                        }
-                        if (order.cat_id.equals("10")) {
-                            datas_kitchen.add(field);
-                        }
-                    }
+        List<Ordering.orders> orders = tbl_tables2_ALM;
+        String order_nos1 = "";
+        int i = 0;
+        for (Ordering.orders o : orders) {
+//            System.out.println(o.order_no);
+            if (o.is_selected) {
+                if (i == 0) {
+                    order_nos1 = o.order_no;
                 } else {
-                    String qty1 = "" + qty;
+                    order_nos1 = order_nos1 + "," + o.order_no;
+                }
+                i++;
+            }
+        }
+        if (!order_nos1.isEmpty()) {
 
-                    String cat_id = order.cat_id;
-                    String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
-                    for (String s : l_types_no_wo_qty) {
-                        if (sub_cat_id.equalsIgnoreCase(s)) {
-                            qty1 = "";
-                        }
-                    }
-//                    System.out.println("sub_cat_id: "+sub_cat_id);
-                    Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.date_added, cat_id, sub_cat_id, true, order.order_no);
-                    datas.add(field);
-                    order_nos.add(field.getOrder_no());
-                    if (order.cat_id.equals("12")) {
-                        datas_bar.add(field);
-                    }
-                    if (order.cat_id.equals("10")) {
-                        datas_kitchen.add(field);
+            String where = " where order_no in (" + order_nos1 + ") and guest_id in (" + guest_ids + ") group by order_no,product_name order by id asc ";
+            List<Srpt_billing_statement.field> list = Ordering.ret_data_sum(where);
+            for (Srpt_billing_statement.field field : list) {
+                if (field.cat_id.equalsIgnoreCase("12")) {
+                    datas_bar.add(field);
+                }
+                if (field.cat_id.equalsIgnoreCase("10")) {
+                    datas_kitchen.add(field);
+                }
+            }
+        }
+
+        for (Srpt_billing_statement.field f : list_orders) {
+            String where = " where product_name='" + f.item_code + "' ";
+            List<Inventory2_stocks_left.to_inventory2_stocks_left> items = Inventory2_stocks_left.ret_data(where);
+            if (!items.isEmpty()) {
+                Inventory2_stocks_left.to_inventory2_stocks_left item = (Inventory2_stocks_left.to_inventory2_stocks_left) items.get(0);
+                String sub_cat_id = item.types_num;
+                for (String s : l_types_no_wo_qty) {
+                    if (sub_cat_id.equalsIgnoreCase(s)) {
+                        f.setIs_add_ons(1);
+
                     }
                 }
-
             }
         }
 
-        loadData_bank(datas);
-
-        Map<String, Integer> myMap = new HashMap<String, Integer>();
-
-        for (int i = 0; i < order_nos.size(); i++) {
-            String product = order_nos.get(i);
-
-            if (myMap.containsKey(product)) {
-                myMap.put(product, 0);
-            } else {
-                myMap.put(product, 0);
+        for (Srpt_billing_statement.field f : datas_bar) {
+            String where = " where product_name='" + f.item_code + "' ";
+            List<Inventory2_stocks_left.to_inventory2_stocks_left> items = Inventory2_stocks_left.ret_data(where);
+            if (!items.isEmpty()) {
+                Inventory2_stocks_left.to_inventory2_stocks_left item = (Inventory2_stocks_left.to_inventory2_stocks_left) items.get(0);
+                String sub_cat_id = item.types_num;
+                for (String s : l_types_no_wo_qty) {
+                    if (sub_cat_id.equalsIgnoreCase(s)) {
+                        f.setIs_add_ons(1);
+                    }
+                }
             }
         }
-        int i = 0;
-        for (String product : myMap.keySet()) {
-//            System.out.println(product + ": " + myMap.get(product));
-            if (i == 0) {
-                order_no = product;
-            } else {
-                order_no = order_no + ", " + product;
+
+        for (Srpt_billing_statement.field f : datas_kitchen) {
+            String where = " where product_name='" + f.item_code + "' ";
+            List<Inventory2_stocks_left.to_inventory2_stocks_left> items = Inventory2_stocks_left.ret_data(where);
+            if (!items.isEmpty()) {
+                Inventory2_stocks_left.to_inventory2_stocks_left item = (Inventory2_stocks_left.to_inventory2_stocks_left) items.get(0);
+                String sub_cat_id = item.types_num;
+                for (String s : l_types_no_wo_qty) {
+                    if (sub_cat_id.equalsIgnoreCase(s)) {
+                        f.setIs_add_ons(1);
+                    }
+                }
             }
-            i++;
         }
 
         String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
@@ -710,168 +847,83 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
         String cashier_name = to_users.getUser_screen_name();
         Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
-        rpt_billing_statement.fields.addAll(datas);
+        rpt_billing_statement.fields.addAll(list_orders);
         Srpt_billing_statement rpt_billing_statement_bar = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
         rpt_billing_statement_bar.fields.addAll(datas_bar);
         Srpt_billing_statement rpt_billing_statement_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
         rpt_billing_statement_kitchen.fields.addAll(datas_kitchen);
 
-        jLabel4.setText("" + datas.size());
-
-        init_report_billing_statement(rpt_billing_statement);
-        init_report_billing_stab_bar_and_resto(rpt_billing_statement_bar);
-        init_report_billing_stab_kitchen(rpt_billing_statement_kitchen);
-    }
-
-    private void preview_order() {
-        String order_no = "";
-        List<String> order_nos = new ArrayList();
-        String types_no_wo_qty = System.getProperty("catid_orders_wo_qty", "");
-        String[] l_types_no_wo_qty = types_no_wo_qty.split(",");
-        String min1 = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:00";
-        String max1 = DateType.sf.format(jDateChooser2.getDate()) + " 00:00:00";
-        Date min = new Date();
-        Date max = new Date();
-        try {
-            min = DateType.datetime.parse(min1);
-            max = DateType.datetime.parse(max1);
-        } catch (ParseException ex) {
-            Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-//        System.out.println("min: " + min);
-//        System.out.println("max: " + max);
-        List<Srpt_billing_statement.field> datas = tbl_bank_ALM;
-        List<Srpt_billing_statement.field> datas2 = new ArrayList();
-        List<Srpt_billing_statement.field> datas_bar = new ArrayList();
-        List<Srpt_billing_statement.field> datas_kitchen = new ArrayList();
-        for (Srpt_billing_statement.field order : datas) {
-            if (order.isIs_selected()) {
-                if (order.getCat_id().equals("10") || order.getCat_id().equals("12")) {
-                    Date d = new Date();
-                    Date d2 = new Date();
-                    try {
-                        d = DateType.datetime.parse(order.getDatetime());
-                        String sf = DateType.sf.format(d) + " 00:00:00";
-                        d2 = DateType.datetime.parse(sf);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(Dlg_print_orders_by_date.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-//                System.out.println("date: " + d2 + " | " + (min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())   );
-
-                    boolean m1 = d.compareTo(min) >= 0;
-                    boolean m2 = d.compareTo(max) <= 0;
-
-                    String item_code = order.getItem_code();
-                    String description = order.getDescription();
-                    String assembly = "" + order.getAssembly();
-                    double qty = FitIn.toDouble(order.getQty());
-                    double selling_price = order.getSelling_price() / qty;
-                    double discount = order.getDiscount();
-                    double amount = (qty * selling_price) - discount;
-                    boolean status = (min.getTime() >= d.getTime() && d.getTime() <= max.getTime());
-//                System.out.println("item_code: " + item_code);
-                    if (!jCheckBox1.isSelected()) {
-                        if ((min.getTime() <= d2.getTime() && d2.getTime() <= max.getTime())) {
-
-                            String qty1 = "" + qty;
-
-                            String cat_id = order.getCat_id();
-                            String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
-                            for (String s : l_types_no_wo_qty) {
-                                if (sub_cat_id.equalsIgnoreCase(s)) {
-                                    qty1 = "";
-                                }
-                            }
-//                    System.out.println("sub_cat_id: "+sub_cat_id);
-                            Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.getDatetime(), cat_id, sub_cat_id, true, order.getOrder_no());
-                            datas2.add(field);
-                            order_nos.add(field.getOrder_no());
-                            if (order.getCat_id().equals("12")) {
-                                datas_bar.add(field);
-                            }
-                            if (order.getCat_id().equals("10")) {
-                                datas_kitchen.add(field);
-                            }
-                        }
-                    } else {
-                        String qty1 = "" + qty;
-
-                        String cat_id = order.getCat_id();
-                        String sub_cat_id = Srpt_billing_statement.ret_types_num(item_code);
-                        for (String s : l_types_no_wo_qty) {
-                            if (sub_cat_id.equalsIgnoreCase(s)) {
-                                qty1 = "";
-                            }
-                        }
-//                    System.out.println("sub_cat_id: "+sub_cat_id);
-                        Srpt_billing_statement.field field = new Srpt_billing_statement.field(item_code, description, assembly, qty1, selling_price, discount, amount, order.getDatetime(), cat_id, sub_cat_id, true, order.getOrder_no());
-                        datas2.add(field);
-                        order_nos.add(field.getOrder_no());
-                        if (order.getCat_id().equals("12")) {
-                            datas_bar.add(field);
-                        }
-                        if (order.getCat_id().equals("10")) {
-                            datas_kitchen.add(field);
-                        }
-                    }
-
-                }
-            }
-
-        }
-
-        Map<String, Integer> myMap = new HashMap<String, Integer>();
-
-        for (int i = 0; i < order_nos.size(); i++) {
-            String product = order_nos.get(i);
-
-            if (myMap.containsKey(product)) {
-                myMap.put(product, 0);
-            } else {
-                myMap.put(product, 0);
-            }
-        }
-        int i = 0;
-        for (String product : myMap.keySet()) {
-//            System.out.println(product + ": " + myMap.get(product));
-            if (i == 0) {
-                order_no = product;
-            } else {
-                order_no = order_no + ", " + product;
-            }
-            i++;
-        }
-
-        String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
-        String address = System.getProperty("address", "Dauin, Negros Oriental");
-        String contact_no = System.getProperty("contact_no", "1235566");
-        String date = DateType.datetime2.format(new Date());
-        String room_no = table_names;
-        String print_to = "";
-        String receipt_footer = System.getProperty("receipt_footer", "This is not an Official BIR Receipt");
-        String cashier_name = to_users.getUser_screen_name();
-
-        Srpt_billing_statement rpt_billing_statement = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
-        rpt_billing_statement.fields.addAll(datas2);
-        Srpt_billing_statement rpt_billing_statement_bar = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
-        rpt_billing_statement_bar.fields.addAll(datas_bar);
-        Srpt_billing_statement rpt_billing_statement_kitchen = new Srpt_billing_statement(business_name, address, contact_no, date, room_no, guess_names, print_to, receipt_footer, cashier_name, order_no);
-        rpt_billing_statement_kitchen.fields.addAll(datas_kitchen);
+        jLabel4.setText("" + list_orders.size());
 
         init_report_billing_statement(rpt_billing_statement);
         init_report_billing_stab_bar_and_resto(rpt_billing_statement_bar);
         init_report_billing_stab_kitchen(rpt_billing_statement_kitchen);
         jTabbedPane1.setSelectedIndex(1);
     }
+
     String guess_names = "";
     String table_names = "";
 
-    public void do_pass(List<S2_search.to_items> orders, String table_name, String guess_name) {
+    String table_no_ids = "";
+    String guest_ids = "";
+
+    public void do_pass(List<S2_search.to_items> orders, String table_name, String guess_name, List<Dlg_check_liquid.to_guests> guest) {
+
+        String guest_id = "";
+        String table_no_id = "";
+        int i = 0;
+        for (Dlg_check_liquid.to_guests g : guest) {
+            table_no_id = "" + g.table_id;
+            if (i == 0) {
+                guest_id = "" + g.id;
+            } else {
+                guest_id = guest_id + "," + g.id;
+            }
+            i++;
+        }
+        table_no_ids = table_no_id;
+        guest_ids = guest_id;
+
         my_orders = orders;
         guess_names = guess_name;
         table_names = table_name;
-        set_order();
+//       
+        ret_order_nos();
+    }
+
+    private void ret_order_nos() {
+
+        String where = " where table_no_id='" + table_no_ids + "' and guest_id in (" + guest_ids + ") and status=0 and cat_id in (10,12) group by order_no order by description asc ";
+
+        if (!jCheckBox1.isSelected()) {
+            String date_from = DateType.sf.format(jDateChooser1.getDate());
+            String date_to = DateType.sf.format(jDateChooser2.getDate());
+            where = " where table_no_id='" + table_no_ids + "' and guest_id in (" + guest_ids + ") and status=0 and cat_id in (10,12) "
+                    + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' group by order_no order by description asc ";
+
+        }
+        tbl_bank_ALM.clear();
+
+        List<Ordering.orders> list_of_orders = Ordering.ret_orders(where);
+        loadData_tables2(list_of_orders);
+        compute_total();
+    }
+
+    private void compute_total() {
+        List<Ordering.orders> list_of_orders = tbl_tables2_ALM;
+        jLabel6.setText("" + list_of_orders.size());
+        double amount = 0;
+        double discount = 0;
+        double net_due = 0;
+        for (Ordering.orders order : list_of_orders) {
+            amount += order.amount_due;
+            discount += order.line_discount;
+            net_due += order.net_due;
+
+        }
+        jLabel10.setText(FitIn.fmt_wc_0(amount));
+        jLabel11.setText(FitIn.fmt_wc_0(discount));
+        jLabel8.setText(FitIn.fmt_wc_0(net_due));
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -902,7 +954,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         tbl_bank.setModel(tbl_bank_M);
         tbl_bank.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_bank.setRowHeight(25);
-        int[] tbl_widths_bank = {60, 80, 100, 80, 80, 100, 180, 30};
+        int[] tbl_widths_bank = {40, 50, 100, 60, 50, 60, 0, 0};
         for (int i = 0, n = tbl_widths_bank.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -924,6 +976,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         tc.setHeaderRenderer(new CheckBoxHeader(new MyItemListener()));
     }
 
+    //<editor-fold defaultstate="collapsed" desc=" listener ">
     class MyItemListener implements ItemListener {
 
         @Override
@@ -1026,6 +1079,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         }
     }
 
+    //</editor-fold>
     public static void loadData_bank(List<Srpt_billing_statement.field> acc) {
         tbl_bank_ALM.clear();
         tbl_bank_ALM.addAll(acc);
@@ -1062,7 +1116,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
             Srpt_billing_statement.field tt = (Srpt_billing_statement.field) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + FitIn.fmt_woc(tt.getQty());
+                    return " " + tt.getQty();
                 case 1:
                     return " " + tt.getItem_code();
                 case 2:
@@ -1072,7 +1126,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
                 case 4:
                     return FitIn.fmt_wc_0(tt.getDiscount()) + " ";
                 case 5:
-                    return FitIn.fmt_wc_0(tt.getAmount()) + " ";
+                    return FitIn.fmt_wc_0(tt.getNet_due()) + " ";
                 case 6:
                     return " " + DateType.convert_slash3(tt.getDatetime());
 
@@ -1355,4 +1409,254 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
     }
 //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc=" Table Orders ">
+    //<editor-fold defaultstate="collapsed" desc=" tables2 "> 
+    public static ArrayListModel tbl_tables2_ALM;
+    public static Tbltables2Model tbl_tables2_M;
+
+    public void init_tbl_tables2(JTable tbl_tables2) {
+        tbl_tables2_ALM = new ArrayListModel();
+        tbl_tables2_M = new Tbltables2Model(tbl_tables2_ALM);
+        tbl_tables2.setModel(tbl_tables2_M);
+        tbl_tables2.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_tables2.setRowHeight(25);
+        int[] tbl_widths_tables2 = {100, 60, 150, 80, 50, 80, 60, 80, 30};
+        for (int i = 0, n = tbl_widths_tables2.length; i < n; i++) {
+            if (i == 0) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_tables2, i, tbl_widths_tables2[i]);
+        }
+        Dimension d = tbl_tables2.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_tables2.getTableHeader().setPreferredSize(d);
+        tbl_tables2.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_tables2.setRowHeight(25);
+        tbl_tables2.setFont(new java.awt.Font("Arial", 0, 12));
+        TableWidthUtilities.setColumnRightRenderer(tbl_tables2, 5);
+        TableWidthUtilities.setColumnRightRenderer(tbl_tables2, 6);
+        TableWidthUtilities.setColumnRightRenderer(tbl_tables2, 7);
+
+        TableColumn tc = tbl_tables2.getColumnModel().getColumn(8);
+        tc.setCellEditor(tbl_tables2.getDefaultEditor(Boolean.class));
+        tc.setCellRenderer(tbl_tables2.getDefaultRenderer(Boolean.class));
+        tc.setHeaderRenderer(new CheckBoxHeader2(new MyItemListener2()));
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" checkbox  ">
+    class MyItemListener2 implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            Object source = e.getSource();
+            if (source instanceof AbstractButton == false) {
+                return;
+            }
+            boolean checked = e.getStateChange() == ItemEvent.SELECTED;
+            for (int x = 0, y = tbl_bank.getRowCount(); x < y; x++) {
+                tbl_bank.setValueAt(checked, x, 0);
+            }
+        }
+    }
+
+    class CheckBoxHeader2 extends JCheckBox
+            implements TableCellRenderer, MouseListener {
+
+        protected CheckBoxHeader2 rendererComponent;
+        protected int column;
+        protected boolean mousePressed = false;
+
+        public CheckBoxHeader2(ItemListener itemListener) {
+            rendererComponent = this;
+            rendererComponent.addItemListener(itemListener);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            if (table != null) {
+                JTableHeader header = table.getTableHeader();
+                if (header != null) {
+                    rendererComponent.setForeground(header.getForeground());
+                    rendererComponent.setBackground(new java.awt.Color(230, 230, 230));
+                    rendererComponent.setHorizontalAlignment(Align.CENTER);
+                    rendererComponent.setOpaque(true);
+                    header.addMouseListener(rendererComponent);
+                }
+            }
+            setColumn(column);
+            rendererComponent.setText("");
+            setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+            return rendererComponent;
+        }
+
+        protected void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        protected void handleClickEvent(MouseEvent e) {
+            if (mousePressed) {
+                mousePressed = false;
+                JTableHeader header = (JTableHeader) (e.getSource());
+                JTable tableView = header.getTable();
+                TableColumnModel columnModel = tableView.getColumnModel();
+                int viewColumn = columnModel.getColumnIndexAtX(e.getX());
+                int column1 = tableView.convertColumnIndexToModel(viewColumn);
+                if (viewColumn == this.column && e.getClickCount() == 1 && column1 != -1) {
+                    doClick();
+                }
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            handleClickEvent(e);
+            ((JTableHeader) e.getSource()).repaint();
+            List<Ordering.orders> datas = tbl_tables2_ALM;
+            boolean selected = false;
+            if (this.isSelected()) {
+                selected = true;
+            }
+            for (Ordering.orders to : datas) {
+                to.setIs_selected(selected);
+            }
+
+            e.consume();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            mousePressed = true;
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+    }
+
+    //</editor-fold>
+    public static void loadData_tables2(List<Ordering.orders> acc) {
+        tbl_tables2_ALM.clear();
+        tbl_tables2_ALM.addAll(acc);
+    }
+
+    public static class Tbltables2Model extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Order #", "Table No", "Date", "Added By", "Item/s", "Amount Due", "Discount", "Net Due", ""
+        };
+
+        public Tbltables2Model(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 8) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            Ordering.orders tt = (Ordering.orders) getRow(row);
+            String user = "";
+            for (Users.to_users u : users) {
+                if (u.user_name.equalsIgnoreCase(tt.user_name)) {
+                    user = u.user_code;
+                    break;
+                }
+            }
+            switch (col) {
+                case 0:
+                    return " " + tt.order_no;
+                case 1:
+                    return " " + tt.table_no_id;
+                case 2:
+                    return " " + DateType.convert_slash3(tt.date_added);
+                case 3:
+                    return " " + user;
+                case 4:
+                    return " " + tt.no_of_items;
+                case 5:
+                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
+                case 6:
+                    return FitIn.fmt_wc_0(tt.line_discount) + " ";
+                case 7:
+                    return FitIn.fmt_wc_0(tt.net_due) + " ";
+                default:
+                    return tt.is_selected;
+            }
+        }
+    }
+//</editor-fold> 
+
+    //</editor-fold>
+    private void select_list_order() {
+        int row = tbl_tables2.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        Ordering.orders order = (Ordering.orders) tbl_tables2_ALM.get(row);
+        int col = tbl_tables2.getSelectedColumn();
+        if (col == 8) {
+            if (order.is_selected) {
+                order.setIs_selected(false);
+            } else {
+                order.setIs_selected(true);
+            }
+            tbl_tables2_M.fireTableDataChanged();
+            get_items();
+        }
+    }
+
+    private void get_items() {
+        List<Ordering.orders> orders = tbl_tables2_ALM;
+        String guest_id = "";
+        String order_no = "";
+        int i = 0;
+        for (Ordering.orders o : orders) {
+            if (o.is_selected) {
+                if (i == 0) {
+
+                    order_no = o.order_no;
+                } else {
+                    order_no = order_no + "," + o.order_no;
+                }
+                i++;
+            }
+        }
+        if (order_no.isEmpty()) {
+            tbl_bank_ALM.clear();
+            jLabel4.setText("0");
+        } else {
+            String where = " where order_no in (" + order_no + ")  and guest_id in (" + guest_ids + ") ";
+            List<Srpt_billing_statement.field> list = Ordering.ret_data(where);
+            loadData_bank(list);
+            jLabel4.setText("" + list.size());
+        }
+
+    }
 }

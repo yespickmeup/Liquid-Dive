@@ -1496,10 +1496,10 @@ public class S2_search {
         try {
             Connection conn = MyConnection1.connect();
             String s0 = "select "
-                    + "product_name"
+                    + " product_name"
                     + ",description"
-                    + ",(price)"
-                    + ",(qty)"
+                    + ",price"
+                    + ",sum(qty)"
                     + ",img_path "
                     + ",guest_id "
                     + ",cat_id "
@@ -1507,7 +1507,7 @@ public class S2_search {
                     + ",status "
                     + ",disc_name "
                     + ",disc_rate "
-                    + ",(discount)"
+                    + ",discount"
                     + ",customer_name "
                     + ",customer_id"
                     + ",customer_address "
@@ -1522,9 +1522,10 @@ public class S2_search {
                     + ",sub_category_name "
                     + ",sub_category_id "
                     + ",order_no"
+                    + ",id"
                     + " from " + MyDB.getNames() + ".customer_tables_details "
-                    + " " + where + " ";
-
+                    + " " + where + "  group by product_name,price,discount "; //
+            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             String saved_name = "";
@@ -1543,6 +1544,7 @@ public class S2_search {
                 String disc_name = rs.getString(10);
                 double disc_rate = rs.getDouble(11);
                 double discount = rs.getDouble(12);
+
                 String customer_name = rs.getString(13);
                 String customer_id = rs.getString(14);
                 String customer_address = rs.getString(15);
@@ -1558,6 +1560,8 @@ public class S2_search {
                 String sub_category_name = rs.getString(24);
                 String sub_category_id = rs.getString(25);
                 String order_no = rs.getString(26);
+                int id = rs.getInt(27);
+//                System.out.println("id: " + id + " names: " + names + " Discount: " + discount+" qty: "+qty);
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
                 }
@@ -1578,7 +1582,7 @@ public class S2_search {
                 if (cat_id.equals(accomodation_id)) {
                     price = (price * nights);
                 }
-                price = ((qty * price) - discount);
+//                price = ((qty * price) - discount);
                 if (discount != 0) {
                     desc = desc + "             @ " + FitIn.fmt_wc_0(disc_rate * 100) + "% DISCOUNT";
                 }
@@ -1599,7 +1603,7 @@ public class S2_search {
             }
 
             return holder;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

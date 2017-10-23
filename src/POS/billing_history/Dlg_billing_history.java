@@ -735,7 +735,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
             }
 
             if (t1.cat_id.equals("10")) {
-                Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTO", date, t1.price, t1.qty);
+                Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTO", date, t1.price, t1.qty,0);
                 regroup.add(tbar);
 
                 String s = DateType.sf.format(date) + " 00:00:00";
@@ -747,7 +747,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                             log(Level.SEVERE, null, ex);
                 }
 
-                Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.description, d1, t1.price, t1.qty);
+                Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.description, d1, t1.price, t1.qty,0);
                 resto_items.add(tbar2);
                 if (r_f == 0) {
                     resto_f_date = DateType.sf.format(date);
@@ -756,7 +756,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 bar_resto += t1.price;
                 r_f++;
             } else if (t1.cat_id.equals("12")) {
-                Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty);
+                Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty,0);
                 regroup3.add(tbar);
 //                System.out.println(tbar);
                 String s = DateType.sf.format(date) + " 00:00:00";
@@ -767,7 +767,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                     Logger.getLogger(Dlg_billing_history.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
-                Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.description, d1, t1.price, t1.qty);
+                Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.description, d1, t1.price, t1.qty,0);
                 bar_items.add(tbar2);
                 if (r_b == 0) {
                     bar_f_date = DateType.sf.format(date);
@@ -816,7 +816,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                         getDesc().
                         toUpperCase(), ss.getDate_added(), ss.getTotal(), ss.
-                        getQty());
+                        getQty(),0);
                 regroup2.add(tbar);
             }
             my_data = DateType.sf.format(ss.getDate_added());
@@ -842,7 +842,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
             }
             Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                     getDesc().
-                    toUpperCase(), ss2.getDate_added(), am, ss2.getQty());
+                    toUpperCase(), ss2.getDate_added(), am, ss2.getQty(),0);
             rpt_bar_and_resto.add(tbar);
             System.out.println(am + " 1");
         }
@@ -855,7 +855,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                         getDesc().
                         toUpperCase(), ss.getDate_added(), ss.getTotal(), ss.
-                        getQty());
+                        getQty(),0);
                 regroup33.add(tbar);
 
             }
@@ -875,7 +875,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
 
             Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                     getDesc().
-                    toUpperCase(), ss2.getDate_added(), am, ss2.getQty());
+                    toUpperCase(), ss2.getDate_added(), am, ss2.getQty(),0);
             System.out.println(am + " 33");
             rpt_bar.add(tbar);
         }

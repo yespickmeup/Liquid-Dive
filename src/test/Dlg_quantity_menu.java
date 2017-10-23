@@ -476,13 +476,13 @@ public class Dlg_quantity_menu extends javax.swing.JDialog {
 
         tbl_items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbl_items.setFocusable(false);
@@ -816,8 +816,8 @@ public class Dlg_quantity_menu extends javax.swing.JDialog {
         if (row <= 0) {
             return;
         }
-        System.out.println(cb_type.getSelectedItem().
-                toString());
+//        System.out.println(cb_type.getSelectedItem().
+//                toString());
         String rate = S2_get_discounts.get_discounts_rate(cb_type.
                 getSelectedItem().
                 toString());

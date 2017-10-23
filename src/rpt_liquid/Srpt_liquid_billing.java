@@ -263,7 +263,7 @@ public class Srpt_liquid_billing {
         double dollar = to_pay / dollar_rate;
         List<Srpt_bar_and_resto.field> rpt_bar_and_resto = new ArrayList();
         for (int i = 0; i < 3; i++) {
-            Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("desc" + i, new Date(), i + 100, 0);
+            Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("desc" + i, new Date(), i + 100, 0,0);
             rpt_bar_and_resto.add(tbar);
         }
 
