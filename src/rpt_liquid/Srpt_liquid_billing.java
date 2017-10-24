@@ -273,7 +273,7 @@ public class Srpt_liquid_billing {
             if (i == 5) {
                 h++;
             }
-            Srpt_others.field tbar = new Srpt_others.field("category" + h, "desc", i, 100 + i);
+            Srpt_others.field tbar = new Srpt_others.field("category" + h, "desc", i, 100 + i,0);
             rpt_others.add(tbar);
 
         }
@@ -285,7 +285,7 @@ public class Srpt_liquid_billing {
             double price = 100 + i;
             double amount = 200 + i;
             String date_stayed = "(January 1, 2013 - January 5, 2012)";
-            Srpt_accomodation.field tbar = new Srpt_accomodation.field(qty, nights, description, price, amount, date_stayed, "");
+            Srpt_accomodation.field tbar = new Srpt_accomodation.field(qty, nights, description, price, amount, date_stayed, "",0);
             accom.add(tbar);
         }
         List<Srpt_history_advance_payments.field> advances = new ArrayList();

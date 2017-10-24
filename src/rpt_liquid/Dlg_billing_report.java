@@ -605,18 +605,19 @@ public class Dlg_billing_report extends javax.swing.JDialog {
         double discount = 0;
         List<S1_category_discounts.to_category_discounts> category_discounts = tbl_category_discounts_ALM;
         List<Srpt_category_discounts.field> cdd = new ArrayList();
-
+       
         if (!category_discounts.isEmpty()) {
             for (S1_category_discounts.to_category_discounts cd : category_discounts) {
-                if (cd.discount_amount != 0) {
+//                if (cd.discount_amount != 0) {
+                    double am=FitIn.toDouble(df.format(cd.due));
                     String category = cd.category_name;
-                    double due = cd.due;
+                    double due = am;
                     double disc_percent = cd.discount_percent;
                     double disc_amount = cd.discount_amount;
-                    double sub_total = cd.due - cd.discount_amount;
+                    double sub_total = am - cd.discount_amount;
                     Srpt_category_discounts.field tbar = new Srpt_category_discounts.field(category, due, disc_percent, disc_amount, sub_total);
                     cdd.add(tbar);
-                }
+//                }
             }
         }
         if (j == 1) {
@@ -989,13 +990,14 @@ public class Dlg_billing_report extends javax.swing.JDialog {
         @Override
         public Object getValueAt(int row, int col) {
             to_category_discounts tt = (to_category_discounts) getRow(row);
+            DecimalFormat df=new DecimalFormat("#,###");
             switch (col) {
                 case 0:
                     return " " + FitIn.fmt_woc(tt.item_count);
                 case 1:
                     return " " + tt.category_name;
                 case 2:
-                    return FitIn.fmt_wc_0(tt.due) + " ";
+                    return df.format(tt.due) + ".00 ";
                 case 3:
                     return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 4:

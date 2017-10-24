@@ -1525,7 +1525,7 @@ public class S2_search {
                     + ",id"
                     + " from " + MyDB.getNames() + ".customer_tables_details "
                     + " " + where + "  group by product_name,price,discount order by date_added asc "; //
-            System.out.println(s0);
+//            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             String saved_name = "";
@@ -1653,6 +1653,7 @@ public class S2_search {
                     + ",order_no"
                     + " from " + MyDB.getNames() + ".customer_tables_details "
                     + " " + where_guest_11 + " group by guest_id,description";
+          
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             String saved_name = "";
@@ -1660,6 +1661,7 @@ public class S2_search {
             while (rs.next()) {
                 String names = rs.getString(1);
                 String desc = rs.getString(2);
+               
                 double price = rs.getDouble(3);
                 double qty = rs.getDouble(4);
                 String img_path = rs.getString(5);

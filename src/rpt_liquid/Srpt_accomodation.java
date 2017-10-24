@@ -35,8 +35,8 @@ public class Srpt_accomodation {
         double amount;
         String date_stayed;
         String accomodation;
-        
-        public field(double qty, int nights, String description, double price, double amount, String date_stayed,String accomodation) {
+        double discount;
+        public field(double qty, int nights, String description, double price, double amount, String date_stayed,String accomodation,double discount) {
             this.qty = qty;
             this.nights = nights;
             this.description = description;
@@ -44,8 +44,17 @@ public class Srpt_accomodation {
             this.amount = amount;
             this.date_stayed = date_stayed;
             this.accomodation=accomodation;
+            this.discount=discount;
         }
 
+        public double getDiscount() {
+            return discount;
+        }
+
+        public void setDiscount(double discount) {
+            this.discount = discount;
+        }
+        
         public field() {
         }
 
@@ -129,7 +138,7 @@ public class Srpt_accomodation {
             double price = 100 + i;
             double amount = 200 + i;
             String date_stayed = "(January 1, 2013 - January 5, 2012)";
-            Srpt_accomodation.field tbar = new field(qty, nights, description, price, amount, date_stayed,"");
+            Srpt_accomodation.field tbar = new field(qty, nights, description, price, amount, date_stayed,"",0);
             fields.add(tbar);
         }
 

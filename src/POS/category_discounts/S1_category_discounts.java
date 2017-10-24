@@ -313,6 +313,7 @@ public class S1_category_discounts {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
+//            System.out.println(s0);
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String guest_ids = rs.getString(2);

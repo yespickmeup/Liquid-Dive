@@ -32,17 +32,26 @@ public class Srpt_others {
         String desc;
         double qty;
         double price;
-
+        double discount;
         public field() {
         }
 
-        public field(String category, String desc, double qty, double price) {
+        public field(String category, String desc, double qty, double price,double discount) {
             this.category = category;
             this.desc = desc;
             this.qty = qty;
             this.price = price;
+            this.discount=discount;
         }
 
+        public double getDiscount() {
+            return discount;
+        }
+
+        public void setDiscount(double discount) {
+            this.discount = discount;
+        }
+        
         public String getCategory() {
             return category;
         }
@@ -92,7 +101,7 @@ public class Srpt_others {
 
         List<Srpt_others.field> fields = new ArrayList();
         for (int i = 0; i < 20; i++) {
-            Srpt_others.field tbar = new Srpt_others.field("category" + i, "desc", i, 100 + i);
+            Srpt_others.field tbar = new Srpt_others.field("category" + i, "desc", i, 100 + i,0);
             fields.add(tbar);
         }
 

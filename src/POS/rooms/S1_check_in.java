@@ -414,7 +414,7 @@ public class S1_check_in {
 //                System.out.println(guest.id + " : " + guest.name + " guessssstt");
                 String id = "";
                 for (S2_search.to_orders t : to) {
-                    
+
                     double qty = 0;
                     double discounts = 0;
                     String s2 = "";
@@ -437,8 +437,8 @@ public class S1_check_in {
                     }
 
                     //<editor-fold defaultstate="collapsed" desc=" Insert Goes here ">
-                    double disc_rate = t.disc_rate/100;
-                    double  discount = t.discount;
+                    double disc_rate = t.disc_rate / 100;
+                    double discount = t.discount;
                     int count = 0;
 
 //                    if (guest.staff == 1 && t.cat_id.equals("10") || guest.staff == 1 && t.cat_id.
@@ -462,10 +462,12 @@ public class S1_check_in {
 //                                JOptionPane.showMessageDialog(null, t.name + " "+price+ " "+t.qty);
                         }
                         price = price / guest_no;
+//                        discount = discount / guest_no;
                     } else {
                         guest_no = my_guest.size();
 
                         price = t.price / guest_no;
+//                        discount = discount / guest_no;
                     }
 
                     String s0 = "insert into " + MyDB.getNames() + ".customer_tables_details(table_no_id,qty,product_name,description,price"
@@ -600,7 +602,7 @@ public class S1_check_in {
                 }
             }
             return order_no;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             MyConnection1.close();
             throw new RuntimeException(e);
         } finally {
