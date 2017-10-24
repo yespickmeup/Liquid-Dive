@@ -134,11 +134,11 @@
             </textField>
             <textField>
                 <reportElement uuid="0a4863e2-6fa9-4370-95cd-62f8130567c3" x="119" y="89" width="383" height="20"/>
-                <box leftPadding="10">
-                    <topPen lineWidth="1.0"/>
-                    <leftPen lineWidth="1.0"/>
-                    <bottomPen lineWidth="1.0"/>
-                    <rightPen lineWidth="1.0"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <font size="14"/>
@@ -149,9 +149,9 @@
             <staticText>
                 <reportElement uuid="01e05919-e5a9-41ef-91c2-8151e4c0aa42" x="71" y="89" width="48" height="20"/>
                 <box>
-                    <topPen lineWidth="1.0"/>
-                    <leftPen lineWidth="1.0"/>
-                    <bottomPen lineWidth="1.0"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
                 </box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font size="14"/>

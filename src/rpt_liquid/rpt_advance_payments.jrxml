@@ -1,255 +1,255 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="410fe437-12a4-4347-bb5e-15afa1fd29e0">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<field name="date_added" class="java.lang.String"/>
-	<field name="php_cash" class="java.lang.Double"/>
-	<field name="php_bank" class="java.lang.Double"/>
-	<field name="usd_cash" class="java.lang.Double"/>
-	<field name="usd_bank" class="java.lang.Double"/>
-	<field name="bank" class="java.lang.String"/>
-	<field name="approval_code" class="java.lang.String"/>
-	<field name="credit_card" class="java.lang.Double"/>
-	<field name="guest" class="java.lang.String"/>
-	<variable name="php_cash_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{php_cash}]]></variableExpression>
-	</variable>
-	<variable name="php_bank_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{php_bank}]]></variableExpression>
-	</variable>
-	<variable name="usd_cash_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{usd_cash}]]></variableExpression>
-	</variable>
-	<variable name="usd_bank_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{usd_bank}]]></variableExpression>
-	</variable>
-	<variable name="credit_card_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{credit_card}]]></variableExpression>
-	</variable>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="52" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="45658a69-cdb2-4bb8-8d3b-a491eb6d0dcb" x="-20" y="0" width="516" height="20"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ADVANCE PAYMENTS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="156" y="32" width="68" height="20"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Php-Cash]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="224" y="32" width="68" height="20"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Php-Bank]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="292" y="32" width="68" height="20"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[USD-Cash]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="-20" y="32" width="89" height="20"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[DATE ADDED]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="360" y="32" width="68" height="20"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[USD-Bank]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="428" y="32" width="68" height="20"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[CREDIT CARD]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="68" y="32" width="89" height="20"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[GUEST]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="20" splitType="Stretch">
-			<textField pattern="EEE, MMM d, &apos;&apos;yy">
-				<reportElement uuid="5ea1ad54-fb2e-4449-a5cd-2dcbd5eb6b63" x="-20" y="0" width="89" height="20"/>
-				<box>
-					<bottomPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{date_added}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement uuid="0a00df92-b391-4253-b38a-dda73c4f19a2" x="156" y="0" width="68" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{php_cash}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="114d07b8-b8a5-4eda-9d83-61abfa48a926" mode="Transparent" x="292" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usd_cash}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="ec3a3509-cc57-40c6-abcf-3f8240888f48" mode="Transparent" x="360" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usd_bank}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="55f7442c-fdf9-4994-bcff-2a9520a3ebca" mode="Transparent" x="428" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{credit_card}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="358dbdab-2dd4-44fe-b98a-9dcc31bbbc3f" mode="Transparent" x="69" y="0" width="87" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{guest}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="91310941-9023-45f0-af42-a1496b13cc4d" mode="Transparent" x="224" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{php_bank}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="48" splitType="Stretch">
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="185102fa-c90c-44bd-856c-0e461cc7367f" mode="Transparent" x="156" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{php_cash_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="b5279ff4-4ad0-44ab-ab8d-f972e4733ca3" mode="Transparent" x="224" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{php_bank_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="48ebce4a-4852-42bc-a667-a8ce6db6d452" mode="Transparent" x="292" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{usd_cash_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="db75daf1-e480-429a-ac83-3087e9f4b946" mode="Transparent" x="360" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{usd_bank_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="139b8a09-6796-42b7-9e9f-f3c914936810" mode="Transparent" x="428" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{credit_card_1}]]></textFieldExpression>
-			</textField>
-		</band>
-	</summary>
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <field name="date_added" class="java.lang.String"/>
+    <field name="php_cash" class="java.lang.Double"/>
+    <field name="php_bank" class="java.lang.Double"/>
+    <field name="usd_cash" class="java.lang.Double"/>
+    <field name="usd_bank" class="java.lang.Double"/>
+    <field name="bank" class="java.lang.String"/>
+    <field name="approval_code" class="java.lang.String"/>
+    <field name="credit_card" class="java.lang.Double"/>
+    <field name="guest" class="java.lang.String"/>
+    <variable name="php_cash_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{php_cash}]]></variableExpression>
+    </variable>
+    <variable name="php_bank_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{php_bank}]]></variableExpression>
+    </variable>
+    <variable name="usd_cash_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{usd_cash}]]></variableExpression>
+    </variable>
+    <variable name="usd_bank_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{usd_bank}]]></variableExpression>
+    </variable>
+    <variable name="credit_card_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{credit_card}]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="52" splitType="Stretch">
+            <staticText>
+                <reportElement uuid="45658a69-cdb2-4bb8-8d3b-a491eb6d0dcb" x="-20" y="0" width="516" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ADVANCE PAYMENTS]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="156" y="32" width="68" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Php-Cash]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="224" y="32" width="68" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Php-Bank]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="292" y="32" width="68" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[USD-Cash]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="-20" y="32" width="89" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[DATE ADDED]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="360" y="32" width="68" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[USD-Bank]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="428" y="32" width="68" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[CREDIT CARD]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="bac667f5-86d6-471f-8d4c-1cd844e87ccf" x="68" y="32" width="89" height="20"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[GUEST]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField pattern="EEE, MMM d, &apos;&apos;yy">
+                <reportElement uuid="5ea1ad54-fb2e-4449-a5cd-2dcbd5eb6b63" x="-20" y="0" width="89" height="20"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{date_added}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement uuid="0a00df92-b391-4253-b38a-dda73c4f19a2" x="156" y="0" width="68" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{php_cash}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="114d07b8-b8a5-4eda-9d83-61abfa48a926" mode="Transparent" x="292" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{usd_cash}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="ec3a3509-cc57-40c6-abcf-3f8240888f48" mode="Transparent" x="360" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{usd_bank}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="55f7442c-fdf9-4994-bcff-2a9520a3ebca" mode="Transparent" x="428" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{credit_card}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="358dbdab-2dd4-44fe-b98a-9dcc31bbbc3f" mode="Transparent" x="69" y="0" width="87" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{guest}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="91310941-9023-45f0-af42-a1496b13cc4d" mode="Transparent" x="224" y="0" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{php_bank}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="48" splitType="Stretch">
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="185102fa-c90c-44bd-856c-0e461cc7367f" mode="Transparent" x="156" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{php_cash_1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="b5279ff4-4ad0-44ab-ab8d-f972e4733ca3" mode="Transparent" x="224" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{php_bank_1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="48ebce4a-4852-42bc-a667-a8ce6db6d452" mode="Transparent" x="292" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{usd_cash_1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="db75daf1-e480-429a-ac83-3087e9f4b946" mode="Transparent" x="360" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{usd_bank_1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement uuid="139b8a09-6796-42b7-9e9f-f3c914936810" mode="Transparent" x="428" y="10" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+                    <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{credit_card_1}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
 </jasperReport>

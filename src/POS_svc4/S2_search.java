@@ -1524,7 +1524,7 @@ public class S2_search {
                     + ",order_no"
                     + ",id"
                     + " from " + MyDB.getNames() + ".customer_tables_details "
-                    + " " + where + "  group by product_name,price,discount "; //
+                    + " " + where + "  group by product_name,price,discount order by date_added asc "; //
             System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);

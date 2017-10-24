@@ -9,6 +9,7 @@ import POS.utl.MyConnection1;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -202,7 +203,7 @@ public class S1_category_discounts {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
-                int id = rs.getInt(1);;
+                int id = rs.getInt(1);
                 String guest_ids = rs.getString(2);
                 String guest_names = rs.getString(3);
                 String room_guest_ids = rs.getString(4);
@@ -221,7 +222,7 @@ public class S1_category_discounts {
                 to1 = new to_category_discounts(id, guest_ids, guest_names, room_guest_ids, table_id, date_added, user_name, status, due, discount_percent, discount_amount, category_name, category_id, item_count, discount);
             }
             return to1;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

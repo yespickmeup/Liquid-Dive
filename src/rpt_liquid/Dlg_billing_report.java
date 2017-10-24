@@ -55,7 +55,6 @@ public class Dlg_billing_report extends javax.swing.JDialog {
     public void setCallback(Callback callback) {
         this.callback = callback;
 
-
     }
 
     public static interface Callback {
@@ -181,7 +180,6 @@ public class Dlg_billing_report extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-
         Dlg_billing_report dialog = Dlg_billing_report.create(new javax.swing.JFrame(), true);
 //        dialog.setVisible(true);
 
@@ -207,7 +205,6 @@ public class Dlg_billing_report extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
 
     }
 
@@ -605,7 +602,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
                 toString());
         lb_rate.setText(rate);
 
-         double discount = 0;
+        double discount = 0;
         List<S1_category_discounts.to_category_discounts> category_discounts = tbl_category_discounts_ALM;
         List<Srpt_category_discounts.field> cdd = new ArrayList();
 
@@ -626,36 +623,48 @@ public class Dlg_billing_report extends javax.swing.JDialog {
             String img_path = System.getProperty("img_path", "C:\\Users\\i1\\");
             String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\i1\\") + "img_templates\\rpt\\";
             discount = FitIn.toDouble(lbl_discount.getText());
-            double to_pay = to2.to_pay - discount;
+//            double to_pay = to2.to_pay - discount;
+            double to_pay = FitIn.toDouble(FitIn.fmt_woc(lbl_total.getText()));
             double dollar = to_pay / to2.dollar_rate;
             String l = "";
-            double dollar_to_pay=to_pay/to2.dollar_rate;
-            String s=df.format(dollar_to_pay);
-            dollar_to_pay=FitIn.toDouble(s)      ;  
-            Srpt_liquid_billing to3 = new Srpt_liquid_billing("", 0, "", "", new ArrayList(), new ArrayList()
-                    , new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList(), "", "", "", "", "", "", 0, ""
-                    , 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,new ArrayList());
+            double dollar_to_pay = to_pay / to2.dollar_rate;
+            String s = df.format(dollar_to_pay);
+            dollar_to_pay = FitIn.toDouble(s);
+            double total_charges = 0;
+            List<to_category_discounts> datas = tbl_category_discounts_ALM;
+            for (to_category_discounts ch : datas) {
+               
+                if (!ch.category_id.equals("11")) {
+                   
+                    total_charges += ch.due;
+                }
+
+            }
+
+            Srpt_liquid_billing to3 = new Srpt_liquid_billing("", 0, "", "", new ArrayList(), new ArrayList(),
+                    new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList(), "", "", "", "", "", "", 0, "",
+                    0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList());
             if (cb_orders.isSelected()) {
-                Srpt_liquid_billing to1 = new Srpt_liquid_billing(to2.busi_name, to2.room_rate
-                        , to2.accomodation, SUBREPORT_DIR, resto_items, bar_items, to2.rpt_others
-                        , to2.rpt_accomodation, advances, cdd, to2.my_date, to2.guest_id, to2.table_no
-                        , to2.check_in, to2.transfers, to2.accomodation_1, to2.accom_total, img_path, to_pay
-                        , to2.guest_name, dollar, to2.total_charges, discount, to2.dollar_rate
-                        , to2.advance_payment, to2.advance_payment_usd, 0, 0, 0, to2.bank_php
-                        , to2.bank_usd, to2.credit_card,dollar_to_pay,new ArrayList());
+                Srpt_liquid_billing to1 = new Srpt_liquid_billing(to2.busi_name, to2.room_rate,
+                        to2.accomodation, SUBREPORT_DIR, resto_items, bar_items, to2.rpt_others,
+                        to2.rpt_accomodation, advances, cdd, to2.my_date, to2.guest_id, to2.table_no,
+                        to2.check_in, to2.transfers, to2.accomodation_1, to2.accom_total, img_path, to_pay,
+                        to2.guest_name, dollar, total_charges, discount, to2.dollar_rate,
+                        to2.advance_payment, to2.advance_payment_usd, 0, 0, 0, to2.bank_php,
+                        to2.bank_usd, to2.credit_card, dollar_to_pay, new ArrayList());
 //              
                 to3 = to1;
                 report_get_viewer_session(to1, "rpt_billing_liquid_items.jrxml");
                 l = "rpt_billing_liquid_items.jrxml";
             } else {
-                
-                Srpt_liquid_billing to1 = new Srpt_liquid_billing(to2.busi_name, to2.room_rate
-                        , to2.accomodation, SUBREPORT_DIR, to2.rpt_bar_and_resto, to2.rpt_bar
-                        , to2.rpt_others, to2.rpt_accomodation, advances, cdd, to2.my_date, to2.guest_id, to2.table_no, to2.check_in, to2.transfers, to2.accomodation_1
-                        , to2.accom_total, img_path, to_pay, to2.guest_name
-                        , dollar, to2.total_charges, discount, to2.dollar_rate
-                        , to2.advance_payment, to2.advance_payment_usd, 0, 0, 0
-                        , to2.bank_php, to2.bank_usd, to2.credit_card,dollar_to_pay,new ArrayList());
+
+                Srpt_liquid_billing to1 = new Srpt_liquid_billing(to2.busi_name, to2.room_rate,
+                        to2.accomodation, SUBREPORT_DIR, to2.rpt_bar_and_resto, to2.rpt_bar,
+                        to2.rpt_others, to2.rpt_accomodation, advances, cdd, to2.my_date, to2.guest_id, to2.table_no, to2.check_in, to2.transfers, to2.accomodation_1,
+                        to2.accom_total, img_path, to_pay, to2.guest_name,
+                        dollar, total_charges, discount, to2.dollar_rate,
+                        to2.advance_payment, to2.advance_payment_usd, 0, 0, 0,
+                        to2.bank_php, to2.bank_usd, to2.credit_card, dollar_to_pay, new ArrayList());
 //              
                 to3 = to1;
                 report_get_viewer_session(to1, "rpt_billing_liquid.jrxml");
@@ -676,23 +685,24 @@ public class Dlg_billing_report extends javax.swing.JDialog {
         }
     }
     int j = 0;
-    Srpt_liquid_billing to2 = new Srpt_liquid_billing("", 0, "", "", new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList()
-            , new ArrayList(), new ArrayList(), "", "", "", "", "", "", 0, "", 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,new ArrayList());
+    Srpt_liquid_billing to2 = new Srpt_liquid_billing("", 0, "", "", new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList(),
+            new ArrayList(), new ArrayList(), "", "", "", "", "", "", 0, "", 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList());
     List<Srpt_bar_and_resto.field> bar_items = new ArrayList();
     List<Srpt_bar_and_resto.field> resto_items = new ArrayList();
     List<Srpt_history_advance_payments.field> advances = new ArrayList();
     List<Dlg_check_liquid.to_guests> my_guest = new ArrayList();
     String guest_ids = "";
     String guest_names = "";
-    DecimalFormat df=new DecimalFormat("#,###");
-    public void do_pass(Srpt_liquid_billing to, String jrxml_name
-            , String table_id
-            , List<Srpt_bar_and_resto.field> resto_items1
-            , List<Srpt_bar_and_resto.field> bar_items1
-            , String guest_name, String guest_id
-            , List<Srpt_history_advance_payments.field> advances1
-            , List<Srpt_accomodation.field> accom
-            , List<Srpt_others.field> rpt_others, List<S1_categories.to_name_cat> categories, List<Dlg_check_liquid.to_guests> guest) {
+    DecimalFormat df = new DecimalFormat("#,###");
+
+    public void do_pass(Srpt_liquid_billing to, String jrxml_name,
+            String table_id,
+            List<Srpt_bar_and_resto.field> resto_items1,
+            List<Srpt_bar_and_resto.field> bar_items1,
+            String guest_name, String guest_id,
+            List<Srpt_history_advance_payments.field> advances1,
+            List<Srpt_accomodation.field> accom,
+            List<Srpt_others.field> rpt_others, List<S1_categories.to_name_cat> categories, List<Dlg_check_liquid.to_guests> guest) {
         j = 1;
         resto_items = resto_items1;
         bar_items = bar_items1;
@@ -704,7 +714,6 @@ public class Dlg_billing_report extends javax.swing.JDialog {
         cb_discount.setSelectedItem(disc.discount);
         lb_rate.setText(FitIn.fmt_wc_0(disc.rate));
         to2 = to;
-        
 
         List<to_category_discounts> datas = new ArrayList();
 
@@ -726,9 +735,10 @@ public class Dlg_billing_report extends javax.swing.JDialog {
 
         for (Srpt_bar_and_resto.field resto : resto_items) {
             item_count_resto += resto.qty;
-            due_resto +=  resto.total ;
-           
+            due_resto += resto.total;
+//            System.out.println("Due Resto: "+resto.total+ " Date: "+resto.date_added);
         }
+
         double due_accom = 0;
         double discount_percent_accom = 0;
         double discount_amount_accom = 0;
@@ -741,14 +751,13 @@ public class Dlg_billing_report extends javax.swing.JDialog {
             due_accom += accomo.amount;
         }
         to_category_discounts cd_accom = new to_category_discounts(id, guest_ids, guest_names, room_guest_ids, table_id, date_added, user_name, status, due_accom, discount_percent_accom, discount_amount_accom, category_name_accom, category_id_accom, item_count_accom, discount_accom);
-        if(item_count_accom!=0){
-             datas.add(cd_accom);
+        if (item_count_accom != 0) {
+            datas.add(cd_accom);
         }
-       
-        to_category_discounts cd_resto = new to_category_discounts(id, guest_ids, guest_names, room_guest_ids, table_id, date_added, user_name
-                , status, due_resto, discount_percent_resto, discount_amount_resto, category_name_resto, category_id_resto, item_count_resto, discount_resto);
-        datas.add(cd_resto);
 
+        to_category_discounts cd_resto = new to_category_discounts(id, guest_ids, guest_names, room_guest_ids, table_id, date_added, user_name,
+                status, due_resto, discount_percent_resto, discount_amount_resto, category_name_resto, category_id_resto, item_count_resto, discount_resto);
+        datas.add(cd_resto);
 
         double due_bar = 0;
         double discount_percent_bar = 0;
@@ -760,7 +769,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
         for (Srpt_bar_and_resto.field bar : bar_items) {
             item_count_bar += bar.qty;
             due_bar += bar.total;
-
+//            System.out.println("Due bar: "+bar.total+ " Date: "+bar.date_added);
         }
         to_category_discounts cd_bar = new to_category_discounts(id, guest_ids, guest_names, room_guest_ids, table_id, date_added, user_name, status, due_bar, discount_percent_bar, discount_amount_bar, category_name_bar, category_id_bar, item_count_bar, discount_bar);
         datas.add(cd_bar);
@@ -781,8 +790,8 @@ public class Dlg_billing_report extends javax.swing.JDialog {
                         due_others += oth.price;
                     }
                 }
-                to_category_discounts cd_others = new to_category_discounts(id, guest_ids1
-                        , guest_names, room_guest_ids, table_id, date_added, user_name, status, due_others, discount_percent_others, discount_amount_others, category_name_others, category_id_others, item_count_others, discount_others);
+                to_category_discounts cd_others = new to_category_discounts(id, guest_ids1,
+                        guest_names, room_guest_ids, table_id, date_added, user_name, status, due_others, discount_percent_others, discount_amount_others, category_name_others, category_id_others, item_count_others, discount_others);
                 if (item_count_others != 0) {
                     datas.add(cd_others);
                 }
@@ -790,9 +799,9 @@ public class Dlg_billing_report extends javax.swing.JDialog {
 
         }
         int i = 0;
-        my_guest_room_ids="";
-        my_guest_ids="";
-        my_guest_names="";
+        my_guest_room_ids = "";
+        my_guest_ids = "";
+        my_guest_names = "";
         for (Dlg_check_liquid.to_guests g : my_guest) {
             if (i == 0) {
                 my_guest_room_ids = my_guest_room_ids + g.room_guest_ids;
@@ -982,13 +991,13 @@ public class Dlg_billing_report extends javax.swing.JDialog {
             to_category_discounts tt = (to_category_discounts) getRow(row);
             switch (col) {
                 case 0:
-                    return FitIn.fmt_woc(tt.item_count);
+                    return " " + FitIn.fmt_woc(tt.item_count);
                 case 1:
-                    return tt.category_name;
+                    return " " + tt.category_name;
                 case 2:
-                    return FitIn.fmt_wc_0(tt.due);
+                    return FitIn.fmt_wc_0(tt.due) + " ";
                 case 3:
-                    return FitIn.fmt_wc_0(tt.discount_amount);
+                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 4:
                     return tt.table_id;
                 case 5:
@@ -1060,7 +1069,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
                     Alert.set(2, "");
                 }
                 reload_discounts();
-                 get_rate();
+                get_rate();
             }
         });
         nd.setLocationRelativeTo(jScrollPane1);
@@ -1073,11 +1082,9 @@ public class Dlg_billing_report extends javax.swing.JDialog {
         for (to_category_discounts to : datas) {
             to_category_discounts get = S1_category_discounts.ret_data(my_guest_room_ids, to.category_name);
             if (get != null) {
-                to_category_discounts to_new = new to_category_discounts(get.id, get.guest_ids, get.guest_names, get.room_guest_ids, get.table_id
-                        , get.date_added, get.user_name, get.status, to.due, get.discount_percent, get.discount_amount, get.category_name
-                        , get.category_id, get.item_count, get.discount);
-//                System.out.println(get.room_guest_ids + " " + get.category_name.
-//                        toUpperCase() + " Guest");
+                to_category_discounts to_new = new to_category_discounts(get.id, get.guest_ids, get.guest_names, get.room_guest_ids, get.table_id,
+                        get.date_added, get.user_name, get.status, to.due, get.discount_percent, get.discount_amount, get.category_name,
+                        get.category_id, get.item_count, get.discount);
                 new_data.add(to_new);
             } else {
                 new_data.add(to);
@@ -1091,7 +1098,9 @@ public class Dlg_billing_report extends javax.swing.JDialog {
             discount += to.discount_amount;
             total += to.due - to.discount_amount;
         }
-        lbl_total.setText(FitIn.fmt_wc_0(total));
+        DecimalFormat df = new DecimalFormat("#,###");
+
+        lbl_total.setText(df.format(total) + ".00");
         lbl_sub_total.setText(FitIn.fmt_wc_0(due));
         lbl_discount.setText(FitIn.fmt_wc_0(discount));
         loadData_category_discounts(new_data);

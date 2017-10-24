@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="51fcd9fe-3e6a-4333-a947-e64c7d188ea6">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<field name="desc" class="java.lang.String"/>
-	<field name="date_added" class="java.util.Date"/>
-	<field name="total" class="java.lang.Double"/>
-	<field name="qty" class="java.lang.Double"/>
-	<variable name="total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{total}]]></variableExpression>
-	</variable>
-	<variable name="variable1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{total}]]></variableExpression>
-	</variable>
-	<variable name="total_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{total}]]></variableExpression>
-	</variable>
-	<variable name="total_2" class="java.lang.Double" resetType="Group" resetGroup="des" calculation="Sum">
-		<variableExpression><![CDATA[$F{total}]]></variableExpression>
-	</variable>
-	<group name="des">
-		<groupExpression><![CDATA[$F{desc}]]></groupExpression>
-		<groupHeader>
-			<band height="21">
-				<textField>
-					<reportElement uuid="c158086d-d82a-42ae-81e7-da902e1ac539" x="0" y="1" width="353" height="20"/>
-					<box>
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
-				</textField>
-				<textField evaluationTime="Report" pattern="#,##0">
-					<reportElement uuid="988025ee-8526-4d4b-835d-3f31f3fb5a00" x="353" y="1" width="56" height="20"/>
-					<box>
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="1.0"/>
-						<rightPen lineWidth="0.0"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement uuid="153d69f8-0b00-48c2-8068-53cfac90b9d4" x="409" y="1" width="22" height="20"/>
-					<box>
-						<topPen lineWidth="1.0"/>
-						<bottomPen lineWidth="1.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
-						<paragraph rightIndent="5"/>
-					</textElement>
-					<text><![CDATA[.00]]></text>
-				</staticText>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="2">
-				<staticText>
-					<reportElement uuid="609ea17c-54bb-4901-be76-668b8943acf8" x="0" y="0" width="431" height="2"/>
-					<box>
-						<topPen lineWidth="1.0"/>
-					</box>
-					<textElement/>
-					<text><![CDATA[]]></text>
-				</staticText>
-			</band>
-		</groupFooter>
-	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="20" splitType="Stretch">
-			<textField pattern="#,##0">
-				<reportElement uuid="24c31180-392c-4cd6-8c42-27e433ebea60" x="353" y="0" width="56" height="20"/>
-				<box>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
-			</textField>
-			<textField pattern="MMMMM dd, yyyy">
-				<reportElement uuid="2ed0cb48-c0de-42d1-86e0-6f25a95ac96d" x="0" y="0" width="353" height="20"/>
-				<box>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{date_added}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="153d69f8-0b00-48c2-8068-53cfac90b9d4" x="409" y="0" width="22" height="20"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-					<paragraph rightIndent="5"/>
-				</textElement>
-				<text><![CDATA[.00]]></text>
-			</staticText>
-		</band>
-	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band splitType="Stretch"/>
-	</summary>
+    <property name="ireport.zoom" value="1.5"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <field name="desc" class="java.lang.String"/>
+    <field name="date_added" class="java.util.Date"/>
+    <field name="total" class="java.lang.Double"/>
+    <field name="qty" class="java.lang.Double"/>
+    <variable name="total" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{total}]]></variableExpression>
+    </variable>
+    <variable name="variable1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{total}]]></variableExpression>
+    </variable>
+    <variable name="total_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{total}]]></variableExpression>
+    </variable>
+    <variable name="total_2" class="java.lang.Double" resetType="Group" resetGroup="des" calculation="Sum">
+        <variableExpression><![CDATA[$F{total}]]></variableExpression>
+    </variable>
+    <group name="des">
+        <groupExpression><![CDATA[$F{desc}]]></groupExpression>
+        <groupHeader>
+            <band height="21">
+                <textField>
+                    <reportElement uuid="c158086d-d82a-42ae-81e7-da902e1ac539" x="0" y="1" width="354" height="20"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                        <leftPen lineWidth="0.5"/>
+                        <bottomPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
+                </textField>
+                <textField evaluationTime="Report" pattern="#,##0">
+                    <reportElement uuid="988025ee-8526-4d4b-835d-3f31f3fb5a00" x="353" y="1" width="56" height="20"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                        <leftPen lineWidth="0.5"/>
+                        <bottomPen lineWidth="0.5"/>
+                        <rightPen lineWidth="0.0"/>
+                    </box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="12" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement uuid="153d69f8-0b00-48c2-8068-53cfac90b9d4" x="409" y="1" width="22" height="20"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                        <bottomPen lineWidth="0.5"/>
+                        <rightPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="12" isBold="true"/>
+                        <paragraph rightIndent="5"/>
+                    </textElement>
+                    <text><![CDATA[.00]]></text>
+                </staticText>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="2">
+                <staticText>
+                    <reportElement uuid="609ea17c-54bb-4901-be76-668b8943acf8" x="0" y="0" width="431" height="2"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement/>
+                    <text><![CDATA[]]></text>
+                </staticText>
+            </band>
+        </groupFooter>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField pattern="#,##0">
+                <reportElement uuid="24c31180-392c-4cd6-8c42-27e433ebea60" x="353" y="0" width="56" height="20"/>
+                <box>
+                    <topPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement uuid="2ed0cb48-c0de-42d1-86e0-6f25a95ac96d" x="0" y="0" width="353" height="20"/>
+                <box>
+                    <topPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{date_added}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="153d69f8-0b00-48c2-8068-53cfac90b9d4" x="409" y="0" width="22" height="20"/>
+                <box>
+                    <topPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                    <paragraph rightIndent="5"/>
+                </textElement>
+                <text><![CDATA[.00]]></text>
+            </staticText>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
 </jasperReport>

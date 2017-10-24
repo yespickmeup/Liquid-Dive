@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package POS.pnl;
-
 import POS.Main;
 import POS.Main.ImgPath;
 import POS.addtl_cashins.Dlg_addtl_cashins;
@@ -6319,7 +6318,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                     if (t1.cat_id.equals("10")) {
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(t1.cat_name.
-                                toUpperCase(), date, t1.price, t1.qty,0);
+                                toUpperCase(), date, t1.price, t1.qty, 0);
                         regroup.add(tbar);
 
                         resto_items.add(tbar);
@@ -6327,7 +6326,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         ch += t1.price;
                         bar_resto += t1.price;
                     } else if (t1.cat_id.equals("12")) {
-                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty,0);
+                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty, 0);
                         regroup3.add(tbar);
 
                         bar_items.add(tbar);
@@ -6373,7 +6372,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                             equals(my_data)) {
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                                 getDesc(), ss.getDate_added(), ss.getTotal(), ss.
-                                getQty(),0);
+                                getQty(), 0);
                         regroup2.add(tbar);
                     }
                     my_data = DateType.sf.format(ss.getDate_added());
@@ -6397,7 +6396,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                                 log(Level.SEVERE, null, ex);
                     }
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
-                            getDesc(), d1, am, ss2.getQty(),0);
+                            getDesc(), d1, am, ss2.getQty(), 0);
                     rpt_bar_and_resto.add(tbar);
                 }
 
@@ -6409,7 +6408,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                                 getDesc().
                                 toUpperCase(), ss.getDate_added(), ss.getTotal(), ss.
-                                getQty(),0);
+                                getQty(), 0);
                         regroup33.add(tbar);
 
                     }
@@ -6429,7 +6428,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                             getDesc().
-                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty(),0);
+                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty(), 0);
 
                     rpt_bar.add(tbar);
                 }
@@ -6470,19 +6469,19 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                 List<Srpt_bar_and_resto.field> rpt_summary = new ArrayList();
                 for (Srpt_accomodation.field r : accom3) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getAccomodation(), new Date(), r.getAmount(), r.getQty(),0);
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getAccomodation(), new Date(), r.getAmount(), r.getQty(), 0);
                     rpt_summary.add(f);
                 }
                 for (Srpt_bar_and_resto.field r : rpt_bar_and_resto) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty(),0);
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty(), 0);
                     rpt_summary.add(f);
                 }
                 for (Srpt_bar_and_resto.field r : rpt_bar) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty(),0);
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getDesc(), new Date(), r.getTotal(), r.getQty(), 0);
                     rpt_summary.add(f);
                 }
                 for (Srpt_others.field r : accom2) {
-                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getCategory(), new Date(), r.getPrice(), r.getQty(),0);
+                    Srpt_bar_and_resto.field f = new Srpt_bar_and_resto.field(r.getCategory(), new Date(), r.getPrice(), r.getQty(), 0);
                     rpt_summary.add(f);
                 }
 
@@ -7171,9 +7170,9 @@ public class Dashboard1 extends javax.swing.JFrame {
                     }
 
                     if (t1.cat_id.equals("10")) {
-                        System.out.println("RESTAURANT: "+t1.desc+ " qty: "+t1.qty+ " price: "+t1.price+ " date: "+t1.date_added);
-                         double amount = t1.price-t1.discount;
-                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTAURANT", date, amount, t1.qty,t1.discount);
+//                        System.out.println("RESTAURANT: "+t1.desc+ " qty: "+t1.qty+ " price: "+t1.price+ " date: "+t1.date_added);
+                        double amount = t1.price-t1.discount;
+                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTAURANT", date, amount, t1.qty, t1.discount);
                         regroup.add(tbar);
 
                         String s = DateType.sf.format(date) + " 00:00:00";
@@ -7184,13 +7183,14 @@ public class Dashboard1 extends javax.swing.JFrame {
                             Logger.getLogger(Dlg_billing_history.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
-                      
-                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, amount, t1.qty,t1.discount);
+
+                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, amount, t1.qty, t1.discount);
 
                         resto_items.add(tbar2);
                         ch += t1.price;
                     } else if (t1.cat_id.equals("12")) {
-                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, t1.price, t1.qty,t1.discount);
+                        double amount = t1.price-t1.discount;
+                        Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, amount, t1.qty, t1.discount);
                         regroup3.add(tbar);
 
                         String s = DateType.sf.format(date) + " 00:00:00";
@@ -7201,8 +7201,8 @@ public class Dashboard1 extends javax.swing.JFrame {
                             Logger.getLogger(Dlg_billing_history.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
-                        double amount = t1.price-t1.discount;
-                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, amount, t1.qty,t1.discount);
+                        double amount2= t1.price - t1.discount;
+                        Srpt_bar_and_resto.field tbar2 = new Srpt_bar_and_resto.field(t1.desc, d1, amount2, t1.qty, t1.discount);
                         bar_items.add(tbar2);
 
                         ch += t1.price;
@@ -7254,10 +7254,10 @@ public class Dashboard1 extends javax.swing.JFrame {
                 for (Srpt_bar_and_resto.field ss : regroup) {
                     if (!DateType.sf.format(ss.getDate_added()).
                             equals(my_data)) {
-                        double amount=ss.getTotal()-ss.getDiscount_amount();
+                        double amount = ss.getTotal() - ss.getDiscount_amount();
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
-                                getDesc(), ss.getDate_added(), amount, ss.
-                                getQty(),ss.getDiscount_amount());
+                                getDesc(), ss.getDate_added(), ss.getTotal(), ss.
+                                getQty(), ss.getDiscount_amount());
                         regroup2.add(tbar);
                     }
                     my_data = DateType.sf.format(ss.getDate_added());
@@ -7269,12 +7269,12 @@ public class Dashboard1 extends javax.swing.JFrame {
                     for (Srpt_bar_and_resto.field ss : regroup) {
                         if (DateType.sf.format(ss2.getDate_added()).
                                 equals(DateType.sf.format(ss.getDate_added()))) {
-                            am += ss.getTotal()-ss.getDiscount_amount();
+                            am += ss.getTotal();
                         }
                     }
 
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
-                            getDesc(), ss2.getDate_added(), am, ss2.getQty(),ss2.getDiscount_amount());
+                            getDesc(), ss2.getDate_added(), am, ss2.getQty(), ss2.getDiscount_amount());
                     rpt_bar_and_resto.add(tbar);
                 }
 
@@ -7283,11 +7283,11 @@ public class Dashboard1 extends javax.swing.JFrame {
                 for (Srpt_bar_and_resto.field ss : regroup3) {
                     if (!DateType.sf.format(ss.getDate_added()).
                             equals(my_data3)) {
-                        double amount=ss.getTotal()-ss.getDiscount_amount();
+                        double amount = ss.getTotal() - ss.getDiscount_amount();
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss.
                                 getDesc().
                                 toUpperCase(), ss.getDate_added(), ss.getTotal(), ss.
-                                getQty(),ss.getDiscount_amount());
+                                getQty(), ss.getDiscount_amount());
                         regroup33.add(tbar);
 
                     }
@@ -7301,12 +7301,12 @@ public class Dashboard1 extends javax.swing.JFrame {
                     for (Srpt_bar_and_resto.field ss : regroup3) {
                         if (DateType.sf.format(ss2.getDate_added()).
                                 equals(DateType.sf.format(ss.getDate_added()))) {
-                            am += ss.getTotal() - ss.getDiscount_amount();
+                            am += ss.getTotal();
                         }
                     }
                     Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                             getDesc().
-                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty(),ss2.getDiscount_amount());
+                            toUpperCase(), ss2.getDate_added(), am, ss2.getQty(), ss2.getDiscount_amount());
 //                    System.out.println(am + " 33");
                     rpt_bar.add(tbar);
                 }
