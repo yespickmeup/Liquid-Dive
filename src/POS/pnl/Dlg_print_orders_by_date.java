@@ -933,7 +933,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
 
     private void ret_order_nos() {
 
-        String where = " where table_no_id='" + table_no_ids + "' and guest_id in (" + guest_ids + ") and status=0 and cat_id in (10,12) group by order_no order by description asc ";
+        String where = " where table_no_id='" + table_no_ids + "' and guest_id in (" + guest_ids + ") and status=0 and cat_id in (10,12) group by order_no order by order_no,description asc ";
 
         if (!jCheckBox1.isSelected()) {
             String date_from = DateType.sf.format(jDateChooser1.getDate());
@@ -1465,7 +1465,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         tbl_tables2.setRowHeight(25);
         int[] tbl_widths_tables2 = {100, 60, 150, 80, 50, 80, 60, 80, 30};
         for (int i = 0, n = tbl_widths_tables2.length; i < n; i++) {
-            if (i == 0) {
+            if (i == 3) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_tables2, i, tbl_widths_tables2[i]);

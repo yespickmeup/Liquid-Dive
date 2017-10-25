@@ -65,7 +65,7 @@ public class Ordering {
 
     public static void main(String[] args) {
 
-        Main.MyDB.setNames("db_pos_restaurant_liquid");
+//        Main.MyDB.setNames("db_pos_restaurant_liquid");
         String where = " where table_no_id='102' and guest_id='00008012' and status=0 "
                 + " or table_no_id='102' and guest_id='00008009' and status=0 "
                 + " group by order_no";

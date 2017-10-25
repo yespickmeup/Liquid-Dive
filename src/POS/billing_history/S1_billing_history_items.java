@@ -182,7 +182,6 @@ public class S1_billing_history_items {
                     + ",discount"
                     + ",user_name"
                     + ",billing_history_id"
-                    
                     + " from " + MyDB.getNames() + ".billing_history_items where "
                     + " billing_history_id='"+billing_history_ids+"' order by date_added asc ";
 

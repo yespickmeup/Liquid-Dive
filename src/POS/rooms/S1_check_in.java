@@ -985,9 +985,9 @@ public class S1_check_in {
             MyConnection1.close();
         }
     }
-
+    
     public static void main(String[] args) {
-        MyDB.setNames("db_pos_restaurant_liquid");
+//        MyDB.setNames("db_pos_restaurant_liquid");
         System.out.println(increment_id());
     }
 

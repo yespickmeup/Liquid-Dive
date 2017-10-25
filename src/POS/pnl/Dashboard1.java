@@ -2491,6 +2491,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 public void order(CloseDialog closeDialog, Dlg_check_liquid.OutputData data) {
                     closeDialog.ok();
                     ord = 1;
+                    my_order = 1;
                     init_tbl_customer_tables_details();
                     my_guest_size = data.guest_size;
                     tbl_customer_tables_details_ALM.clear();
@@ -4635,12 +4636,12 @@ public class Dashboard1 extends javax.swing.JFrame {
         pnl.setBackground(new java.awt.Color(255, 255, 255));
 
         btn_logout.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/log-out2.png"))); // NOI18N
+                getResource("/POS/img2/error.png"))); // NOI18N
         btn_logout.setBorderPainted(false);
         btn_logout.setContentAreaFilled(false);
         btn_logout.setFocusable(false);
         btn_logout.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/log-out button-MO.png"))); // NOI18N
+                getResource("/POS/img2/error.png"))); // NOI18N
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4649,15 +4650,15 @@ public class Dashboard1 extends javax.swing.JFrame {
                 logout();
             }
         });
-        pnl.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 110, -1));
+        pnl.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 80, 80));
 
         btn_standby.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/stand-by.png"))); // NOI18N
+                getResource("/POS/img2/hot-drink.png"))); // NOI18N
         btn_standby.setBorderPainted(false);
         btn_standby.setContentAreaFilled(false);
         btn_standby.setFocusable(false);
         btn_standby.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/stand-by-MO.png"))); // NOI18N
+                getResource("/POS/img2/hot-drink.png"))); // NOI18N
         btn_standby.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4665,7 +4666,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 do_login("");
             }
         });
-        pnl.add(btn_standby, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, -1, 70));
+        pnl.add(btn_standby, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 80, 80));
 
         lb_standby.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         lb_standby.setForeground(new java.awt.Color(41, 9, 149));
@@ -4677,17 +4678,17 @@ public class Dashboard1 extends javax.swing.JFrame {
         lb_logout.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         lb_logout.setForeground(new java.awt.Color(41, 9, 149));
         lb_logout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_logout.setText("LOGOUT");
+        lb_logout.setText("Standby");
         lb_logout.setFocusable(false);
         pnl.add(lb_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, 110, -1));
 
         btn_add_product.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/inventory.png"))); // NOI18N
+                getResource("/POS/img2/warehouse.png"))); // NOI18N
         btn_add_product.setBorderPainted(false);
         btn_add_product.setContentAreaFilled(false);
         btn_add_product.setFocusable(false);
         btn_add_product.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/inventory-mo.png"))); // NOI18N
+                getResource("/POS/img2/warehouse.png"))); // NOI18N
         btn_add_product.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4695,7 +4696,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 do_add_product();
             }
         });
-        pnl.add(btn_add_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, 80));
+        pnl.add(btn_add_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 80, 80));
 
         lb_add_product.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         lb_add_product.setForeground(new java.awt.Color(41, 9, 149));
@@ -4705,12 +4706,12 @@ public class Dashboard1 extends javax.swing.JFrame {
         pnl.add(lb_add_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 100, -1));
 
         btn_discount.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/discount.png"))); // NOI18N
+                getResource("/POS/img2/shopping-cart (1).png"))); // NOI18N
         btn_discount.setBorderPainted(false);
         btn_discount.setContentAreaFilled(false);
         btn_discount.setFocusable(false);
         btn_discount.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/discount-MO.png"))); // NOI18N
+                getResource("/POS/img2/shopping-cart (1).png"))); // NOI18N
         btn_discount.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4728,12 +4729,12 @@ public class Dashboard1 extends javax.swing.JFrame {
         pnl.add(lb_endorsement2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 90, -1));
 
         btn_report.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/reports.png"))); // NOI18N
+                getResource("/POS/img2/analytics.png"))); // NOI18N
         btn_report.setBorderPainted(false);
         btn_report.setContentAreaFilled(false);
         btn_report.setFocusable(false);
         btn_report.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/reports-MO.png"))); // NOI18N
+                getResource("/POS/img2/analytics.png"))); // NOI18N
         btn_report.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4751,12 +4752,12 @@ public class Dashboard1 extends javax.swing.JFrame {
         pnl.add(lb_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 80, 20));
 
         btn_tables1.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/table.png"))); // NOI18N
+                getResource("/POS/img2/room-key.png"))); // NOI18N
         btn_tables1.setBorderPainted(false);
         btn_tables1.setContentAreaFilled(false);
         btn_tables1.setFocusable(false);
         btn_tables1.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/table-MO.png"))); // NOI18N
+                getResource("/POS/img2/room-key.png"))); // NOI18N
 
         btn_tables1.addActionListener(new java.awt.event.ActionListener() {
 
@@ -4785,12 +4786,12 @@ public class Dashboard1 extends javax.swing.JFrame {
         pnl.add(lb_tables1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 80, -1));
 
         btn_voider.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/void.png"))); // NOI18N
+                getResource("/POS/img2/x-button.png"))); // NOI18N
         btn_voider.setBorderPainted(false);
         btn_voider.setContentAreaFilled(false);
         btn_voider.setFocusable(false);
         btn_voider.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/void-MO.png"))); // NOI18N
+                getResource("/POS/img2/x-button.png"))); // NOI18N
         btn_voider.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4809,12 +4810,12 @@ public class Dashboard1 extends javax.swing.JFrame {
         pnl.add(lb_inventory1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 90, -1));
 
         btn_register_users.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/users.png"))); // NOI18N
+                getResource("/POS/img2/user (1).png"))); // NOI18N
         btn_register_users.setBorderPainted(false);
         btn_register_users.setContentAreaFilled(false);
         btn_register_users.setFocusable(false);
         btn_register_users.setRolloverIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img2/users-MO.png"))); // NOI18N
+                getResource("/POS/img2/user (1).png"))); // NOI18N
         btn_register_users.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -6324,7 +6325,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                     }
 
                     if (t1.cat_id.equals("10")) {
-                        double am1=t1.price*t1.qty;
+                        double am1 = t1.price * t1.qty;
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(t1.cat_name.
                                 toUpperCase(), date, am1, t1.qty, t1.discount_amount);
                         regroup.add(tbar);
@@ -6334,7 +6335,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         ch += t1.price;
                         bar_resto += t1.price;
                     } else if (t1.cat_id.equals("12")) {
-                          double am1=t1.price*t1.qty;
+                        double am1 = t1.price * t1.qty;
                         Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, am1, t1.qty, t1.discount_amount);
                         regroup3.add(tbar);
 
@@ -6356,7 +6357,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         int nights = 1;
                         String description = t1.description;
                         double price = 0;
-                        double amount = (t1.price*t1.qty) - t1.discount_amount;
+                        double amount = (t1.price * t1.qty) - t1.discount_amount;
                         nights = 1;
                         nights = FitIn.toInt("" + qty);
 //                        System.out.println("am: "+t1.price+ " dis: "+t1.discount_amount);
@@ -6366,7 +6367,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         accom.add(tt);
                         accom_total += amount;
                     } else {
-                           double am1=t1.price*t1.qty;
+                        double am1 = t1.price * t1.qty;
                         Srpt_others.field tbar = new Srpt_others.field(t1.cat_name.
                                 toUpperCase(), t1.description, t1.qty, am1, t1.discount_amount);
                         rpt_others.add(tbar);
@@ -6623,7 +6624,14 @@ public class Dashboard1 extends javax.swing.JFrame {
                 Srpt_category_discounts.field cd4 = (Srpt_category_discounts.field) cdd_list.get(3);
                 cd4.setDisc_amount(dis_others);
                 cd4.setSub_total(cd4.getDue() - dis_others);
-
+                
+//                List<Srpt_category_discounts.field> cdd_list2=new ArrayList();
+//                for(Srpt_category_discounts.field sss:cdd_list){
+//                    if(sss.getDisc_amount()!=0){
+//                        cdd_list2.add(sss);
+//                    }
+//                }
+                
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
                         accom3, advances, cdd_list, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
                         FitIn.toDouble(ss), guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
@@ -7351,7 +7359,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         double amount = (t1.price * t1.qty) - t1.discount;
 
                         Srpt_others.field tbar = new Srpt_others.field(t1.category_name.
-                                toUpperCase(), t1.desc, t1.qty,amount, t1.discount);
+                                toUpperCase(), t1.desc, t1.qty, amount, t1.discount);
                         rpt_others.add(tbar);
                         ch += t1.price;
                     }
@@ -8180,8 +8188,16 @@ public class Dashboard1 extends javax.swing.JFrame {
         tbl_items.setRowHeight(25);
         int amount = 0;
         int size = 0;
+        int a1 = 0;
+        int a2 = 0;
+        int a3 = 0;
+
         if (my_order == 1) {
             amount = 100;
+        } else {
+            a1 = 60;
+            a2 = 80;
+            a3 = 140;
         }
         if (ord == 0) {
             size = 200;
@@ -8191,7 +8207,8 @@ public class Dashboard1 extends javax.swing.JFrame {
 //        if(my_order = =0){
 //            size
 //        }
-        int[] tbl_widths_customer_tables_details = {40, 100, 80, 60, 80, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        int[] tbl_widths_customer_tables_details = {40, 100, 80, a1, a2, a3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_customer_tables_details.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -8261,6 +8278,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 case 3:
                     return FitIn.fmt_wc_0(tt.discount) + " ";
                 case 4:
+
                     return FitIn.fmt_wc_0((tt.qty * tt.price) - tt.discount) + " ";
                 case 5:
                     return " " + DateType.convert_slash3(tt.date_added);

@@ -419,7 +419,7 @@ public class Dlg_login1 extends javax.swing.JDialog {
         );
 
         pnl_log.add(jPanel2);
-        jPanel2.setBounds(50, 30, 0, 0);
+        jPanel2.setBounds(50, 30, 730, 57);
 
         btn_clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img2/clear-fields1.png"))); // NOI18N
         btn_clear.setBorderPainted(false);
@@ -1155,7 +1155,7 @@ public class Dlg_login1 extends javax.swing.JDialog {
             }
         });
 
-        jLabel9.setText("V1.0.7");
+        jLabel9.setText("V1.5.171024");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);

@@ -441,7 +441,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant_liquid");
         init_key();
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());
@@ -733,7 +733,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
 
             if (t1.cat_id.equals("10")) {
 
-                double am = (t1.price*t1.qty) - t1.discount_amount;
+                double am = (t1.price * t1.qty) - t1.discount_amount;
 
                 Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTO", date, am, t1.qty, t1.discount_amount);
                 regroup.add(tbar);
@@ -752,12 +752,13 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 if (r_f == 0) {
                     resto_f_date = DateType.sf.format(date);
                 }
-                ch += t1.price;
+                ch += am;
                 bar_resto += t1.price;
                 r_f++;
             } else if (t1.cat_id.equals("12")) {
 //                System.out.println("t1: "+t1.description+ " am: "+t1.price+ " dis: "+t1.discount_amount);
-                double am = (t1.price*t1.qty)-t1.discount_amount;
+                double am = (t1.price * t1.qty) - t1.discount_amount;
+//                System.out.println("desc: "+t1.description+ " price: "+t1.price+ " disc: "+t1.discount_amount);
                 Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, am, t1.qty, t1.discount_amount);
                 regroup3.add(tbar);
 //                System.out.println(tbar);
@@ -774,7 +775,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 if (r_b == 0) {
                     bar_f_date = DateType.sf.format(date);
                 }
-                ch += t1.price;
+                ch += am;
                 bar_resto += t1.price;
                 r_b++;
             } else if (t1.cat_id.equals("11")) {
@@ -792,7 +793,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 int nights = 1;
                 String description = t1.description;
                 double price = 0;
-                double am = (t1.price*t1.qty) - t1.discount_amount;
+                double am = (t1.price * t1.qty) - t1.discount_amount;
                 double amount = am;
                 nights = 1;
                 nights = FitIn.toInt("" + qty);
@@ -803,11 +804,11 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 accom.add(t);
                 accom_total += amount;
             } else {
-                double am = (t1.price*t1.qty) - t1.discount_amount;
+                double am = (t1.price * t1.qty) - t1.discount_amount;
                 Srpt_others.field tbar = new Srpt_others.field(t1.cat_name.
                         toUpperCase(), t1.description, t1.qty, am, t1.discount_amount);
                 rpt_others.add(tbar);
-                ch += t1.price;
+                ch += am;
             }
         }
         String my_data = "";
@@ -879,7 +880,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                     dis += ss.getDiscount_amount();
                 }
             }
-            am = am - dis;
+//            am = am - dis;
 //            System.out.println("am: "+am);
             Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field(ss2.
                     getDesc().
@@ -920,6 +921,8 @@ public class Dlg_billing_history extends javax.swing.JDialog {
         double cash_usd = to.adv_usd * to.dollar_rate;
         double bank_usd = to.bank_usd * to.dollar_rate;
         double usd = cash_usd + bank_usd;
+        System.out.println("Total Charges: " + total_charges + " accom_total: " + accom_total);
+        System.out.println("bank_php: " + bank_php + " usd: " + usd + " to.credit_card: " + to.credit_card+ " to.discount: "+to.discount);
         to_pay = (total_charges + accom_total) - (bank_php + usd + to.credit_card + to.discount);
         double discount = to.discount;
         double dollar_rate = S1_currency.ret_dollar(DateType.sf.format(new Date()));

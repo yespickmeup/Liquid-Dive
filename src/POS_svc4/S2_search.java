@@ -1580,12 +1580,13 @@ public class S2_search {
                     cat_name = rs2.getString(1);
                 }
                 if (cat_id.equals(accomodation_id)) {
-                    price = (price * nights);
+                    price = (price );
                 }
 //                price = ((qty * price) - discount);
                 if (discount != 0) {
                     desc = desc + "             @ " + FitIn.fmt_wc_0(disc_rate * 100) + "% DISCOUNT";
                 }
+//                System.out.println("desc: "+desc+ " price: "+price);
                 if (price != 0) {
                     if (check_outs == 0 && cat_id.equals("11")) {
                     } else {
@@ -1627,7 +1628,7 @@ public class S2_search {
             String s0 = "select "
                     + "product_name"
                     + ",description"
-                    + ",sum(price*qty)"
+                    + ",(price)"
                     + ",sum(qty)"
                     + ",img_path "
                     + ",guest_id "
@@ -1652,7 +1653,7 @@ public class S2_search {
                     + ",sub_category_id "
                     + ",order_no"
                     + " from " + MyDB.getNames() + ".customer_tables_details "
-                    + " " + where_guest_11 + " group by guest_id,description";
+                    + " " + where_guest_11 + " group by guest_id,product_name,price,discount";
           
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -1711,6 +1712,7 @@ public class S2_search {
 //                    price = (price * nights);
 //                }
 //                price = ((qty * price) - discount);
+//                System.out.println("desc: "+desc+ " price: "+price);
                 if (discount != 0) {
                     desc = desc + "             @ " + FitIn.fmt_wc_0(disc_rate * 100) + "% DISCOUNT";
                 }
@@ -1731,7 +1733,7 @@ public class S2_search {
             }
 
             return holder;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();
@@ -1752,7 +1754,7 @@ public class S2_search {
             String s0 = "select "
                     + "product_name"
                     + ",description"
-                    + ",sum(price*qty)"
+                    + ",price"
                     + ",sum(qty)"
                     + ",img_path "
                     + ",guest_id "
@@ -1778,7 +1780,8 @@ public class S2_search {
                     + ",sub_category_id "
                     + ",order_no"
                     + " from " + MyDB.getNames() + ".customer_tables_details "
-                    + " " + where_guest_11_dive + " group by description,guest_id";
+                    + " " + where_guest_11_dive + " group by guest_id,product_name,price,discount";
+//            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             String saved_name = "";
@@ -1861,7 +1864,7 @@ public class S2_search {
             }
 
             return holder;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();
