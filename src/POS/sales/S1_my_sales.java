@@ -385,6 +385,7 @@ public class S1_my_sales {
                     + " from " + MyDB.getNames() + ".guest_advance_payment where "
                     + " Date(date_added) between '" + date_from + "' and '" + date_to + "' and user_name like '%" + user_names + "%'"
                     + " ";
+//            System.out.println(s5);
             Statement stmt5 = conn.createStatement();
             ResultSet rs5 = stmt5.executeQuery(s5);
             if (rs5.next()) {
@@ -451,7 +452,7 @@ public class S1_my_sales {
 
             to = new to_details(cashin, expenses, cashout, addtl_cashins, advance_payment, advance_payment_usd, outside_cash, cc_reflenishment, bank_php, bank_usd);
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

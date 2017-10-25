@@ -1328,7 +1328,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
 
         to_details t = S1_my_sales.ret_cash_in(users, date_from, date_to);
         lbl_cash_in.setText(FitIn.fmt_wc_0(t.cashin));
-
+//        System.out.println("t.advance_payment: "+t.advance_payment);
         double bank_php = 0;
         double bank_usd = 0;
         double credit_card = 0;     
@@ -1344,10 +1344,10 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         for(Srpt_advance_payments.field to: advances){
             credit_card+=to.getCredit_card();
         }
-        System.out.println("User: "+users);
-        System.out.println("From: "+date_from);
-        System.out.println("To: "+date_to);
-        System.out.println("Credit Card: "+credit_card);
+//        System.out.println("User: "+users);
+//        System.out.println("From: "+date_from);
+//        System.out.println("To: "+date_to);
+//        System.out.println("Credit Card: "+credit_card);
         
         
         lbl_credit_card.setText(FitIn.fmt_wc_0(credit_card));

@@ -6624,18 +6624,46 @@ public class Dashboard1 extends javax.swing.JFrame {
                 Srpt_category_discounts.field cd4 = (Srpt_category_discounts.field) cdd_list.get(3);
                 cd4.setDisc_amount(dis_others);
                 cd4.setSub_total(cd4.getDue() - dis_others);
-                
+
 //                List<Srpt_category_discounts.field> cdd_list2=new ArrayList();
 //                for(Srpt_category_discounts.field sss:cdd_list){
 //                    if(sss.getDisc_amount()!=0){
 //                        cdd_list2.add(sss);
 //                    }
 //                }
+               
+                double peso1 = 0;
+                double dollar1 = 0;
+                double peso_bank1 = 0;
+                double usd_bank = 0;
+                double credit1 = 0;
+                for (Srpt_history_advance_payments.field ad : advances) {
+                    peso1 += ad.getPhp_cash();
+                    dollar1 += ad.getUsd_cash();
+                    peso_bank1 += ad.getPhp_bank();
+                    usd_bank += ad.getUsd_bank();
+
+                    double credit_rate = ad.getCredit_card_rate();
+                    credit_rate = (credit_rate / 100) * ad.getCredit_card();
+                    double credit_total = ad.getCredit_card();//+ credit_rate;
+                    credit1 += credit_total;
+                }
+
+                double prepaid_peso = peso1 + peso_bank1;
+                double prepaid_dollar = dollar1 + usd_bank;
+                double prepaid_dollar_to_peso = prepaid_dollar * dollar_rate1;
+
+                double prepaid_total = prepaid_peso + prepaid_dollar_to_peso;
+                double prepaid_credit_card = credit1;
+
+                double total = FitIn.toDouble(ss) - (prepaid_total + prepaid_credit_card);
+                prepaid_dollar = total/dollar_rate1;
+                prepaid_dollar = FitIn.toDouble(df.format(prepaid_dollar)+".00");
                 
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
                         accom3, advances, cdd_list, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
-                        FitIn.toDouble(ss), guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
-                        print.paid_credit, bank_php, bank_usd, advance_credit_card, dollar_to_pay, rpt_summary);
+                        total, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
+                        print.paid_credit, bank_php, bank_usd, advance_credit_card, prepaid_dollar, rpt_summary);
 
 //                test_print(rpt,table_id, resto_items, bar_items, guest_names, guest_ids, advances, accom, rpt_others); 
                 try {
@@ -7379,7 +7407,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                     }
                     my_data = DateType.sf.format(ss.getDate_added());
                 }
-                System.out.println("WAWWE");
+//                System.out.println("WAWWE");
                 for (Srpt_bar_and_resto.field ss2 : regroup2) {
                     double am = 0;
                     double qty = 0;
@@ -7451,7 +7479,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 double advance_payment = FitIn.toDouble(lbl_advance_payment.
                         getText());
                 advance_payment += bank_php;
-                to_pay = to_pay - (advance_payment + dollar_rate1 + advance_credit_card);
+
                 double dollar = S1_currency.ret_dollar(DateType.sf.format(new Date()));
 
                 List<Srpt_history_advance_payments.field> advances = new ArrayList();
@@ -7491,12 +7519,14 @@ public class Dashboard1 extends javax.swing.JFrame {
                     double credit_total = ad.getCredit_card();//+ credit_rate;
                     credit1 += credit_total;
                 }
-
+                advance_payment = peso1 + peso_bank1;
                 double dollar_to_pay = to_pay / dollar_rate;
                 String s = df.format(dollar_to_pay);
                 dollar_to_pay = FitIn.toDouble(s);
+
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(
-                        busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2, accom3, advances, new ArrayList(), my_date, guest_id, table_no, check_in, transfers, accomodation_1, accom_total, img_path, to_pay, guest_name, dollar, total_charges, discount, dollar_rate, peso1, dollar1, 0, 0, 0, peso_bank1, usd_bank, credit1, dollar_to_pay, new ArrayList());
+                        busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2, accom3, advances, new ArrayList(), my_date,
+                        guest_id, table_no, check_in, transfers, accomodation_1, accom_total, img_path, to_pay, guest_name, dollar, total_charges, discount, dollar_rate, peso1, dollar1, 0, 0, 0, peso_bank1, usd_bank, credit1, dollar_to_pay, new ArrayList());
                 Window p = (Window) this;
                 Dlg_billing_report nd = Dlg_billing_report.create(p, true);
                 nd.setTitle("");

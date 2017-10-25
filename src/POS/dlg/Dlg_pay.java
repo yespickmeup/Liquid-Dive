@@ -454,8 +454,8 @@ public class Dlg_pay extends javax.swing.JDialog {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(159, 207, 243));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1235,83 +1235,83 @@ public class Dlg_pay extends javax.swing.JDialog {
         });
         pnl_numpad.add(lbl_credit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 310, 40));
 
-        lbl_advance_payment.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        lbl_advance_payment.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_advance_payment.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_advance_payment.setText("0.00");
-        lbl_advance_payment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_numpad.add(lbl_advance_payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 100, 20));
+        lbl_advance_payment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnl_numpad.add(lbl_advance_payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 110, 20));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("USD");
-        jLabel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 50, 40));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("ADVANCE PAYMENT:");
-        jLabel17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 410, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("CREDIT CARD");
-        jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 100, 20));
 
-        lbl_advance_payment_usd.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        lbl_advance_payment_usd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_advance_payment_usd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_advance_payment_usd.setText("0.00");
-        lbl_advance_payment_usd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbl_advance_payment_usd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(lbl_advance_payment_usd, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 100, 20));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("PESO");
-        jLabel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 50, 40));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("CASH");
-        jLabel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 50, 20));
 
-        lbl_advance_payment_bank.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        lbl_advance_payment_bank.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_advance_payment_bank.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_advance_payment_bank.setText("0.00");
-        lbl_advance_payment_bank.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_numpad.add(lbl_advance_payment_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 100, 20));
+        lbl_advance_payment_bank.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnl_numpad.add(lbl_advance_payment_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 110, 20));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("CASH");
-        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 50, 20));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("BANK");
-        jLabel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 50, 20));
 
-        lbl_advance_payment_usd_bank.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        lbl_advance_payment_usd_bank.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_advance_payment_usd_bank.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_advance_payment_usd_bank.setText("0.00");
-        lbl_advance_payment_usd_bank.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbl_advance_payment_usd_bank.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(lbl_advance_payment_usd_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 100, 20));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("BANK");
-        jLabel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnl_numpad.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 50, 20));
 
-        lbl_adv_credit_card.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        lbl_adv_credit_card.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_adv_credit_card.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_adv_credit_card.setText("0.00");
-        lbl_adv_credit_card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_numpad.add(lbl_adv_credit_card, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 100, 20));
+        lbl_adv_credit_card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnl_numpad.add(lbl_adv_credit_card, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 310, 20));
 
         jPanel2.add(pnl_numpad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 650));
 
@@ -2317,6 +2317,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     String my_guest_room_ids = "";
 
     public void load(InputData data, String amount, String table_id, double advance_payment, double advance_usd, double bank_php, double bank_usd, int staff, double adv_credit_card, String guest_id, String my_guest_room_ids1) {
+
         lbl_advance_payment.setText(FitIn.fmt_wc_0(advance_payment));
 
         my_guest_room_ids = my_guest_room_ids1;
@@ -2371,6 +2372,31 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
 
         type_peso();
+
+        double peso1 = FitIn.toDouble(lbl_advance_payment.getText());
+        double dollar1 = FitIn.toDouble(lbl_advance_payment_usd.getText());
+        double peso_bank1 = FitIn.toDouble(lbl_advance_payment_bank.getText());
+        double usd_bank = FitIn.toDouble(lbl_advance_payment_usd_bank.getText());
+        double credit1 = FitIn.toDouble(lbl_adv_credit_card.getText());
+        double discount1= FitIn.toDouble(lbl_disc_amount.getText());
+        double prepaid_peso = peso1 + peso_bank1;
+        double prepaid_dollar = dollar1 + usd_bank;
+        double prepaid_dollar_to_peso = prepaid_dollar * FitIn.toDouble(tf_dollar.getText());
+
+        double prepaid_total = prepaid_peso + prepaid_dollar_to_peso;
+        double prepaid_credit_card = credit1;
+        double total = FitIn.toDouble(ds_amountdue.getText());
+        total = total - (prepaid_total + prepaid_credit_card+discount1);
+        lbl_net.setText(FitIn.fmt_wc_0(total));
+        ds_change_peso.setText(FitIn.fmt_wc_0(total));
+
+        DecimalFormat df2 = new DecimalFormat("#,###");
+        double dollar = total / FitIn.toDouble(tf_dollar.getText());
+        double dollar2 = FitIn.toDouble(df2.format(dollar) + ".00");
+
+        ds_change_dollar.setText(FitIn.fmt_wc_0(dollar2));
+
+       
         if (staff == 1) {
             cb_payable.setVisible(true);
         } else {
@@ -2925,7 +2951,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
     private void type_peso() {
         double dollar = FitIn.toDouble(tf_dollar.getText());
-        double discount = FitIn.toDouble(lbl_disc_amount.getText());
+        double discount1 = FitIn.toDouble(lbl_disc_amount.getText());
         double net_due = FitIn.toDouble(lbl_net.getText());
 
         if (discount == 0) {
@@ -2944,43 +2970,35 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         double my_change = 0;
         if (cb_credit_peso.isSelected()) {
             double my_due = FitIn.toDouble(lbl_net.getText());
-            double my_due2 = FitIn.toDouble(ds_change_peso.getText());
+            double my_due2 = FitIn.toDouble(lbl_net.getText());
 
             double master_card = 0;
             master_card = FitIn.toDouble(lbl_credit_rate.getText()) / 100;
-//            if(master_card==0){
-//                master_card=1;
-//            }
             master_card = my_due2 * master_card;
 
             double aw = master_card;
-//            JOptionPane.showMessageDialog(null, aw + " "+ds_change_peso.getText());
-
-            double credit_amount = (aw + my_due2) * -1;
-            if (my_due2 > 0) {
-                lbl_credit.setText("");
-                lbl_net_credit.setText("");
-                late_credit = 0;
-                late_credit_rate = 0;
-            } else {
-                lbl_credit.setText(FitIn.fmt_wc_0(credit_amount));
-
-//                  JOptionPane.showMessageDialog(null, credit_amount);
-                lbl_net_credit.setText(FitIn.fmt_wc_0(aw * -1));
-                late_credit = FitIn.toDouble(lbl_credit.getText()) - FitIn.
-                        toDouble(lbl_net_credit.getText());
-//                 JOptionPane.showMessageDialog(null, late_credit);
-//                late_credit_rate=FitIn.toDouble(lbl_net_credit.getText());
-            }
-
-            ds_amountdue.setText(FitIn.fmt_wc_0(aw * -1 + amount_due));
-            lbl_net.setText(df2.format((aw * -1 + amount_due) - discount) + ".00");
+            double credit_amount = (aw + my_due2) ;
+//            if (my_due2 > 0) {
+//                lbl_credit.setText("");
+//                lbl_net_credit.setText("");
+//                late_credit = 0;
+//                late_credit_rate = 0;
+//            } else {
+//
+//            }
+            lbl_credit.setText(FitIn.fmt_wc_0(my_due2));
+            lbl_net_credit.setText(FitIn.fmt_wc_0(aw ));
+            late_credit = FitIn.toDouble(lbl_credit.getText()) - FitIn.toDouble(lbl_net_credit.getText());
+            
+            double due = FitIn.toDouble(lbl_net.getText());
+//            ds_amountdue.setText(FitIn.fmt_wc_0(aw * -1 + amount_due));
+//            lbl_net.setText(df2.format((aw * -1 + due) - discount1) + ".00");
             late_due = FitIn.toDouble(ds_amountdue.getText());
             late_net_due = FitIn.toDouble(lbl_net.getText());
 
             double tendered_dollar = FitIn.toDouble(lbl_tendered_dollar.getText());
 
-            double all_tendered = (tendered_peso + (tendered_dollar * dollar)) + credit_amount;
+            double all_tendered = (tendered_peso + (tendered_dollar * dollar));
             my_change = (my_due - all_tendered) - (aw);
 
             if (my_change > 0) {
@@ -3000,15 +3018,15 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             late_credit = 0;
             late_credit_rate = 0;
 
-            ds_amountdue.setText(FitIn.fmt_wc_0(amount_due));
-            lbl_net.setText(df2.format(amount_due - discount) + ".00");
+//            ds_amountdue.setText(FitIn.fmt_wc_0(amount_due));
+//            lbl_net.setText(df2.format(amount_due - discount) + ".00");
             late_due = FitIn.toDouble(ds_amountdue.getText());
             late_net_due = FitIn.toDouble(lbl_net.getText());
 
             double tendered_dollar = FitIn.toDouble(lbl_tendered_dollar.getText());
             double all_tendered = (tendered_peso + (tendered_dollar * dollar));
 //            JOptionPane.showMessageDialog(null, my_due);
-            my_change = (my_due - net_credit) - all_tendered;
+            my_change = (my_due) - all_tendered;
 
         }
 
@@ -3019,6 +3037,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         double total_dollar = (FitIn.toDouble(lbl_net.getText()) / FitIn.toDouble(tf_dollar.getText()));
 
         lbl_total_dollar.setText(df2.format(total_dollar) + ".00");
+
     }
     double late_credit = 0;
     double late_credit_rate = 0;

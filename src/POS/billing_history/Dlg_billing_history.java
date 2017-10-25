@@ -921,8 +921,8 @@ public class Dlg_billing_history extends javax.swing.JDialog {
         double cash_usd = to.adv_usd * to.dollar_rate;
         double bank_usd = to.bank_usd * to.dollar_rate;
         double usd = cash_usd + bank_usd;
-        System.out.println("Total Charges: " + total_charges + " accom_total: " + accom_total);
-        System.out.println("bank_php: " + bank_php + " usd: " + usd + " to.credit_card: " + to.credit_card+ " to.discount: "+to.discount);
+//        System.out.println("Total Charges: " + total_charges + " accom_total: " + accom_total);
+//        System.out.println("bank_php: " + bank_php + " usd: " + usd + " to.credit_card: " + to.credit_card+ " to.discount: "+to.discount);
         to_pay = (total_charges + accom_total) - (bank_php + usd + to.credit_card + to.discount);
         double discount = to.discount;
         double dollar_rate = S1_currency.ret_dollar(DateType.sf.format(new Date()));
