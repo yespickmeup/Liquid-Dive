@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import POS.utl.MyConnection1;
+import java.sql.SQLException;
 
 /**
  *
@@ -235,7 +236,7 @@ public static List<to_name_cat> ret_categories_top(String cat_id) {
             }
 
             return id;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();
@@ -256,7 +257,7 @@ public static List<to_name_cat> ret_categories_top(String cat_id) {
                 datas.add(name);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

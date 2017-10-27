@@ -362,7 +362,7 @@ public class S10_update_product {
                 name = rs.getString(1);
             }
             return name;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

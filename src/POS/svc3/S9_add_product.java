@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import POS.utl.MyConnection1;
 import java.sql.SQLException;
+import mijzcx.synapse.desk.utils.FitIn;
 
 /**
  *
@@ -63,12 +64,12 @@ public class S9_add_product {
                 if (rs2.next()) {
                     category_name = rs2.getString(1);
                 }
-                to_add_product to = new to_add_product(name, desc, price, qty, num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package, happy_hour);
+                to_add_product to = new to_add_product(name, desc, FitIn.toDouble(price), FitIn.toDouble(qty), num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package, happy_hour);
                 datas.add(to);
             }
 
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();
@@ -115,7 +116,7 @@ public class S9_add_product {
                 if (rs2.next()) {
                     category_name = rs2.getString(1);
                 }
-                to_add_product to = new to_add_product(name, desc, price, qty, num, vat, types_num, is_linient, w_commission, comm_amount, cat_ids, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package_id, happy_hour);
+                to_add_product to = new to_add_product(name, desc, FitIn.toDouble(price), FitIn.toDouble(qty), num, vat, types_num, is_linient, w_commission, comm_amount, cat_ids, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package_id, happy_hour);
                 datas.add(to);
             }
 
@@ -169,7 +170,7 @@ public class S9_add_product {
                     category_name = rs2.getString(1);
                 }
 
-                to_add_product to = new to_add_product(name, desc, price, qty, num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package_id, happy_hour);
+                to_add_product to = new to_add_product(name, desc, FitIn.toDouble(price), FitIn.toDouble(qty), num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package_id, happy_hour);
                 datas.add(to);
             }
 
@@ -220,7 +221,7 @@ public class S9_add_product {
                 if (rs2.next()) {
                     category_name = rs2.getString(1);
                 }
-                to_add_product to = new to_add_product(name, desc, price, qty, num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_ids, type_name, item_package_id, happy_hour);
+                to_add_product to = new to_add_product(name, desc, FitIn.toDouble(price), FitIn.toDouble(qty), num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_ids, type_name, item_package_id, happy_hour);
                 datas.add(to);
             }
 
@@ -272,7 +273,7 @@ public class S9_add_product {
                 if (rs2.next()) {
                     category_name = rs2.getString(1);
                 }
-                to_add_product to = new to_add_product(name, desc, price, qty, num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_ids, type_name, item_package_id, happy_hour);
+                to_add_product to = new to_add_product(name, desc, FitIn.toDouble(price), FitIn.toDouble(qty), num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_ids, type_name, item_package_id, happy_hour);
                 datas.add(to);
             }
 
@@ -465,7 +466,7 @@ public class S9_add_product {
                     category_name = rs2.getString(1);
                 }
 
-                to_add_product to = new to_add_product(name, desc, price, qty, num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package_id, happy_hour);
+                to_add_product to = new to_add_product(name, desc, FitIn.toDouble(price), FitIn.toDouble(qty), num, vat, types_num, is_linient, w_commission, comm_amount, cat_id, cost, printing_assembly, is_active, category_name, type_id, type_name, item_package_id, happy_hour);
                 datas.add(to);
             }
 

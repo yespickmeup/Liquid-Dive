@@ -28,3 +28,37 @@
 1.0 | 2759 | chili bagel | 0.00 | 0.00 | 0.00
 
 
+delete from stock_in;
+delete from stock_in_main;
+
+alter table stock_in add cost double default 0;
+alter table stock_in add types varchar(255);
+alter table stock_in add types_num varchar(255);
+alter table stock_in add cat_id varchar(255);
+alter table stock_in add stock_in_no varchar(255);
+alter table stock_in add remarks varchar(255);
+alter table stock_in add supplier varchar(255);
+
+alter table stock_in_main add remarks varchar(255);
+alter table stock_in_main add supplier varchar(255);
+
+
+
+delete from stock_out;
+delete from stock_out_main;
+
+alter table stock_out add cost double default 0;
+alter table stock_out add types varchar(255);
+alter table stock_out add types_num varchar(255);
+alter table stock_out add cat_id varchar(255);
+alter table stock_out add stock_in_no varchar(255);
+alter table stock_out add remarks varchar(255);
+alter table stock_out add supplier varchar(255);
+
+alter table stock_out_main add remarks varchar(255);
+alter table stock_out_main add supplier varchar(255);
+
+
+
+
+

@@ -1580,7 +1580,7 @@ public class S2_search {
                     cat_name = rs2.getString(1);
                 }
                 if (cat_id.equals(accomodation_id)) {
-                    price = (price );
+                    price = (price);
                 }
 //                price = ((qty * price) - discount);
                 if (discount != 0) {
@@ -1626,35 +1626,36 @@ public class S2_search {
         try {
             Connection conn = MyConnection1.connect();
             String s0 = "select "
-                    + "product_name"
-                    + ",description"
-                    + ",(price)"
-                    + ",sum(qty)"
-                    + ",img_path "
-                    + ",guest_id "
-                    + ",cat_id "
-                    + ",printing_assembly "
-                    + ",status "
-                    + ",disc_name "
-                    + ",disc_rate "
-                    + ",(discount)"
-                    + ",customer_name "
-                    + ",customer_id"
-                    + ",customer_address "
-                    + ",date_added "
-                    + ",group_id "
-                    + ",nights "
-                    + ",guest_no "
-                    + ",check_out "
-                    + ",room_guest_id "
-                    + ",user_name "
-                    + ",category_name"
-                    + ",sub_category_name "
-                    + ",sub_category_id "
-                    + ",order_no"
-                    + " from " + MyDB.getNames() + ".customer_tables_details "
-                    + " " + where_guest_11 + " group by guest_id,product_name,price,discount";
-          
+                    + "ct.product_name"
+                    + ",ct.description"
+                    + ",(ct.price)"
+                    + ",sum(ct.qty)"
+                    + ",ct.img_path "
+                    + ",ct.guest_id "
+                    + ",ct.cat_id "
+                    + ",ct.printing_assembly "
+                    + ",ct.status "
+                    + ",ct.disc_name "
+                    + ",ct.disc_rate "
+                    + ",(ct.discount)"
+                    + ",ct.customer_name "
+                    + ",ct.customer_id"
+                    + ",ct.customer_address "
+                    + ",ct.date_added "
+                    + ",ct.group_id "
+                    + ",ct.nights "
+                    + ",ct.guest_no "
+                    + ",ct.check_out "
+                    + ",ct.room_guest_id "
+                    + ",ct.user_name "
+                    + ",ct.category_name"
+                    + ",ct.sub_category_name "
+                    + ",ct.sub_category_id "
+                    + ",ct.order_no"
+                    //                    + ",(select i.item_package_id from " + MyDB.getNames() + ".inventory2_stocks_left i where i.product_name=ct.product_name order by id desc limit 1)"
+                    + " from " + MyDB.getNames() + ".customer_tables_details ct "
+                    + " " + where_guest_11 + " group by ct.guest_id,ct.product_name,ct.price,ct.discount";
+
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             String saved_name = "";
@@ -1662,7 +1663,7 @@ public class S2_search {
             while (rs.next()) {
                 String names = rs.getString(1);
                 String desc = rs.getString(2);
-               
+
                 double price = rs.getDouble(3);
                 double qty = rs.getDouble(4);
                 String img_path = rs.getString(5);
@@ -1690,6 +1691,7 @@ public class S2_search {
                 String sub_category_name = rs.getString(24);
                 String sub_category_id = rs.getString(25);
                 String order_no = rs.getString(26);
+
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
                 }
@@ -1752,35 +1754,36 @@ public class S2_search {
         try {
             Connection conn = MyConnection1.connect();
             String s0 = "select "
-                    + "product_name"
-                    + ",description"
-                    + ",price"
-                    + ",sum(qty)"
-                    + ",img_path "
-                    + ",guest_id "
-                    + ",cat_id "
-                    + ",printing_assembly "
-                    + ",status "
-                    + ",disc_name "
-                    + ",disc_rate "
-                    + ",(discount)"
-                    + ",customer_name "
-                    + ",customer_id"
-                    + ",customer_address "
-                    + ",date_added "
-                    + ",group_id "
-                    + ",nights "
-                    + ",guest_no "
-                    + ",check_out "
-                    + ",room_guest_id "
-                    + ",user_name "
-                    + ",guest_name "
-                    + ",category_name "
-                    + ",sub_category_name "
-                    + ",sub_category_id "
-                    + ",order_no"
-                    + " from " + MyDB.getNames() + ".customer_tables_details "
-                    + " " + where_guest_11_dive + " group by guest_id,product_name,price,discount";
+                    + "ct.product_name"
+                    + ",ct.description"
+                    + ",ct.price"
+                    + ",sum(ct.qty)"
+                    + ",ct.img_path "
+                    + ",ct.guest_id "
+                    + ",ct.cat_id "
+                    + ",ct.printing_assembly "
+                    + ",ct.status "
+                    + ",ct.disc_name "
+                    + ",ct.disc_rate "
+                    + ",(ct.discount)"
+                    + ",ct.customer_name "
+                    + ",ct.customer_id"
+                    + ",ct.customer_address "
+                    + ",ct.date_added "
+                    + ",ct.group_id "
+                    + ",ct.nights "
+                    + ",ct.guest_no "
+                    + ",ct.check_out "
+                    + ",ct.room_guest_id "
+                    + ",ct.user_name "
+                    + ",ct.guest_name "
+                    + ",ct.category_name "
+                    + ",ct.sub_category_name "
+                    + ",ct.sub_category_id "
+                    + ",ct.order_no"
+                    + ",(select i.item_package_id from " + MyDB.getNames() + ".inventory2_stocks_left i where i.product_name=ct.product_name order by id desc limit 1)"
+                    + " from " + MyDB.getNames() + ".customer_tables_details ct "
+                    + " " + where_guest_11_dive + " group by ct.guest_id,ct.product_name,ct.price,ct.discount";
 //            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -1822,6 +1825,8 @@ public class S2_search {
                 String sub_category_name = rs.getString(25);
                 String sub_category_id = rs.getString(26);
                 String order_no = rs.getString(27);
+                int item_package = rs.getInt(28);
+
                 if (img_path.equals("empty")) {
                     img_path = "siopao.jpeg";
                 }
@@ -1840,6 +1845,36 @@ public class S2_search {
                 if (rs2.next()) {
                     cat_name = rs2.getString(1);
                 }
+
+                if (item_package == 1) {
+                    String s3 = "select "
+                            + " range_from"
+                            + ",range_to"
+                            + ",rate"
+                            + ",description"
+                            + " from " + MyDB.getNames() + ".item_packages where "
+                            + " product_name ='" + names + "' "
+                            + " ";
+                    Statement stmt3 = conn.createStatement();
+                    ResultSet rs3 = stmt3.executeQuery(s3);
+
+                    while (rs3.next()) {
+
+                        int range_from = FitIn.toInt(rs3.getString(1));
+                        int range_to = FitIn.toInt(rs3.getString(2));
+                        double rate = FitIn.toInt(rs3.getString(3));
+
+                        if (qty >= range_from && qty <= range_to) {
+                            price = rate;
+                            if (selected_guest > 1) {
+                                desc = rs3.getString(4) + " - " + rs.getString(23).
+                                        toUpperCase();
+                            }
+
+                        }
+                    }
+                }
+
 //                if (cat_id.equals(accomodation_id)) {
 //                    price = (price * nights);
 //                }
@@ -2120,5 +2155,19 @@ public class S2_search {
         } finally {
             MyConnection1.close();
         }
+    }
+
+    public static class item_packages {
+
+        public final int range_from;
+        public final int range_to;
+        public final double rate;
+
+        public item_packages(int range_from, int range_to, double rate) {
+            this.range_from = range_from;
+            this.range_to = range_to;
+            this.rate = rate;
+        }
+
     }
 }

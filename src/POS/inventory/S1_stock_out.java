@@ -15,10 +15,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
-import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.Lg;
 import POS.utl.MyConnection1;
+import java.sql.SQLException;
 import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 
 /**
@@ -41,8 +40,8 @@ public class S1_stock_out {
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.setString(1, t.name);
                 stmt.setString(2, t.desc);
-                stmt.setDouble(3, FitIn.toDouble(t.qty));
-                stmt.setDouble(4, FitIn.toDouble(t.price));
+                stmt.setDouble(3, t.qty);
+                stmt.setDouble(4, t.price);
                 stmt.setString(5, date);
                 stmt.setString(6, t_main.user_name);
                 stmt.setString(7, t_main.user_id);
@@ -60,7 +59,7 @@ public class S1_stock_out {
                 if (rs.next()) {
                     new_qty = rs.getDouble(1);
                 }
-                new_qty -= FitIn.toDouble(t.qty);
+                new_qty -= t.qty;
                 String s1 = "update " + MyDB.getNames() + ".inventory2_stocks_left set product_qty='" + new_qty + "' where product_name='" + t.name + "' ";
                 PreparedStatement stmt1 = conn.prepareStatement(s1);
                 stmt1.execute();
@@ -78,8 +77,8 @@ public class S1_stock_out {
                 PreparedStatement stmt3 = conn.prepareStatement(s3);
                 stmt3.setString(1, t.name);
                 stmt3.setString(2, t.desc);
-                stmt3.setDouble(3, FitIn.toDouble(t.qty));
-                stmt3.setDouble(4, FitIn.toDouble(t.price));
+                stmt3.setDouble(3, t.qty);
+                stmt3.setDouble(4, t.price);
                 stmt3.setString(5, date);
                 stmt3.setString(6, user);
                 stmt3.setString(7, user_id);
@@ -113,7 +112,7 @@ public class S1_stock_out {
 //            Prompt.call("Successfully Updated");
             Lg.s(S1_stock_out.class, "Successfully Added");
 //            JOptionPane.showMessageDialog(null, "Updated Successfully");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();
@@ -132,8 +131,8 @@ public class S1_stock_out {
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.setString(1, t.name);
                 stmt.setString(2, t.desc);
-                stmt.setDouble(3, FitIn.toDouble(t.qty));
-                stmt.setDouble(4, FitIn.toDouble(t.price));
+                stmt.setDouble(3, t.qty);
+                stmt.setDouble(4, t.price);
                 stmt.setString(5, date);
                 stmt.setString(6, t_main.user_name);
                 stmt.setString(7, t_main.user_id);
@@ -151,7 +150,7 @@ public class S1_stock_out {
                 if (rs.next()) {
                     new_qty = rs.getDouble(1);
                 }
-                new_qty += FitIn.toDouble(t.qty);
+                new_qty += t.qty;
                 String s1 = "update " + MyDB.getNames() + ".inventory2_stocks_left set product_qty='" + new_qty + "' where product_name='" + t.name + "' ";
                 PreparedStatement stmt1 = conn.prepareStatement(s1);
                 stmt1.execute();
@@ -169,8 +168,8 @@ public class S1_stock_out {
                 stmt3.setString(1, t.name);
                 stmt3.setString(2, t.name);
                 stmt3.setString(3, t.desc);
-                stmt3.setDouble(4, FitIn.toDouble(t.price));
-                stmt3.setDouble(5, FitIn.toDouble(t.qty));
+                stmt3.setDouble(4, t.price);
+                stmt3.setDouble(5, t.qty);
                 stmt3.setString(6, remarks);
                 stmt3.setString(7, t.cat_id);
                 stmt3.setString(8, "0");
@@ -207,7 +206,7 @@ public class S1_stock_out {
 //            Prompt.call("Successfully Updated");
             Lg.s(S1_stock_out.class, "Successfully Added");
 //            JOptionPane.showMessageDialog(null, "Updated Successfully");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();

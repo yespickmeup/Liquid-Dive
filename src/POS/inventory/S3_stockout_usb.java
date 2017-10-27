@@ -65,7 +65,7 @@ public class S3_stockout_usb {
                 int cashier_refid = 111;
                 String comments = "comment";
 
-                to_add_product tie = new to_add_product(path, path, path, path, path, path, path
+                to_add_product tie = new to_add_product(path, path, 0, 0, path, path, path
                         , comments, comments, action, path, action,0,0,"","","","",0);
 
                 // do not include canceled

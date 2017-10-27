@@ -105,12 +105,12 @@ import test.*;
  *
  * @author i1
  */
-public class Dashboard1 extends javax.swing.JFrame {
+public class Dashboard3 extends javax.swing.JFrame {
 
     /**
      * Creates new form Dashboard
      */
-    public Dashboard1() {
+    public Dashboard3() {
         initComponents();
         myInit();
     }
@@ -1612,7 +1612,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                 String img_path = System.getProperty("img_path", "C:\\Users\\i1\\");
                 ImgPath.setPath(img_path);
-                Dashboard1 aw = new Dashboard1();
+                Dashboard3 aw = new Dashboard3();
                 System.setProperty("sun.java2d.opengl", "True");
                 Application.setSystemLookAndFeel();
                 Screen.set_normal(aw);
@@ -6349,7 +6349,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         try {
                             date_added = DateType.datetime.parse(t1.date_added);
                         } catch (ParseException ex) {
-                            Logger.getLogger(Dashboard1.class.getName()).
+                            Logger.getLogger(Dashboard3.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
 
@@ -7189,7 +7189,7 @@ public class Dashboard1 extends javax.swing.JFrame {
             try {
                 d = DateType.datetime.parse(lbl_check_date.getText());
             } catch (ParseException ex) {
-                Logger.getLogger(Dashboard1.class.getName()).
+                Logger.getLogger(Dashboard3.class.getName()).
                         log(Level.SEVERE, null, ex);
             }
 
@@ -7241,7 +7241,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                     }
 
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard1.class.getName()).
+                    Logger.getLogger(Dashboard3.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 i_date++;
@@ -7250,7 +7250,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 try {
                     nd = DateType.datetime.parse(cd.check_in);
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard1.class.getName()).
+                    Logger.getLogger(Dashboard3.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 int nights = DateUtils.count_days(nd, md) + 1;
@@ -7276,7 +7276,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                     }
                     start = DateType.datetime.parse(cd.check_in);
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard1.class.getName()).
+                    Logger.getLogger(Dashboard3.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 String date_stayed = "( " + DateType.month_date.format(start) + " - " + DateType.month_date.
@@ -7307,7 +7307,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                     try {
                         date = DateType.datetime.parse(t1.date_added);
                     } catch (ParseException ex) {
-                        Logger.getLogger(Dashboard1.class.getName()).
+                        Logger.getLogger(Dashboard3.class.getName()).
                                 log(Level.SEVERE, null, ex);
                     }
 
@@ -7356,7 +7356,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         try {
                             date_added = DateType.datetime.parse(t1.date_added);
                         } catch (ParseException ex) {
-                            Logger.getLogger(Dashboard1.class.getName()).
+                            Logger.getLogger(Dashboard3.class.getName()).
                                     log(Level.SEVERE, null, ex);
                         }
 //                        z
@@ -7585,7 +7585,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 try {
                     d = DateType.datetime.parse(lbl_check_date.getText());
                 } catch (ParseException ex) {
-                    Logger.getLogger(Dashboard1.class.getName()).
+                    Logger.getLogger(Dashboard3.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 int count = S2_search.ret_guest_charge_count(lbl_table_no.
@@ -7650,7 +7650,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         try {
             d = DateType.datetime.parse(lbl_check_date.getText());
         } catch (ParseException ex) {
-            Logger.getLogger(Dashboard1.class.getName()).
+            Logger.getLogger(Dashboard3.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
         int count = S2_search.ret_guest_charge_count(lbl_table_no.getText(), where_charge);

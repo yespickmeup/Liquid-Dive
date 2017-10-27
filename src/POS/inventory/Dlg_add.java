@@ -1255,13 +1255,13 @@ public class Dlg_add extends javax.swing.JDialog {
 
     private void stock_in_out() {
         Window p = (Window) this;
-        Dlg_stockout nd = Dlg_stockout.create(p, true);
+        Dlg_inventory_stockin_out nd = Dlg_inventory_stockin_out.create(p, true);
         nd.setTitle("");
 //        nd.do_pass("");
-        nd.setCallback(new Dlg_stockout.Callback() {
+        nd.setCallback(new Dlg_inventory_stockin_out.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_stockout.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_inventory_stockin_out.OutputData data) {
 //                closeDialog.ok();
                 data_employee_search();
             }

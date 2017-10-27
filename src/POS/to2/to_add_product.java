@@ -12,8 +12,8 @@ public class to_add_product {
 
     public String name;
     public String desc;
-    public String price;
-    public String qty;
+    public double price;
+    public double qty;
     public String num;
     public String vat;
     public String category_id;
@@ -30,7 +30,7 @@ public class to_add_product {
     public final String item_package_id;
     public final int happy_hour;
 
-    public to_add_product(String name, String desc, String price, String qty, String num, String vat, String category_id, String is_linient
+    public to_add_product(String name, String desc, double price, double qty, String num, String vat, String category_id, String is_linient
             , String w_commission, double comm_amount, String cat_id, double cost, int printing_assembly, int is_active, String category_name
             , String type_id, String type_name, String item_package_id,int happy_hour) {
         this.name = name;
@@ -155,22 +155,25 @@ public class to_add_product {
         this.num = num;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getQty() {
+   
+
+    public double getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(double qty) {
         this.qty = qty;
     }
 
+  
     public String getVat() {
         return vat;
     }

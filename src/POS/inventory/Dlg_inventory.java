@@ -4,6 +4,7 @@
  */
 package POS.inventory;
 
+import POS.Main;
 import POS.dlg2.Dlg_category;
 import POS.dlg2.Dlg_confirm;
 import POS.dlg2.Dlg_search_product;
@@ -30,6 +31,7 @@ import org.jdesktop.swingx.combobox.ListComboBoxModel;
 import POS.utl.Center;
 import POS.utl.Prompt;
 import POS_svc4.S7_uom;
+import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ import synsoftech.fields.Field;
  *
  * @author Dummy
  */
-public class Dlg_add3 extends javax.swing.JDialog {
+public class Dlg_inventory extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_add
@@ -71,30 +73,30 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_add3(java.awt.Frame parent, boolean modal) {
+    private Dlg_inventory(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         myInit();
     }
 
-    private Dlg_add3(java.awt.Dialog parent, boolean modal) {
+    private Dlg_inventory(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         myInit();
     }
 
-    public Dlg_add3() {
+    public Dlg_inventory() {
         super();
         initComponents();
         myInit();
 
     }
-    private Dlg_add3 myRef;
+    private Dlg_inventory myRef;
 
-    private void setThisRef(Dlg_add3 myRef) {
+    private void setThisRef(Dlg_inventory myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_add3> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_inventory> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -102,7 +104,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_add3 create(java.awt.Window parent, boolean modal) {
+    public static Dlg_inventory create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -112,14 +114,14 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_add3 create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_inventory create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_add3 dialog = dialogContainer.get(parent);
+            Dlg_inventory dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_add3((java.awt.Frame) parent, false);
+                dialog = new Dlg_inventory((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().
@@ -134,10 +136,10 @@ public class Dlg_add3 extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_add3 dialog = dialogContainer.get(parent);
+            Dlg_inventory dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_add3((java.awt.Dialog) parent, false);
+                dialog = new Dlg_inventory((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().
@@ -166,7 +168,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_add3 dialog = Dlg_add3.create(new javax.swing.JFrame(), true);
+        Dlg_inventory dialog = Dlg_inventory.create(new javax.swing.JFrame(), true);
 //        dialog.setVisible(true);
 //        FullScreen.do_max_normal(dialog);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -219,6 +221,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
         pm_is_active = new javax.swing.JCheckBoxMenuItem();
         pm_category = new javax.swing.JMenu();
         pm_package = new javax.swing.JMenuItem();
+        jPanel7 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -243,7 +246,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
         jButton1 = new Button.Warning();
         cb_happy_hour = new javax.swing.JCheckBox();
         jButton8 = new Button.Default();
-        jButton9 = new Button.Default();
         jButton10 = new Button.Default();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -259,12 +261,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
 
         jPopupMenu1.setFocusable(false);
         jPopupMenu1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -305,6 +302,17 @@ public class Dlg_add3 extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(pm_package);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -468,14 +476,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jButton9.setText("STOCK IN/OUT");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img2/barcode.png"))); // NOI18N
         jButton10.setText("CODES");
@@ -491,57 +491,52 @@ public class Dlg_add3 extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(tf_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cb_is_selected)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cb_is_lenient)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cb_happy_hour))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(tf_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cb_is_selected)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cb_is_lenient)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cb_happy_hour))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(tf_barcode)
-                                        .addGap(209, 209, 209))
-                                    .addComponent(tf_description))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cb_type, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cb_category, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(tf_barcode)
+                                .addGap(209, 209, 209))
+                            .addComponent(tf_description))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cb_type, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cb_category, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -577,10 +572,9 @@ public class Dlg_add3 extends javax.swing.JDialog {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1))
+                .addGap(3, 3, 3))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -765,102 +759,31 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 919, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 548, Short.MAX_VALUE)
+        );
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.addTab("Stock In & Out", jPanel5);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
+            .addGap(0, 919, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Item Ledger", jPanel6);
-
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Stock In", jPanel7);
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Stock Out", jPanel8);
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Sold Out", jPanel9);
-
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Void", jPanel10);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Reports", jPanel5);
+        jTabbedPane1.addTab("Reports", jPanel6);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1012,10 +935,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
         update_active();
     }//GEN-LAST:event_pm_is_activeActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        stock_in_out();
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         print_barcode();
@@ -1076,7 +995,6 @@ public class Dlg_add3 extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -1088,19 +1006,15 @@ public class Dlg_add3 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JMenu pm_category;
     private javax.swing.JCheckBoxMenuItem pm_is_active;
     private javax.swing.JMenuItem pm_package;
@@ -1113,7 +1027,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//      
+        Main.MyDB.setNames("db_pos_restaurant");
 //        Main.MyDB.setNames("db_pos_restaurant_liquid");
         tf_search.grabFocus();
         tf_barcode.setText("" + S7_uom.get_barcode());
@@ -1124,7 +1038,18 @@ public class Dlg_add3 extends javax.swing.JDialog {
         jButton8.setVisible(false);
         jButton10.setVisible(false);
 //        jButton9.setVisible(false);
+        add_dlg_stockin();
+    }
 
+    private void add_dlg_stockin() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                jPanel5.setLayout(new BorderLayout());
+                Dlg_inventory_stockin_out in_out = new Dlg_inventory_stockin_out();
+                jPanel5.add(in_out.getSurface());
+            }
+        });
     }
 
     private boolean check_code() {
@@ -1352,7 +1277,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
             is_active = 1;
         }
 
-        to_add_product to1 = new to_add_product(barcode, description, "0", barcode, "0", cat_id, is_linient, "0", "0", 0, cat_id, 0, 0, is_active, "", "", "", "", 0);
+        to_add_product to1 = new to_add_product(barcode, description, 0, 0, "0", cat_id, is_linient, "0", "0", 0, cat_id, 0, 0, is_active, "", "", "", "", 0);
         S6_items.delete_data(to1);
         clear_item();
         category_id = cat_id;
@@ -1426,7 +1351,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
         final String cat_id = S10_update_product.get_classid(category_name);
         String barcode = tf_barcode.getText();
         String description = tf_description.getText();
-        String price = "" + FitIn.toDouble(tf_price.getText());
+        double price = FitIn.toDouble(tf_price.getText());
         String is_linient = "0";
         if (cb_is_lenient.isSelected()) {
             is_linient = "1";
@@ -1443,7 +1368,7 @@ public class Dlg_add3 extends javax.swing.JDialog {
                 toString();
         String type_id = S1_categories.ret_type_id(type_name);
 //        System.out.println(" ***** "+type_name + " = "+type_id);
-        to_add_product to1 = new to_add_product(barcode, description, price, barcode, "0", cat_id, is_linient, "0", "0", 0, cat_id, 0, 0, is_active, "", type_id, type_name, "", happy_hour);
+        to_add_product to1 = new to_add_product(barcode, description, price, 0, "0", cat_id, is_linient, "0", "0", 0, cat_id, 0, 0, is_active, "", type_id, type_name, "", happy_hour);
         S6_items.edit_data(to1, is_linient, "" + is_active, type_name, type_id, happy_hour);
         clear_item();
 //        data_employee_search();
@@ -1913,13 +1838,13 @@ public class Dlg_add3 extends javax.swing.JDialog {
 
     private void stock_in_out() {
         Window p = (Window) this;
-        Dlg_stockout nd = Dlg_stockout.create(p, true);
+        Dlg_inventory_stockin_out nd = Dlg_inventory_stockin_out.create(p, true);
         nd.setTitle("");
 //        nd.do_pass("");
-        nd.setCallback(new Dlg_stockout.Callback() {
+        nd.setCallback(new Dlg_inventory_stockin_out.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_stockout.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_inventory_stockin_out.OutputData data) {
 //                closeDialog.ok();
                 data_employee_search();
             }
