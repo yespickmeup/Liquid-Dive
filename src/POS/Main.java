@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mijzcx.synapse.desk.utils.*;
 
+
 /**
  *
  * @author u2
@@ -175,7 +176,7 @@ public class Main {
             MyDB.setNames(mydb);
             CountOrders.setCounts(0);
             //RECEIPT CONFIGS
-
+            
             System.setProperty("business_name", prop.getProperty("business_name", "Synapse Software Tech"));
             System.setProperty("operated_by", prop.getProperty("operated_by", "Operated by: Ronald Pascua"));
             System.setProperty("address", prop.getProperty("address", "Address: Dumaguete City"));

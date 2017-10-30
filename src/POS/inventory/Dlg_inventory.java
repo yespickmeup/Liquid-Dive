@@ -4,7 +4,6 @@
  */
 package POS.inventory;
 
-import POS.Main;
 import POS.dlg2.Dlg_category;
 import POS.dlg2.Dlg_confirm;
 import POS.dlg2.Dlg_search_product;
@@ -1027,7 +1026,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_pos_restaurant");
+//        Main.MyDB.setNames("db_pos_restaurant");
 //        Main.MyDB.setNames("db_pos_restaurant_liquid");
         tf_search.grabFocus();
         tf_barcode.setText("" + S7_uom.get_barcode());
@@ -1039,6 +1038,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jButton10.setVisible(false);
 //        jButton9.setVisible(false);
         add_dlg_stockin();
+        add_dlg_reports();
     }
 
     private void add_dlg_stockin() {
@@ -1048,6 +1048,17 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 jPanel5.setLayout(new BorderLayout());
                 Dlg_inventory_stockin_out in_out = new Dlg_inventory_stockin_out();
                 jPanel5.add(in_out.getSurface());
+            }
+        });
+    }
+
+    private void add_dlg_reports() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                jPanel6.setLayout(new BorderLayout());
+                Dlg_inventory_reports in_out = new Dlg_inventory_reports();
+                jPanel6.add(in_out.getSurface());
             }
         });
     }

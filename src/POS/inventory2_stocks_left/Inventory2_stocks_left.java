@@ -47,8 +47,9 @@ public class Inventory2_stocks_left {
         public final int group_id;
         public final String item_package_id;
         public final int happy_hour;
+        public boolean is_selected;
 
-        public to_inventory2_stocks_left(int id, String lookup_code, int prod_num, String product_name, String description, double price, double product_qty, String types, String types_num, String is_vat, int prod_assembly, int is_linient, int w_commission, double comm_amount, int cat_id, double cost, String img_path, int printing_assembly, int is_active, int group_id, String item_package_id, int happy_hour) {
+        public to_inventory2_stocks_left(int id, String lookup_code, int prod_num, String product_name, String description, double price, double product_qty, String types, String types_num, String is_vat, int prod_assembly, int is_linient, int w_commission, double comm_amount, int cat_id, double cost, String img_path, int printing_assembly, int is_active, int group_id, String item_package_id, int happy_hour, boolean is_selected) {
             this.id = id;
             this.lookup_code = lookup_code;
             this.prod_num = prod_num;
@@ -71,7 +72,17 @@ public class Inventory2_stocks_left {
             this.group_id = group_id;
             this.item_package_id = item_package_id;
             this.happy_hour = happy_hour;
+            this.is_selected = is_selected;
         }
+
+        public boolean isIs_selected() {
+            return is_selected;
+        }
+
+        public void setIs_selected(boolean is_selected) {
+            this.is_selected = is_selected;
+        }
+        
     }
 
     public static void add_data(to_inventory2_stocks_left to_inventory2_stocks_left) {
@@ -242,29 +253,31 @@ public class Inventory2_stocks_left {
         try {
             Connection conn = MyConnection1.connect();
             String s0 = "select "
-                    + "id"
-                    + ",lookup_code"
-                    + ",prod_num"
-                    + ",product_name"
-                    + ",description"
-                    + ",price"
-                    + ",product_qty"
-                    + ",types"
-                    + ",types_num"
-                    + ",is_vat"
-                    + ",prod_assembly"
-                    + ",is_linient"
-                    + ",w_commission"
-                    + ",comm_amount"
-                    + ",cat_id"
-                    + ",cost"
-                    + ",img_path"
-                    + ",printing_assembly"
-                    + ",is_active"
-                    + ",group_id"
-                    + ",item_package_id"
-                    + ",happy_hour"
-                    + " from " + MyDB.getNames() + ".inventory2_stocks_left"
+                    + "i.id"
+                    + ",i.lookup_code"
+                    + ",i.prod_num"
+                    + ",i.product_name"
+                    + ",i.description"
+                    + ",i.price"
+                    + ",i.product_qty"
+                    + ",i.types"
+                    + ",i.types_num"
+                    + ",i.is_vat"
+                    + ",i.prod_assembly"
+                    + ",i.is_linient"
+                    + ",i.w_commission"
+                    + ",i.comm_amount"
+                    + ",i.cat_id"
+                    + ",i.cost"
+                    + ",c.cat_name"
+                    + ",i.printing_assembly"
+                    + ",i.is_active"
+                    + ",i.group_id"
+                    + ",i.item_package_id"
+                    + ",i.happy_hour"
+                    + " from " + MyDB.getNames() + ".inventory2_stocks_left i "
+                    + " join " + MyDB.getNames() + ".category c on"
+                    + " c.id=i.cat_id "
                     + " " + where;
 
             Statement stmt = conn.createStatement();
@@ -293,7 +306,7 @@ public class Inventory2_stocks_left {
                 String item_package_id = rs.getString(21);
                 int happy_hour = rs.getInt(22);
 
-                to_inventory2_stocks_left to = new to_inventory2_stocks_left(id, lookup_code, prod_num, product_name, description, price, product_qty, types, types_num, is_vat, prod_assembly, is_linient, w_commission, comm_amount, cat_id, cost, img_path, printing_assembly, is_active, group_id, item_package_id, happy_hour);
+                to_inventory2_stocks_left to = new to_inventory2_stocks_left(id, lookup_code, prod_num, product_name, description, price, product_qty, types, types_num, is_vat, prod_assembly, is_linient, w_commission, comm_amount, cat_id, cost, img_path, printing_assembly, is_active, group_id, item_package_id, happy_hour, false);
                 datas.add(to);
             }
             return datas;

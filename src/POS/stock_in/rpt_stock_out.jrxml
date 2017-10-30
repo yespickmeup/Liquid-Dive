@@ -94,7 +94,7 @@
                     <font size="11"/>
                     <paragraph leftIndent="5"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$P{category}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{sub_category}]]></textFieldExpression>
             </textField>
         </band>
     </title>

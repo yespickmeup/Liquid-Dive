@@ -2378,7 +2378,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         double peso_bank1 = FitIn.toDouble(lbl_advance_payment_bank.getText());
         double usd_bank = FitIn.toDouble(lbl_advance_payment_usd_bank.getText());
         double credit1 = FitIn.toDouble(lbl_adv_credit_card.getText());
-        double discount1= FitIn.toDouble(lbl_disc_amount.getText());
+        double discount1 = FitIn.toDouble(lbl_disc_amount.getText());
         double prepaid_peso = peso1 + peso_bank1;
         double prepaid_dollar = dollar1 + usd_bank;
         double prepaid_dollar_to_peso = prepaid_dollar * FitIn.toDouble(tf_dollar.getText());
@@ -2386,7 +2386,8 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         double prepaid_total = prepaid_peso + prepaid_dollar_to_peso;
         double prepaid_credit_card = credit1;
         double total = FitIn.toDouble(ds_amountdue.getText());
-        total = total - (prepaid_total + prepaid_credit_card+discount1);
+        total = amount_due - (prepaid_total + prepaid_credit_card + discount1);
+        
         lbl_net.setText(FitIn.fmt_wc_0(total));
         ds_change_peso.setText(FitIn.fmt_wc_0(total));
 
@@ -2396,7 +2397,6 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
         ds_change_dollar.setText(FitIn.fmt_wc_0(dollar2));
 
-       
         if (staff == 1) {
             cb_payable.setVisible(true);
         } else {
@@ -2968,39 +2968,56 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 //        double net = (FitIn.toDouble(ds_change_peso.getText())) + (tendered_dollar * dollar);
         double my_change = 0;
+
         if (cb_credit_peso.isSelected()) {
+
             double my_due = FitIn.toDouble(lbl_net.getText());
-            double my_due2 = FitIn.toDouble(lbl_net.getText());
+            double my_due2 = FitIn.toDouble(ds_change_peso.getText());
 
             double master_card = 0;
             master_card = FitIn.toDouble(lbl_credit_rate.getText()) / 100;
             master_card = my_due2 * master_card;
 
             double aw = master_card;
-            double credit_amount = (aw + my_due2) ;
-//            if (my_due2 > 0) {
-//                lbl_credit.setText("");
-//                lbl_net_credit.setText("");
-//                late_credit = 0;
-//                late_credit_rate = 0;
-//            } else {
-//
-//            }
-            lbl_credit.setText(FitIn.fmt_wc_0(my_due2));
-            lbl_net_credit.setText(FitIn.fmt_wc_0(aw ));
-            late_credit = FitIn.toDouble(lbl_credit.getText()) - FitIn.toDouble(lbl_net_credit.getText());
-            
+            double credit_amount = (aw + my_due2);
+
+            if (my_due2 > 0) {
+                lbl_credit.setText("");
+                lbl_net_credit.setText("");
+                late_credit = 0;
+                late_credit_rate = 0;
+                aw=0;
+            } else {
+                DecimalFormat df3 = new DecimalFormat("#,###");
+                lbl_credit.setText(df3.format(credit_amount * -1) + ".00");
+
+                lbl_net_credit.setText(FitIn.fmt_wc_0(aw * -1));
+                late_credit = FitIn.toDouble(lbl_credit.getText()) - FitIn.
+                        toDouble(lbl_net_credit.getText());
+            }
+            double net_credit2 = FitIn.toDouble(lbl_net_credit.getText());
+//            lbl_credit.setText(FitIn.fmt_wc_0(my_due2));
+//            lbl_net_credit.setText(FitIn.fmt_wc_0(aw));
+//            late_credit = FitIn.toDouble(lbl_credit.getText()) - FitIn.toDouble(lbl_net_credit.getText());
+
             double due = FitIn.toDouble(lbl_net.getText());
-//            ds_amountdue.setText(FitIn.fmt_wc_0(aw * -1 + amount_due));
-//            lbl_net.setText(df2.format((aw * -1 + due) - discount1) + ".00");
+            
+            double total_advance_peso=FitIn.toDouble(lbl_advance_payment.getText())+FitIn.toDouble(lbl_advance_payment_bank.getText());
+            double total_advance_dollar=FitIn.toDouble(lbl_advance_payment_usd.getText())+FitIn.toDouble(lbl_advance_payment_usd_bank.getText());
+            total_advance_dollar = total_advance_dollar*FitIn.toDouble(tf_dollar.getText());
+            double total_amount_due=amount_due-(total_advance_peso+total_advance_dollar);
+            
+            ds_amountdue.setText(df2.format(total_amount_due + net_credit2) + ".00");
+            lbl_net.setText(df2.format(((total_amount_due + net_credit2) - discount1)) + ".00");
+           
             late_due = FitIn.toDouble(ds_amountdue.getText());
             late_net_due = FitIn.toDouble(lbl_net.getText());
 
             double tendered_dollar = FitIn.toDouble(lbl_tendered_dollar.getText());
 
             double all_tendered = (tendered_peso + (tendered_dollar * dollar));
-            my_change = (my_due - all_tendered) - (aw);
-
+            my_change = ((total_amount_due-discount1) - all_tendered) - (aw);
+//            System.out.println("amount_due: "+amount_due+ " all_tendered: "+all_tendered+ " aw: "+aw);
             if (my_change > 0) {
                 my_change = 0;
             }
@@ -3017,16 +3034,21 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             lbl_net_credit.setText("");
             late_credit = 0;
             late_credit_rate = 0;
-
-//            ds_amountdue.setText(FitIn.fmt_wc_0(amount_due));
-//            lbl_net.setText(df2.format(amount_due - discount) + ".00");
+            
+            double total_advance_peso=FitIn.toDouble(lbl_advance_payment.getText())+FitIn.toDouble(lbl_advance_payment_bank.getText());
+            double total_advance_dollar=FitIn.toDouble(lbl_advance_payment_usd.getText())+FitIn.toDouble(lbl_advance_payment_usd_bank.getText());
+            total_advance_dollar = total_advance_dollar*FitIn.toDouble(tf_dollar.getText());
+            double total_amount_due=amount_due-(total_advance_peso+total_advance_dollar);
+            
+            ds_amountdue.setText(FitIn.fmt_wc_0(total_amount_due));
+            lbl_net.setText(df2.format(total_amount_due - discount1) + ".00");
             late_due = FitIn.toDouble(ds_amountdue.getText());
             late_net_due = FitIn.toDouble(lbl_net.getText());
 
             double tendered_dollar = FitIn.toDouble(lbl_tendered_dollar.getText());
             double all_tendered = (tendered_peso + (tendered_dollar * dollar));
 //            JOptionPane.showMessageDialog(null, my_due);
-            my_change = (my_due) - all_tendered;
+            my_change = (total_amount_due - discount1) - all_tendered;
 
         }
 

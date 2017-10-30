@@ -16,8 +16,6 @@ import java.util.Date;
 import java.util.List;
 import POS.utl.MyConnection1;
 import mijzcx.synapse.desk.utils.FitIn;
-import test.Dlg_check;
-import test.Dlg_check.to_guests;
 import test.Dlg_check_liquid;
 
 /**
@@ -53,6 +51,7 @@ public class S5_tables {
         public final String state;
         public final int table_location_id;
 
+        
         public to_tables2(String name, String no, String status, double amount, double rate, String guest_id, String guest_name, String date_added, List<Dlg_check_liquid.to_guests> to_guest, String rate_type, double percentage, String state, int table_location_id) {
             this.name = name;
             this.no = no;

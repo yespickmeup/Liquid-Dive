@@ -10,7 +10,7 @@
  */
 package POS.dlg;
 
-import POS.Main;
+
 import POS.currency.Dlg_currency;
 import POS.currency.S1_currency;
 import POS.printing2.S1_get_sales_for_the_day;

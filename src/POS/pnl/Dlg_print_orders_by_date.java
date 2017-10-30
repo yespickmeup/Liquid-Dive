@@ -780,6 +780,7 @@ public class Dlg_print_orders_by_date extends javax.swing.JDialog {
         init_tbl_bank(tbl_bank);
         init_tbl_tables2(tbl_tables2);
         ret_users();
+        
     }
     static List<Users.to_users> users = new ArrayList();
 

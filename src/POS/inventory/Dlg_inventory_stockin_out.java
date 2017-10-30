@@ -7,6 +7,11 @@ package POS.inventory;
 import POS.stock_in.Srpt_stock_in;
 import POS.branches.Dlg_branches;
 import POS.category_types.S1_categories;
+import POS.inventory2_stocks_left.Inventory2_stocks_left.to_inventory2_stocks_left;
+import POS.inventory_replenishment.Inventory_replenishment_items;
+import POS.inventory_replenishment.Inventory_replenishment_items.to_inventory_replenishment_items;
+import POS.inventory_replenishment.Inventory_replenishments;
+import POS.inventory_replenishment.Inventory_replenishments.to_inventory_replenishments;
 import POS.stock_in.Srpt_stock_in_main;
 import POS.stock_in.Stock_in;
 import POS.stock_in.Stock_in_main;
@@ -323,6 +328,23 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel31 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jButton7 = new Button.Default();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jLabel32 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jPanel23 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tbl_inventory_replenishment_items = new javax.swing.JTable();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -769,7 +791,7 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1000,8 +1022,8 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
@@ -1051,7 +1073,7 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -1334,7 +1356,7 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -1353,6 +1375,202 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Itemized", jPanel11);
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel21.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton7.setText("Search Items");
+        jButton7.setFocusable(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jProgressBar2.setString("");
+        jProgressBar2.setStringPainted(true);
+
+        jLabel32.setText("Status:");
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32))
+                .addGap(15, 15, 15))
+        );
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jTable1);
+
+        jLabel34.setText("Total no. of rows:");
+
+        jLabel35.setText("0");
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(jLabel35)))
+        );
+
+        jPanel23.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbl_inventory_replenishment_items.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane7.setViewportView(tbl_inventory_replenishment_items);
+
+        jLabel36.setText("Total no. of rows:");
+
+        jLabel37.setText("0");
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addComponent(jLabel36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel37)))
+        );
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Inventory Replenishment", jPanel9);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1528,6 +1746,14 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
         jLabel15.setText("0.00");
         jLabel13.setText("0");
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        search_replenishment();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       ret_replenishment_items();
+    }//GEN-LAST:event_jTable1MouseClicked
     /**
      * @param args the command line arguments
      */
@@ -1553,6 +1779,7 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -1588,7 +1815,12 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1601,28 +1833,39 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_branch;
     private javax.swing.JLabel lbl_ref_no;
+    private javax.swing.JTable tbl_inventory_replenishment_items;
     private javax.swing.JTable tbl_prod;
     private javax.swing.JTable tbl_stock_in_main;
     private javax.swing.JTable tbl_stock_in_main1;
@@ -1648,6 +1891,9 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
 
         init_tbl_stock_in_main(tbl_stock_in_main);
         init_tbl_stock_out_main(tbl_stock_in_main1);
+        init_tbl_inventory_replenishments(jTable1);
+        init_tbl_inventory_replenishment_items(tbl_inventory_replenishment_items);
+        ret_replenishments();
         ref_no();
         jScrollPane5.setVisible(false);
     }
@@ -2429,6 +2675,8 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
             public void run() {
                 List<Srpt_stock_in.field> datas = new ArrayList();
                 String jrxml = "rpt_stock_in.jrxml";
+                String category = "All";
+                String sub_category = "All";
                 String date_from = DateType.sf.format(jDateChooser3.getDate());
                 String date_to = DateType.sf.format(jDateChooser4.getDate());
 
@@ -2439,9 +2687,13 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
                     String where = " where prod_name like '%%' ";
                     if (!cb_is_selected5.isSelected() && !cb_is_selected6.isSelected()) {
                         where = where + " and s.types_num='" + sub_cat_id + "' ";
+                        category = cb_category3.getSelectedItem().toString();
+                        sub_category = cb_type3.getSelectedItem().toString();
                     }
-                    if (cb_is_selected5.isSelected() && !cb_is_selected6.isSelected()) {
+                    if (!cb_is_selected5.isSelected() && cb_is_selected6.isSelected()) {
                         where = where + " and s.cat_id='" + cat_id + "' ";
+                        category = cb_category3.getSelectedItem().toString();
+                        sub_category = "All";
                     }
                     if (!jCheckBox6.isSelected()) {
                         where = where + " and Date(si.date_added) between '" + date_from + "' and '" + date_to + "' ";
@@ -2453,9 +2705,13 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
                     String where = " where prod_name like '%%' ";
                     if (!cb_is_selected5.isSelected() && !cb_is_selected6.isSelected()) {
                         where = where + " and s.types_num='" + sub_cat_id + "' ";
+                        category = cb_category3.getSelectedItem().toString();
+                        sub_category = cb_type3.getSelectedItem().toString();
                     }
-                    if (cb_is_selected5.isSelected() && !cb_is_selected6.isSelected()) {
+                    if (!cb_is_selected5.isSelected() && cb_is_selected6.isSelected()) {
                         where = where + " and s.cat_id='" + cat_id + "' ";
+                        category = cb_category3.getSelectedItem().toString();
+                        sub_category = "All";
                     }
                     if (!jCheckBox6.isSelected()) {
                         where = where + " and Date(si.date_added) between '" + date_from + "' and '" + date_to + "' ";
@@ -2468,8 +2724,6 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
                 String business_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
                 String date = DateType.month_date.format(new Date());
 
-                String category = "All";
-                String sub_category = "All";
                 String printed_by = "Administrator";
                 Srpt_stock_in rpt = new Srpt_stock_in(business_name, date, category, sub_category);
                 rpt.fields.addAll(datas);
@@ -2740,4 +2994,262 @@ public class Dlg_inventory_stockin_out extends javax.swing.JDialog {
             lbl_ref_no.setText(no);
         }
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" replenishment ">
+    private void search_replenishment() {
+        Window p = (Window) this;
+        Dlg_inventory_replenishment nd = Dlg_inventory_replenishment.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_inventory_replenishment.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_inventory_replenishment.OutputData data) {
+                closeDialog.ok();
+                int id = 0;
+                String replenishment_no = Inventory_replenishments.increment_id();
+                String date_added = DateType.datetime.format(new Date());
+                String added_by = to_users.get_user();
+                String remarks = "";
+                int status = 0;
+                int no_of_items = data.selected_items.size();
+
+                final Inventory_replenishments.to_inventory_replenishments rep = new to_inventory_replenishments(id, replenishment_no, date_added, added_by, remarks, status, no_of_items);
+
+                List<to_inventory2_stocks_left> items = data.selected_items;
+                final List<Inventory_replenishment_items.to_inventory_replenishment_items> selected = new ArrayList();
+                for (to_inventory2_stocks_left to : items) {
+                    int id2 = 0;
+                    String item_code = to.product_name;
+                    String description = to.description;
+                    double product_qty = to.product_qty;
+                    double price = to.price;
+                    double cost = to.cost;
+                    String category = to.img_path;
+                    String category_id = "" + to.cat_id;
+                    String sub_category = to.types;
+                    String sub_category_id = to.types_num;
+                    int is_active = to.is_active;
+                    int item_package = FitIn.toInt(to.item_package_id);
+                    int status2 = 0;
+                    Inventory_replenishment_items.to_inventory_replenishment_items f = new Inventory_replenishment_items.to_inventory_replenishment_items(id, replenishment_no, item_code, description, product_qty, price, cost, category, category_id, sub_category, sub_category_id, is_active, item_package, status, date_added, added_by, remarks);
+                    selected.add(f);
+
+                }
+                jProgressBar2.setString("Loading...Please wait...");
+                jProgressBar2.setIndeterminate(true);
+                Thread t = new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Inventory_replenishments.add_data(rep, selected);
+                        Alert.set(1, "");
+                        ret_replenishments();
+                        jProgressBar2.setString("Finished...");
+                        jProgressBar2.setIndeterminate(false);
+                    }
+                });
+                t.start();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" inventory_replenishments "> 
+    public static ArrayListModel tbl_inventory_replenishments_ALM;
+    public static Tblinventory_replenishmentsModel tbl_inventory_replenishments_M;
+
+    public static void init_tbl_inventory_replenishments(JTable tbl_inventory_replenishments) {
+        tbl_inventory_replenishments_ALM = new ArrayListModel();
+        tbl_inventory_replenishments_M = new Tblinventory_replenishmentsModel(tbl_inventory_replenishments_ALM);
+        tbl_inventory_replenishments.setModel(tbl_inventory_replenishments_M);
+        tbl_inventory_replenishments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_inventory_replenishments.setRowHeight(25);
+        int[] tbl_widths_inventory_replenishments = {120, 80, 80, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_inventory_replenishments.length; i < n; i++) {
+            if (i == 0) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_inventory_replenishments, i, tbl_widths_inventory_replenishments[i]);
+        }
+        Dimension d = tbl_inventory_replenishments.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_inventory_replenishments.getTableHeader().setPreferredSize(d);
+        tbl_inventory_replenishments.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_inventory_replenishments.setRowHeight(25);
+        tbl_inventory_replenishments.setFont(new java.awt.Font("Arial", 0, 12));
+    }
+
+    public static void loadData_inventory_replenishments(List<to_inventory_replenishments> acc) {
+        tbl_inventory_replenishments_ALM.clear();
+        tbl_inventory_replenishments_ALM.addAll(acc);
+    }
+
+    public static class Tblinventory_replenishmentsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Transaction No", "Date Added", "Item/s", "added_by", "remarks", "status", "no_of_items"
+        };
+
+        public Tblinventory_replenishmentsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_inventory_replenishments tt = (to_inventory_replenishments) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.replenishment_no;
+                case 1:
+                    return " " + DateType.convert_slash(tt.date_added);
+                case 2:
+                    return " " + tt.no_of_items;
+                case 3:
+                    return tt.added_by;
+                case 4:
+                    return tt.remarks;
+                case 5:
+                    return tt.status;
+                default:
+                    return tt.no_of_items;
+            }
+        }
+    }
+
+    private void ret_replenishments() {
+        String where = " order by id desc ";
+        List<to_inventory_replenishments> datas = Inventory_replenishments.ret_data(where);
+        loadData_inventory_replenishments(datas);
+        jLabel35.setText("" + datas.size());
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" inventory_replenishment_items "> 
+    public static ArrayListModel tbl_inventory_replenishment_items_ALM;
+    public static Tblinventory_replenishment_itemsModel tbl_inventory_replenishment_items_M;
+
+    public static void init_tbl_inventory_replenishment_items(JTable tbl_inventory_replenishment_items) {
+        tbl_inventory_replenishment_items_ALM = new ArrayListModel();
+        tbl_inventory_replenishment_items_M = new Tblinventory_replenishment_itemsModel(tbl_inventory_replenishment_items_ALM);
+        tbl_inventory_replenishment_items.setModel(tbl_inventory_replenishment_items_M);
+        tbl_inventory_replenishment_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_inventory_replenishment_items.setRowHeight(25);
+        int[] tbl_widths_inventory_replenishment_items = {70, 100, 150, 150, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_inventory_replenishment_items.length; i < n; i++) {
+            if (i == 1) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_inventory_replenishment_items, i, tbl_widths_inventory_replenishment_items[i]);
+        }
+        Dimension d = tbl_inventory_replenishment_items.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_inventory_replenishment_items.getTableHeader().setPreferredSize(d);
+        tbl_inventory_replenishment_items.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_inventory_replenishment_items.setRowHeight(25);
+        tbl_inventory_replenishment_items.setFont(new java.awt.Font("Arial", 0, 12));
+    }
+
+    public static void loadData_inventory_replenishment_items(List<to_inventory_replenishment_items> acc) {
+        tbl_inventory_replenishment_items_ALM.clear();
+        tbl_inventory_replenishment_items_ALM.addAll(acc);
+    }
+
+    public static class Tblinventory_replenishment_itemsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Item Code", "Description", "Category", "Sub Category", "Previous Qty", "price", "cost", "category", "category_id", "sub_category", "sub_category_id", "is_active", "item_package", "status", "date_added", "added_by", "remarks"
+        };
+
+        public Tblinventory_replenishment_itemsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_inventory_replenishment_items tt = (to_inventory_replenishment_items) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.item_code;
+                case 1:
+                    return " " + tt.description;
+                case 2:
+                    return " " + tt.category;
+                case 3:
+                    return " " + tt.sub_category;
+                case 4:
+                    return " " + tt.product_qty;
+                case 5:
+                    return tt.price;
+                case 6:
+                    return tt.cost;
+                case 7:
+                    return tt.category;
+                case 8:
+                    return tt.category_id;
+                case 9:
+                    return tt.sub_category;
+                case 10:
+                    return tt.sub_category_id;
+                case 11:
+                    return tt.is_active;
+                case 12:
+                    return tt.item_package;
+                case 13:
+                    return tt.status;
+                case 14:
+                    return tt.date_added;
+                case 15:
+                    return tt.added_by;
+                default:
+                    return tt.remarks;
+            }
+        }
+    }
+
+    private void ret_replenishment_items() {
+        int row = jTable1.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_inventory_replenishments to = (to_inventory_replenishments) tbl_inventory_replenishments_ALM.get(row);
+        String where = " where replenishment_no='" + to.replenishment_no + "'";
+        List<to_inventory_replenishment_items> datas = Inventory_replenishment_items.ret_data(where);
+        loadData_inventory_replenishment_items(datas);
+        jLabel37.setText("" + datas.size());
+    }
+//</editor-fold> 
+
+//</editor-fold> 
+    //</editor-fold>
 }

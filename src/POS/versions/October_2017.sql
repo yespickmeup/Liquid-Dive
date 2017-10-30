@@ -59,6 +59,35 @@ alter table stock_out_main add remarks varchar(255);
 alter table stock_out_main add supplier varchar(255);
 
 
+drop table if exists inventory_replenishments;
+create table inventory_replenishments(
+id int auto_increment primary key
+,replenishment_no varchar(255)
+,date_added datetime
+,added_by varchar(255)
+,remarks varchar(255)
+,status int
+,no_of_items int
+);
 
-
+drop table if exists inventory_replenishment_items;
+create table inventory_replenishment_items(
+id int auto_increment primary key
+,replenishment_no varchar(255)
+,item_code varchar(255)
+,description varchar(255)
+,product_qty double
+,price double
+,cost double
+,category varchar(255)
+,category_id varchar(255)
+,sub_category varchar(255)
+,sub_category_id varchar(255)
+,is_active int
+,item_package int
+,status int
+,date_added datetime
+,added_by varchar(255)
+,remarks varchar(255)
+);
 
