@@ -1066,10 +1066,17 @@ public class Dlg_billing_history extends javax.swing.JDialog {
 
             Srpt_category_discounts.field tothe = new Srpt_category_discounts.field(cdd_othe_name, cdd_othe_due, cdd_othe_disc_percent, cdd_othe_disc_amount, cdd_othe_sub_total);
             cdd2.add(tothe);
-
+            
+            List<Srpt_category_discounts.field> cdd3=new ArrayList();
+            for(Srpt_category_discounts.field cd:cdd2){
+                if(cd.getDisc_amount()>0){
+                    cdd3.add(cd);
+                }
+            }
+            
             to_pay = FitIn.toDouble(df2.format(to_pay));
             Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation,
-                    SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2, accom3, advances, cdd2, my_date, to.guest_ids, to.room_id,
+                    SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2, accom3, advances, cdd3, my_date, to.guest_ids, to.room_id,
                     to.checkin_date, "", accomodation_1, accom_total, img_path, to_pay, to.guest_names, dollar,
                     total_charges, discount, dollar_rate, to.adv_peso, to.adv_usd, to.paid_peso, to.paid_dollar,
                     to.paid_credit, to.bank_php, to.bank_usd, to.credit_card, dollar_to_pay, new ArrayList());

@@ -6624,7 +6624,13 @@ public class Dashboard1 extends javax.swing.JFrame {
                 Srpt_category_discounts.field cd4 = (Srpt_category_discounts.field) cdd_list.get(3);
                 cd4.setDisc_amount(dis_others);
                 cd4.setSub_total(cd4.getDue() - dis_others);
-
+                
+                List<Srpt_category_discounts.field> cdd_list2=new ArrayList();
+                for(Srpt_category_discounts.field f: cdd_list ){
+                    if(f.getDisc_amount()>0){
+                        cdd_list2.add(f);
+                    }
+                }
 //                List<Srpt_category_discounts.field> cdd_list2=new ArrayList();
 //                for(Srpt_category_discounts.field sss:cdd_list){
 //                    if(sss.getDisc_amount()!=0){
@@ -6664,7 +6670,10 @@ public class Dashboard1 extends javax.swing.JFrame {
                         accom3, advances, cdd_list, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
                         total, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
                         print.paid_credit, bank_php, bank_usd, advance_credit_card, prepaid_dollar, rpt_summary);
-
+                 Srpt_liquid_billing rpt2 = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
+                        accom3, advances, cdd_list2, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
+                        total, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
+                        print.paid_credit, bank_php, bank_usd, advance_credit_card, prepaid_dollar, rpt_summary);
 //                test_print(rpt,table_id, resto_items, bar_items, guest_names, guest_ids, advances, accom, rpt_others); 
                 try {
                     JasperReport jasperReport;
@@ -6693,7 +6702,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                             getResourceAsStream(l2);
                     jasperReport2 = JasperCompileManager.compileReport(is2);
                     jasperPrint2 = JasperFillManager.fillReport(jasperReport2, JasperUtil.
-                            setParameter(rpt), JasperUtil.emptyDatasource());
+                            setParameter(rpt2), JasperUtil.emptyDatasource());
 
                     //Test print
 //                    JRViewer viewer = new JRViewer(jasperPrint);

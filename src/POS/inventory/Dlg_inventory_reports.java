@@ -640,6 +640,7 @@ public class Dlg_inventory_reports extends javax.swing.JDialog {
                 if (jCheckBox9.isSelected()) {
                     where = where + " and ct.status=0 ";
                 }
+                where = where + " and ct.description like '%" + tf_search2.getText() + "%' ";
                 where = where + " group by ct.room_guest_id,ct.product_name,ct.price,ct.discount order by ct.product_name asc ";
 
                 List<Srpt_sold_out_items.field> datas = Srpt_sold_out_items.ret_data(where);
@@ -653,7 +654,7 @@ public class Dlg_inventory_reports extends javax.swing.JDialog {
                     }
                 }
                 String printed_by = "Administrator";
-                Srpt_sold_out_items rpt = new Srpt_sold_out_items(business_name, date, category, sub_category,paid,unpaid);
+                Srpt_sold_out_items rpt = new Srpt_sold_out_items(business_name, date, category, sub_category, paid, unpaid);
                 rpt.fields.addAll(datas);
                 String jrxml = "rpt_sold_out_items.jrxml";
                 report_sold_out(rpt, jrxml);
