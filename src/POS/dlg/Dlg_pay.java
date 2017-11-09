@@ -3004,8 +3004,9 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             
             double total_advance_peso=FitIn.toDouble(lbl_advance_payment.getText())+FitIn.toDouble(lbl_advance_payment_bank.getText());
             double total_advance_dollar=FitIn.toDouble(lbl_advance_payment_usd.getText())+FitIn.toDouble(lbl_advance_payment_usd_bank.getText());
+            double credit_card=FitIn.toDouble(lbl_adv_credit_card.getText());
             total_advance_dollar = total_advance_dollar*FitIn.toDouble(tf_dollar.getText());
-            double total_amount_due=amount_due-(total_advance_peso+total_advance_dollar);
+            double total_amount_due=amount_due-(total_advance_peso+total_advance_dollar+credit_card);
             
             ds_amountdue.setText(df2.format(total_amount_due + net_credit2) + ".00");
             lbl_net.setText(df2.format(((total_amount_due + net_credit2) - discount1)) + ".00");
@@ -3037,8 +3038,9 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             
             double total_advance_peso=FitIn.toDouble(lbl_advance_payment.getText())+FitIn.toDouble(lbl_advance_payment_bank.getText());
             double total_advance_dollar=FitIn.toDouble(lbl_advance_payment_usd.getText())+FitIn.toDouble(lbl_advance_payment_usd_bank.getText());
+            double credit_card=FitIn.toDouble(lbl_adv_credit_card.getText());
             total_advance_dollar = total_advance_dollar*FitIn.toDouble(tf_dollar.getText());
-            double total_amount_due=amount_due-(total_advance_peso+total_advance_dollar);
+            double total_amount_due=amount_due-(total_advance_peso+total_advance_dollar+credit_card);
             
             ds_amountdue.setText(FitIn.fmt_wc_0(total_amount_due));
             lbl_net.setText(df2.format(total_amount_due - discount1) + ".00");
@@ -3092,7 +3094,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             type_peso();
         }
     }
-
+    
     private void sel() {
         if (cb_credit_peso.isSelected()) {
             cb_credit_peso.setSelected(false);

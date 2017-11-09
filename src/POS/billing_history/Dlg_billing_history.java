@@ -4,12 +4,14 @@
  */
 package POS.billing_history;
 
+import POS.Main;
 import POS.billing_history.S1_billing_guest.to_billing_guest;
 import POS.billing_history.S1_billing_history.to_billing_histories;
 import POS.category_discounts.S1_category_discounts;
 import POS.currency.S1_currency;
 import POS.pnl.Dashboard1;
 import POS.utl.DateType;
+import POS.utl.DateUtils1;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.lowagie.text.Font;
@@ -312,15 +314,15 @@ public class Dlg_billing_history extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(183, 183, 183)
                         .addComponent(cb_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -370,7 +372,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
         pnl_rpt.setLayout(pnl_rptLayout);
         pnl_rptLayout.setHorizontalGroup(
             pnl_rptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 494, Short.MAX_VALUE)
         );
         pnl_rptLayout.setVerticalGroup(
             pnl_rptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,7 +385,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 494, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +400,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -484,12 +486,12 @@ public class Dlg_billing_history extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        Main.MyDB.setNames("db_pos_restaurant");
+        Main.MyDB.setNames("db_pos_restaurant");
         init_key();
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());
         dp_from.addPropertyChangeListener(new PropertyChangeListener() {
-            
+
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 data_cols();
@@ -542,9 +544,9 @@ public class Dlg_billing_history extends javax.swing.JDialog {
         tbl_billing_histories.setModel(tbl_billing_histories_M);
         tbl_billing_histories.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_billing_histories.setRowHeight(25);
-        int[] tbl_widths_billing_histories = {0, 0, 100, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_billing_histories = {100, 170, 170, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_billing_histories.length; i < n; i++) {
-            if (i == 2) {
+            if (i == 0) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_billing_histories, i, tbl_widths_billing_histories[i]);
@@ -555,9 +557,9 @@ public class Dlg_billing_history extends javax.swing.JDialog {
         tbl_billing_histories.getTableHeader().
                 setPreferredSize(d);
         tbl_billing_histories.getTableHeader().
-                setFont(new java.awt.Font("Arial", Font.BOLD, 12));
+                setFont(new java.awt.Font("Arial", 0, 12));
         tbl_billing_histories.setRowHeight(35);
-        tbl_billing_histories.setFont(new java.awt.Font("Arial", 1, 12));
+        tbl_billing_histories.setFont(new java.awt.Font("Arial", 0, 12));
     }
 
     private void loadData_billing_histories(List<to_billing_histories> acc) {
@@ -568,7 +570,7 @@ public class Dlg_billing_history extends javax.swing.JDialog {
     public static class Tblbilling_historiesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "id", "room_id", "ROOM", "guest_ids", "guest_names", "checkin_date", "DATE", "status", "gross_sales", "NET PAY", "adv_peso", "adv_usd", "paid_peso", "paid_dollar", "paid_credit", "dollar_rate", "discount", "discount_rate", "discount_name", "room_guest_ids", "user_name", "credit_card"
+            "Room", "Checkin", "Checkout", "guest_ids", "guest_names", "checkin_date", "DATE", "status", "gross_sales", "NET PAY", "adv_peso", "adv_usd", "paid_peso", "paid_dollar", "paid_credit", "dollar_rate", "discount", "discount_rate", "discount_name", "room_guest_ids", "user_name", "credit_card"
         };
 
         public Tblbilling_historiesModel(ListModel listmodel) {
@@ -596,11 +598,11 @@ public class Dlg_billing_history extends javax.swing.JDialog {
             to_billing_histories tt = (to_billing_histories) getRow(row);
             switch (col) {
                 case 0:
-                    return tt.id;
-                case 1:
-                    return tt.room_id;
-                case 2:
                     return " " + tt.room_name;
+                case 1:
+                    return " " + DateType.convert_jan_1_2013_datetime(tt.checkin_date);
+                case 2:
+                    return " " + DateType.convert_jan_1_2013_datetime(tt.checkout_date);
                 case 3:
                     return tt.guest_ids;
                 case 4:
@@ -746,8 +748,8 @@ public class Dlg_billing_history extends javax.swing.JDialog {
         String busi_name = System.getProperty("business_name", "");
         double room_rate = 100;
         String accomodation = "";// + (count) + " x nights @ " + FitIn.fmt_wc_0(table_rate);   
-        String img_path = System.getProperty("img_path", "C:\\Users\\Maytopacka\\");
-        String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Maytopacka\\") + "img_templates\\rpt\\";
+        String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\");
+        String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "img_templates\\rpt\\";
         List<Srpt_bar_and_resto.field> rpt_bar_and_resto = new ArrayList();
         List<Srpt_bar_and_resto.field> rpt_bar = new ArrayList();
         List<Srpt_bar_and_resto.field> regroup = new ArrayList();
@@ -762,6 +764,18 @@ public class Dlg_billing_history extends javax.swing.JDialog {
 //        accom.clear();
         String resto_f_date = "";
         String bar_f_date = "";
+        String billing_history_date = System.getProperty("billing_history_date", "2017-11-01");
+
+        Date d3 = new Date();
+        Date d4 = new Date();
+        try {
+            d3 = DateType.datetime.parse(to.checkout_date);
+            d4 = DateType.sf.parse(billing_history_date);
+        } catch (ParseException ex) {
+            Logger.getLogger(Dlg_billing_history.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int count = DateUtils1.count_days(d3, d4);
+
         for (S1_billing_history_items.to_billing_history_items t1 : items) {
             Date date = new Date();
 
@@ -777,7 +791,9 @@ public class Dlg_billing_history extends javax.swing.JDialog {
             if (t1.cat_id.equals("10")) {
 
                 double am = (t1.price * t1.qty) - t1.discount_amount;
-
+                if (count > 0) {
+                    am = (t1.price) - t1.discount_amount;
+                }
                 Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("RESTO", date, am, t1.qty, t1.discount_amount);
                 regroup.add(tbar);
 
@@ -801,6 +817,9 @@ public class Dlg_billing_history extends javax.swing.JDialog {
             } else if (t1.cat_id.equals("12")) {
 //                System.out.println("t1: "+t1.description+ " am: "+t1.price+ " dis: "+t1.discount_amount);
                 double am = (t1.price * t1.qty) - t1.discount_amount;
+                if (count > 0) {
+                    am = (t1.price) - t1.discount_amount;
+                }
 //                System.out.println("desc: "+t1.description+ " price: "+t1.price+ " disc: "+t1.discount_amount);
                 Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("BAR", date, am, t1.qty, t1.discount_amount);
                 regroup3.add(tbar);
@@ -838,6 +857,9 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 double price = 0;
                 DecimalFormat df2 = new DecimalFormat("#,###");
                 double am = FitIn.toDouble(df2.format((t1.price * t1.qty) - t1.discount_amount) + ".00");
+                if (count > 0) {
+                    am = FitIn.toDouble(df2.format((t1.price) - t1.discount_amount) + ".00");
+                }
                 double amount = am;
                 nights = 1;
                 nights = FitIn.toInt("" + qty);
@@ -849,6 +871,9 @@ public class Dlg_billing_history extends javax.swing.JDialog {
                 accom_total += amount;
             } else {
                 double am = (t1.price * t1.qty) - t1.discount_amount;
+                if (count > 0) {
+                    am = (t1.price) - t1.discount_amount;
+                }
                 Srpt_others.field tbar = new Srpt_others.field(t1.cat_name.
                         toUpperCase(), t1.description, t1.qty, am, t1.discount_amount);
                 rpt_others.add(tbar);
@@ -875,9 +900,9 @@ public class Dlg_billing_history extends javax.swing.JDialog {
 //            System.out.println(my_data + " -------  ");
         }
 
-        for (String s : resto_dates) {
-            System.out.println(s + " ---- ");
-        }
+//        for (String s : resto_dates) {
+//            System.out.println(s + " ---- ");
+//        }
         for (Srpt_bar_and_resto.field ss2 : regroup2) {
 //            System.out.println(ss2.getDesc()+ " *********");
             double am = 0;
@@ -1066,14 +1091,14 @@ public class Dlg_billing_history extends javax.swing.JDialog {
 
             Srpt_category_discounts.field tothe = new Srpt_category_discounts.field(cdd_othe_name, cdd_othe_due, cdd_othe_disc_percent, cdd_othe_disc_amount, cdd_othe_sub_total);
             cdd2.add(tothe);
-            
-            List<Srpt_category_discounts.field> cdd3=new ArrayList();
-            for(Srpt_category_discounts.field cd:cdd2){
-                if(cd.getDisc_amount()>0){
+
+            List<Srpt_category_discounts.field> cdd3 = new ArrayList();
+            for (Srpt_category_discounts.field cd : cdd2) {
+                if (cd.getDisc_amount() > 0) {
                     cdd3.add(cd);
                 }
             }
-            
+
             to_pay = FitIn.toDouble(df2.format(to_pay));
             Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation,
                     SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2, accom3, advances, cdd3, my_date, to.guest_ids, to.room_id,

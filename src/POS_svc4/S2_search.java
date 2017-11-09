@@ -1524,7 +1524,7 @@ public class S2_search {
                     + ",order_no"
                     + ",id"
                     + " from " + MyDB.getNames() + ".customer_tables_details "
-                    + " " + where + "  group by product_name,price,discount order by date_added asc "; //
+                    + " " + where + "  group by product_name,Date(date_added),price,discount order by date_added asc "; //
 //            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -1654,7 +1654,7 @@ public class S2_search {
                     + ",ct.order_no"
                     //                    + ",(select i.item_package_id from " + MyDB.getNames() + ".inventory2_stocks_left i where i.product_name=ct.product_name order by id desc limit 1)"
                     + " from " + MyDB.getNames() + ".customer_tables_details ct "
-                    + " " + where_guest_11 + " group by ct.guest_id,ct.product_name,ct.price,ct.discount";
+                    + " " + where_guest_11 + " group by ct.guest_id,ct.product_name,Date(ct.date_added),ct.price,ct.discount";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);

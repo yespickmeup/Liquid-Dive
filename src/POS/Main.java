@@ -197,7 +197,7 @@ public class Main {
             System.setProperty("catid_orders_wo_qty", prop.getProperty("catid_orders_wo_qty", "false"));
             System.setProperty("order_no", prop.getProperty("order_no", "false"));
             System.setProperty("save_billing_history_bar", prop.getProperty("save_billing_history_bar", "false"));
-
+            System.setProperty("billing_history_date", prop.getProperty("billing_history_date", "2017-11-01"));
 //            System.out.println(MyDB.getNames() + " ------");
             Lg.$.severe(System.getProperty("receipt_printer"));
 
