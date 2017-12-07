@@ -3105,7 +3105,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         double payment = 0;
         List< S2_search.to_items> datas = new ArrayList();
         if (ui_items.equals("list")) {
-            System.out.println("list");
+//            System.out.println("list");
             for (S2_search.to_items s : results) {
                 S2_search.to_items to = new S2_search.to_items(s.name, s.uom, s.desc, s.price, s.qty, s.img_path, s.qty2, s.guest_id, s.cat_id, s.category_name, s.printing_assembly, s.status, s.disc_name, s.disc_rate, s.discount, s.customer_name, s.customer_address, s.customer_address, s.date_added, s.group_id, s.nights, s.guest_no, s.check_out, s.room_guest_id, s.user_name, s.item_package_id, s.sub_category_name, s.sub_category_id, s.order_no);
                 datas.add(to);
@@ -6944,12 +6944,13 @@ public class Dashboard1 extends javax.swing.JFrame {
                 datas.add(t);
             }
         }
-
+        
         if (System.getProperty("version", "ordering").
                 equals("ordering")) {
             tf_search.setVisible(false);
             jLabel6.setVisible(false);
         }
+        
         boolean check = false;
         check = S2_guest_charges.select_guests(lbl_table_no.getText());
 
@@ -7119,9 +7120,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                         s.discount);
                 rpt.fields.add(f);
             }
-
         }
-
     }
 
     private void set_bill_discount(String discount, double rate, String guest_id, String guest_name) {
