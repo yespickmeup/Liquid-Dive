@@ -78,7 +78,7 @@ public class Srpt_billing_statement {
         public int is_add_ons;
         public field() {
         }
-
+        
         public field(String item_code, String description, String assembly, double qty, double selling_price, double discount, double amount, String datetime,
                 String cat_id, String sub_cat_id, boolean is_selected,
                 String order_no, String table_no_id, String date_added, String guest_id, String guest_name, String user_name,double net_due,int is_add_ons) {

@@ -7899,10 +7899,10 @@ public class Dashboard1 extends javax.swing.JFrame {
             String description = tt.desc;
             String assembly1 = "" + tt.printing_assembly;
             double qty = tt.qty;
-            double selling_price = tt.price;
-            double discount = (tt.disc_rate / 100) * (qty * selling_price);
-
-            double amount = (qty * selling_price) - discount;
+            double selling_price = tt.price*qty;
+            double discount = (tt.disc_rate / 100) * ( selling_price);
+            double amount = selling_price ;
+            
             String qty1 = "" + qty;
             String types_no_wo_qty = System.getProperty("catid_orders_wo_qty", "");
             String[] l_types_no_wo_qty = types_no_wo_qty.split(",");
@@ -7913,12 +7913,13 @@ public class Dashboard1 extends javax.swing.JFrame {
                     qty1 = "";
                 }
             }
+            
             String table_no_id = table_name;
             String date_added = DateType.dash2.format(new Date());
             String guest_id = "";
             String guest_name = guess_names;
             String user_name = to_users.getUser_screen_name();
-            double net_due = amount - discount;
+            double net_due = selling_price - discount ;
             Srpt_billing_statement.field field_billing_statement = new Srpt_billing_statement.field(item_code, description, assembly1, qty, selling_price, discount,
                     amount, "", cat_id, sub_cat_id, true, order_no, table_no_id, date_added, guest_id, guest_name, user_name, net_due, 0);
             rpt_billing_statement.fields.add(field_billing_statement);
