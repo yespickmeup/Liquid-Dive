@@ -1533,6 +1533,7 @@ public class S2_search {
             while (rs.next()) {
                 String names = rs.getString(1);
                 String desc = rs.getString(2);
+
                 double price = rs.getDouble(3);
                 double qty = rs.getDouble(4);
                 String img_path = rs.getString(5);
@@ -1663,7 +1664,7 @@ public class S2_search {
             while (rs.next()) {
                 String names = rs.getString(1);
                 String desc = rs.getString(2);
-                System.out.println("Names: " + names + ", desc: " + desc);
+//                System.out.println("Names: " + names + ", desc: " + desc);
                 double price = rs.getDouble(3);
                 double qty = rs.getDouble(4);
                 String img_path = rs.getString(5);
@@ -1783,7 +1784,7 @@ public class S2_search {
                     + ",ct.order_no"
                     + ",(select i.item_package_id from " + MyDB.getNames() + ".inventory2_stocks_left i where i.product_name=ct.product_name order by id desc limit 1)"
                     + " from " + MyDB.getNames() + ".customer_tables_details ct "
-                    + " " + where_guest_11_dive + " group by ct.guest_id,ct.product_name,ct.price,ct.discount";
+                    + " " + where_guest_11_dive + " group by ct.guest_id,ct.product_name,ct.discount";
 //            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -1794,13 +1795,14 @@ public class S2_search {
 
                 String names = rs.getString(1);
                 String desc = rs.getString(2);
-              
+
                 String guest_id = rs.getString(6);
                 if (selected_guest > 1 || (all_guest > 1 && selected_guest == 0) || selected_guest == 0) {
                     desc = desc + " - " + rs.getString(23).
                             toUpperCase();
                 }
                 double price = rs.getDouble(3);
+//                System.out.println("desc: " + desc + " = " + price);
                 double qty = rs.getDouble(4);
                 String img_path = rs.getString(5);
 
