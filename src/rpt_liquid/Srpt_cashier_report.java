@@ -11,7 +11,6 @@ import POS.to.to_users;
 import POS.utl.DateType;
 import POS.utl.MyConnection1;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -19,13 +18,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import mijzcx.synapse.desk.utils.Application;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
-import rpt_liquid.Srpt_credits.field;
 
 /**
  *
@@ -133,7 +130,7 @@ public class Srpt_cashier_report {
 
     public static Srpt_cashier_report ret_data_session(String session_id, Date date_from, Date date_to, String busi_name, double dollar, String dfrom, String dto, List<S1_my_sales.to_receipts> receipts, double tendered, double discount, double credit, double expences, String users, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card) {
 
-        String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Ronald\\") + "img_templates\\rpt\\";
+        String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "img_templates\\rpt\\";
         Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0);
         String user = to_users.username1;
         try {

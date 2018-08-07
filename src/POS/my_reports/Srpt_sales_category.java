@@ -187,7 +187,7 @@ public class Srpt_sales_category {
     }
 
     public static Srpt_sales_category get_sales_summary(String date_from, String date_to) {
-        String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Ronald\\") + "img_templates\\rpt_sales_report\\";
+        String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "img_templates\\rpt_sales_report\\";
         String busi_name = System.getProperty("business_name", "Liquid Dive Dumaguete");
         Date d = new Date();
         Date f = new Date();
