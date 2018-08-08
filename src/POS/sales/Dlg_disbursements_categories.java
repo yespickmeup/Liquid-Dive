@@ -267,6 +267,7 @@ public class Dlg_disbursements_categories extends javax.swing.JDialog {
 
         buttonGroup1.add(jCheckBox4);
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setSelected(true);
         jCheckBox4.setText("All");
 
         buttonGroup1.add(jCheckBox5);

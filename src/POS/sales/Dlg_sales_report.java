@@ -4,7 +4,6 @@
  */
 package POS.sales;
 
-import POS.Main;
 import POS.currency.S1_currency;
 import POS.inventory.S6_items;
 import POS.my_reports.Srpt_disbursements;
@@ -614,7 +613,7 @@ public class Dlg_sales_report extends javax.swing.JDialog {
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());
         jPanel4.setVisible(false);
-        Main.MyDB.setNames("db_pos_liquid");
+//        Main.MyDB.setNames("db_pos_liquid");
         set_cashiers();
 
         b_name = System.getProperty("business_name", "Synapse");

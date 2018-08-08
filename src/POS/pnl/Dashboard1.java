@@ -32,7 +32,6 @@ import POS.printing2.rpt_orders1;
 import POS.rooms.S1_check_in;
 import POS.rpt2.rpt_report;
 import POS.rpt2.to_date_from;
-import POS.sales.Dlg_sales_report;
 import POS.svc.S12_retval_user_level;
 import POS.svc.S15_save_new_pen_orders;
 import POS.svc.S3_insert_new_user;
@@ -61,6 +60,7 @@ import POS.printing2.Dlg_print_orders;
 import POS.printing2.Srpt_billing_statement;
 import POS.redo_receipts.Dlg_receipts;
 import POS.sales.Dlg_cashier_sales_all;
+import POS.sales.Dlg_sales_report2;
 import POS_svc4.S2_search;
 import POS_svc4.S2_search.to_items;
 import POS_svc4.S2_search.to_items_status;
@@ -5251,13 +5251,13 @@ public class Dashboard1 extends javax.swing.JFrame {
             nd.setVisible(true);
         } else {
             Window p = (Window) this;
-            Dlg_sales_report nd = Dlg_sales_report.create(p, true);
+            Dlg_sales_report2 nd = Dlg_sales_report2.create(p, true);
             nd.setTitle("");
-            nd.do_pass("");
-            nd.setCallback(new Dlg_sales_report.Callback() {
+//            nd.do_pass("");
+            nd.setCallback(new Dlg_sales_report2.Callback() {
 
                 @Override
-                public void ok(CloseDialog closeDialog, Dlg_sales_report.OutputData data) {
+                public void ok(CloseDialog closeDialog, Dlg_sales_report2.OutputData data) {
 //                        closeDialog.ok();
                 }
             });
@@ -5345,6 +5345,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 to_users.setUser_level1("" + user_level);
                 to_users.setUsername1(name);
                 to_users.setUser_screen_name(name);
+               
                 myInit();
                 set_or();
                 if (to_users.get_inventory() == 1) {

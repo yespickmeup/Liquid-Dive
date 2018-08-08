@@ -19,6 +19,7 @@ public class to_users {
     public static String username1;
     public static String user_level1;
     public static String user_screen_name;
+    public static String id;
     public to_users(String username, String user_level) {
         username1 = username;
         user_level1 = user_level;
@@ -43,6 +44,38 @@ public class to_users {
     @Override
     public String toString() {
         return "to_users{" + "username=" + username1 + ", user_level=" + user_level1 + '}';
+    }
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        to_users.id = id;
+    }
+
+    public static int getCheck_ins() {
+        return check_ins;
+    }
+
+    public static void setCheck_ins(int check_ins) {
+        to_users.check_ins = check_ins;
+    }
+
+    public static int getCheck_outs() {
+        return check_outs;
+    }
+
+    public static void setCheck_outs(int check_outs) {
+        to_users.check_outs = check_outs;
+    }
+
+    public static int getInventorys() {
+        return inventorys;
+    }
+
+    public static void setInventorys(int inventorys) {
+        to_users.inventorys = inventorys;
     }
 
     public static String get_lvl() {

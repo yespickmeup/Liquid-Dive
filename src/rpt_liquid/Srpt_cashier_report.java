@@ -6,6 +6,7 @@ package rpt_liquid;
 
 import POS.Main;
 import POS.currency.S1_currency;
+import POS.receipts.Receipts;
 import POS.sales.S1_my_sales;
 import POS.to.to_users;
 import POS.utl.DateType;
@@ -655,6 +656,151 @@ public class Srpt_cashier_report {
             return jasper;
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+    
+    public static Srpt_cashier_report ret_data_session2(String session_id, Date date_from, Date date_to, String busi_name, double dollar, String dfrom
+            , String dto, List<Receipts.to_receipts> receipts, double tendered, double discount, double credit, double expences, String users, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card) {
+
+        String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "img_templates\\rpt\\";
+        Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0);
+       
+        String user = to_users.username1;
+        try {
+            Connection conn = MyConnection1.connect();
+            double foods = 0;
+            double beverages = 0;
+
+            for (Receipts.to_receipts t : receipts) {
+                String s2 = "select "
+                        + "qty"
+                        + ",unit_price"
+                        + ",cat_name"
+                        + ",group_id"
+                        + " from " + Main.MyDB.getNames() + ".receipt_items where "
+                        + " receipt_id ='" + t.id + "' "
+                        + " ";
+            }
+
+            String user_name = "";
+            if (to_users.username1 == null) {
+                user_name = "Ronald Pascua";
+            } else {
+                user_name = to_users.ret_data(to_users.username1);
+            }
+
+            double net = ((tendered + discount) - credit) - expences;
+            List<Srpt_credits.field> rpt_credits = new ArrayList();
+            String s4 = "select "
+                    + "or_no"
+                    + ",bank_name"
+                    + ",card_holder"
+                    + ",card_no"
+                    + ",approval_code"
+                    + ",amount"
+                    + ",dollar_amount"
+                    + ",dollar_rate"
+                    + " from " + Main.MyDB.getNames() + ".credits where   "
+                    + "Date(date_payed) between '" + dfrom + "' and '" + dto + "'"
+                    + "and user_name like '%" + users + "%'"
+                    + " ";
+            Statement stmt4 = conn.createStatement();
+            ResultSet rs4 = stmt4.executeQuery(s4);
+            while (rs4.next()) {
+                String trans_no = rs4.getString(1);
+                String card_type = rs4.getString(2);
+                String card_holder = rs4.getString(3);
+                String card_no = rs4.getString(4);
+                String approval_code = rs4.getString(5);
+                double amount = rs4.getDouble(6);
+                double additional = rs4.getDouble(7);
+                double dollar_rate = rs4.getDouble(8);
+                Srpt_credits.field to = new Srpt_credits.field(trans_no, card_type, card_holder, card_no, approval_code, amount, additional, dollar_rate);
+                rpt_credits.add(to);
+            }
+            List<Srpt_expenses.field> rpt_expenses = new ArrayList();
+            String s5 = "select "
+                    + "date_added"
+                    + ",amount"
+                    + ",purpose"
+                    + ",category_name"
+                    + ",vat"
+                    + " from " + Main.MyDB.getNames() + ".expenses where "
+                    + "  Date(date_added) between '" + dfrom + "' and '" + dto + "' "
+                    + "and user_name like '%" + users + "%' order by category_name asc"
+                    + " ";
+
+            Statement stmt5 = conn.createStatement();
+            ResultSet rs5 = stmt5.executeQuery(s5);
+            while (rs5.next()) {
+                Date d = new Date();
+                d = DateType.datetime.parse(rs5.getString(1));
+                String date_added = DateType.time.format(d);
+                double amount = rs5.getDouble(2);
+                String purpose = rs5.getString(3);
+                String category_name = rs5.getString(4);
+                String vat = rs5.getString(5);
+
+                Srpt_expenses.field to = new Srpt_expenses.field(date_added, amount, purpose, category_name, vat);
+                rpt_expenses.add(to);
+            }
+
+            List<Srpt_advance_payments.field> advance_payments = new ArrayList();
+            String s10 = "select "
+                    + "date_added"
+                    + ",amount_paid"            
+                    + ",peso_on_bank"
+                     + ",usd"
+                    + ",usd_on_bank"
+                    + ",bank"
+                    + ",approval_code"
+                    + ",credit_amount"
+                    + ",guest_name"
+                    + " from " + Main.MyDB.getNames() + ".guest_advance_payment where "
+                    + "Date(date_added) between '" + dfrom + "' and '" + dto + "' "
+                    + "and user_name like '%" + users + "%' "
+                    + " ";
+
+            Statement stmt10 = conn.createStatement();
+            ResultSet rs10 = stmt10.executeQuery(s10);
+            while (rs10.next()) {
+                String date_added = DateType.convert_jan_1_2013_datetime(rs10.
+                        getString(1));
+                double php_cash = rs10.getDouble(2);
+                double php_bank = rs10.getDouble(3);
+                double usd_cash = rs10.getDouble(4);
+                double usd_bank = rs10.getDouble(5);
+                String bank = rs10.getString(6);
+                String approval_code = rs10.getString(7);
+                double credit_card1 = rs10.getDouble(8);
+                String guest = rs10.getString(9);
+                Srpt_advance_payments.field to = new Srpt_advance_payments.field(date_added, php_cash, php_bank, usd_cash, usd_bank, bank, approval_code, credit_card1, guest);
+                advance_payments.add(to);
+            }
+
+            List<String> datas = S1_my_sales.ret_cashier();
+            List<Srpt_cashiers.field> data = new ArrayList();
+            for (String s : datas) {
+                users = to_users.ret_user(s);
+                double am = 0;
+                String s6 = "select sum(peso) from " + Main.MyDB.getNames() + ".receipts where Date(receipt_date) between '" + dfrom + "' and '" + dto + "'"
+                        + " and user_name like '%" + users + "%'";
+                Statement stmt6 = conn.createStatement();
+                ResultSet rs6 = stmt6.executeQuery(s6);
+                if (rs6.next()) {
+                    am = rs6.getDouble(1);
+                }
+                Srpt_cashiers.field t = new Srpt_cashiers.field(s, am);
+                data.add(t);
+            }
+            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, advance_payments, date_from, date_to, busi_name, user_name, dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, user, data, cashin, cashout, addtl_cashin, dollar, gross, advance_payment, advance_payment_usd, to_users.username1, outside_cash, cc_reflenishment, bank_php, bank_usd, credit_card);
+
+            System.out.println("SUBREPORT_DIR: "+SUBREPORT_DIR);
+            return to1;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection1.close();
         }
     }
 }

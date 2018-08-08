@@ -29,8 +29,10 @@ public class Srpt_sales_by_category {
     public final String category;
     public final String category_type;
     public final List<field> fields;
-
-    public Srpt_sales_by_category(String business_name, String address, String contact_no, String date, String cashier, String category, String category_type) {
+    public final double grand_total;
+    public final double paid;
+    public final double unpaid;
+    public Srpt_sales_by_category(String business_name, String address, String contact_no, String date, String cashier, String category, String category_type,double grand_total,double paid,double unpaid) {
         this.business_name = business_name;
         this.address = address;
         this.contact_no = contact_no;
@@ -39,6 +41,9 @@ public class Srpt_sales_by_category {
         this.category = category;
         this.category_type = category_type;
         this.fields = new ArrayList();
+        this.grand_total=grand_total;
+        this.paid=paid;
+        this.unpaid=unpaid;
     }
 
     public static class field {
