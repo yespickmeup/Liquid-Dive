@@ -7,6 +7,7 @@ package POS.sales;
 
 import POS.categories.Categories;
 import POS.categories.Category_types;
+import POS.currency.S1_currency;
 import POS.expenses.S1_expenses_categories;
 import POS.my_reports.Srpt_disbursements;
 import POS.receipts.Receipt_items;
@@ -20,6 +21,7 @@ import static POS.sales.Dlg_sales_report.get_viewer_conn_summary;
 import POS.to.to_users;
 import POS.users.Users;
 import POS.utl.DateType;
+import POS.utl.DateUtils1;
 import POS.utl.MyConnection1;
 import POS.utl.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -839,14 +841,15 @@ public class Dlg_sales_report2 extends javax.swing.JDialog {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel20)
-                        .addComponent(jLabel19)))
+                        .addComponent(jLabel19))
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel16)
+                        .addComponent(jLabel17)
+                        .addComponent(jLabel18)))
                 .addContainerGap())
         );
 
@@ -1429,9 +1432,27 @@ public class Dlg_sales_report2 extends javax.swing.JDialog {
 //                lbl_dollar.setText(FitIn.fmt_wc_0(dollar1));
 //                lbl_discounts.setText(FitIn.fmt_wc_0(discount1));
 //                lbl_credit.setText(FitIn.fmt_wc_0(credit1));
+                double dollar_rate = 0;
                 String business_name = System.getProperty("business_name", "");
                 double outside_cash = 0;
-                final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session("", dp_from.getDate(), dp_to.getDate(), business_name, dollar1, date_from, date_to, datas, peso1, discount1, credit1, t.expenses, users, t.cashin, t.cashout, t.addtl_cashins, 0, gross, advance_payment, advance_payment_usd, outside_cash, 0, 0, 0, 0);
+                int count_days = DateUtils1.count_days(dp_from.getDate(), dp_to.getDate());
+                if (count_days == 0) {
+                    String where3 = " where Date(date_added) ='" + date_from + "' ";
+                    List<S1_currency.to_currencies> currency = S1_currency.ret_data_where(where3);
+                    if (!currency.isEmpty()) {
+                        S1_currency.to_currencies cur = (S1_currency.to_currencies) currency.get(0);
+                        dollar_rate = FitIn.toDouble(cur.amount);
+                    }
+                } else {
+                    String where3 = " where Date(date_added) ='" + date_to + "' ";
+                    List<S1_currency.to_currencies> currency = S1_currency.ret_data_where(where3);
+                    if (!currency.isEmpty()) {
+                        S1_currency.to_currencies cur = (S1_currency.to_currencies) currency.get(0);
+                        dollar_rate = FitIn.toDouble(cur.amount);
+                    }
+                }
+
+                final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session("", dp_from.getDate(), dp_to.getDate(), business_name, dollar1, date_from, date_to, datas, peso1, discount1, credit1, t.expenses, users, t.cashin, t.cashout, t.addtl_cashins, 0, gross, advance_payment, advance_payment_usd, outside_cash, 0, 0, 0, 0,dollar_rate,0);
                 jrxml_name = "rpt_daily_sales_liquid.jrxml";
                 report_get_viewer_sales_summary(to, jrxml_name);
 

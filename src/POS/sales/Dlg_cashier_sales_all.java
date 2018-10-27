@@ -4,6 +4,8 @@
  */
 package POS.sales;
 
+import POS.currency.Dlg_currency;
+import POS.currency.S1_currency;
 import POS.expenses.S1_expenses_categories;
 import POS.rpt2.rpt_report;
 import POS.rpt2.to_date_to;
@@ -14,6 +16,7 @@ import POS.send_mail.Email;
 import POS.to.to_users;
 import POS.utl.DateType;
 import POS.utl.DateUtils;
+import POS.utl.DateUtils1;
 import POS.utl.Prompt;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -55,7 +58,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
 
     public void setCallback(Callback callback) {
         this.callback = callback;
-
 
     }
 
@@ -167,7 +169,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-
         Dlg_cashier_sales_all dialog = Dlg_cashier_sales_all.create(new javax.swing.JFrame(), true);
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().
@@ -192,7 +193,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
 
     }
 
@@ -256,6 +256,9 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         lbl_adv_usd_bank = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         lbl_credit_card = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -493,6 +496,17 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
             }
         });
 
+        jLabel17.setText("Dollar Rate:");
+
+        jTextField1.setFocusable(false);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons/settings (4).png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -509,12 +523,20 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
                         .addGap(68, 68, 68)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(dp_from, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dp_from, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10)
-                        .addComponent(dp_to, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(cb_session, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(dp_to, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(cb_session, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,10 +605,60 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel9))
+                                .addGap(3, 3, 3)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_cash_in, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_cashout, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_addtl_cashins, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16))
+                                .addGap(3, 3, 3)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_peso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_dollar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_credit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_discounts, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_advance_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(lbl_advance_payment_bank, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_adv_usd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(lbl_adv_usd_bank, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl_credit_card, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -597,60 +669,13 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dp_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(dp_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cb_session)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel9))
-                                        .addGap(3, 3, 3)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbl_cash_in, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl_cashout, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl_addtl_cashins, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel15)
-                                            .addComponent(jLabel16))
-                                        .addGap(3, 3, 3)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbl_peso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl_dollar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl_credit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl_discounts, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl_expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cb_session))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lbl_advance_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(lbl_advance_payment_bank, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lbl_adv_usd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(lbl_adv_usd_bank, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lbl_credit_card, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField1)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(2, 2, 2))))
         );
 
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -716,11 +741,11 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -733,7 +758,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addGap(7, 7, 7))
         );
@@ -746,11 +771,11 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         pnl_rpt.setLayout(pnl_rptLayout);
         pnl_rptLayout.setHorizontalGroup(
             pnl_rptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1303, Short.MAX_VALUE)
+            .addGap(0, 1289, Short.MAX_VALUE)
         );
         pnl_rptLayout.setVerticalGroup(
             pnl_rptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 478, Short.MAX_VALUE)
+            .addGap(0, 486, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -778,11 +803,11 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         pnl_float.setLayout(pnl_floatLayout);
         pnl_floatLayout.setHorizontalGroup(
             pnl_floatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1303, Short.MAX_VALUE)
+            .addGap(0, 1289, Short.MAX_VALUE)
         );
         pnl_floatLayout.setVerticalGroup(
             pnl_floatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 478, Short.MAX_VALUE)
+            .addGap(0, 486, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -814,7 +839,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         );
         pnl_expensesLayout.setVerticalGroup(
             pnl_expensesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 454, Short.MAX_VALUE)
         );
 
         cb_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -852,7 +877,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
                         .addComponent(cb_category, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(cb_vat)
-                        .addGap(0, 817, Short.MAX_VALUE)))
+                        .addGap(0, 803, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -878,7 +903,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -999,6 +1024,10 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
     private void lbl_credit_cardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_credit_cardMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_lbl_credit_cardMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dollar();
+    }//GEN-LAST:event_jButton1ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1010,6 +1039,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
     private javax.swing.JCheckBox cb_vat;
     private com.toedter.calendar.JDateChooser dp_from;
     private com.toedter.calendar.JDateChooser dp_to;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1019,6 +1049,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1043,6 +1074,7 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_addtl_cashins;
     private javax.swing.JLabel lbl_adv_usd;
     private javax.swing.JLabel lbl_adv_usd_bank;
@@ -1107,7 +1139,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
                     set_report();
                 }
 
-
             }
         });
 
@@ -1120,7 +1151,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
 
     private void set_cashiers2() {
         cb_cashier.setModel(new ListComboBoxModel(S1_my_sales.ret_cb_data()));
-
 
     }
     String session = "1";
@@ -1324,14 +1354,13 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         } else {
             loadData_receipts(S1_my_sales.ret_data_date(date_from, date_to));
         }
-        
 
         to_details t = S1_my_sales.ret_cash_in(users, date_from, date_to);
         lbl_cash_in.setText(FitIn.fmt_wc_0(t.cashin));
 //        System.out.println("t.advance_payment: "+t.advance_payment);
         double bank_php = 0;
         double bank_usd = 0;
-        double credit_card = 0;     
+        double credit_card = 0;
         lbl_expenses.setText(FitIn.fmt_wc_0(t.expenses));
         lbl_cashout.setText(FitIn.fmt_wc_0(t.cashout));
         lbl_addtl_cashins.setText(FitIn.fmt_wc_0(t.addtl_cashins));
@@ -1339,21 +1368,36 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         lbl_adv_usd.setText(FitIn.fmt_wc_0(t.advance_payment_usd));
         lbl_advance_payment_bank.setText(FitIn.fmt_wc_0(t.bank_php));
         lbl_adv_usd_bank.setText(FitIn.fmt_wc_0(t.bank_usd));
-        
-        List<Srpt_advance_payments.field> advances=Srpt_advance_payments.get_expenses(users, date_from, date_to, date_from, users);
-        for(Srpt_advance_payments.field to: advances){
-            credit_card+=to.getCredit_card();
+
+        List<Srpt_advance_payments.field> advances = Srpt_advance_payments.get_expenses(users, date_from, date_to, date_from, users);
+        for (Srpt_advance_payments.field to : advances) {
+            credit_card += to.getCredit_card();
         }
 //        System.out.println("User: "+users);
 //        System.out.println("From: "+date_from);
 //        System.out.println("To: "+date_to);
 //        System.out.println("Credit Card: "+credit_card);
-        
-        
+
         lbl_credit_card.setText(FitIn.fmt_wc_0(credit_card));
         outside_cash = t.outside_cash;
         cc_reflenishment = t.cc_reflenishment;
 
+        int count_days = DateUtils1.count_days(dp_from.getDate(), dp_to.getDate());
+        if (count_days == 0) {
+            String where3 = " where Date(date_added) ='" + date_from + "' ";
+            List<S1_currency.to_currencies> currency = S1_currency.ret_data_where(where3);
+            if (!currency.isEmpty()) {
+                S1_currency.to_currencies cur = (S1_currency.to_currencies) currency.get(0);
+                jTextField1.setText(FitIn.fmt_wc_0(cur.amount));
+            }
+        } else {
+            String where3 = " where Date(date_added) ='" + date_to + "' ";
+            List<S1_currency.to_currencies> currency = S1_currency.ret_data_where(where3);
+            if (!currency.isEmpty()) {
+                S1_currency.to_currencies cur = (S1_currency.to_currencies) currency.get(0);
+                jTextField1.setText(FitIn.fmt_wc_0(cur.amount));
+            }
+        }
         compute();
     }
     private ArrayListModel tbl_receipt_items_ALM;
@@ -1513,7 +1557,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         String date_to = DateType.sf.format(dp_to.getDate());
         String user_name = to_users.username1;
 
-
         double tendered = FitIn.toDouble(lbl_peso.getText());
         double discount = FitIn.toDouble(lbl_discounts.getText());
         double credit = FitIn.toDouble(lbl_credit.getText());
@@ -1527,7 +1570,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         double bank_php = FitIn.toDouble(lbl_advance_payment_bank.getText());
         double bank_usd = FitIn.toDouble(lbl_adv_usd_bank.getText());
         double credit_card = FitIn.toDouble(lbl_credit_card.getText());
-
 
         String jrxml_name = "";
         String users = "";
@@ -1543,32 +1585,33 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
             users = to_users.ret_user(users);
         }
 
-
         String business_name = System.getProperty("business_name", "");
+        double dollar_rate = FitIn.toDouble(jTextField1.getText());
+        double total_dollar = (0 + advance_payment_usd + bank_usd) * dollar_rate;
         if (version.equals("resto")) {
+
             final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session(session, dp_from.
-                    getDate(), dp_to.getDate(), business_name, dollar, date_from
-                    , date_to, tbl_receipts_ALM, tendered, discount, credit
-                    , expences, users, cashin, cashout, addtl_cashin, 0, gross
-                    , advance_payment, advance_payment_usd, outside_cash, cc_reflenishment
-                    , bank_php, bank_usd, credit_card);
+                    getDate(), dp_to.getDate(), business_name, dollar, date_from,
+                    date_to, tbl_receipts_ALM, tendered, discount, credit,
+                    expences, users, cashin, cashout, addtl_cashin, 0, gross,
+                    advance_payment, advance_payment_usd, outside_cash, cc_reflenishment,
+                    bank_php, bank_usd, credit_card, dollar_rate, total_dollar);
             jrxml_name = "rpt_daily_sales_liquid.jrxml";
-            
+
             if (to_users.user_level1.equals("1")) {
                 jrxml_name = "rpt_daily_sales_liquid_all.jrxml";
             }
             report_get_viewer_conn_summary(to, jrxml_name);
         } else {
             final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session(session, dp_from.
-                    getDate(), dp_to.getDate(), business_name, dollar, date_from, date_to, tbl_receipts_ALM, tendered, discount, credit
-                    , expences, users, cashin, cashout, addtl_cashin, 0, gross, advance_payment, advance_payment_usd
-                    , outside_cash, cc_reflenishment, bank_php, bank_usd, credit_card);
+                    getDate(), dp_to.getDate(), business_name, dollar, date_from, date_to, tbl_receipts_ALM, tendered, discount, credit,
+                    expences, users, cashin, cashout, addtl_cashin, 0, gross, advance_payment, advance_payment_usd,
+                    outside_cash, cc_reflenishment, bank_php, bank_usd, credit_card, dollar_rate, total_dollar);
 
             jrxml_name = "rpt_daily_sales_cashier_2.jrxml";
             report_get_viewer_conn_summary(to, jrxml_name);
 
         }
-
 
     }
 
@@ -1582,10 +1625,8 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
 
         String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Ronald\\") + "img_templates\\rpt\\";
 
-        Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", data, 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0);
+        Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", data, 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0,0);
         String jrxml_name = "rpt_daily_sales_cashier_2.jrxml";
-
-
 
         JRViewer viewer = get_viewer_from(to1, "rpt_daily_sales_cashier_2.jrxml");
         JFrame f = Application.launchMainFrame3(viewer, "", true);
@@ -1634,7 +1675,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         String date_from = DateType.sf.format(dp_from.getDate());
         String date_to = DateType.sf.format(dp_to.getDate());
 
-
         String users = "";
         if (cb_cashier.getSelectedIndex() == -1) {
         } else {
@@ -1669,7 +1709,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         report_set_expenses(to, jrxml_name);
 
     }
-
 
     private void report_set_float(final Srpt_cash_float_main to, String jrxml_name) {
         pnl_float.removeAll();
@@ -1707,7 +1746,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
 
         try {
 
-
             return JasperUtil.getJasperViewer(
                     compileJasper(rpt_name),
                     JasperUtil.setParameter(to),
@@ -1723,7 +1761,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
 
         try {
 
-
             return JasperUtil.getJasperViewer(
                     compileJasper(rpt_name),
                     JasperUtil.setParameter(to),
@@ -1738,7 +1775,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
 
         try {
 
-
             return JasperUtil.getJasperViewer(
                     compileJasper_float(rpt_name),
                     JasperUtil.setParameter(to),
@@ -1752,7 +1788,6 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
     public static JRViewer get_viewer_expenses(Srpt_expenses_all to, String rpt_name) {
 
         try {
-
 
             return JasperUtil.getJasperViewer(
                     compileJasper_expenses(rpt_name),
@@ -1831,12 +1866,10 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         double credit = to.credit;
         to_edit_sales to1 = S1_edit_sales.ret_data(to.room_guest_ids);
 
-
         double ap_peso_cash = to1.amount_paid;
         double ap_peso_bank = to1.peso_on_bank;
         double ap_dollar_cash = to1.usd;
         double ap_dollar_bank = to1.usd_on_bank;
-
 
         Window p = (Window) this;
         Dlg_edit_sales nd = Dlg_edit_sales.create(p, true);
@@ -1861,5 +1894,23 @@ public class Dlg_cashier_sales_all extends javax.swing.JDialog {
         if (evt.isPopupTrigger()) {
             jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
         }
+    }
+
+    private void dollar() {
+        Window p = (Window) this;
+        Dlg_currency nd = Dlg_currency.create(p, true);
+        nd.setTitle("");
+//        nd.do_pass("");
+        nd.setCallback(new Dlg_currency.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_currency.OutputData data) {
+//                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+
+        nd.setVisible(true);
     }
 }

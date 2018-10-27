@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -952,7 +951,7 @@ public class Dlg_cashier_sales extends javax.swing.JDialog {
         if (version.equals("resto")) {
             final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session(session, dp_from.
                     getDate(), dp_to.getDate(), user_name, 0, date_from, date_to, tbl_receipts_ALM, tendered
-                    , discount, credit, expences,"",0,0,0,0,0,0,0,outside_cash,0,0,0,0);
+                    , discount, credit, expences,"",0,0,0,0,0,0,0,outside_cash,0,0,0,0,0,0);
             jrxml_name = "rpt_daily_sales_liquid.jrxml";
             report_get_viewer_conn_summary(to, jrxml_name);
         } else {
@@ -960,7 +959,7 @@ public class Dlg_cashier_sales extends javax.swing.JDialog {
 //         
             final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session(session, dp_from.
                     getDate(), dp_to.getDate(), "", 0, date_from, date_to, tbl_receipts_ALM
-                    , tendered, discount, credit, expences,"",0,0,0,0,0,0,0,outside_cash,0,0,0,0);
+                    , tendered, discount, credit, expences,"",0,0,0,0,0,0,0,outside_cash,0,0,0,0,0,0);
 ////                JOptionPane.showMessageDialog(null, to.foods);
             jrxml_name = "rpt_daily_sales_cashier.jrxml";
             

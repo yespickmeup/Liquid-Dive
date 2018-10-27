@@ -162,8 +162,39 @@ public class S1_currency {
         }
     }
 
+    public static List<to_currencies> ret_data_where(String where) {
+        List<to_currencies> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection1.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",dollar"
+                    + ",amount"
+                    + ",date_added"
+                    + " from " + MyDB.getNames() + ".currencies "
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String dollar = rs.getString(2);
+                String amount = rs.getString(3);
+                String date_added = rs.getString(4);
+                to_currencies to = new to_currencies(id, dollar, amount, date_added);
+                datas.add(to);
+            }
+            return datas;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection1.close();
+        }
+    }
+
     public static void update_cashier_session() {
-        String date=DateType.sf.format(new Date());
+        String date = DateType.sf.format(new Date());
         try {
             Connection conn = MyConnection1.connect();
             String s0 = "update " + MyDB.getNames() + ".cashier_sessions set "
@@ -262,7 +293,6 @@ public class S1_currency {
                         stmt4.execute();
                     }
                 }
-
 
             }
 //            }

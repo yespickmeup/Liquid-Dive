@@ -4,7 +4,6 @@
  */
 package POS.currency;
 
-import POS.Main;
 import POS.currency.S1_currency.to_currencies;
 import POS.utl.DateType;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -208,6 +207,7 @@ public class Dlg_currency extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jButton2.setText("CLOSE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -223,13 +223,13 @@ public class Dlg_currency extends javax.swing.JDialog {
 
         tbl_currencies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbl_currencies.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -286,9 +286,7 @@ public class Dlg_currency extends javax.swing.JDialog {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dp_date, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(dp_date, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tf_to_dollar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

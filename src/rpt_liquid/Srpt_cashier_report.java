@@ -63,8 +63,9 @@ public class Srpt_cashier_report {
     public final double bank_php;
     public final double bank_usd;
     public final double credit_card;
-
-    public Srpt_cashier_report(String SUBREPORT_DIR, List<Srpt_credits.field> rpt_credits, List<Srpt_expenses.field> rpt_expenses, List<Srpt_advance_payments.field> rpt_advances, Date date_from, Date date_to, String busi_name, String my_db, double dollar, double tendered, double discount, double credit, double foods, double beverages, double expences, double tot_bev, double net_total, String user_name, List<Srpt_cashiers.field> rpt_cashiers, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, String cashier_name, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card) {
+    public final double dollar_rate;
+    public final double total_dollars;
+    public Srpt_cashier_report(String SUBREPORT_DIR, List<Srpt_credits.field> rpt_credits, List<Srpt_expenses.field> rpt_expenses, List<Srpt_advance_payments.field> rpt_advances, Date date_from, Date date_to, String busi_name, String my_db, double dollar, double tendered, double discount, double credit, double foods, double beverages, double expences, double tot_bev, double net_total, String user_name, List<Srpt_cashiers.field> rpt_cashiers, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, String cashier_name, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card, double dollar_rate,double total_dollars) {
         this.SUBREPORT_DIR = SUBREPORT_DIR;
         this.rpt_credits = rpt_credits;
         this.rpt_expenses = rpt_expenses;
@@ -97,6 +98,8 @@ public class Srpt_cashier_report {
         this.bank_php = bank_php;
         this.bank_usd = bank_usd;
         this.credit_card = credit_card;
+        this.dollar_rate = dollar_rate;
+        this.total_dollars=total_dollars;
     }
 
     public static class field {
@@ -129,10 +132,10 @@ public class Srpt_cashier_report {
         }
     }
 
-    public static Srpt_cashier_report ret_data_session(String session_id, Date date_from, Date date_to, String busi_name, double dollar, String dfrom, String dto, List<S1_my_sales.to_receipts> receipts, double tendered, double discount, double credit, double expences, String users, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card) {
+    public static Srpt_cashier_report ret_data_session(String session_id, Date date_from, Date date_to, String busi_name, double dollar, String dfrom, String dto, List<S1_my_sales.to_receipts> receipts, double tendered, double discount, double credit, double expences, String users, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card, double dollar_rate1,double total_dollars) {
 
         String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "img_templates\\rpt\\";
-        Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0);
+        Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, dollar_rate1,total_dollars);
         String user = to_users.username1;
         try {
             Connection conn = MyConnection1.connect();
@@ -147,7 +150,7 @@ public class Srpt_cashier_report {
 
             for (S1_my_sales.to_receipts t : receipts) {
 
-                System.out.println("**** " + t.id + " " + t.tendered);
+//                System.out.println("**** " + t.id + " " + t.tendered);
                 String s2 = "select "
                         + "qty"
                         + ",unit_price"
@@ -184,9 +187,6 @@ public class Srpt_cashier_report {
 //            if (rs3.next()) {
 //                expences = rs3.getDouble(1);
 //            }
-
-
-
             String user_name = "";
             if (to_users.username1 == null) {
                 user_name = "Ronald Pascua";
@@ -195,7 +195,9 @@ public class Srpt_cashier_report {
             }
 
 //            System.out.println(tendered + " " + discount + " " + credit + " " + foods + " " + beverages + " " + expences);
+           
             double net = ((tendered + discount) - credit) - expences;
+           
 //            dollar = S1_currency.ret_dollar(DateType.sf.format(new Date()));
 
 //            String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\i1\\") + "img_templates\\rpt\\";s
@@ -231,8 +233,6 @@ public class Srpt_cashier_report {
                 rpt_credits.add(to);
             }
 
-
-
             List<Srpt_expenses.field> rpt_expenses = new ArrayList();
             String s5 = "select "
                     + "date_added"
@@ -257,16 +257,16 @@ public class Srpt_cashier_report {
                 String vat = rs5.getString(5);
 
                 Srpt_expenses.field to = new Srpt_expenses.field(date_added, amount, purpose, category_name, vat);
-                System.out.println(amount);
+//                System.out.println(amount);
                 rpt_expenses.add(to);
             }
 
             List<Srpt_advance_payments.field> advance_payments = new ArrayList();
             String s10 = "select "
                     + "date_added"
-                    + ",amount_paid"            
+                    + ",amount_paid"
                     + ",peso_on_bank"
-                     + ",usd"
+                    + ",usd"
                     + ",usd_on_bank"
                     + ",bank"
                     + ",approval_code"
@@ -317,8 +317,12 @@ public class Srpt_cashier_report {
 
 //            JOptionPane.showMessageDialog(null, dollar);
 //            String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Maytopacka\\") + "img_templates\\rpt\\";
-            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, advance_payments, date_from, date_to, busi_name, user_name, dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, user, data, cashin, cashout, addtl_cashin, dollar, gross, advance_payment, advance_payment_usd, to_users.username1, outside_cash, cc_reflenishment, bank_php, bank_usd, credit_card);
-
+            gross = (credit + discount + tendered + advance_payment + bank_php + credit_card) - expences;
+           
+           
+//            System.out.println("dollars: "+dollars + " ,advance_payment_usd: "+advance_payment_usd+ " , bank_usd: "+bank_usd+ " ,dollar_rate1: "+dollar_rate1);
+            
+            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, advance_payments, date_from, date_to, busi_name, user_name, dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, user, data, cashin, cashout, addtl_cashin, dollar, gross, advance_payment, advance_payment_usd, to_users.username1, outside_cash, cc_reflenishment, bank_php, bank_usd, credit_card, dollar_rate1,total_dollars);
 
             return to1;
         } catch (Exception e) {
@@ -329,8 +333,7 @@ public class Srpt_cashier_report {
     }
 
     public static Srpt_cashier_report ret_data_date(String session_id, Date date_from, Date date_to, String busi_name, double dollar, String dfrom, String dto) {
-        Srpt_cashier_report to1 = new Srpt_cashier_report("", new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0);
-
+        Srpt_cashier_report to1 = new Srpt_cashier_report("", new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0,0);
 
         String user = to_users.username1;
         String user_name = to_users.ret_user(to_users.username1);
@@ -397,15 +400,12 @@ public class Srpt_cashier_report {
                 expences = rs3.getDouble(1);
             }
 
-
-
 //            String user_name = "";
 //            if (to_users.username1 == null) {
 //                user_name = "Ronald Pascua";
 //            } else {
 //                user_name = to_users.ret_data(to_users.username1);
 //            }
-
 //            System.out.println(tendered + " " + discount + " " + credit + " " + foods + " " + beverages + " " + expences);
             double net = ((tendered + discount) - credit) - expences;
             dollar = S1_currency.ret_dollar(DateType.sf.format(new Date()));
@@ -440,7 +440,6 @@ public class Srpt_cashier_report {
                 rpt_credits.add(to);
             }
 
-
             List<Srpt_expenses.field> rpt_expenses = new ArrayList();
 
             String s5 = "select "
@@ -469,7 +468,7 @@ public class Srpt_cashier_report {
                 rpt_expenses.add(to);
             }
 
-            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, new ArrayList(), date_from, date_to, busi_name, user_name, my_dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, user, new ArrayList(), 0, 0, 0, dollar, 0, 0, 0, "", 0, 0, 0, 0, 0);
+            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, new ArrayList(), date_from, date_to, busi_name, user_name, my_dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, user, new ArrayList(), 0, 0, 0, dollar, 0, 0, 0, "", 0, 0, 0, 0, 0, 0,0);
             return to1;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -488,8 +487,7 @@ public class Srpt_cashier_report {
         double dollar = 0;
         String dfrom = "2013-01-21";
         String dto = "2013-01-21";
-        Srpt_cashier_report to1 = new Srpt_cashier_report("", new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0);
-
+        Srpt_cashier_report to1 = new Srpt_cashier_report("", new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0,0);
 
         try {
             Connection conn = MyConnection1.connect();
@@ -552,8 +550,6 @@ public class Srpt_cashier_report {
             if (rs3.next()) {
                 expences = rs3.getDouble(1);
             }
-
-
 
             String user_name = "";
             if (to_users.username1 == null) {
@@ -622,7 +618,7 @@ public class Srpt_cashier_report {
                 rpt_expenses.add(to);
             }
 
-            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, new ArrayList(), date_from, date_to, busi_name, user_name, my_dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, "", new ArrayList(), 0, 0, 0, dollar, 0, 0, 0, "", 0, 0, 0, 0, 0);
+            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, new ArrayList(), date_from, date_to, busi_name, user_name, my_dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, "", new ArrayList(), 0, 0, 0, dollar, 0, 0, 0, "", 0, 0, 0, 0, 0, 0,0);
             JRViewer viewer = get_viewer_conn_summary(to1, "rpt_daily_sales_liquid.jrxml");
             JFrame f = Application.launchMainFrame3(viewer, "", true);
         } catch (Exception e) {
@@ -658,13 +654,13 @@ public class Srpt_cashier_report {
             throw new RuntimeException(e);
         }
     }
-    
-    public static Srpt_cashier_report ret_data_session2(String session_id, Date date_from, Date date_to, String busi_name, double dollar, String dfrom
-            , String dto, List<Receipts.to_receipts> receipts, double tendered, double discount, double credit, double expences, String users, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card) {
+
+    public static Srpt_cashier_report ret_data_session2(String session_id, Date date_from, Date date_to, String busi_name, double dollar, String dfrom,
+             String dto, List<Receipts.to_receipts> receipts, double tendered, double discount, double credit, double expences, String users, double cashin, double cashout, double addtl_cashin, double dollars, double gross, double advance_payment, double advance_payment_usd, double outside_cash, double cc_reflenishment, double bank_php, double bank_usd, double credit_card) {
 
         String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "img_templates\\rpt\\";
-        Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0);
-       
+        Srpt_cashier_report to1 = new Srpt_cashier_report(SUBREPORT_DIR, new ArrayList(), new ArrayList(), new ArrayList(), new Date(), new Date(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", new ArrayList(), 0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0,0);
+
         String user = to_users.username1;
         try {
             Connection conn = MyConnection1.connect();
@@ -748,9 +744,9 @@ public class Srpt_cashier_report {
             List<Srpt_advance_payments.field> advance_payments = new ArrayList();
             String s10 = "select "
                     + "date_added"
-                    + ",amount_paid"            
+                    + ",amount_paid"
                     + ",peso_on_bank"
-                     + ",usd"
+                    + ",usd"
                     + ",usd_on_bank"
                     + ",bank"
                     + ",approval_code"
@@ -793,9 +789,9 @@ public class Srpt_cashier_report {
                 Srpt_cashiers.field t = new Srpt_cashiers.field(s, am);
                 data.add(t);
             }
-            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, advance_payments, date_from, date_to, busi_name, user_name, dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, user, data, cashin, cashout, addtl_cashin, dollar, gross, advance_payment, advance_payment_usd, to_users.username1, outside_cash, cc_reflenishment, bank_php, bank_usd, credit_card);
+            to1 = new Srpt_cashier_report(SUBREPORT_DIR, rpt_credits, rpt_expenses, advance_payments, date_from, date_to, busi_name, user_name, dollar, tendered, discount, credit, foods, beverages, expences, (foods + beverages), net, user, data, cashin, cashout, addtl_cashin, dollar, gross, advance_payment, advance_payment_usd, to_users.username1, outside_cash, cc_reflenishment, bank_php, bank_usd, credit_card, 0,0);
 
-            System.out.println("SUBREPORT_DIR: "+SUBREPORT_DIR);
+            System.out.println("SUBREPORT_DIR: " + SUBREPORT_DIR);
             return to1;
         } catch (Exception e) {
             throw new RuntimeException(e);

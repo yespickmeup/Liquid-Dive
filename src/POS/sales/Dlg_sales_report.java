@@ -784,7 +784,7 @@ public class Dlg_sales_report extends javax.swing.JDialog {
                     lbl_credit.setText(FitIn.fmt_wc_0(credit1));
                     String business_name = System.getProperty("business_name", "");
                     double outside_cash = 0;
-                    final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session(session, dp_from.getDate(), dp_to.getDate(), business_name, dollar1, date_from, date_to, datas, peso1, discount1, credit1, t.expenses, users, t.cashin, t.cashout, t.addtl_cashins, 0, gross, advance_payment, advance_payment_usd, outside_cash, 0, 0, 0, 0);
+                    final Srpt_cashier_report to = Srpt_cashier_report.ret_data_session(session, dp_from.getDate(), dp_to.getDate(), business_name, dollar1, date_from, date_to, datas, peso1, discount1, credit1, t.expenses, users, t.cashin, t.cashout, t.addtl_cashins, 0, gross, advance_payment, advance_payment_usd, outside_cash, 0, 0, 0, 0,0,0);
                     jrxml_name = "rpt_daily_sales_liquid.jrxml";
                     report_get_viewer_conn_summary(to, jrxml_name);
 
