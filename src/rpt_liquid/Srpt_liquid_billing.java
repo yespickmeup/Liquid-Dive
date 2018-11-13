@@ -57,18 +57,19 @@ public class Srpt_liquid_billing {
     public final double credit_card;
     public final double dollar_to_pay;
     public final List<Srpt_bar_and_resto.field> rpt_summary;
+    public final String room_no;
 
-    public Srpt_liquid_billing(String busi_name, double room_rate, String accomodation, String SUBREPORT_DIR
-            , List<field> rpt_bar_and_resto, List<field> rpt_bar, List<Srpt_others.field> rpt_others
-            , List<Srpt_accomodation.field> rpt_accomodation, List<Srpt_history_advance_payments.field> rpt_advance_payments
-            ,List<Srpt_category_discounts.field> rpt_category_discounts, String my_date, String guest_id
-            , String table_no, String check_in, String transfers, String accomodation_1
-            , double accom_total, String img_path, double to_pay, String guest_name
-            , double dollar, double total_charges, double discount, double dollar_rate
-            , double advance_payment, double advance_payment_usd, double paid_peso, double paid_usd
-            , double paid_cc, double bank_php, double bank_usd, double credit_card
-            , double dollar_to_pay,List<Srpt_bar_and_resto.field> rpt_summary
-            ) {
+    public Srpt_liquid_billing(String busi_name, double room_rate, String accomodation, String SUBREPORT_DIR,
+             List<field> rpt_bar_and_resto, List<field> rpt_bar, List<Srpt_others.field> rpt_others,
+             List<Srpt_accomodation.field> rpt_accomodation, List<Srpt_history_advance_payments.field> rpt_advance_payments,
+             List<Srpt_category_discounts.field> rpt_category_discounts, String my_date, String guest_id,
+             String table_no, String check_in, String transfers, String accomodation_1,
+             double accom_total, String img_path, double to_pay, String guest_name,
+             double dollar, double total_charges, double discount, double dollar_rate,
+             double advance_payment, double advance_payment_usd, double paid_peso, double paid_usd,
+             double paid_cc, double bank_php, double bank_usd, double credit_card,
+             double dollar_to_pay, List<Srpt_bar_and_resto.field> rpt_summary, String room_no
+    ) {
         this.busi_name = busi_name;
         this.room_rate = room_rate;
         this.accomodation = accomodation;
@@ -77,8 +78,8 @@ public class Srpt_liquid_billing {
         this.rpt_bar = rpt_bar;
         this.rpt_others = rpt_others;
         this.rpt_accomodation = rpt_accomodation;
-         this.rpt_advance_payments = rpt_advance_payments;
-         this.rpt_category_discounts=rpt_category_discounts;
+        this.rpt_advance_payments = rpt_advance_payments;
+        this.rpt_category_discounts = rpt_category_discounts;
         this.my_date = my_date;
         this.guest_id = guest_id;
         this.table_no = table_no;
@@ -101,20 +102,19 @@ public class Srpt_liquid_billing {
         this.bank_php = bank_php;
         this.bank_usd = bank_usd;
         this.credit_card = credit_card;
-        this.dollar_to_pay=dollar_to_pay;
-        this.rpt_summary=rpt_summary;
+        this.dollar_to_pay = dollar_to_pay;
+        this.rpt_summary = rpt_summary;
+        this.room_no=room_no;
     }
 
     public double getDollar_to_pay() {
         return dollar_to_pay;
     }
 
-    
     public List<Srpt_category_discounts.field> getRpt_category_discounts() {
         return rpt_category_discounts;
     }
 
-    
     public List<Srpt_history_advance_payments.field> getRpt_advance_payments() {
         return rpt_advance_payments;
     }
@@ -263,7 +263,7 @@ public class Srpt_liquid_billing {
         double dollar = to_pay / dollar_rate;
         List<Srpt_bar_and_resto.field> rpt_bar_and_resto = new ArrayList();
         for (int i = 0; i < 3; i++) {
-            Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("desc" + i, new Date(), i + 100, 0,0);
+            Srpt_bar_and_resto.field tbar = new Srpt_bar_and_resto.field("desc" + i, new Date(), i + 100, 0, 0);
             rpt_bar_and_resto.add(tbar);
         }
 
@@ -273,7 +273,7 @@ public class Srpt_liquid_billing {
             if (i == 5) {
                 h++;
             }
-            Srpt_others.field tbar = new Srpt_others.field("category" + h, "desc", i, 100 + i,0);
+            Srpt_others.field tbar = new Srpt_others.field("category" + h, "desc", i, 100 + i, 0);
             rpt_others.add(tbar);
 
         }
@@ -285,7 +285,7 @@ public class Srpt_liquid_billing {
             double price = 100 + i;
             double amount = 200 + i;
             String date_stayed = "(January 1, 2013 - January 5, 2012)";
-            Srpt_accomodation.field tbar = new Srpt_accomodation.field(qty, nights, description, price, amount, date_stayed, "",0);
+            Srpt_accomodation.field tbar = new Srpt_accomodation.field(qty, nights, description, price, amount, date_stayed, "", 0);
             accom.add(tbar);
         }
         List<Srpt_history_advance_payments.field> advances = new ArrayList();
@@ -298,14 +298,14 @@ public class Srpt_liquid_billing {
             String bank = "";
             String approval_code = "";
             double credit_card = 0;
-            double credit_card_rate=0;
-            Srpt_history_advance_payments.field to2 = new Srpt_history_advance_payments.field(date_added, php_cash, php_bank, usd_cash, usd_bank, bank, approval_code, credit_card
-                    , "",credit_card_rate);
-          
+            double credit_card_rate = 0;
+            Srpt_history_advance_payments.field to2 = new Srpt_history_advance_payments.field(date_added, php_cash, php_bank, usd_cash, usd_bank, bank, approval_code, credit_card,
+                     "", credit_card_rate);
+
             advances.add(to2);
         }
-        
-         List<Srpt_category_discounts.field> category_discounts = new ArrayList();
+
+        List<Srpt_category_discounts.field> category_discounts = new ArrayList();
         for (int i = 0; i < 5; i++) {
             String category = "cat " + i;
             double due = 0;
@@ -315,10 +315,10 @@ public class Srpt_liquid_billing {
             Srpt_category_discounts.field tbar = new Srpt_category_discounts.field(category, due, disc_percent, disc_amount, sub_total);
             category_discounts.add(tbar);
         }
-        Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation
-                , SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar_and_resto, rpt_others, accom,advances,category_discounts, my_date
-                , guest_id, table_no, check_in, transfers, accomodation_1, accom_total, img_path
-                , to_pay, guest_name, dollar, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,new ArrayList());
+        Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation,
+                 SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar_and_resto, rpt_others, accom, advances, category_discounts, my_date,
+                 guest_id, table_no, check_in, transfers, accomodation_1, accom_total, img_path,
+                 to_pay, guest_name, dollar, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(),"");
         JRViewer viewer = Srpt_liquid_billing.get_viewer(rpt);
         JFrame f = Application.launchMainFrame3(viewer, "Sample", true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -352,7 +352,8 @@ public class Srpt_liquid_billing {
                 JasperUtil.emptyDatasource());
 
     }
-      public static JRViewer get_viewer2(Srpt_liquid_billing to) {
+
+    public static JRViewer get_viewer2(Srpt_liquid_billing to) {
 
         return JasperUtil.getJasperViewer(
                 compileJasper2(),
@@ -360,8 +361,8 @@ public class Srpt_liquid_billing {
                 JasperUtil.emptyDatasource());
 
     }
-      
-       public static JasperReport compileJasper2() {
+
+    public static JasperReport compileJasper2() {
         try {
             String jrxml = "rpt_billing_liquid_paid_summary.jrxml";
             InputStream is = Srpt_liquid_billing.class.getResourceAsStream(jrxml);

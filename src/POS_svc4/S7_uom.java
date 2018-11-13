@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import POS.utl.MyConnection1;
+import java.sql.SQLException;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 
 /**
  *
@@ -39,7 +41,7 @@ public class S7_uom {
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "select id,uom,uom_amount from "+MyDB.getNames()+".uom";
+            String s0 = "select id,uom,uom_amount from " + MyDB.getNames() + ".uom";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -60,7 +62,7 @@ public class S7_uom {
     public static void add_uom(String name, double qty) {
         try {
             Connection conn = MyConnection1.connect();
-            String s0 = "insert into "+MyDB.getNames()+".uom(uom,uom_amount)values(?,?)";
+            String s0 = "insert into " + MyDB.getNames() + ".uom(uom,uom_amount)values(?,?)";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.setString(1, name);
             stmt.setDouble(2, qty);
@@ -77,7 +79,7 @@ public class S7_uom {
     public static void edit_uom(String name, double qty, String id) {
         try {
             Connection conn = MyConnection1.connect();
-            String s0 = "update "+MyDB.getNames()+".uom set uom='" + name + "',uom_amount='" + qty + "' where id='" + id + "'";
+            String s0 = "update " + MyDB.getNames() + ".uom set uom='" + name + "',uom_amount='" + qty + "' where id='" + id + "'";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Prompt.call("Successfully Updated");
@@ -91,7 +93,7 @@ public class S7_uom {
     public static void delete_uom(String id) {
         try {
             Connection conn = MyConnection1.connect();
-            String s0 = "delete from  "+MyDB.getNames()+".uom  where id='" + id + "'";
+            String s0 = "delete from  " + MyDB.getNames() + ".uom  where id='" + id + "'";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Prompt.call("Successfully Deleted");
@@ -130,7 +132,7 @@ public class S7_uom {
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "select id,uom,uom_amount,prod_num from "+MyDB.getNames()+".product_uom where prod_num='" + product_ids + "'";
+            String s0 = "select id,uom,uom_amount,prod_num from " + MyDB.getNames() + ".product_uom where prod_num='" + product_ids + "'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -141,7 +143,6 @@ public class S7_uom {
                 to_product_uom to = new to_product_uom(id, uom, uom_amount, product_id);
                 datas.add(to);
             }
-
 
             return datas;
 
@@ -156,7 +157,7 @@ public class S7_uom {
 
         try {
             Connection conn = MyConnection1.connect();
-            String s0 = "insert into "+MyDB.getNames()+".product_uom(uom,uom_amount,prod_num)values(?,?,?)";
+            String s0 = "insert into " + MyDB.getNames() + ".product_uom(uom,uom_amount,prod_num)values(?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.setString(1, uom);
             stmt.setDouble(2, uom_amount);
@@ -176,7 +177,7 @@ public class S7_uom {
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "update "+MyDB.getNames()+".product_uom set uom='" + uom + "' , uom_amount='" + uom_amount + "' where id='" + id + "'";
+            String s0 = "update " + MyDB.getNames() + ".product_uom set uom='" + uom + "' , uom_amount='" + uom_amount + "' where id='" + id + "'";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Prompt.call("Successfully Updated");
@@ -191,7 +192,7 @@ public class S7_uom {
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "delete from  "+MyDB.getNames()+".product_uom  where id='" + id + "'";
+            String s0 = "delete from  " + MyDB.getNames() + ".product_uom  where id='" + id + "'";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
 //            Prompt.call("Successfully Updated");
@@ -202,22 +203,52 @@ public class S7_uom {
         }
     }
 
-    public static int get_barcode() {
-        int code = 0;
+    public static String increment_id() {
+        String id = "000000";
+        try {
+            Connection conn = MyConnection1.connect();
+            String s0 = "select max(id) from " + MyDB.getNames() + ".inventory2_stocks_left ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select product_name from " + MyDB.getNames() + ".inventory2_stocks_left where id='" + id + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = "000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+            System.out.println("id: "+id);
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection1.close();
+        }
+    }
+
+    public static String get_barcode() {
+        String code = "000000";
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "select max(id) from "+MyDB.getNames()+".inventory2_stocks_left ";
+            String s0 = "select max(id) from " + MyDB.getNames() + ".inventory2_stocks_left ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
-                code = rs.getInt(1);
+                code = rs.getString(1);
             }
 
-            code++;
+            code = ReceiptIncrementor.increment(code);
+
             return code;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection1.close();
@@ -229,14 +260,13 @@ public class S7_uom {
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "select product_name from "+MyDB.getNames()+".inventory2_stocks_left where product_name='" + codes + "' ";
+            String s0 = "select product_name from " + MyDB.getNames() + ".inventory2_stocks_left where product_name='" + codes + "' ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
                 code = true;
                 break;
             }
-
 
             return code;
 
@@ -247,8 +277,6 @@ public class S7_uom {
         }
     }
 
-  
-
     public static List<String> uoms(String product_code) {
 //        JOptionPane.showMessageDialog(null, product_codeC);
         List<String> datas = new ArrayList();
@@ -256,14 +284,14 @@ public class S7_uom {
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "select uom from "+MyDB.getNames()+".product_uom where prod_num='" + product_code + "'";
+            String s0 = "select uom from " + MyDB.getNames() + ".product_uom where prod_num='" + product_code + "'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
                 String name = rs.getString(1);
 //                JOptionPane.showMessageDialog(null, "adadad");
                 datas.add(name);
-            }   
+            }
             return datas;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -277,7 +305,7 @@ public class S7_uom {
         try {
             Connection conn = MyConnection1.connect();
 
-            String s0 = "select uom_amount from "+MyDB.getNames()+".product_uom where uom='" + uom + "' and prod_num='" + product_id + "' ";
+            String s0 = "select uom_amount from " + MyDB.getNames() + ".product_uom where uom='" + uom + "' and prod_num='" + product_id + "' ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -290,7 +318,8 @@ public class S7_uom {
             MyConnection1.close();
         }
     }
-      public static void main(String[] args) {
-        System.out.println(get_uom_amount("pack","4803925320002"));
+
+    public static void main(String[] args) {
+        System.out.println(get_uom_amount("pack", "4803925320002"));
     }
 }

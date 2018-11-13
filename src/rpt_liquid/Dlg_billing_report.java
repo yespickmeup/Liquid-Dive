@@ -830,7 +830,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
 
             Srpt_liquid_billing to3 = new Srpt_liquid_billing("", 0, "", "", new ArrayList(), new ArrayList(),
                     new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList(), "", "", "", "", "", "", 0, "",
-                    0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList());
+                    0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(),"");
             if (cb_orders.isSelected()) {
                 Srpt_liquid_billing to1 = new Srpt_liquid_billing(to2.busi_name, to2.room_rate,
                         to2.accomodation, SUBREPORT_DIR, resto_items, bar_items, to2.rpt_others,
@@ -838,7 +838,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
                         to2.check_in, to2.transfers, to2.accomodation_1, to2.accom_total, img_path, to_pay,
                         to2.guest_name, dollar, total_charges, discount, to2.dollar_rate,
                         to2.advance_payment, to2.advance_payment_usd, 0, 0, 0, to2.bank_php,
-                        to2.bank_usd, to2.credit_card, dollar_to_pay, new ArrayList());
+                        to2.bank_usd, to2.credit_card, dollar_to_pay, new ArrayList(),to2.room_no);
 //              
                 to3 = to1;
                 report_get_viewer_session(to1, "rpt_billing_liquid_items.jrxml");
@@ -851,7 +851,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
                         to2.accom_total, img_path, to_pay, to2.guest_name,
                         dollar, total_charges, discount, to2.dollar_rate,
                         to2.advance_payment, to2.advance_payment_usd, 0, 0, 0,
-                        to2.bank_php, to2.bank_usd, to2.credit_card, dollar_to_pay, new ArrayList());
+                        to2.bank_php, to2.bank_usd, to2.credit_card, dollar_to_pay, new ArrayList(),to2.room_no);
 //              
                 to3 = to1;
                 report_get_viewer_session(to1, "rpt_billing_liquid.jrxml");
@@ -873,7 +873,7 @@ public class Dlg_billing_report extends javax.swing.JDialog {
     }
     int j = 0;
     Srpt_liquid_billing to2 = new Srpt_liquid_billing("", 0, "", "", new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList(),
-            new ArrayList(), new ArrayList(), "", "", "", "", "", "", 0, "", 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList());
+            new ArrayList(), new ArrayList(), "", "", "", "", "", "", 0, "", 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(),"");
     List<Srpt_bar_and_resto.field> bar_items = new ArrayList();
     List<Srpt_bar_and_resto.field> resto_items = new ArrayList();
     List<Srpt_history_advance_payments.field> advances = new ArrayList();

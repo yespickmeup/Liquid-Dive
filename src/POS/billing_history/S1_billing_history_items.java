@@ -46,7 +46,8 @@ public class S1_billing_history_items {
         public final String user_name;
         public final int billing_history_id;
         public final double discount_amount;
-        public to_billing_history_items(int id, String room_id, String room_name, String or_no, double qty, String product_name, String description, double price, String img_path, int status, int guest_id, String guest_name, String cat_id, String cat_name, String date_added, int printing_assembly, String disc_name, double disc_rate, String discount, String user_name, int billing_history_id,double discount_amount) {
+
+        public to_billing_history_items(int id, String room_id, String room_name, String or_no, double qty, String product_name, String description, double price, String img_path, int status, int guest_id, String guest_name, String cat_id, String cat_name, String date_added, int printing_assembly, String disc_name, double disc_rate, String discount, String user_name, int billing_history_id, double discount_amount) {
             this.id = id;
             this.room_id = room_id;
             this.room_name = room_name;
@@ -68,7 +69,7 @@ public class S1_billing_history_items {
             this.discount = discount;
             this.user_name = user_name;
             this.billing_history_id = billing_history_id;
-            this.discount_amount=discount_amount;
+            this.discount_amount = discount_amount;
         }
     }
 
@@ -154,7 +155,6 @@ public class S1_billing_history_items {
         }
     }
 
-    
     public static List<to_billing_history_items> ret_data(String billing_history_ids) {
         List<to_billing_history_items> datas = new ArrayList();
 
@@ -183,7 +183,7 @@ public class S1_billing_history_items {
                     + ",user_name"
                     + ",billing_history_id"
                     + " from " + MyDB.getNames() + ".billing_history_items where "
-                    + " billing_history_id='"+billing_history_ids+"' order by date_added asc ";
+                    + " billing_history_id='" + billing_history_ids + "' order by date_added asc ";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -209,8 +209,8 @@ public class S1_billing_history_items {
                 String discount = rs.getString(19);
                 String user_name = rs.getString(20);
                 int billing_history_id = rs.getInt(21);
-                double discount_amount=price*disc_rate;
-                to_billing_history_items to = new to_billing_history_items(id, room_id, room_name, or_no, qty, product_name, description, price, img_path, status, guest_id, guest_name, cat_id, cat_name, date_added, printing_assembly, disc_name, disc_rate, discount, user_name, billing_history_id,discount_amount);
+                double discount_amount = (qty * price) * disc_rate;
+                to_billing_history_items to = new to_billing_history_items(id, room_id, room_name, or_no, qty, product_name, description, price, img_path, status, guest_id, guest_name, cat_id, cat_name, date_added, printing_assembly, disc_name, disc_rate, discount, user_name, billing_history_id, discount_amount);
                 datas.add(to);
             }
             return datas;

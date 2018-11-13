@@ -1644,10 +1644,11 @@ public class Dlg_sales_report2 extends javax.swing.JDialog {
                         + "  ,ctd.product_name, "
                         + "  CASE WHEN isl.item_package_id='0' THEN ctd.price END "
                         + "  ,ctd.discount "
-                        + " order by ctd.category_name,ctd.description asc ";
+                        + " order by ctd.category_name asc ,ctd.description asc ";
                 String business_name = System.getProperty("business_name", "");
                 String address = System.getProperty("address", "");
                 String contact_no = System.getProperty("contact_no", "");
+                System.out.println("where: "+where);
                 String date = DateType.convert_slash2(date_from) + " - " + DateType.convert_slash2(date_to);
                 List<Srpt_sales_by_category.field> fields = Srpt_sales_by_category.ret_data(where);
                 double grand_total = 0;

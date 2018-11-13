@@ -28,7 +28,7 @@ import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import org.jdesktop.swingx.combobox.ListComboBoxModel;
 import POS.utl.Center;
-import POS.utl.Prompt;
+import POS.utl.Dlg_confirm_action;
 import POS_svc4.S7_uom;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
@@ -359,6 +359,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jLabel2.setText("BARCODE:");
 
         tf_barcode.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tf_barcode.setFocusable(false);
         tf_barcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_barcodeActionPerformed(evt);
@@ -1073,7 +1074,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         if (if_ok.equals(tf_barcode.getText())) {
 //            Prompt.call("Product Already exists");
 //            JOptionPane.showMessageDialog(null, "Product Already exists");
-            tf_barcode.setText("" + S7_uom.get_barcode());
+            tf_barcode.setText(S7_uom.increment_id());
             tf_barcode.setCaretPosition(0);
             tf_barcode.selectAll();
             j = true;
@@ -1224,19 +1225,19 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void add_item() {
 
-        boolean c = check_code();
-        if (c) {
-            Prompt.call("ITEM Already Exists");
-            tf_barcode.grabFocus();
-            return;
-        }
+//        boolean c = check_code();
+//        if (c) {
+//            Prompt.call("ITEM Already Exists");
+//            tf_barcode.grabFocus();
+//            return;
+//        }
         String category_name = cb_category.getSelectedItem().
                 toString();
         final String cat_id = S10_update_product.get_classid(category_name);
-        int printing_assembly = S5_printing_assemlby.get_category_assembly_id(cat_id);
-        String barcode = tf_barcode.getText();
-        String description = tf_description.getText();
-        String price = "" + FitIn.toDouble(tf_price.getText());
+        final int printing_assembly = S5_printing_assemlby.get_category_assembly_id(cat_id);
+        final String barcode = S7_uom.increment_id();
+        final String description = tf_description.getText();
+        final String price = "" + FitIn.toDouble(tf_price.getText());
         String is_linient = "0";
         if (cb_is_lenient.isSelected()) {
             is_linient = "1";
@@ -1250,18 +1251,40 @@ public class Dlg_inventory extends javax.swing.JDialog {
         if (cb_happy_hour.isSelected()) {
             happy_hour = 1;
         }
+        final String is_linient1 = is_linient;
+        final int is_active1 = is_active;
+
         String type_name = cb_type.getSelectedItem().
                 toString();
+        final String type_name1 = type_name;
         String type_id = S1_categories.ret_type_id(type_name);
         int group_id = S5_printing_assemlby.get_category_group_id(cat_id);
 //        JOptionPane.showMessageDialog(null, cat_id);
-        S9_add_product.add(barcode, description, price, "0", "", "none", "", "0", "0", new ArrayList(), is_linient, "0", 0, cat_id, 0, "", is_active, printing_assembly, group_id, type_name, type_id, happy_hour);
-        clear_item();
-//        data_employee_search();
-        category_id = cat_id;
-        data_employee_category();
-        tf_description.grabFocus();
-        ok1();
+        final String type_id1 = type_id;
+        final int group_id1 = group_id;
+        final int happy_hour1 = happy_hour;
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S9_add_product.add(barcode, description, price, "0", "", "none", "", "0", "0", new ArrayList(), is_linient1, "0", 0, cat_id, 0, "", is_active1,
+                                   printing_assembly, group_id1, type_name1, type_id1, happy_hour1);
+                clear_item();
+
+                category_id = cat_id;
+                data_employee_category();
+                tf_description.grabFocus();
+                ok1();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void delete_item() {
@@ -1367,25 +1390,46 @@ public class Dlg_inventory extends javax.swing.JDialog {
         if (cb_is_lenient.isSelected()) {
             is_linient = "1";
         }
+        final String is_linient1=is_linient;
         int is_active = 0;
         if (cb_is_selected.isSelected()) {
             is_active = 1;
         }
+        final int is_active1=is_active;
         int happy_hour = 0;
         if (cb_happy_hour.isSelected()) {
             happy_hour = 1;
         }
+        final int happy_hour1=happy_hour;
         String type_name = cb_type.getSelectedItem().
                 toString();
         String type_id = S1_categories.ret_type_id(type_name);
+        final String type_id1=type_id;
+        final String type_name1=type_name;
+        
 //        System.out.println(" ***** "+type_name + " = "+type_id);
-        to_add_product to1 = new to_add_product(barcode, description, price, 0, "0", cat_id, is_linient, "0", "0", 0, cat_id, 0, 0, is_active, "", type_id, type_name, "", happy_hour);
-        S6_items.edit_data(to1, is_linient, "" + is_active, type_name, type_id, happy_hour);
-        clear_item();
-//        data_employee_search();
-        category_id = cat_id;
-        data_employee_category();
-        ok1();
+        final to_add_product to1 = new to_add_product(barcode, description, price, 0, "0", cat_id, is_linient, "0", "0", 0, cat_id, 0, 0, is_active, "", type_id, type_name, "", happy_hour);
+
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S6_items.edit_data(to1, is_linient1, "" + is_active1, type_name1, type_id1, happy_hour1);
+                clear_item();
+
+                category_id = cat_id;
+                data_employee_category();
+                ok1();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
     private ArrayListModel tbl_employee_payroll_ALM;
     private TblInvoicesModel tbl_employee_payroll_M;
@@ -1823,11 +1867,11 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
         Executor.doExecute(this, new Executor.Task() {
 
-            @Override
-            public void work_on() {
-                rpt_barcode.print_barcode("", name, desc, price);
-            }
-        });
+                       @Override
+                       public void work_on() {
+                           rpt_barcode.print_barcode("", name, desc, price);
+                       }
+                   });
     }
 
     private void do_barcodes() {

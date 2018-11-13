@@ -6670,11 +6670,11 @@ public class Dashboard1 extends javax.swing.JFrame {
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
                         accom3, advances, cdd_list, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
                         total, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
-                        print.paid_credit, bank_php, bank_usd, advance_credit_card, prepaid_dollar, rpt_summary);
+                        print.paid_credit, bank_php, bank_usd, advance_credit_card, prepaid_dollar, rpt_summary,room_name);
                  Srpt_liquid_billing rpt2 = new Srpt_liquid_billing(busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2,
                         accom3, advances, cdd_list2, my_date, guest_ids, t.id, t.date_added, "", accomodation_1, accom_total, img_path,
                         total, guest_names, dollar, total_charges, discount, dollar_rate1, advance_payment, advance_usd, print.paid_peso, print.paid_dollar,
-                        print.paid_credit, bank_php, bank_usd, advance_credit_card, prepaid_dollar, rpt_summary);
+                        print.paid_credit, bank_php, bank_usd, advance_credit_card, prepaid_dollar, rpt_summary,room_name);
 //                test_print(rpt,table_id, resto_items, bar_items, guest_names, guest_ids, advances, accom, rpt_others); 
                 try {
                     JasperReport jasperReport;
@@ -6717,7 +6717,8 @@ public class Dashboard1 extends javax.swing.JFrame {
                     JasperPrintManager.printReport(jasperPrint2, true);
                 } catch (JRException e) {
                     JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
-                    throw new RuntimeException(e);
+//                    throw new RuntimeException(e);
+                    System.out.println("e: "+e);
                 }
                 if (print.prints == 2) {
                     S1_billing_history_items.add_billing_history_items(items); //uncomment this
@@ -7535,7 +7536,8 @@ public class Dashboard1 extends javax.swing.JFrame {
 
                 Srpt_liquid_billing rpt = new Srpt_liquid_billing(
                         busi_name, room_rate, accomodation, SUBREPORT_DIR, rpt_bar_and_resto, rpt_bar, accom2, accom3, advances, new ArrayList(), my_date,
-                        guest_id, table_no, check_in, transfers, accomodation_1, accom_total, img_path, to_pay, guest_name, dollar, total_charges, discount, dollar_rate, peso1, dollar1, 0, 0, 0, peso_bank1, usd_bank, credit1, dollar_to_pay, new ArrayList());
+                        guest_id, table_no, check_in, transfers, accomodation_1, accom_total, img_path, to_pay, guest_name, dollar, total_charges
+                        , discount, dollar_rate, peso1, dollar1, 0, 0, 0, peso_bank1, usd_bank, credit1, dollar_to_pay, new ArrayList(),table.room);
                 Window p = (Window) this;
                 Dlg_billing_report nd = Dlg_billing_report.create(p, true);
                 nd.setTitle("");

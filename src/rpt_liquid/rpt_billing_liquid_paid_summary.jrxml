@@ -1,373 +1,373 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="14" bottomMargin="14" uuid="006a20ca-32d8-4a71-99f8-654db29afdfe">
-    <property name="ireport.zoom" value="1.0"/>
-    <property name="ireport.x" value="0"/>
-    <property name="ireport.y" value="0"/>
-    <parameter name="busi_name" class="java.lang.String"/>
-    <parameter name="room_rate" class="java.lang.Double"/>
-    <parameter name="accomodation" class="java.lang.String"/>
-    <parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
-    </parameter>
-    <parameter name="rpt_bar_and_resto" class="java.util.List"/>
-    <parameter name="rpt_bar" class="java.util.List"/>
-    <parameter name="rpt_others" class="java.util.List"/>
-    <parameter name="rpt_accomodation" class="java.util.List"/>
-    <parameter name="rpt_advance_payments" class="java.util.List"/>
-    <parameter name="rpt_category_discounts" class="java.util.List"/>
-    <parameter name="my_date" class="java.lang.String"/>
-    <parameter name="guest_id" class="java.lang.String"/>
-    <parameter name="table_no" class="java.lang.String"/>
-    <parameter name="check_in" class="java.lang.String"/>
-    <parameter name="transfers" class="java.lang.String"/>
-    <parameter name="accomodation_1" class="java.lang.String"/>
-    <parameter name="accom_total" class="java.lang.Double"/>
-    <parameter name="img_path" class="java.lang.String"/>
-    <parameter name="to_pay" class="java.lang.Double"/>
-    <parameter name="guest_name" class="java.lang.String"/>
-    <parameter name="dollar" class="java.lang.Double"/>
-    <parameter name="total_charges" class="java.lang.Double"/>
-    <parameter name="discount" class="java.lang.Double"/>
-    <parameter name="dollar_rate" class="java.lang.Double"/>
-    <parameter name="advance_payment" class="java.lang.Double"/>
-    <parameter name="advance_payment_usd" class="java.lang.Double"/>
-    <parameter name="paid_peso" class="java.lang.Double"/>
-    <parameter name="paid_usd" class="java.lang.Double"/>
-    <parameter name="paid_cc" class="java.lang.Double"/>
-    <parameter name="bank_php" class="java.lang.Double"/>
-    <parameter name="bank_usd" class="java.lang.Double"/>
-    <parameter name="credit_card" class="java.lang.Double"/>
-    <parameter name="dollar_to_pay" class="java.lang.Double"/>
-    <parameter name="rpt_summary" class="java.util.List"/>
-    <group name="rpt_summary">
-        <groupExpression><![CDATA[$P{rpt_summary}]]></groupExpression>
-        <groupHeader>
-            <band/>
-        </groupHeader>
-    </group>
-    <group name="rpt_category_discounts">
-        <groupExpression><![CDATA[$P{rpt_category_discounts}]]></groupExpression>
-        <groupHeader>
-            <band height="15">
-                <subreport>
-                    <reportElement uuid="5fa3e4d1-7bf5-41c8-aee7-da97f43214a7" x="71" y="0" width="431" height="15"/>
-                    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rpt_category_discounts}, false);]]></dataSourceExpression>
-                    <subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rpt_category_discounts_summary.jasper"]]></subreportExpression>
-                </subreport>
-            </band>
-        </groupHeader>
-    </group>
-    <background>
-        <band splitType="Stretch"/>
-    </background>
-    <title>
-        <band height="136" splitType="Stretch">
-            <image>
-                <reportElement uuid="a7326976-8e79-4353-b485-0ee5e42205b1" x="397" y="0" width="104" height="50"/>
-                <imageExpression><![CDATA[$P{img_path} +"img_templates\\liquid.jpg"]]></imageExpression>
-            </image>
-            <textField>
-                <reportElement uuid="a4001cea-a828-4135-8557-858968c2e164" x="72" y="87" width="428" height="20"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="14"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{my_date}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement uuid="0a4863e2-6fa9-4370-95cd-62f8130567c3" x="72" y="64" width="428" height="20"/>
-                <box>
-                    <topPen lineWidth="0.0"/>
-                    <leftPen lineWidth="0.0"/>
-                    <bottomPen lineWidth="0.0"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <font size="14"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{guest_name}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="70" y="0" width="327" height="50"/>
-                <textElement verticalAlignment="Middle">
-                    <font size="24" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Invoice]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="71" y="122" width="430" height="14"/>
-                <box>
-                    <topPen lineWidth="0.5"/>
-                    <bottomPen lineWidth="0.0"/>
-                </box>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[]]></text>
-            </staticText>
-        </band>
-    </title>
-    <pageHeader>
-        <band/>
-    </pageHeader>
-    <columnHeader>
-        <band/>
-    </columnHeader>
-    <detail>
-        <band splitType="Stretch"/>
-        <band/>
-    </detail>
-    <columnFooter>
-        <band splitType="Stretch"/>
-    </columnFooter>
-    <pageFooter>
-        <band splitType="Stretch"/>
-    </pageFooter>
-    <lastPageFooter>
-        <band height="353">
-            <staticText>
-                <reportElement uuid="3a4247a3-246b-476b-a2d0-c5b9684789d5" x="71" y="291" width="168" height="13"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Negros Oriental, Philippines]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="f32f90b4-c8ea-4435-a82a-88f3ffb6a02c" x="239" y="279" width="262" height="13"/>
-                <textElement textAlignment="Right">
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[info@LiquidDumaguete.com]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="357826d6-d08d-49ae-bd36-1c77aee74511" x="239" y="291" width="262" height="13"/>
-                <textElement textAlignment="Right">
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[www.LiquidDumaguete.com]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="71" y="279" width="168" height="13"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Bulak, Dauin]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="067ccd0b-b4d8-4563-8aeb-e18a070d3d89" x="239" y="303" width="262" height="13"/>
-                <textElement textAlignment="Right">
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[www.facebook.com/LiquidDumaguete]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="97621da1-3df8-4aa6-a921-cf98eaf7e319" x="71" y="303" width="168" height="13"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[+63 (917) 314 1778]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="71" y="5" width="431" height="48"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Thank you for choosing Liquid for your stay in Dauin. We hope you enjoyed your holiday with us and look forward to seeing you again. As a returning guest we would like to offer you an automatic 10% discount on accomodation on your next visit to Liquid.]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="71" y="53" width="432" height="36"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[At your convenience, would you please take a moment to share your experience online with your friends and others on your favorite travel review website?]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="89" width="431" height="37"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Attached you will also find one of our business cards so you can "give a friend a dive". Simply pass it along to someone that you think would enjoy Liquid.]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="126" width="431" height="34"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Don't forget to follow us on Facebook and sign up for our online newsletter to keep in touch with the monthly happenings at Liquid.]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="196" width="431" height="16"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[See you next time.]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="221" width="431" height="16"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Zoe]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="236" width="431" height="16"/>
-                <textElement>
-                    <font size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Zoe@LiquidDumaguete.com]]></text>
-            </staticText>
-        </band>
-    </lastPageFooter>
-    <summary>
-        <band height="104" splitType="Stretch">
-            <staticText>
-                <reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="72" y="71" width="84" height="22"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Total]]></text>
-            </staticText>
-            <textField pattern="#,##0.00" isBlankWhenNull="false">
-                <reportElement uuid="bc14f0fd-7ef3-485b-8fd9-f4afe2462ed0" mode="Transparent" x="383" y="71" width="117" height="22" forecolor="#000000" backcolor="#FFFFFF"/>
-                <box>
-                    <bottomPen lineWidth="0.0"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
-                    <font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-                    <paragraph lineSpacing="Single" rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{to_pay}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="72" y="93" width="428" height="11"/>
-                <box>
-                    <bottomPen lineWidth="0.5"/>
-                </box>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="72" y="8" width="428" height="7"/>
-                <box>
-                    <topPen lineWidth="0.5"/>
-                    <bottomPen lineWidth="0.0"/>
-                </box>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="209" y="28" width="32" height="15"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="9" isItalic="true"/>
-                </textElement>
-                <text><![CDATA[BANK]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="240" y="28" width="64" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10"/>
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{bank_php}]]></textFieldExpression>
-            </textField>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="396" y="13" width="104" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10"/>
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{discount}]]></textFieldExpression>
-            </textField>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="240" y="13" width="64" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10"/>
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{advance_payment}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="317" y="49" width="80" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="9" isItalic="true"/>
-                </textElement>
-                <text><![CDATA[BANK]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="210" y="49" width="32" height="15"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="9" isItalic="true"/>
-                </textElement>
-                <text><![CDATA[CASH]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="170" y="13" width="37" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10" isItalic="false"/>
-                </textElement>
-                <text><![CDATA[Php:]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="317" y="28" width="79" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="10" isItalic="false"/>
-                </textElement>
-                <text><![CDATA[CREDIT CARD:]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="241" y="49" width="63" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10"/>
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{advance_payment_usd}]]></textFieldExpression>
-            </textField>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="396" y="49" width="104" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10"/>
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{bank_usd}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="317" y="13" width="79" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="10" isItalic="false"/>
-                </textElement>
-                <text><![CDATA[Discount:]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="396" y="28" width="104" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10"/>
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{credit_card}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="72" y="13" width="98" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="10" isItalic="false"/>
-                </textElement>
-                <text><![CDATA[ADV. PAYMENT]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="209" y="13" width="32" height="15"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="9" isItalic="true"/>
-                </textElement>
-                <text><![CDATA[CASH]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="170" y="49" width="37" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10" isItalic="false"/>
-                </textElement>
-                <text><![CDATA[USD:]]></text>
-            </staticText>
-        </band>
-    </summary>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="busi_name" class="java.lang.String"/>
+	<parameter name="room_rate" class="java.lang.Double"/>
+	<parameter name="accomodation" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="rpt_bar_and_resto" class="java.util.List"/>
+	<parameter name="rpt_bar" class="java.util.List"/>
+	<parameter name="rpt_others" class="java.util.List"/>
+	<parameter name="rpt_accomodation" class="java.util.List"/>
+	<parameter name="rpt_advance_payments" class="java.util.List"/>
+	<parameter name="rpt_category_discounts" class="java.util.List"/>
+	<parameter name="my_date" class="java.lang.String"/>
+	<parameter name="guest_id" class="java.lang.String"/>
+	<parameter name="table_no" class="java.lang.String"/>
+	<parameter name="check_in" class="java.lang.String"/>
+	<parameter name="transfers" class="java.lang.String"/>
+	<parameter name="accomodation_1" class="java.lang.String"/>
+	<parameter name="accom_total" class="java.lang.Double"/>
+	<parameter name="img_path" class="java.lang.String"/>
+	<parameter name="to_pay" class="java.lang.Double"/>
+	<parameter name="guest_name" class="java.lang.String"/>
+	<parameter name="dollar" class="java.lang.Double"/>
+	<parameter name="total_charges" class="java.lang.Double"/>
+	<parameter name="discount" class="java.lang.Double"/>
+	<parameter name="dollar_rate" class="java.lang.Double"/>
+	<parameter name="advance_payment" class="java.lang.Double"/>
+	<parameter name="advance_payment_usd" class="java.lang.Double"/>
+	<parameter name="paid_peso" class="java.lang.Double"/>
+	<parameter name="paid_usd" class="java.lang.Double"/>
+	<parameter name="paid_cc" class="java.lang.Double"/>
+	<parameter name="bank_php" class="java.lang.Double"/>
+	<parameter name="bank_usd" class="java.lang.Double"/>
+	<parameter name="credit_card" class="java.lang.Double"/>
+	<parameter name="dollar_to_pay" class="java.lang.Double"/>
+	<parameter name="rpt_summary" class="java.util.List"/>
+	<group name="rpt_summary">
+		<groupExpression><![CDATA[$P{rpt_summary}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<group name="rpt_category_discounts">
+		<groupExpression><![CDATA[$P{rpt_category_discounts}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<subreport>
+					<reportElement uuid="5fa3e4d1-7bf5-41c8-aee7-da97f43214a7" x="71" y="0" width="431" height="15"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rpt_category_discounts}, false);]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rpt_category_discounts_summary.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement uuid="a7326976-8e79-4353-b485-0ee5e42205b1" x="397" y="0" width="104" height="50"/>
+				<imageExpression><![CDATA[$P{img_path} +"img_templates\\liquid.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="a4001cea-a828-4135-8557-858968c2e164" x="72" y="87" width="428" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{my_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0a4863e2-6fa9-4370-95cd-62f8130567c3" x="72" y="64" width="428" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{guest_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="70" y="0" width="327" height="50"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="71" y="122" width="430" height="14"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="353">
+			<staticText>
+				<reportElement uuid="3a4247a3-246b-476b-a2d0-c5b9684789d5" x="71" y="291" width="168" height="13"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Negros Oriental, Philippines]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f32f90b4-c8ea-4435-a82a-88f3ffb6a02c" x="239" y="279" width="262" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[info@LiquidDumaguete.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="357826d6-d08d-49ae-bd36-1c77aee74511" x="239" y="291" width="262" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[www.LiquidDumaguete.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="71" y="279" width="168" height="13"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bulak, Dauin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="067ccd0b-b4d8-4563-8aeb-e18a070d3d89" x="239" y="303" width="262" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[www.facebook.com/LiquidDumaguete]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="97621da1-3df8-4aa6-a921-cf98eaf7e319" x="71" y="303" width="168" height="13"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[+63 (917) 314 1778]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="71" y="5" width="431" height="48"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thank you for choosing Liquid for your stay in Dauin. We hope you enjoyed your holiday with us and look forward to seeing you again. As a returning guest we would like to offer you an automatic 10% discount on accomodation on your next visit to Liquid.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="71" y="53" width="432" height="36"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[At your convenience, would you please take a moment to share your experience online with your friends and others on your favorite travel review website?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="89" width="431" height="37"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Attached you will also find one of our business cards so you can "give a friend a dive". Simply pass it along to someone that you think would enjoy Liquid.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="126" width="431" height="34"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Don't forget to follow us on Facebook and sign up for our online newsletter to keep in touch with the monthly happenings at Liquid.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="196" width="431" height="16"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[See you next time.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="221" width="431" height="16"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zoe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7dc4f2f-6d11-4faa-b667-71ddf882646a" x="72" y="236" width="431" height="16"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zoe@LiquidDumaguete.com]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="72" y="71" width="84" height="22"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="bc14f0fd-7ef3-485b-8fd9-f4afe2462ed0" mode="Transparent" x="383" y="71" width="117" height="22" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{to_pay}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="72" y="93" width="428" height="11"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d7ab248-baa2-4c25-bc6f-f057591f8499" x="72" y="8" width="428" height="7"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="209" y="28" width="32" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[BANK]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="240" y="28" width="64" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{bank_php}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="396" y="13" width="104" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{discount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="240" y="13" width="64" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{advance_payment}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="317" y="49" width="80" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[BANK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="210" y="49" width="32" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CASH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="170" y="13" width="37" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Php:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="317" y="28" width="79" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CREDIT CARD:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="241" y="49" width="63" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{advance_payment_usd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="396" y="49" width="104" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{bank_usd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="317" y="13" width="79" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Discount:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="646212a4-55e4-47c0-aa19-fa475bf76c2f" x="396" y="28" width="104" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{credit_card}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="72" y="13" width="98" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ADV. PAYMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="209" y="13" width="32" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CASH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="540d55a8-b417-4e46-87fa-10e9a31d30c1" x="170" y="49" width="37" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[USD:]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>

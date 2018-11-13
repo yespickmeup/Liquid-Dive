@@ -794,7 +794,7 @@ public class Dlg_pay extends javax.swing.JDialog {
 
         tf_dollar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tf_dollar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tf_dollar.setText("41.00");
+        tf_dollar.setText("50.00");
         tf_dollar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tf_dollar.setFocusable(false);
         tf_dollar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2991,7 +2991,7 @@ private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 DecimalFormat df3 = new DecimalFormat("#,###");
                 lbl_credit.setText(df3.format(credit_amount * -1) + ".00");
 
-                lbl_net_credit.setText(FitIn.fmt_wc_0(aw * -1));
+                lbl_net_credit.setText(df3.format(aw * -1)+".00");
                 late_credit = FitIn.toDouble(lbl_credit.getText()) - FitIn.
                         toDouble(lbl_net_credit.getText());
             }
